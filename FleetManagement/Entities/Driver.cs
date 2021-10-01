@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace FleetManagement.Business.Entities
 {
-    class Driver
-    {
+    public class Driver {
+
+        public int DriverID { get; private set; }
+        public string Model { get; private set; }
+
+        public Driver() {
+            //constructor
+
+        }
     }
 }
