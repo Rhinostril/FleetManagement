@@ -5,6 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FleetManagement.Business.Exceptions {
-    class VehicleException {
+    public class VehicleException : Exception
+    {
+
+        public VehicleException(string message) : base(message)
+        {
+
+        }
+
     }
 }
