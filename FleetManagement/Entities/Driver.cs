@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FleetManagement
+namespace FleetManagement.Business.Entities
 {
-    class Class2
+    class Driver
     {
     }
 }
