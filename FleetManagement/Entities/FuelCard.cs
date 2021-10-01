@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace FleetManagement.Business.Entities
 {
-    class FuelCard
+    public class FuelCard
     {
+
+
+
     }
 }
