@@ -18,10 +18,15 @@ namespace FleetManagement.Business.Entities
         public Vehicle Vehicle { get; private set; }
         public FuelCard FuelCard { get; private set; }
 
-        public Driver(string firstname, string lastname, DateTime dateofBirth, string securitynumber, List<string> licensetypes,) {
+        public Driver(string firstname, string lastname, DateTime dateofBirth, string securitynumber, List<string> licensetypes) {
             DriversLicenceType = new List<string>();
-
+            setFirstName(firstname);
+            setLastName(lastname);
+            setDateOfBirth(dateofBirth);
+            setDriversLicensetypes(licensetypes);
+            setSecurityNumber(securitynumber);
         }
+        //maybe add another constructor with more options and use this as :base
         private void setFirstName(string firstname) {
             FirstName = firstname;
         }
@@ -45,7 +50,7 @@ namespace FleetManagement.Business.Entities
         private bool validateSecurityNumber(string securitynumber) {
             //this method validates the inputted SN strictly, it is invalid until proven otherwise
             bool validationsucceeded = false;
-            //TODO validation
+            //TODO validation method
 
             return validationsucceeded;
         }
