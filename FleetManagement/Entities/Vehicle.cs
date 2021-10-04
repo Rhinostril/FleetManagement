@@ -9,7 +9,6 @@ namespace FleetManagement.Business.Entities
 {
     public class Vehicle
     {
-
         public int VehicleId { get; private set; }
         public string Brand { get; private set; }
         public string Model { get; private set; }
@@ -20,6 +19,20 @@ namespace FleetManagement.Business.Entities
         public string Color { get; private set; }
         public int Doors { get; private set; }
         public Driver Driver { get; private set; }
+
+        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, string fuelType, string vehicleType, string color, int doors, Driver driver)
+        {
+            SetVehicleId(vehicleId);
+            SetBrand(brand);
+            SetModel(model);
+            SetChassisNumber(chassisNumber);
+            SetLicensePlate(licensePlate);
+            SetFuelType(fuelType);
+            SetVehicleType(vehicleType);
+            SetVehicleColor(color);
+            SetVehicleDoors(doors);
+            SetDriver(driver);
+        }
 
         public void SetVehicleId(int id)
         {
@@ -97,11 +110,65 @@ namespace FleetManagement.Business.Entities
             }
             else
             {
-                throw new VehicleException("Vehicle license plate can't be empty!");
+                throw new VehicleException("Vehicle fuel type can't be empty!");
+            }
+        }
+        public void SetVehicleType(string vehicleType)
+        {
+            if (!string.IsNullOrWhiteSpace(vehicleType))
+            {
+                VehicleType = vehicleType;
+            }
+            else
+            {
+                throw new VehicleException("Vehicle type can't be empty!");
+            }
+        }
+        public void SetVehicleColor(string color)
+        {
+            if (!string.IsNullOrWhiteSpace(color))
+            {
+                Color = color;
+            }
+            else
+            {
+                throw new VehicleException("Vehicle color can't be empty!");
             }
         }
 
+        public void SetVehicleDoors(int doors)
+        {
+            if(doors > 0 && doors <= 7)
+            {
+                Doors = doors;
+            }
+            else
+            {
+                throw new VehicleException("Vehicle has to have more than 0 and less or equal than 7 doors!");
+            }
+        }
 
+        public void SetDriver(Driver driver)
+        {
+            if(Driver != null) // heeft vehicle al een driver?
+            {
+                if(Driver != driver)
+                {
+                    Driver = driver;
+                }
+            }
+            else
+            {
+                if(driver != null) // is driver niet null
+                {
+                    Driver = driver;
+                }
+                else
+                {
+                    
+                }
+            }
+        }
 
 
 
