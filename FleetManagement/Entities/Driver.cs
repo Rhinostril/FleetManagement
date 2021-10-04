@@ -43,14 +43,49 @@ namespace FleetManagement.Business.Entities
                 SecurityNumber = securtiynumber;
             }
             else {
-                //TODO: throw validation error message here
+                throw new DriverException("The given social security number is invalid");
             }
 
         }
         private bool validateSecurityNumber(string securitynumber) {
             //this method validates the inputted SN strictly, it is invalid until proven otherwise
+            //security number that should pass this filter:
+            //97.10.27-363.61
             bool validationsucceeded = false;
-            //TODO validation method
+            if(securitynumber.Length == 15) {
+                string DateSubString = securitynumber.Substring(0, 8); //Example: 97.10.27
+                char[] DateArray = DateSubString.ToCharArray();
+                if(Char.IsDigit(DateArray[0]) && Char.IsDigit(DateArray[1]) && DateArray[2] == '.' && Char.IsDigit(DateArray[3]) && Char.IsDigit(DateArray[4]) && DateArray[5] == '.' && Char.IsDigit(DateArray[6]) && Char.IsDigit(DateArray[7])) {
+                    string[] DateSplitInto3 = DateSubString.Split('.');
+                    int yearNumber = int.Parse(DateSplitInto3[0]);
+                    int monthNumber = int.Parse(DateSplitInto3[1]);
+                    bool monthIsBetweenZeroAndTwelve = false;
+                    if(monthNumber >= 0 && monthNumber <= 12) {
+                        monthIsBetweenZeroAndTwelve = true;
+                        //this captures month 00 on purpose
+                    }
+                    if(monthIsBetweenZeroAndTwelve || (monthNumber>40 && monthNumber<=52) || (monthNumber>20 && monthNumber<=32)) {
+                        int dayNumber = int.Parse(DateSplitInto3[2]);
+                        bool zeromonthcheckpassed = true;
+                        if(monthNumber == 0) {
+                            //monthnumber was 0 so day needs to also be 0
+                           if(dayNumber != 0) {
+                                zeromonthcheckpassed = false;
+                            }
+                        } else {
+                            if(dayNumber == 0) {
+                                zeromonthcheckpassed = false;
+                            }
+                        }
+                        if(DateTime.DaysInMonth(yearNumber, monthNumber) <= dayNumber && zeromonthcheckpassed) {
+
+
+
+
+                        }//the given day number is not correct for the year and the month or it cant be 0 if the month isnt also 0
+                    }//any month ranges that are not 0-12 or 20/40 are not allowed
+                }//this fails because one of the date characters is incorrect, at this point 99.99.99 is allowed still
+            }//this fails the test because string is not 15 characters long
 
             return validationsucceeded;
         }
@@ -76,7 +111,7 @@ namespace FleetManagement.Business.Entities
                 Address = null;
             }
             else {
-                //TODO throw error could not find this specific adress to remove
+                throw new DriverException("Can't remove the targeted address because it is not the same as the given address");
             }
         }
         public void setDriverID(int driverid) {
@@ -91,7 +126,7 @@ namespace FleetManagement.Business.Entities
                 Vehicle = null;
                 return true;
             }else {
-                //TODO throw error vehicle cannot be removed because the driver does not drive this exact vehicle
+                throw new DriverException("Vehicle cannot be removed because the driver does not drive this exact vehicle");
                 return false;
             }
         }
@@ -106,7 +141,7 @@ namespace FleetManagement.Business.Entities
                 FuelCard = null;
                 return true;
             }else {
-                //TODO Throw error cannot find this specific fuelcard to remove
+                throw new DriverException("Unable to remove this specific fuel card");
                 return false;
             }
         }
