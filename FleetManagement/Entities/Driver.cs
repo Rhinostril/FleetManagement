@@ -34,12 +34,12 @@ namespace FleetManagement.Business.Entities
             LastName = lastname;
         }
         private void setDateOfBirth(DateTime dateofbirth) {
-            //possible check if Date is not past 150 years or so --> ask client
+            //possible check if Date is not past 150 years ago or so --> ask client
             DateOfBirth = dateofbirth;
         }
         public void setSecurityNumber(string securtiynumber) {
             //this is public because this parameter can concievably still change after it is set
-            if(validateSecurityNumber(securtiynumber)) {
+            if(validateSecurityNumberNormal(securtiynumber)) {
                 SecurityNumber = securtiynumber;
             }
             else {
@@ -47,7 +47,7 @@ namespace FleetManagement.Business.Entities
             }
 
         }
-        private bool validateSecurityNumber(string securitynumber) {
+        private bool validateSecurityNumberNormal(string securitynumber) {
             //this method validates the inputted SN strictly, it is invalid until proven otherwise
             //security number that should pass this filter:
             //97.10.27-363.61
@@ -59,32 +59,18 @@ namespace FleetManagement.Business.Entities
                     string[] DateSplitInto3 = DateSubString.Split('.');
                     int yearNumber = int.Parse(DateSplitInto3[0]);
                     int monthNumber = int.Parse(DateSplitInto3[1]);
-                    bool monthIsBetweenZeroAndTwelve = false;
-                    if(monthNumber >= 0 && monthNumber <= 12) {
-                        monthIsBetweenZeroAndTwelve = true;
-                        //this captures month 00 on purpose
-                    }
-                    if(monthIsBetweenZeroAndTwelve || (monthNumber>40 && monthNumber<=52) || (monthNumber>20 && monthNumber<=32)) {
+                    
+                    if(monthNumber >= 1 && monthNumber <= 12) {
                         int dayNumber = int.Parse(DateSplitInto3[2]);
-                        bool zeromonthcheckpassed = true;
-                        if(monthNumber == 0) {
-                            //monthnumber was 0 so day needs to also be 0
-                           if(dayNumber != 0) {
-                                zeromonthcheckpassed = false;
-                            }
-                        } else {
-                            if(dayNumber == 0) {
-                                zeromonthcheckpassed = false;
-                            }
-                        }
-                        if(DateTime.DaysInMonth(yearNumber, monthNumber) <= dayNumber && zeromonthcheckpassed) {
+                        int daysInTheMonthAndYear = DateTime.DaysInMonth(yearNumber, monthNumber);
+                        if(dayNumber <= daysInTheMonthAndYear) {
+                            //after this the  date is presumed to be okay
+                            //next up is the validation of the birth number;
 
 
-
-
-                        }//the given day number is not correct for the year and the month or it cant be 0 if the month isnt also 0
-                    }//any month ranges that are not 0-12 or 20/40 are not allowed
-                }//this fails because one of the date characters is incorrect, at this point 99.99.99 is allowed still
+                        }//this fails if for example a user gives 30 of february as a date
+                    }//this fails if the given month is not 1-12 which is the limited version of validation
+                  }//this fails because one of the date characters is incorrect, at this point 99.99.99 is allowed still
             }//this fails the test because string is not 15 characters long
 
             return validationsucceeded;
@@ -103,11 +89,11 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        public void setAdress(Address address) {
+        public void setAddress(Address address) {
             Address = address;
         }
-        public void removeAdress(Address adress) {
-            if(Address == adress) {
+        public void removeAddress(Address address) {
+            if(Address == address) {
                 Address = null;
             }
             else {
