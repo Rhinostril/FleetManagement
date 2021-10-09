@@ -34,23 +34,44 @@ namespace FleetManagement.Business.Entities
             LastName = lastname;
         }
         private void setDateOfBirth(DateTime dateofbirth) {
-            //possible check if Date is not past 150 years or so --> ask client
+            //possible check if Date is not past 150 years ago or so --> ask client
             DateOfBirth = dateofbirth;
         }
         public void setSecurityNumber(string securtiynumber) {
             //this is public because this parameter can concievably still change after it is set
-            if(validateSecurityNumber(securtiynumber)) {
+            if(validateSecurityNumberNormal(securtiynumber)) {
                 SecurityNumber = securtiynumber;
             }
             else {
-                //TODO: throw validation error message here
+                throw new DriverException("The given social security number is invalid");
             }
 
         }
-        private bool validateSecurityNumber(string securitynumber) {
+        private bool validateSecurityNumberNormal(string securitynumber) {
             //this method validates the inputted SN strictly, it is invalid until proven otherwise
+            //security number that should pass this filter:
+            //97.10.27-363.61
             bool validationsucceeded = false;
-            //TODO validation method
+            if(securitynumber.Length == 15) {
+                string DateSubString = securitynumber.Substring(0, 8); //Example: 97.10.27
+                char[] DateArray = DateSubString.ToCharArray();
+                if(Char.IsDigit(DateArray[0]) && Char.IsDigit(DateArray[1]) && DateArray[2] == '.' && Char.IsDigit(DateArray[3]) && Char.IsDigit(DateArray[4]) && DateArray[5] == '.' && Char.IsDigit(DateArray[6]) && Char.IsDigit(DateArray[7])) {
+                    string[] DateSplitInto3 = DateSubString.Split('.');
+                    int yearNumber = int.Parse(DateSplitInto3[0]);
+                    int monthNumber = int.Parse(DateSplitInto3[1]);
+                    
+                    if(monthNumber >= 1 && monthNumber <= 12) {
+                        int dayNumber = int.Parse(DateSplitInto3[2]);
+                        int daysInTheMonthAndYear = DateTime.DaysInMonth(yearNumber, monthNumber);
+                        if(dayNumber <= daysInTheMonthAndYear) {
+                            //after this the  date is presumed to be okay
+                            //next up is the validation of the birth number;
+
+
+                        }//this fails if for example a user gives 30 of february as a date
+                    }//this fails if the given month is not 1-12 which is the limited version of validation
+                  }//this fails because one of the date characters is incorrect, at this point 99.99.99 is allowed still
+            }//this fails the test because string is not 15 characters long
 
             return validationsucceeded;
         }
@@ -68,15 +89,15 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        public void setAdress(Address address) {
+        public void setAddress(Address address) {
             Address = address;
         }
-        public void removeAdress(Address adress) {
-            if(Address == adress) {
+        public void removeAddress(Address address) {
+            if(Address == address) {
                 Address = null;
             }
             else {
-                //TODO throw error could not find this specific adress to remove
+                throw new DriverException("Can't remove the targeted address because it is not the same as the given address");
             }
         }
         public void setDriverID(int driverid) {
@@ -91,7 +112,7 @@ namespace FleetManagement.Business.Entities
                 Vehicle = null;
                 return true;
             }else {
-                //TODO throw error vehicle cannot be removed because the driver does not drive this exact vehicle
+                throw new DriverException("Vehicle cannot be removed because the driver does not drive this exact vehicle");
                 return false;
             }
         }
@@ -106,7 +127,7 @@ namespace FleetManagement.Business.Entities
                 FuelCard = null;
                 return true;
             }else {
-                //TODO Throw error cannot find this specific fuelcard to remove
+                throw new DriverException("Unable to remove this specific fuel card");
                 return false;
             }
         }
