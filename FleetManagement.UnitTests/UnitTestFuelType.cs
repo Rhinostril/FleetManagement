@@ -3,7 +3,7 @@ using Xunit;
 
 namespace FleetManagement.UnitTests
 {
-    public class UnitTest1
+    public class UnitTestFuelType
     {
         [Fact]
         public void Test1()
