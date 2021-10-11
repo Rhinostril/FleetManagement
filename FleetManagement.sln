@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManagement.Business", "FleetManagement\FleetManagement.Business.csproj", "{120B3AD2-78A5-4A46-B55A-5767CF75F0E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleetManagement.BusinessTests1", "FleetManagement.BusinessTests1\FleetManagement.BusinessTests1.csproj", "{7B3D20AD-797A-4AE4-802D-7B7BD86718C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleetManagement.BusinessTests", "FleetManagement.BusinessTests1\FleetManagement.BusinessTests.csproj", "{7B3D20AD-797A-4AE4-802D-7B7BD86718C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
