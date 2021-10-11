@@ -8,8 +8,9 @@ namespace FleetManagement.Business.Entities
 {
     public class FuelType
     {
-
-
-
+        List<string> fuelTypes = new List<string> 
+        { 
+        "Gasoline","Diesel","LPG","Hybride diesel","Hybride Gasoline","Electric"
+        };
     }
 }
