@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FleetManagement.Business.Tools;
+using FleetManagement.Business.Exceptions;
 
 namespace FleetManagement.Business.Entities
 {
@@ -39,41 +41,13 @@ namespace FleetManagement.Business.Entities
         }
         public void setSecurityNumber(string securtiynumber) {
             //this is public because this parameter can concievably still change after it is set
-            if(validateSecurityNumberNormal(securtiynumber)) {
+            bool validationSucceeded = SocialSecurityNumberChecker.checknormalSecurityNumber(securtiynumber);
+            if(validationSucceeded) {
                 SecurityNumber = securtiynumber;
             }
             else {
-                throw new DriverException("The given social security number is invalid");
+                throw new SecurityNumberException("The given social security number is invalid");
             }
-
-        }
-        private bool validateSecurityNumberNormal(string securitynumber) {
-            //this method validates the inputted SN strictly, it is invalid until proven otherwise
-            //security number that should pass this filter:
-            //97.10.27-363.61
-            bool validationsucceeded = false;
-            if(securitynumber.Length == 15) {
-                string DateSubString = securitynumber.Substring(0, 8); //Example: 97.10.27
-                char[] DateArray = DateSubString.ToCharArray();
-                if(Char.IsDigit(DateArray[0]) && Char.IsDigit(DateArray[1]) && DateArray[2] == '.' && Char.IsDigit(DateArray[3]) && Char.IsDigit(DateArray[4]) && DateArray[5] == '.' && Char.IsDigit(DateArray[6]) && Char.IsDigit(DateArray[7])) {
-                    string[] DateSplitInto3 = DateSubString.Split('.');
-                    int yearNumber = int.Parse(DateSplitInto3[0]);
-                    int monthNumber = int.Parse(DateSplitInto3[1]);
-                    
-                    if(monthNumber >= 1 && monthNumber <= 12) {
-                        int dayNumber = int.Parse(DateSplitInto3[2]);
-                        int daysInTheMonthAndYear = DateTime.DaysInMonth(yearNumber, monthNumber);
-                        if(dayNumber <= daysInTheMonthAndYear) {
-                            //after this the  date is presumed to be okay
-                            //next up is the validation of the birth number;
-
-
-                        }//this fails if for example a user gives 30 of february as a date
-                    }//this fails if the given month is not 1-12 which is the limited version of validation
-                  }//this fails because one of the date characters is incorrect, at this point 99.99.99 is allowed still
-            }//this fails the test because string is not 15 characters long
-
-            return validationsucceeded;
         }
 
         private void setDriversLicensetypes(List<string> licensetypes) {
