@@ -27,7 +27,7 @@ namespace FleetManagement.Business.Entities.Tests
             var time = DateTime.DaysInMonth(2000, 10);
 
 
-            Vehicle v = new Vehicle(vecId,"","","","","","","",5, new Driver("","",new DateTime(20,10,01), "00.06.30-283.52",new List<string>()));
+            Vehicle v = new Vehicle(vecId,"",""," ","","","","",5, new Driver("","",new DateTime(20,10,01), "00.06.30-283.52",new List<string>()));
 
             Assert.AreEqual(1, vecId);
 
