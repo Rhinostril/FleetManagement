@@ -19,7 +19,16 @@ namespace FleetManagement.Business.Tools {
                     int monthNumber = int.Parse(DateSplitInto3[1]);
                     if(monthNumber >= 1 && monthNumber <= 12) {
                         int dayNumber = int.Parse(DateSplitInto3[2]);
-                        int daysInTheMonthAndYear = DateTime.DaysInMonth(yearNumber, monthNumber);
+                        bool yearIsAfter2000 = false;
+                        string graphicalInterpretationOfyear = "";
+                        if(yearNumber <= 30) {
+                            graphicalInterpretationOfyear = "20" + DateSplitInto3[0]; // if the user is born after 2000 you should add 20 to the method that checks the nr of days in the month;
+                            yearIsAfter2000= true;
+                        }
+                        else {
+                            graphicalInterpretationOfyear = "19" + DateSplitInto3[0];
+                        }
+                        int daysInTheMonthAndYear = DateTime.DaysInMonth(int.Parse(graphicalInterpretationOfyear), monthNumber);
                         if(dayNumber <= daysInTheMonthAndYear) {
                             //after this the  date is presumed to be okay
                             //next up is the validation of the birth number;
@@ -32,7 +41,7 @@ namespace FleetManagement.Business.Tools {
                                 //we know the second number is only digits, and not 000
                                 if(securitynumber.ElementAt(12) == '.') {
                                     string combinednumberstring = DateSplitInto3[0] + DateSplitInto3[1] + DateSplitInto3[2] + amountOfBirths;
-                                    if(DateSplitInto3[0].StartsWith('0')) {
+                                    if(yearIsAfter2000) {
                                         combinednumberstring = "2" + DateSplitInto3[0] + DateSplitInto3[1] + DateSplitInto3[2] + amountOfBirths; //needed for people born after 2000
                                     }
                                     int numberToDivide = int.Parse(combinednumberstring); //Example  900201999
