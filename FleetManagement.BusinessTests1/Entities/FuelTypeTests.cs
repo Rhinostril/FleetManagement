@@ -14,13 +14,10 @@ namespace FleetManagement.Business.Entities.Tests
         [TestMethod()]
         public void GetFuelTypeTest()
         {
-            throw new NotImplementedException();
+            FuelType f = new FuelType();
+            Assert.AreEqual("Diesel", f.GetFuelType(1));
         }
 
-        [TestMethod()]
-        public void GetFuelTypeTest1()
-        {
-            throw new NotImplementedException();
-        }
+ 
     }
 }

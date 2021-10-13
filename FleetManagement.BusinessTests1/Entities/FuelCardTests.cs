@@ -14,43 +14,69 @@ namespace FleetManagement.Business.Entities.Tests
         [TestMethod()]
         public void FuelCardTest()
         {
-            throw new NotImplementedException();
-        }
+            FuelCard f = new FuelCard(1, "123", new DateTime(1997,03,20), "1324", new List<string> {"gasoline" }, new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" }));
+            Assert.AreEqual(1, f.FuelCardId);
+            Assert.AreEqual("123", f.CardNumber);
+            Assert.AreEqual(new DateTime(1997, 03, 20), f.ValidityDate);
+            Assert.AreEqual("1324", f.Pin);
+           }
 
         [TestMethod()]
         public void SetFuelCardIdTest()
         {
-            throw new NotImplementedException();
+            FuelCard f = new FuelCard(1, "123", new DateTime(1997, 03, 20), "1324", new List<string> { "gasoline" }, new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" }));
+            Assert.AreEqual(1, f.FuelCardId);
         }
 
         [TestMethod()]
         public void SetCardNumberTest()
         {
-            throw new NotImplementedException();
+            FuelCard f = new FuelCard(1, "123", new DateTime(1997, 03, 20), "1324", new List<string> { "gasoline" }, new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" }));
+            Assert.AreEqual("123", f.CardNumber);
         }
 
         [TestMethod()]
         public void SetPinTest()
         {
-            throw new NotImplementedException();
+            FuelCard f = new FuelCard(1, "123", new DateTime(1997, 03, 20), "1324", new List<string> { "gasoline" }, new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" }));
+            Assert.AreEqual("1324", f.Pin);
         }
 
         [TestMethod()]
         public void SetDriverTest()
         {
-            throw new NotImplementedException();
+            FuelCard f = new FuelCard(1, "123", new DateTime(1997, 03, 20), "1324", new List<string> { "gasoline" }, new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" })); ;
+           // Assert.AreEqual(1, f.Driver);
         }
 
         [TestMethod()]
         public void AddFuelTypeTest()
         {
-            throw new NotImplementedException();
+            FuelCard f = new FuelCard(1, "123", new DateTime(1997, 03, 20), "1324", new List<string> { "gasoline" }, new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" }));
+            string fuel = "";
+
+
+            fuel = "Diesel";
+
+            f.AddFuelType(fuel);
+            Assert.AreEqual("Diesel", fuel);
+
+
         }
 
         [TestMethod()]
         public void RemoveFuelTypeTest()
         {
-            throw new NotImplementedException();
+            FuelCard f = new FuelCard(1, "123", new DateTime(1997, 03, 20), "1324", new List<string> { "gasoline" }, new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" }));
+            string fuel = "";
+
+
+            fuel = "Diesel";
+
+            f.AddFuelType(fuel);
+            f.RemoveFuelType(fuel);
+
+            Assert.IsNotNull( fuel);
         }
     }
 }
