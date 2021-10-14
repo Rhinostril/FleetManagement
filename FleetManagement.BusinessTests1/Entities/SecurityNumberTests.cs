@@ -17,7 +17,7 @@ namespace FleetManagement.Business.Entities.Tests {
            
             ValidtestSecurityNumbers = new Dictionary<int, string>();
             ValidtestSecurityNumbers.Add(1, "97.10.27-363.61"); 
-            ValidtestSecurityNumbers.Add(2, "00.06.30-283.52");
+            ValidtestSecurityNumbers.Add(2, "00.06.30-283.52"); //person born in 2000 -> validation works
 
             InValidtestSecurityNumbers = new Dictionary<int, string>();
             InValidtestSecurityNumbers.Add(1, "97,10,27-363,61");//fail reason commas

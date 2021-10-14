@@ -42,7 +42,7 @@ namespace FleetManagement.Business.Tools {
                                 if(securitynumber.ElementAt(12) == '.') {
                                     string combinednumberstring = DateSplitInto3[0] + DateSplitInto3[1] + DateSplitInto3[2] + amountOfBirths;
                                     if(yearIsAfter2000) {
-                                        combinednumberstring = "2" + DateSplitInto3[0] + DateSplitInto3[1] + DateSplitInto3[2] + amountOfBirths; //needed for people born after 2000
+                                        combinednumberstring = "2" + DateSplitInto3[0] + DateSplitInto3[1] + DateSplitInto3[2] + amountOfBirths; //extra validation needed for people born after 2000
                                     }
                                     int numberToDivide = int.Parse(combinednumberstring); //Example  900201999
                                     int computedmodulo = numberToDivide % 97;
