@@ -16,7 +16,7 @@ namespace FleetManagement.Business.Entities {
 
 
         public void SetAddressID(int ID) {
-            if(ID <= 0) {
+            if(ID > 0) {
                 AddressID = ID;
             }else {
                 throw new AddressException("AddressID cannot be 0 or negative");
