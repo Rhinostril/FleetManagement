@@ -151,6 +151,7 @@ namespace FleetManagement.Business.Entities
         public void SetDriver(Driver driver)
         {
             if(Driver != null) // heeft vehicle al een driver?
+                // remove vehicle implementation
             {
                 if(Driver != driver)
                 {

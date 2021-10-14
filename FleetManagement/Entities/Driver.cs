@@ -66,6 +66,7 @@ namespace FleetManagement.Business.Entities
         public void setAddress(Address address) {
             Address = address;
         }
+
         public void removeAddress(Address address) {
             if(Address == address) {
                 Address = null;
@@ -78,6 +79,7 @@ namespace FleetManagement.Business.Entities
             DriverID = driverid;
         }
         public void setVehicle(Vehicle vehicle) {
+            //this needs to be improved
             Vehicle = vehicle;
         }
 

@@ -121,5 +121,27 @@ namespace FleetManagement.BusinessTests {
             Address adr = new Address();
             Assert.Throws<AddressException>(() => adr.SetCity(City));
         }
+        [Fact]
+        public void Test_AdressCountry_Valid() {
+
+            string Country = "België";
+            Address adr = new Address();
+            adr.SetCountry(Country);
+            Assert.Equal(Country, adr.Country);
+        }
+        [Fact]
+        public void Test_AdressCountry_InValid1() {
+
+            string Country = "";
+            Address adr = new Address();
+            Assert.Throws<AddressException>(() => adr.SetCountry(Country));
+        }
+        [Fact]
+        public void Test_AdressCountry_InValid2() {
+
+            string Country = null;
+            Address adr = new Address();
+            Assert.Throws<AddressException>(() => adr.SetCountry(Country));
+        }
     }
 }
