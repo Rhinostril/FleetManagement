@@ -7,12 +7,12 @@ using FleetManagement.Business.Exceptions;
 
 namespace FleetManagement.Business.Entities {
     public class Address {
-        public int AddressID { get; set; }
-        public string Street { get; set; }
-        public string HouseNr { get; set; }
-        public string PostalCode { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
+        public int AddressID { get; private set; }
+        public string Street { get; private set; }
+        public string HouseNr { get; private set; }
+        public string PostalCode { get; private set; }
+        public string City { get; private set; }
+        public string Country { get; private set; }
 
 
         public void SetAddressID(int ID) {

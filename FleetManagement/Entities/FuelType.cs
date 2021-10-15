@@ -3,20 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FleetManagement.Business.Exceptions;
 
 namespace FleetManagement.Business.Entities
 {
     public class FuelType
     {
-        List<string> fuelTypes = new List<string>
-        {
-        "Gasoline","Diesel","LPG","Hybride diesel","Hybride Gasoline","Electric"
-        };
+        public string FuelName { get; private set; }
 
-        public string GetFuelType( int index)
+        public FuelType(string fuelName)
         {
-       
-            return fuelTypes[index];
+            SetFuelName(fuelName);
+        }
+
+        public void SetFuelName(string name)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                FuelName = name;
+            }
+            else
+            {
+                throw new FuelTypeException("FuelType Name cannot be empty!");
+            }
         }
  
     }
