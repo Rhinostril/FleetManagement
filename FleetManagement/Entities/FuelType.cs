@@ -24,7 +24,7 @@ namespace FleetManagement.Business.Entities
             }
             else
             {
-                throw new FuelTypeException("FuelType Name cannot be empty!");
+                throw new FuelTypeException("FuelTypeName cannot be empty!");
             }
         }
  

@@ -14,17 +14,17 @@ namespace FleetManagement.Business.Entities
         public string CardNumber { get; private set; }
         public DateTime ValidityDate { get; set; }
         public string Pin { get; private set; }
-        public List<string> FuelTypes { get; private set; }
+        public FuelType FuelType { get; private set; }
         public Driver Driver { get; set; }
 
 
-        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, List<string> fuelTypes, Driver driver)
+        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType, Driver driver)
         {
             SetFuelCardId(fuelCardId);
             SetCardNumber(cardNumber);
             ValidityDate = validityDate;
             SetPin(pin);
-            FuelTypes = new List<string>();
+            SetFuelType(fuelType);
             SetDriver(driver);
         }
 
@@ -79,38 +79,24 @@ namespace FleetManagement.Business.Entities
                 }
                 else
                 {
-
+                    //TODO
                 }
             }
             else
             {
-
+                //TODO
             }
         }
 
-        public void AddFuelType(string fuelType)
+        public void SetFuelType(FuelType fuelType)
         {
-            fuelType = fuelType.ToLower();
-            if (!FuelTypes.Contains(fuelType))
+            if(fuelType != null)
             {
-                FuelTypes.Add(fuelType);
+                FuelType = fuelType;
             }
             else
             {
-                throw new FuelCardException("Fueltype already added!");
-            }
-        }
-
-        public void RemoveFuelType(string fuelType)
-        {
-            fuelType = fuelType.ToLower();
-            if (FuelTypes.Contains(fuelType))
-            {
-                FuelTypes.Remove(fuelType);
-            }
-            else
-            {
-                throw new FuelCardException("Fueltype does not exist!");
+                throw new FuelCardException("FuelType cannot be null!");
             }
         }
 
