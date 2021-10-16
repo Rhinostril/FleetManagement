@@ -1,21 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="FleetManagement.Business.Entities.Address">
-    <Position X="11" Y="0.75" Width="2" />
+    <Position X="13.5" Y="0.75" Width="2" />
     <TypeIdentifier>
       <HashCode>RAAAAAAIAAIAAAAIoAAAAACAgAIAAAAAAAKAAAAAAAA=</HashCode>
       <FileName>Entities\Address.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FleetManagement.Business.Entities.Driver">
-    <Position X="8" Y="0.75" Width="2" />
+    <Position X="9.75" Y="0.75" Width="2" />
     <TypeIdentifier>
       <HashCode>ABCAAGACQDAAACABACgEAAEApAAQEAACAAAQAAAAAQg=</HashCode>
       <FileName>Entities\Driver.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FuelCard" />
+      <Property Name="Address" />
+      <Property Name="Vehicle" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="FleetManagement.Business.Entities.FuelCard">
-    <Position X="5.5" Y="5.5" Width="2" />
+    <Position X="6" Y="4.25" Width="2" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAQABAAIAACACEAAAAAAAAAAAEAAAAAAAEAA=</HashCode>
       <FileName>Entities\FuelCard.cs</FileName>
@@ -25,18 +30,22 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="FleetManagement.Business.Entities.FuelType">
-    <Position X="2.5" Y="6.75" Width="2" />
+    <Position X="2.5" Y="6" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\FuelType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FleetManagement.Business.Entities.Vehicle">
-    <Position X="2.5" Y="0.75" Width="2" />
+    <Position X="2.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>ACBAAEACCAABQAAAAAAAAAAAAAAIgAABEIiBgAADCAA=</HashCode>
       <FileName>Entities\Vehicle.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FuelType" />
+      <Property Name="Driver" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
