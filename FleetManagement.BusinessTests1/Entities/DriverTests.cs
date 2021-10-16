@@ -24,33 +24,32 @@ namespace FleetManagement.Business.Entities.Tests
             Assert.Equal(new List<string>{"B","A1"}, driver.DriversLicenceType);
         }
 
-        [TestMethod()]
-        public void setSecurityNumberTest()
+        [Fact]
+        public void SetSecurityNumberTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
             Assert.Equal("97.05.20-327.78", driver.SecurityNumber);
         }
 
-        [TestMethod()]
-        public void addTypeToDriversLicenseTest()
+        [Fact]
+        public void AddTypeToDriversLicenseTest()
         {
             
         }
 
-        [TestMethod()]
-        public void setAddressTest()
+        [Fact]
+        public void SetAddressTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
 
             Address a = new Address();
-            a.Street = "street";
-            a.PostalCode = "9000";
-            a.HouseNr = "2";
-            a.Country = "belgium";
-            a.City = "gent";
+            a.SetStreet("street"); //a.Street = "street";
+            a.SetPostalCode("9000"); //a.PostalCode = "9000";
+            a.SetHouseNr("2"); //a.HouseNr = "2";
+            a.SetCountry("belgium"); //a.Country = "belgium";
+            a.SetCity("gent"); //a.City = "gent";
 
             driver.SetAddress(a);
-            
 
             Assert.NotNull(a.Street);
             Assert.NotNull(a.PostalCode);
@@ -60,8 +59,8 @@ namespace FleetManagement.Business.Entities.Tests
            
         }
 
-        [TestMethod()]
-        public void removeAddressTest()
+        [Fact]
+        public void RemoveAddressTest()
         {
             //Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
 
@@ -80,8 +79,8 @@ namespace FleetManagement.Business.Entities.Tests
 
         }
 
-        [TestMethod()]
-        public void setDriverIDTest()
+        [Fact]
+        public void SetDriverIDTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
             driver.SetDriverID(1);
@@ -89,8 +88,8 @@ namespace FleetManagement.Business.Entities.Tests
 
         }
 
-        [TestMethod()]
-        public void setVehicleTest()
+        [Fact]
+        public void SetVehicleTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
             Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", "Gasoline", "Sportauto", "Donkergrijs", 2, null);
@@ -99,7 +98,7 @@ namespace FleetManagement.Business.Entities.Tests
 
         }
 
-        [TestMethod()]
+        [Fact]
         public void TryRemoveVehicleTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
@@ -109,22 +108,22 @@ namespace FleetManagement.Business.Entities.Tests
 
         }
 
-        [TestMethod()]
-        public void setFuelCardTest()
+        [Fact]
+        public void SetFuelCardTest()
         {
-            FuelCard f = new FuelCard(1, "123", new DateTime(), "1324", null, null);
+            FuelCard f = new FuelCard(1, "123", new DateTime(), "1324", null);
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
             driver.SetFuelCard(f);
             Assert.NotNull(f);
 
         }
 
-        [TestMethod()]
-        public void removeAnyFuelCardTest()
+        [Fact]
+        public void RemoveAnyFuelCardTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
             Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", "Gasoline", "Sportauto", "Donkergrijs", 2, null);
-            FuelCard f = new FuelCard(1, "123", new DateTime(), "1324", null, null);
+            FuelCard f = new FuelCard(1, "123", new DateTime(), "1324", null);
 
             driver.SetFuelCard(f);
 
@@ -133,13 +132,13 @@ namespace FleetManagement.Business.Entities.Tests
 
         }
 
-        [TestMethod()]
-        public void tryRemoveSpecificFuelCardTest()
+        [Fact]
+        public void TryRemoveSpecificFuelCardTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
             Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", "Gasoline", "Sportauto", "Donkergrijs", 2, null);
-            FuelCard f1 = new FuelCard(1, "123", new DateTime(), "1324", null, null);
-            FuelCard f2 = new FuelCard(1, "123", new DateTime(), "1324", null, null);
+            FuelCard f1 = new FuelCard(1, "123", new DateTime(), "1324", null);
+            FuelCard f2 = new FuelCard(1, "123", new DateTime(), "1324", null);
 
             driver.SetFuelCard(f2);
             driver.SetFuelCard(f1);

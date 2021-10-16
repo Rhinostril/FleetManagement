@@ -1,23 +1,27 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using FleetManagement.Business.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FleetManagement.Business.Exceptions;
 
 namespace FleetManagement.Business.Entities.Tests
 {
-    [TestClass()]
+
     public class FuelTypeTests
     {
-        [TestMethod()]
-        public void GetFuelTypeTest()
+        [Fact]
+        public void Test_SetFuelName_Valid()
         {
-            FuelType f = new FuelType();
-            Assert.AreEqual("Diesel", f.GetFuelType(1));
+            FuelType fuelType = new FuelType("Gasoline");
+            fuelType.SetFuelName("Diesel");
+            Assert.Equal("Diesel", fuelType.FuelName);
         }
 
- 
+        [Fact]
+        public void Test_SetFuelName_Invalid()
+        {
+            FuelType fuelType = new FuelType("Gasoline");
+            Assert.Throws<FuelTypeException>(() => fuelType.SetFuelName(""));
+        }
+
+
     }
 }

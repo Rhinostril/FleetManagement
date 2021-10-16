@@ -3,8 +3,8 @@ using System.Runtime.Serialization;
 
 namespace FleetManagement.Business.Exceptions
 {
-    [Serializable]
-    internal class FuelTypeException : Exception
+
+    public class FuelTypeException : Exception
     {
         public FuelTypeException()
         {
