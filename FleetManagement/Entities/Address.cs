@@ -34,6 +34,8 @@ namespace FleetManagement.Business.Entities {
         }
         public void SetHouseNr(string houseNr) {
            
+            // Moet beginnen met een cijfer ?
+
             if(!String.IsNullOrEmpty(houseNr)) {
                 HouseNr = houseNr;
             }
@@ -44,6 +46,7 @@ namespace FleetManagement.Business.Entities {
         }
         public void SetPostalCode(string postalcode) {
             
+            // Moet 4 karakters lang zijn ?
 
             if(!String.IsNullOrEmpty(postalcode)) {
                 PostalCode = postalcode;

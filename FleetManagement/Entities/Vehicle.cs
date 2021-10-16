@@ -14,13 +14,13 @@ namespace FleetManagement.Business.Entities
         public string Model { get; private set; }
         public string ChassisNumber { get; private set; }
         public string LicensePlate { get; private set; }
-        public string FuelType { get; private set; }
+        public FuelType FuelType { get; private set; }
         public string VehicleType { get; private set; }
         public string Color { get; private set; }
         public int Doors { get; private set; }
         public Driver Driver { get; private set; }
 
-        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, string fuelType, string vehicleType, string color, int doors, Driver driver)
+        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
         {
             SetVehicleId(vehicleId);
             SetBrand(brand);
@@ -102,15 +102,15 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        public void SetFuelType(string fuel)
+        public void SetFuelType(FuelType fuelType)
         {
-            if (!string.IsNullOrWhiteSpace(fuel))
+            if (fuelType != null)
             {
-                FuelType = fuel;
+                FuelType = fuelType;
             }
             else
             {
-                throw new VehicleException("Vehicle fuel type can't be empty!");
+                throw new VehicleException("Vehicle fueltype can't be empty!");
             }
         }
         public void SetVehicleType(string vehicleType)
