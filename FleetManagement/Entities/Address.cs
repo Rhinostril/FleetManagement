@@ -45,11 +45,15 @@ namespace FleetManagement.Business.Entities {
 
         }
         public void SetPostalCode(string postalcode) {
-            
-            // Moet 4 karakters lang zijn ?
-
             if(!String.IsNullOrEmpty(postalcode)) {
-                PostalCode = postalcode;
+                if(postalcode.Length == 4)
+                {
+                    PostalCode = postalcode;
+                }
+                else
+                {
+                    throw new AddressException("Address postalcode must be 4 characters long");
+                }
             }
             else {
                 throw new AddressException("Address postalcode cannot be empty or missing");
