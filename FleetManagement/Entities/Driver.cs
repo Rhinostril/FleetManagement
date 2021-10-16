@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FleetManagement.Business.Exceptions;
 using FleetManagement.Business.Tools;
-using FleetManagement.Business.Exceptions;
+using System;
+using System.Collections.Generic;
 
 namespace FleetManagement.Business.Entities
 {
@@ -22,24 +19,24 @@ namespace FleetManagement.Business.Entities
 
         public Driver(string firstname, string lastname, DateTime dateofBirth, string securitynumber, List<string> licensetypes) {
             DriversLicenceType = new List<string>();
-            setFirstName(firstname);
-            setLastName(lastname);
-            setDateOfBirth(dateofBirth);
-            setDriversLicensetypes(licensetypes);
-            setSecurityNumber(securitynumber);
+            SetFirstName(firstname);
+            SetLastName(lastname);
+            SetDateOfBirth(dateofBirth);
+            SetDriversLicensetypes(licensetypes);
+            SetSecurityNumber(securitynumber);
         }
         //maybe add another constructor with more options and use this as :base
-        private void setFirstName(string firstname) {
+        private void SetFirstName(string firstname) {
             FirstName = firstname;
         }
-        private void setLastName(string lastname) {
+        private void SetLastName(string lastname) {
             LastName = lastname;
         }
-        private void setDateOfBirth(DateTime dateofbirth) {
+        private void SetDateOfBirth(DateTime dateofbirth) {
             //possible check if Date is not past 150 years ago or so --> ask client
             DateOfBirth = dateofbirth;
         }
-        public void setSecurityNumber(string securtiynumber) {
+        public void SetSecurityNumber(string securtiynumber) {
             //this is public because this parameter can concievably still change after it is set
             bool validationSucceeded = SocialSecurityNumberChecker.checknormalSecurityNumber(securtiynumber);
             if(validationSucceeded) {
@@ -50,11 +47,11 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        private void setDriversLicensetypes(List<string> licensetypes) {
+        private void SetDriversLicensetypes(List<string> licensetypes) {
             DriversLicenceType.Clear();
             DriversLicenceType.AddRange(licensetypes);
         }
-        public void addTypeToDriversLicense(List<string> licenseTypesToAdd) {
+        public void AddTypeToDriversLicense(List<string> licenseTypesToAdd) {
             foreach(string type in licenseTypesToAdd) {
                 if(!DriversLicenceType.Contains(type)) {
                     //the list does not contain this type yet and it can be added
@@ -63,11 +60,19 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        public void setAddress(Address address) {
-            Address = address;
+        public void SetAddress(Address address) {
+            if(address != null)
+            {
+                Address = address;
+            }
+            else
+            {
+                throw new DriverException("Address cannot be null or empty");
+            }
+
         }
 
-        public void removeAddress(Address address) {
+        public void RemoveAddress(Address address) {
             if(Address == address) {
                 Address = null;
             }
@@ -75,12 +80,25 @@ namespace FleetManagement.Business.Entities
                 throw new DriverException("Can't remove the targeted address because it is not the same as the given address");
             }
         }
-        public void setDriverID(int driverid) {
-            DriverID = driverid;
+        public void SetDriverID(int driverId) {
+            if(driverId > 0)
+            {
+                DriverID = driverId;
+            }
+            else
+            {
+                throw new DriverException("Driver id needs to be greater than 0");
+            }
         }
-        public void setVehicle(Vehicle vehicle) {
-            //this needs to be improved
-            Vehicle = vehicle;
+        public void SetVehicle(Vehicle vehicle) {
+            if(vehicle != null)
+            {
+                Vehicle = vehicle;
+            }
+            else
+            {
+                throw new DriverException("Vehicle cannot be null or empty");
+            }
         }
 
         public bool TryRemoveVehicle(Vehicle vehicle) {
@@ -89,22 +107,29 @@ namespace FleetManagement.Business.Entities
                 return true;
             }else {
                 throw new DriverException("Vehicle cannot be removed because the driver does not drive this exact vehicle");
-                return false;
+                //return false;
             }
         }
-        public void setFuelCard(FuelCard fuelcard) {
-            FuelCard = fuelcard;
+        public void SetFuelCard(FuelCard fuelCard) {
+            if(fuelCard != null)
+            {
+                FuelCard = fuelCard;
+            }
+            else
+            {
+                throw new DriverException("Fuelcard cannot be empty or null");
+            }
         }
-        public void removeAnyFuelCard() {
+        public void RemoveAnyFuelCard() {
             FuelCard = null;
         }
-        public bool tryRemoveSpecificFuelCard(FuelCard fuelcard) {
+        public bool TryRemoveSpecificFuelCard(FuelCard fuelcard) {
             if(FuelCard != null && FuelCard == fuelcard) {
                 FuelCard = null;
                 return true;
             }else {
                 throw new DriverException("Unable to remove this specific fuel card");
-                return false;
+                //return false;
             }
         }
 

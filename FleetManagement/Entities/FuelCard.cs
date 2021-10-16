@@ -10,22 +10,20 @@ namespace FleetManagement.Business.Entities
     public class FuelCard
     {
 
-        public int FuelCardId { get; private set; }
+        public int FuelCardId { get; private set; } // cardNumber als id gebruiken ?
         public string CardNumber { get; private set; }
         public DateTime ValidityDate { get; set; }
         public string Pin { get; private set; }
         public FuelType FuelType { get; private set; }
-        public Driver Driver { get; set; }
 
 
-        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType, Driver driver)
+        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType)
         {
             SetFuelCardId(fuelCardId);
             SetCardNumber(cardNumber);
             ValidityDate = validityDate;
             SetPin(pin);
             SetFuelType(fuelType);
-            SetDriver(driver);
         }
 
         public void SetFuelCardId(int id)
@@ -66,25 +64,6 @@ namespace FleetManagement.Business.Entities
             else
             {
                 throw new FuelCardException("Pin can't be empty!");
-            }
-        }
-        public void SetDriver(Driver driver)
-        {
-            if(driver != null)
-            {
-                if(driver.FuelCard == null)
-                {
-                    Driver = driver;
-                    driver.setFuelCard(this);
-                }
-                else
-                {
-                    //TODO
-                }
-            }
-            else
-            {
-                //TODO
             }
         }
 
