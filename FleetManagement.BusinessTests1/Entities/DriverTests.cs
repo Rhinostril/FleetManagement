@@ -92,7 +92,7 @@ namespace FleetManagement.Business.Entities.Tests
         public void SetVehicleTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
-            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", "Gasoline", "Sportauto", "Donkergrijs", 2, null);
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, null);
             driver.SetVehicle(vehicle);
             Assert.NotNull(vehicle);
 
@@ -102,7 +102,7 @@ namespace FleetManagement.Business.Entities.Tests
         public void TryRemoveVehicleTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
-            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", "Gasoline", "Sportauto", "Donkergrijs", 2, null);
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, null);
             driver.SetVehicle(vehicle);
             Assert.True(driver.TryRemoveVehicle(vehicle));
 
@@ -122,7 +122,7 @@ namespace FleetManagement.Business.Entities.Tests
         public void RemoveAnyFuelCardTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
-            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", "Gasoline", "Sportauto", "Donkergrijs", 2, null);
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, null);
             FuelCard f = new FuelCard(1, "123", new DateTime(), "1324", null);
 
             driver.SetFuelCard(f);
@@ -136,7 +136,7 @@ namespace FleetManagement.Business.Entities.Tests
         public void TryRemoveSpecificFuelCardTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
-            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", "Gasoline", "Sportauto", "Donkergrijs", 2, null);
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, null);
             FuelCard f1 = new FuelCard(1, "123", new DateTime(), "1324", null);
             FuelCard f2 = new FuelCard(1, "123", new DateTime(), "1324", null);
 
