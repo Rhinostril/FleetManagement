@@ -85,20 +85,17 @@ namespace FleetManagement.BusinessTests {
             adr.SetPostalCode(PostalCode);
             Assert.Equal(PostalCode, adr.PostalCode);
         }
-        [Fact]
-        public void Test_AdressPostalCode_InValid1() {
 
-            string PostalCode = "";
+        [Theory]
+        [InlineData("")]
+        [InlineData("123")]
+        [InlineData("12345")]
+        [InlineData("123456787978979874165")]
+        public void Test_AdressPostalCode_InValid(string code) {
             Address adr = new Address();
-            Assert.Throws<AddressException>(() => adr.SetPostalCode(PostalCode));
+            Assert.Throws<AddressException>(() => adr.SetPostalCode(code));
         }
-        [Fact]
-        public void Test_AdressPostalCode_InValid2() {
 
-            string PostalCode = null;
-            Address adr = new Address();
-            Assert.Throws<AddressException>(() => adr.SetPostalCode(PostalCode));
-        }
         [Fact]
         public void Test_AdressCity_Valid() {
 
