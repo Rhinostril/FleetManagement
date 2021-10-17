@@ -150,17 +150,19 @@ namespace FleetManagement.Business.Entities
 
         public void SetDriver(Driver driver)
         {
-            if(Driver != null) // heeft vehicle al een driver?
+            if(this.Driver != null) // heeft vehicle al een driver?
                 // remove vehicle implementation
             {
                 if(Driver != driver)
-                {
+                {  //TODO remove vehicle from old driver if it has a vehicle registered
+                    //then set the new driver of this vehice
                     Driver = driver;
+                    //TODO and set the new vehicle for this driver
                 }
             }
             else
             {
-                if(driver != null) // is driver niet null
+                if(driver != null) // incoming driver also isnt null
                 {
                     Driver = driver;
                 }

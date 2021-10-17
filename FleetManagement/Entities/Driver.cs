@@ -27,12 +27,11 @@ namespace FleetManagement.Business.Entities
                 SetDateOfBirth(dateofBirth);
                 SetDriversLicensetypes(licensetypes);
                 SetSecurityNumber(securitynumber);
-            }
-            catch(Exception ex) {
+            }catch(Exception ex) {
 
             }
 
-            }
+        }
         //maybe add another constructor with more options and use this as :base
         private void SetFirstName(string firstname) {
             string trimmed = firstname.Trim();
@@ -103,8 +102,7 @@ namespace FleetManagement.Business.Entities
             {
                 Address = address;
             }
-            else
-            {
+            else { 
                 throw new DriverException("Address cannot be null or empty");
             }
         }
@@ -139,6 +137,19 @@ namespace FleetManagement.Business.Entities
         }
         public void RemoveVehicle() {
             Vehicle = null;
+        }
+        public bool HasVehicle(Vehicle vehicle) {
+            if(Vehicle != null) {
+                if(this.Vehicle == vehicle) {
+                    return true;
+                }
+                else { 
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
         }
         
         public bool TryRemoveVehicle(Vehicle vehicle) {
