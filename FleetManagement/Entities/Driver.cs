@@ -142,10 +142,12 @@ namespace FleetManagement.Business.Entities
                         newvehicle.RemoveDriver();
                         newvehicle.SetDriver(this);
                     }
-                   
                 }
-
                 Vehicle = newvehicle;
+                if(!newvehicle.HasDriver(this)) {
+                    newvehicle.RemoveDriver();
+                    newvehicle.SetDriver(this);
+                }
             }
             
             else {
@@ -178,13 +180,25 @@ namespace FleetManagement.Business.Entities
                 throw new DriverException("Vehicle cannot be removed because the driver does not drive this exact vehicle");
             }
         }
-        public void SetFuelCard(FuelCard fuelCard) {
-            if(fuelCard != null)
-            {
-                FuelCard = fuelCard;
+        public void SetFuelCard(FuelCard newfuelCard) {
+            if(newfuelCard != null) {
+                if(this.FuelCard == null) {
+                    if(!newfuelCard.HasDriver(this)) {
+                        newfuelCard.SetDriver(this);
+                    }
+                }else if(this.FuelCard != newfuelCard) {
+                    if(!newfuelCard.HasDriver(this)) {
+                        newfuelCard.RemoveDriver();
+                        newfuelCard.SetDriver(this);
+                    }
+                }
+                this.FuelCard = newfuelCard;
+                if(!FuelCard.HasDriver(this)) {
+                    FuelCard.SetDriver(this);
+                }
+
             }
-            else
-            {
+            else {
                 throw new DriverException("Fuelcard cannot be empty or null");
             }
         }

@@ -179,6 +179,7 @@ namespace FleetManagement.Business.Entities
                 else if(this.Driver == newDriver) // is huidige driver wel gelijk aan nieuwe driver? -> exception
                 {
                     if(!this.Driver.HasVehicle(this)) {
+                        this.Driver.RemoveVehicle();
                         this.Driver.SetVehicle(this);
                     }
                     
