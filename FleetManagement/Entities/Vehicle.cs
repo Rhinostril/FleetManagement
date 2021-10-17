@@ -18,7 +18,7 @@ namespace FleetManagement.Business.Entities
         public string VehicleType { get; private set; }
         public string Color { get; private set; }
         public int Doors { get; private set; }
-        public Driver Driver { get; private set; }
+        public Driver Driver { get; private set; } 
 
         public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
         {
