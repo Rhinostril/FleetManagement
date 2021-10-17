@@ -101,12 +101,27 @@ namespace FleetManagement.Business.Entities.Tests
         public void SetVehicleTestVersion2() {
             Driver driverorig = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.10.27-363.61", new List<string> { "B", "A1" });
             Driver drivernext= new Driver("Bradley", "Cooper", new DateTime(1977, 05, 10), "97.10.27-363.61", new List<string> { "B", "A1" });
-
-            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, null);
-            driverorig.SetVehicle(vehicleOrig);
+            
+            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driverorig);
             drivernext.SetVehicle(vehicleOrig);
-                      
-            Assert.Equal(drivernext.Vehicle, vehicleOrig);
+
+            Assert.Null(driverorig.Vehicle);
+            Assert.Equal(drivernext.Vehicle.ChassisNumber, vehicleOrig.ChassisNumber);
+
+        }
+        [Fact]
+        public void SetVehicleTestVersion3() {
+            Driver driverorig = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.10.27-363.61", new List<string> { "B", "A1" });
+            Driver drivernext = new Driver("Bradley", "Cooper", new DateTime(1977, 05, 10), "97.10.27-363.61", new List<string> { "B", "A1" });
+
+            
+            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driverorig);
+            Vehicle vehiclesecond = new Vehicle(1, "Porsche", "GT2RS", "1234-1334-1234-12", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, drivernext);
+
+            drivernext.SetVehicle(vehicleOrig);
+            driverorig.SetVehicle(vehiclesecond);
+            Assert.Equal(driverorig.Vehicle.ChassisNumber, vehiclesecond.ChassisNumber);
+            Assert.Equal(drivernext.Vehicle.ChassisNumber, vehicleOrig.ChassisNumber);
 
         }
 

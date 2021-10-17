@@ -152,23 +152,36 @@ namespace FleetManagement.Business.Entities
         {
             if (newDriver != null)
             {
-                if (this.Driver != newDriver) //is huidige driver niet gelijk aan nieuwe driver ?
-                    //TO TEST: WHAT HAPPENS IF this.Driver is null
+                if(this.Driver == null) {
+                    if(!newDriver.HasVehicle(this)) //heeft de nieuwe driver dit al als vehicle ?
+                   {
+                        newDriver.RemoveVehicle();
+                        this.Driver = newDriver;
+                        newDriver.SetVehicle(this);
+                    }
+                    this.Driver = newDriver;
+
+                } else if (this.Driver != newDriver) //is huidige driver niet gelijk aan nieuwe driver ?
                 {
                     if (this.Driver.HasVehicle(this))
                     {
-                        this.Driver.RemoveVehicle(); //verwijder de huidige driver zijn vehicle
+                        this.Driver.RemoveVehicle();
+                        //verwijder de huidige driver zijn vehicle
                     }
                     if (!newDriver.HasVehicle(this)) //heeft de nieuwe driver dit al als vehicle ?
                     {
                         newDriver.RemoveVehicle();
+                        this.Driver = newDriver;
                         newDriver.SetVehicle(this);
                     }
-                    this.Driver = newDriver;
+                    
                 }
-                else // is huidige driver wel gelijk aan nieuwe driver? -> exception
+                else if(this.Driver == newDriver) // is huidige driver wel gelijk aan nieuwe driver? -> exception
                 {
-                    throw new VehicleException("Vehicle - SetDriver - Driver not new");
+                    if(!this.Driver.HasVehicle(this)) {
+                        this.Driver.SetVehicle(this);
+                    }
+                    
                 }
             }
             else

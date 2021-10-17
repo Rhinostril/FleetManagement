@@ -126,8 +126,14 @@ namespace FleetManagement.Business.Entities
             }
         }
         public void SetVehicle(Vehicle newvehicle) {
+
             if(newvehicle != null) {
-                if(this.Vehicle != newvehicle) {
+                if(this.Vehicle == null) {
+                    if(!newvehicle.HasDriver(this)) {
+                        newvehicle.SetDriver(this);
+                    }
+                }
+                else if(this.Vehicle != newvehicle) {
                     //case where the new vehicle isnt the same as the current one
                     if(this.Vehicle.HasDriver(this)) {
                         this.Vehicle.RemoveDriver(); //if the previous vehicle still has this driver, remove it
@@ -136,12 +142,12 @@ namespace FleetManagement.Business.Entities
                         newvehicle.RemoveDriver();
                         newvehicle.SetDriver(this);
                     }
-                    this.Vehicle = newvehicle;
+                   
                 }
-                else {//case where we try to set the exact same vehicle
-                    throw new VehicleException("Driver - Setvehicle:  vehicle not new");
-                }
+
+                Vehicle = newvehicle;
             }
+            
             else {
                 throw new DriverException("Driver - Setvehicle: new vehicle is null");
             }     
