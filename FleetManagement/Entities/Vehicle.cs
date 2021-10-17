@@ -153,6 +153,7 @@ namespace FleetManagement.Business.Entities
             if (newDriver != null)
             {
                 if (this.Driver != newDriver) //is huidige driver niet gelijk aan nieuwe driver ?
+                    //TO TEST: WHAT HAPPENS IF this.Driver is null
                 {
                     if (this.Driver.HasVehicle(this))
                     {

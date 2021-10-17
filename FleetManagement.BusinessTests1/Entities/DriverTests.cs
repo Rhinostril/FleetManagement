@@ -97,6 +97,18 @@ namespace FleetManagement.Business.Entities.Tests
             Assert.NotNull(vehicle);
 
         }
+        [Fact]
+        public void SetVehicleTestVersion2() {
+            Driver driverorig = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.10.27-363.61", new List<string> { "B", "A1" });
+            Driver drivernext= new Driver("Bradley", "Cooper", new DateTime(1977, 05, 10), "97.10.27-363.61", new List<string> { "B", "A1" });
+
+            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, null);
+            driverorig.SetVehicle(vehicleOrig);
+            drivernext.SetVehicle(vehicleOrig);
+                      
+            Assert.Equal(drivernext.Vehicle, vehicleOrig);
+
+        }
 
         [Fact]
         public void TryRemoveVehicleTest()
