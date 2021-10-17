@@ -2,6 +2,7 @@
 using FleetManagement.Business.Tools;
 using System;
 using System.Collections.Generic;
+using System.Linq; 
 
 namespace FleetManagement.Business.Entities
 {
@@ -18,23 +19,52 @@ namespace FleetManagement.Business.Entities
         public FuelCard FuelCard { get; private set; }
 
         public Driver(string firstname, string lastname, DateTime dateofBirth, string securitynumber, List<string> licensetypes) {
-            DriversLicenceType = new List<string>();
-            SetFirstName(firstname);
-            SetLastName(lastname);
-            SetDateOfBirth(dateofBirth);
-            SetDriversLicensetypes(licensetypes);
-            SetSecurityNumber(securitynumber);
-        }
+
+            try {
+                DriversLicenceType = new List<string>();
+                SetFirstName(firstname);
+                SetLastName(lastname);
+                SetDateOfBirth(dateofBirth);
+                SetDriversLicensetypes(licensetypes);
+                SetSecurityNumber(securitynumber);
+            }
+            catch(Exception ex) {
+
+            }
+
+            }
         //maybe add another constructor with more options and use this as :base
         private void SetFirstName(string firstname) {
-            FirstName = firstname;
+            string trimmed = firstname.Trim();
+            if(String.IsNullOrEmpty(trimmed)) {
+                throw new DriverException("Cannot set an empty first name");
+            }
+            else {
+                FirstName = firstname;
+            }
+           
         }
         private void SetLastName(string lastname) {
-            LastName = lastname;
+            string trimmed = lastname.Trim();
+            if(String.IsNullOrEmpty(trimmed)) {
+                throw new DriverException("Cannot set an empty last name");
+            }
+            else {
+                LastName = lastname;
+            }
+            
         }
         private void SetDateOfBirth(DateTime dateofbirth) {
-            //possible check if Date is not past 150 years ago or so --> ask client
-            DateOfBirth = dateofbirth;
+            TimeSpan offset = DateTime.Now - dateofbirth;
+            if(offset.TotalDays <= 0) {
+                throw new DriverException("Date of birth cannot be in the future");
+            }else if(offset.TotalDays >= 36524) {
+                throw new DriverException("Date of birth cannot be more than 100 years in the past");
+            }
+            else {
+                DateOfBirth = dateofbirth;
+            }
+         
         }
         public void SetSecurityNumber(string securtiynumber) {
             //this is public because this parameter can concievably still change after it is set
@@ -48,6 +78,14 @@ namespace FleetManagement.Business.Entities
         }
 
         private void SetDriversLicensetypes(List<string> licensetypes) {
+
+            //ASK client: Do we check if this list contains any licenses?
+            //Usecase where we might not need license : self driving cars
+
+            //bool iscollectionempty = licensetypes.Any();
+            //if(iscollectionempty) {
+            //    throw new DriverException("driver must have at least 1 driverslicense");
+            //}
             DriversLicenceType.Clear();
             DriversLicenceType.AddRange(licensetypes);
         }
@@ -69,7 +107,6 @@ namespace FleetManagement.Business.Entities
             {
                 throw new DriverException("Address cannot be null or empty");
             }
-
         }
 
         public void RemoveAddress(Address address) {
@@ -100,14 +137,16 @@ namespace FleetManagement.Business.Entities
                 throw new DriverException("Vehicle cannot be null or empty");
             }
         }
-
+        public void RemoveVehicle() {
+            Vehicle = null;
+        }
+        
         public bool TryRemoveVehicle(Vehicle vehicle) {
             if(Vehicle == vehicle) {
                 Vehicle = null;
                 return true;
             }else {
                 throw new DriverException("Vehicle cannot be removed because the driver does not drive this exact vehicle");
-                //return false;
             }
         }
         public void SetFuelCard(FuelCard fuelCard) {
@@ -120,17 +159,8 @@ namespace FleetManagement.Business.Entities
                 throw new DriverException("Fuelcard cannot be empty or null");
             }
         }
-        public void RemoveAnyFuelCard() {
+        public void RemoveFuelCard() {
             FuelCard = null;
-        }
-        public bool TryRemoveSpecificFuelCard(FuelCard fuelcard) {
-            if(FuelCard != null && FuelCard == fuelcard) {
-                FuelCard = null;
-                return true;
-            }else {
-                throw new DriverException("Unable to remove this specific fuel card");
-                //return false;
-            }
         }
 
 
