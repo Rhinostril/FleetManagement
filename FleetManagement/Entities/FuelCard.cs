@@ -99,6 +99,25 @@ namespace FleetManagement.Business.Entities
             }
         }
 
+        public bool HasDriver(Driver driver)
+        {
+            if(Driver != null)
+            {
+                if(Driver == driver)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void RemoveDriver()
         {
             Driver = null;

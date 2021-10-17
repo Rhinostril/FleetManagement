@@ -150,25 +150,38 @@ namespace FleetManagement.Business.Entities
 
         public void SetDriver(Driver driver)
         {
-            if(Driver != null) // heeft vehicle al een driver?
-                // remove vehicle implementation
+            if (driver == null) throw new VehicleException("");
+            if (driver == Driver) throw new VehicleException("");
+            if(Driver != null)
             {
-                if(Driver != driver)
+                // TODO
+
+                Driver = driver;
+            }
+        }
+
+        public bool HasDriver(Driver driver)
+        {
+            if (Driver != null)
+            {
+                if (Driver == driver)
                 {
-                    Driver = driver;
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             else
             {
-                if(driver != null) // is driver niet null
-                {
-                    Driver = driver;
-                }
-                else
-                {
-                    
-                }
+                return false;
             }
+        }
+
+        public void RemoveDriver()
+        {
+            Driver = null;
         }
 
 
