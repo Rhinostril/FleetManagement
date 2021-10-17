@@ -28,7 +28,7 @@ namespace FleetManagement.Business.Entities
                 SetDriversLicensetypes(licensetypes);
                 SetSecurityNumber(securitynumber);
             }catch(Exception ex) {
-
+                throw new Exception(ex.Message);
             }
 
         }
