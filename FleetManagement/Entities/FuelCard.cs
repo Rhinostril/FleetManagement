@@ -15,6 +15,7 @@ namespace FleetManagement.Business.Entities
         public DateTime ValidityDate { get; set; }
         public string Pin { get; private set; }
         public FuelType FuelType { get; private set; }
+        public Driver Driver { get; private set; }
 
 
         public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType)
@@ -77,6 +78,30 @@ namespace FleetManagement.Business.Entities
             {
                 throw new FuelCardException("FuelType cannot be null!");
             }
+        }
+
+        public void SetDriver(Driver driver)
+        {
+            if (driver == null) throw new FuelCardException("FuelCard - SetDriver - invalid driver");
+            if (driver == Driver) throw new FuelCardException("FuelCard - SetDriver - not new");
+            if(Driver != null)
+            {
+                if (driver.HasFuelCard(this))
+                {
+                    Driver.RemoveFuelCard();
+                }
+                if (!driver.HasFuelCard(this))
+                {
+                    Driver.SetFuelCard(this);
+                }
+                
+                Driver = driver;
+            }
+        }
+
+        public void RemoveDriver()
+        {
+            Driver = null;
         }
 
 
