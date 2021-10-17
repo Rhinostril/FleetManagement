@@ -17,6 +17,8 @@ namespace FleetManagement.Business.Entities
         public FuelType FuelType { get; private set; }
         public Driver Driver { get; private set; }
 
+        //TODO public bool isEnabled { get; private set; }
+
 
         public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType)
         {
