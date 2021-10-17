@@ -158,8 +158,11 @@ namespace FleetManagement.Business.Entities.Tests
             drivernext.SetVehicle(vehiclenr3);
 
             Assert.Equal(drivernext.Vehicle.ChassisNumber, vehiclenr3.ChassisNumber);
+            Assert.Equal(vehiclenr3.Driver.LastName, drivernext.LastName);
             Assert.Equal(driverNr3.Vehicle.ChassisNumber, vehiclesecond.ChassisNumber);
+            Assert.Equal(vehiclesecond.Driver.LastName, driverNr3.LastName);
             Assert.Equal(driverorig.Vehicle.ChassisNumber, vehicleOrig.ChassisNumber);
+            Assert.Equal(vehicleOrig.Driver.LastName, driverorig.LastName);
 
         }
 
