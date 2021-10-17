@@ -148,22 +148,22 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        public void SetDriver(Driver driver) //feedback leerkracht
+        public void SetDriver(Driver newDriver) //feedback leerkracht
         {
-            if (driver != null)
+            if (newDriver != null)
             {
-                if (this.Driver != driver) //is huidige driver niet gelijk aan nieuwe driver ?
+                if (this.Driver != newDriver) //is huidige driver niet gelijk aan nieuwe driver ?
                 {
                     if (this.Driver.HasVehicle(this))
                     {
                         this.Driver.RemoveVehicle(); //verwijder de huidige driver zijn vehicle
                     }
-                    if (!driver.HasVehicle(this)) //heeft de nieuwe driver dit al als vehicle ?
+                    if (!newDriver.HasVehicle(this)) //heeft de nieuwe driver dit al als vehicle ?
                     {
-                        driver.RemoveVehicle();
-                        driver.SetVehicle(this);
+                        newDriver.RemoveVehicle();
+                        newDriver.SetVehicle(this);
                     }
-                    this.Driver = driver;
+                    this.Driver = newDriver;
                 }
                 else // is huidige driver wel gelijk aan nieuwe driver? -> exception
                 {
