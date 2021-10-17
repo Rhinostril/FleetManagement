@@ -15,6 +15,7 @@ namespace FleetManagement.Business.Entities
         public DateTime ValidityDate { get; set; }
         public string Pin { get; private set; }
         public FuelType FuelType { get; private set; }
+        public Driver Driver { get; private set; }
 
 
         public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType)
@@ -24,6 +25,16 @@ namespace FleetManagement.Business.Entities
             ValidityDate = validityDate;
             SetPin(pin);
             SetFuelType(fuelType);
+        }
+
+        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType, Driver driver)
+        {
+            SetFuelCardId(fuelCardId);
+            SetCardNumber(cardNumber);
+            ValidityDate = validityDate;
+            SetPin(pin);
+            SetFuelType(fuelType);
+            SetDriver(driver);
         }
 
         public void SetFuelCardId(int id)
@@ -77,6 +88,49 @@ namespace FleetManagement.Business.Entities
             {
                 throw new FuelCardException("FuelType cannot be null!");
             }
+        }
+
+        public void SetDriver(Driver driver)
+        {
+            if (driver == null) throw new FuelCardException("FuelCard - SetDriver - invalid driver");
+            if (driver == Driver) throw new FuelCardException("FuelCard - SetDriver - not new");
+            if(Driver != null)
+            {
+                if (driver.HasFuelCard(this))
+                {
+                    Driver.RemoveFuelCard();
+                }
+                if (!driver.HasFuelCard(this))
+                {
+                    Driver.SetFuelCard(this);
+                }
+                
+                Driver = driver;
+            }
+        }
+
+        public bool HasDriver(Driver driver)
+        {
+            if(Driver != null)
+            {
+                if(Driver == driver)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void RemoveDriver()
+        {
+            Driver = null;
         }
 
 
