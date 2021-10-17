@@ -90,22 +90,22 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        public void SetDriver(Driver driver)
+        public void SetDriver(Driver newDriver) //feedback leerkracht
         {
-            if (driver == null) throw new FuelCardException("FuelCard - SetDriver - invalid driver");
-            if (driver == Driver) throw new FuelCardException("FuelCard - SetDriver - not new");
+            if (newDriver == null) throw new FuelCardException("FuelCard - SetDriver - invalid driver");
+            if (newDriver == Driver) throw new FuelCardException("FuelCard - SetDriver - not new");
             if(Driver != null)
             {
-                if (driver.HasFuelCard(this))
+                if (newDriver.HasFuelCard(this))
                 {
                     Driver.RemoveFuelCard();
                 }
-                if (!driver.HasFuelCard(this))
+                if (!newDriver.HasFuelCard(this))
                 {
                     Driver.SetFuelCard(this);
                 }
                 
-                Driver = driver;
+                Driver = newDriver;
             }
         }
 

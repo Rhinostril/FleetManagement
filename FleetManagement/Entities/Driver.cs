@@ -76,7 +76,7 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        private void SetDriversLicensetypes(List<string> licensetypes) {
+        private void SetDriversLicensetypes(List<string> licensetypes) { //feedback leerkrach
 
             //ASK client: Do we check if this list contains any licenses?
             //Usecase where we might not need license : self driving cars
