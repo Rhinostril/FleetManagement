@@ -172,14 +172,7 @@ namespace FleetManagement.Business.Entities
             }
         }
         
-        public bool TryRemoveVehicle(Vehicle vehicle) {
-            if(Vehicle == vehicle) {
-                Vehicle = null;
-                return true;
-            }else {
-                throw new DriverException("Vehicle cannot be removed because the driver does not drive this exact vehicle");
-            }
-        }
+      
         public void SetFuelCard(FuelCard newfuelCard) {
             if(newfuelCard != null) {
                 if(this.FuelCard == null) {
@@ -194,6 +187,7 @@ namespace FleetManagement.Business.Entities
                 }
                 this.FuelCard = newfuelCard;
                 if(!FuelCard.HasDriver(this)) {
+                    FuelCard.RemoveDriver();
                     FuelCard.SetDriver(this);
                 }
 
