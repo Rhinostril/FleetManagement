@@ -27,6 +27,16 @@ namespace FleetManagement.Business.Entities
             SetFuelType(fuelType);
         }
 
+        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType, Driver driver)
+        {
+            SetFuelCardId(fuelCardId);
+            SetCardNumber(cardNumber);
+            ValidityDate = validityDate;
+            SetPin(pin);
+            SetFuelType(fuelType);
+            SetDriver(driver);
+        }
+
         public void SetFuelCardId(int id)
         {
             if(id > 0)
