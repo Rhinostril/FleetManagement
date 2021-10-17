@@ -162,7 +162,19 @@ namespace FleetManagement.Business.Entities
         public void RemoveFuelCard() {
             FuelCard = null;
         }
-
+        public bool HasFuelCard(FuelCard fuelcard) {
+            if(FuelCard != null) {
+                if(this.FuelCard == fuelcard) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
 
     }
 }
