@@ -17,14 +17,14 @@ namespace FleetManagement.Business.Entities
         }
 
         public void SetFuelName(string name)
-        {
+        {   
             if (!string.IsNullOrWhiteSpace(name))
             {
                 FuelName = name;
             }
             else
             {
-                throw new FuelTypeException("FuelTypeName cannot be empty!");
+                throw new FuelTypeException("FuelType - SetFuelName: name cannot be empty!");
             }
         }
  

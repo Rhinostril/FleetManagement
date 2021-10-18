@@ -14,12 +14,28 @@ namespace FleetManagement.Business.Entities {
         public string City { get; private set; }
         public string Country { get; private set; }
 
+        public Address() {
+
+        }
+        public Address(int addressid, string street, string housenr, string postalcode, string city, string country) {
+            try {
+                SetAddressID(addressid);
+                SetStreet(street);
+                SetHouseNr(housenr);
+                SetPostalCode(postalcode);
+                SetCity(city);
+                SetCountry(country);
+            }
+            catch(Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public void SetAddressID(int ID) {
             if(ID > 0) {
                 AddressID = ID;
             }else {
-                throw new AddressException("AddressID cannot be 0 or negative");
+                throw new AddressException("Address - SetAddressID: Id cannot be 0 or negative");
             }
             
         }
@@ -28,19 +44,19 @@ namespace FleetManagement.Business.Entities {
                 Street = street;
             }
             else {
-                throw new AddressException("Address street cannot be empty or missing");
+                throw new AddressException("Address - SetStreet: street cannot be empty or missing");
             }
 
         }
         public void SetHouseNr(string houseNr) {
            
-            // Moet beginnen met een cijfer ?
+            // Does it have to start with a NR? in other words : houseNr validation?
 
             if(!String.IsNullOrEmpty(houseNr)) {
                 HouseNr = houseNr;
             }
             else {
-                throw new AddressException("Address housenumber cannot be empty or missing");
+                throw new AddressException("Address - SetHouseNr: housenumber cannot be empty or missing");
             }
 
         }
@@ -52,11 +68,11 @@ namespace FleetManagement.Business.Entities {
                 }
                 else
                 {
-                    throw new AddressException("Address postalcode must be 4 characters long");
+                    throw new AddressException("Address - SetPostalCode: postalcode must be 4 characters long");
                 }
             }
             else {
-                throw new AddressException("Address postalcode cannot be empty or missing");
+                throw new AddressException("Address - SetPostalCode: postalcode cannot be empty or missing");
             }
         }
         public void SetCity(string city) {
@@ -65,7 +81,7 @@ namespace FleetManagement.Business.Entities {
                 City = city;
             }
             else {
-                throw new AddressException("Address city cannot be empty or missing");
+                throw new AddressException("Address - SetCity: city cannot be empty or missing");
             }
            
         }
@@ -75,7 +91,7 @@ namespace FleetManagement.Business.Entities {
                 Country = country;
             }
             else {
-                throw new AddressException("Address city cannot be empty or missing");
+                throw new AddressException("Address - SetCountry: city cannot be empty or missing");
             }
         }
 

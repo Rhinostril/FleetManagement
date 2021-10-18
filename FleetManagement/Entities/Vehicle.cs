@@ -20,9 +20,10 @@ namespace FleetManagement.Business.Entities
         public int Doors { get; private set; }
         public Driver Driver { get; private set; } 
 
-
+        //Ask Client : Vehicle constructor without driver?
         public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
         {
+            try {
             SetVehicleId(vehicleId);
             SetBrand(brand);
             SetModel(model);
@@ -33,7 +34,10 @@ namespace FleetManagement.Business.Entities
             SetVehicleColor(color);
             SetVehicleDoors(doors);
             SetDriver(driver);
-        }
+             }catch(Exception ex) {
+                throw new Exception(ex.Message);
+    }
+}
 
         public void SetVehicleId(int id)
         {
@@ -83,7 +87,6 @@ namespace FleetManagement.Business.Entities
                 {
                     throw new VehicleException("Vehicle chassis number must be 17 characters long!");
                 }
-
             }
             else
             {

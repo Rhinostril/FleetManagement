@@ -22,21 +22,31 @@ namespace FleetManagement.Business.Entities
 
         public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType)
         {
+            try { 
             SetFuelCardId(fuelCardId);
             SetCardNumber(cardNumber);
             ValidityDate = validityDate;
             SetPin(pin);
             SetFuelType(fuelType);
+            }
+            catch(Exception ex) {
+                throw new Exception(ex.Message);
+            }
         }
 
         public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType, Driver driver)
         {
+            try {
             SetFuelCardId(fuelCardId);
             SetCardNumber(cardNumber);
             ValidityDate = validityDate;
             SetPin(pin);
             SetFuelType(fuelType);
             SetDriver(driver);
+            }
+            catch(Exception ex) {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void SetFuelCardId(int id)
@@ -47,7 +57,7 @@ namespace FleetManagement.Business.Entities
             }
             else
             {
-                throw new FuelCardException("FuelCardId has to be greater than 0!");
+                throw new FuelCardException("FuelCard - SetFuelCardId: FuelCardId has to be greater than 0!");
             }
         }
         public void SetCardNumber(string cardNumber)
@@ -58,7 +68,7 @@ namespace FleetManagement.Business.Entities
             }
             else
             {
-                throw new FuelCardException("Cardnumber can't be empty!");
+                throw new FuelCardException("FuelCard - SetCardNumber: Cardnumber can't be empty!");
             }
         }
         public void SetPin(string pin)
@@ -71,12 +81,12 @@ namespace FleetManagement.Business.Entities
                 }
                 else
                 {
-                    throw new FuelCardException("Pin has to be 4 characters long!");
+                    throw new FuelCardException("FuelCard - SetPin: Pin has to be 4 characters long!");
                 }
             }
             else
             {
-                throw new FuelCardException("Pin can't be empty!");
+                throw new FuelCardException("FuelCard - SetPin: Pin can't be empty!");
             }
         }
 

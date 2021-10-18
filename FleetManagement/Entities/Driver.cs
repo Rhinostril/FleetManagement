@@ -30,13 +30,30 @@ namespace FleetManagement.Business.Entities
             }catch(Exception ex) {
                 throw new Exception(ex.Message);
             }
-
         }
-        //maybe add another constructor with more options and use this as :base
+        public Driver(string firstname, string lastname, DateTime dateofBirth, string securitynumber, List<string> licensetypes, Vehicle vehicle) :this(firstname, lastname, dateofBirth, securitynumber, licensetypes) {
+
+            try {
+                SetVehicle(vehicle);
+            }
+            catch(Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+        public Driver(string firstname, string lastname, DateTime dateofBirth, string securitynumber, List<string> licensetypes, Vehicle vehicle,FuelCard fuelcard) : this(firstname, lastname, dateofBirth, securitynumber, licensetypes,vehicle) {
+
+            try {
+                SetFuelCard(fuelcard);
+            }
+            catch(Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+
         private void SetFirstName(string firstname) {
-            string trimmed = firstname.Trim();
-            if(String.IsNullOrEmpty(trimmed)) {
-                throw new DriverException("Cannot set an empty first name");
+            
+            if(String.IsNullOrWhiteSpace(firstname)) {
+                throw new DriverException("Driver -Setfirstname: Cannot set an empty first name");
             }
             else {
                 FirstName = firstname;
@@ -44,9 +61,8 @@ namespace FleetManagement.Business.Entities
            
         }
         private void SetLastName(string lastname) {
-            string trimmed = lastname.Trim();
-            if(String.IsNullOrEmpty(trimmed)) {
-                throw new DriverException("Cannot set an empty last name");
+            if(String.IsNullOrWhiteSpace(lastname)) {
+                throw new DriverException("Driver - SetLastName: Cannot set an empty last name");
             }
             else {
                 LastName = lastname;
@@ -56,9 +72,9 @@ namespace FleetManagement.Business.Entities
         private void SetDateOfBirth(DateTime dateofbirth) {
             TimeSpan offset = DateTime.Now - dateofbirth;
             if(offset.TotalDays <= 0) {
-                throw new DriverException("Date of birth cannot be in the future");
+                throw new DriverException("Driver - SetDateOfBirth: Date of birth cannot be in the future");
             }else if(offset.TotalDays >= 36524) {
-                throw new DriverException("Date of birth cannot be more than 100 years in the past");
+                throw new DriverException("Driver - SetDateOfBirth: Date of birth cannot be more than 100 years in the past");
             }
             else {
                 DateOfBirth = dateofbirth;
@@ -72,7 +88,9 @@ namespace FleetManagement.Business.Entities
                 SecurityNumber = securtiynumber;
             }
             else {
-                throw new SecurityNumberException("The given social security number is invalid");
+                throw new SecurityNumberException("Driver - SetSecurityNumber: The given social security number is invalid");
+
+                //ASK client: driverexception or other
             }
         }
 
@@ -96,14 +114,14 @@ namespace FleetManagement.Business.Entities
                 }//else it should be ignored
             }
         }
-
+        //Ask Client: removeDriversLicenseType?
         public void SetAddress(Address address) {
             if(address != null)
             {
                 Address = address;
             }
             else { 
-                throw new DriverException("Address cannot be null or empty");
+                throw new DriverException("Driver - SetAddress: Address cannot be null or empty");
             }
         }
 
@@ -112,7 +130,7 @@ namespace FleetManagement.Business.Entities
                 Address = null;
             }
             else {
-                throw new DriverException("Can't remove the targeted address because it is not the same as the given address");
+                throw new DriverException("Driver - RemoveAddress: Can't remove the targeted address because it is not the same as the given address");
             }
         }
         public void SetDriverID(int driverId) {
@@ -122,7 +140,7 @@ namespace FleetManagement.Business.Entities
             }
             else
             {
-                throw new DriverException("Driver id needs to be greater than 0");
+                throw new DriverException("Driver - SetDriverID:  id needs to be greater than 0");
             }
         }
         public void SetVehicle(Vehicle newvehicle) {
@@ -149,16 +167,14 @@ namespace FleetManagement.Business.Entities
                     newvehicle.SetDriver(this);
                 }
             }
-            
             else {
                 throw new DriverException("Driver - Setvehicle: new vehicle is null");
             }     
-            
         }
         public void RemoveVehicle() {
             Vehicle = null;
         }
-        public bool HasVehicle(Vehicle vehicle) {
+        public bool HasVehicle(Vehicle vehicle) { //maybe ambiguous language: hasvehicle could be interpreted as "Does the driver have any vehicle?"
             if(Vehicle != null) {
                 if(this.Vehicle == vehicle) {
                     return true;
@@ -171,15 +187,16 @@ namespace FleetManagement.Business.Entities
                 return false;
             }
         }
-        
       
         public void SetFuelCard(FuelCard newfuelCard) {
             if(newfuelCard != null) {
                 if(this.FuelCard == null) {
+                    //no previous fuelcard exitst
                     if(!newfuelCard.HasDriver(this)) {
                         newfuelCard.SetDriver(this);
                     }
                 }else if(this.FuelCard != newfuelCard) {
+                    //previous fuelcard exitst and is not the new fuelcard
                     if(!newfuelCard.HasDriver(this)) {
                         newfuelCard.RemoveDriver();
                         newfuelCard.SetDriver(this);
@@ -190,10 +207,9 @@ namespace FleetManagement.Business.Entities
                     FuelCard.RemoveDriver();
                     FuelCard.SetDriver(this);
                 }
-
             }
             else {
-                throw new DriverException("Fuelcard cannot be empty or null");
+                throw new DriverException("Driver - Setvehicle: Fuelcard cannot be empty or null");
             }
         }
         public void RemoveFuelCard() {

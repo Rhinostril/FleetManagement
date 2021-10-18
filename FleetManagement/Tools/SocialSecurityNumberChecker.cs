@@ -50,9 +50,9 @@ namespace FleetManagement.Business.Tools {
                                     string computedcontrolnumberAstext = computedControlNumber.ToString("00"); // should make numbers less than 10 into "02"
                                     if(computedcontrolnumberAstext == securitynumber.Substring(13, 2)) {
                                         validationsucceeded = true;
-                                    }
-                                }
-                            }
+                                    }//this fails if security number validation is off
+                                }//this fails if the char between validaiton number and birthnumber is not '.'
+                            }//this fails because either the birthnumber is not all digits/ is 000 or the 8th char is not '.'
                         }//this fails if for example a user gives 30 of february as a date
                     }//this fails if the given month is not 1-12 which is the limited version of validation
                 }//this fails because one of the date characters is incorrect, at this point 99.99.99 is allowed still

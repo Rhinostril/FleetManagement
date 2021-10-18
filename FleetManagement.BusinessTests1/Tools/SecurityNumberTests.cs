@@ -22,7 +22,7 @@ namespace FleetManagement.Business.Entities.Tests {
             InValidtestSecurityNumbers = new Dictionary<int, string>();
             InValidtestSecurityNumbers.Add(1, "97,10,27-363,61");//fail reason commas
             InValidtestSecurityNumbers.Add(2, "97.10.27-363");   //fail reason missing number
-            InValidtestSecurityNumbers.Add(3, "97.10.27-000.61");//fail reason 000 number
+            InValidtestSecurityNumbers.Add(3, "97.10.27-000.61");//fail reason 000 at birth number
             InValidtestSecurityNumbers.Add(4, "97.10.27 363.61");//fail reason space instead of -
             InValidtestSecurityNumbers.Add(5, "97.10.27-363.62");//fail reason wrong control number
         }
