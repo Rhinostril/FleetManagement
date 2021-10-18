@@ -117,8 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Fueltype1" xml:space="preserve">
+  <data name="Fueltype01" xml:space="preserve">
     <value>Petrol 98</value>
+  </data>
+  <data name="Fueltype02" xml:space="preserve">
+    <value>Petrol 95</value>
+  </data>
+  <data name="Fueltype03" xml:space="preserve">
+    <value>premium Petrol</value>
+  </data>
+  <data name="Fueltype04" xml:space="preserve">
+    <value>super Petrol</value>
+  </data>
+  <data name="Fueltype05" xml:space="preserve">
+    <value>Diesel</value>
+  </data>
+  <data name="Fueltype06" xml:space="preserve">
+    <value>super Diesel</value>
+  </data>
+  <data name="Fueltype07" xml:space="preserve">
+    <value>premium Diesel</value>
+  </data>
+  <data name="Fueltype08" xml:space="preserve">
+    <value>Bio Diesel</value>
+  </data>
+  <data name="Fueltype09" xml:space="preserve">
+    <value>LPG</value>
   </data>
   <data name="Fueltype10" xml:space="preserve">
     <value>Hydrogen</value>
@@ -137,29 +161,5 @@
   </data>
   <data name="Fueltype15" xml:space="preserve">
     <value>Electric Tesla Charge</value>
-  </data>
-  <data name="Fueltype2" xml:space="preserve">
-    <value>Petrol 95</value>
-  </data>
-  <data name="Fueltype3" xml:space="preserve">
-    <value>premium Petrol</value>
-  </data>
-  <data name="Fueltype4" xml:space="preserve">
-    <value>super Petrol</value>
-  </data>
-  <data name="Fueltype5" xml:space="preserve">
-    <value>Diesel</value>
-  </data>
-  <data name="Fueltype6" xml:space="preserve">
-    <value>super Diesel</value>
-  </data>
-  <data name="Fueltype7" xml:space="preserve">
-    <value>premium Diesel</value>
-  </data>
-  <data name="Fueltype8" xml:space="preserve">
-    <value>Bio Diesel</value>
-  </data>
-  <data name="Fueltype9" xml:space="preserve">
-    <value>LPG</value>
   </data>
 </root>

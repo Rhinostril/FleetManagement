@@ -22,7 +22,7 @@ namespace FleetManagement.Business.ConfigFiles {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class FuelTypeConfig {
+    internal class FuelTypeConfig {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace FleetManagement.Business.ConfigFiles {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FleetManagement.Business.ConfigFiles.FuelTypeConfig", typeof(FuelTypeConfig).Assembly);
@@ -51,7 +51,7 @@ namespace FleetManagement.Business.ConfigFiles {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,16 +63,88 @@ namespace FleetManagement.Business.ConfigFiles {
         /// <summary>
         ///   Looks up a localized string similar to Petrol 98.
         /// </summary>
-        public static string Fueltype1 {
+        internal static string Fueltype01 {
             get {
-                return ResourceManager.GetString("Fueltype1", resourceCulture);
+                return ResourceManager.GetString("Fueltype01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Petrol 95.
+        /// </summary>
+        internal static string Fueltype02 {
+            get {
+                return ResourceManager.GetString("Fueltype02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to premium Petrol.
+        /// </summary>
+        internal static string Fueltype03 {
+            get {
+                return ResourceManager.GetString("Fueltype03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to super Petrol.
+        /// </summary>
+        internal static string Fueltype04 {
+            get {
+                return ResourceManager.GetString("Fueltype04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diesel.
+        /// </summary>
+        internal static string Fueltype05 {
+            get {
+                return ResourceManager.GetString("Fueltype05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to super Diesel.
+        /// </summary>
+        internal static string Fueltype06 {
+            get {
+                return ResourceManager.GetString("Fueltype06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to premium Diesel.
+        /// </summary>
+        internal static string Fueltype07 {
+            get {
+                return ResourceManager.GetString("Fueltype07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bio Diesel.
+        /// </summary>
+        internal static string Fueltype08 {
+            get {
+                return ResourceManager.GetString("Fueltype08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LPG.
+        /// </summary>
+        internal static string Fueltype09 {
+            get {
+                return ResourceManager.GetString("Fueltype09", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Hydrogen.
         /// </summary>
-        public static string Fueltype10 {
+        internal static string Fueltype10 {
             get {
                 return ResourceManager.GetString("Fueltype10", resourceCulture);
             }
@@ -81,7 +153,7 @@ namespace FleetManagement.Business.ConfigFiles {
         /// <summary>
         ///   Looks up a localized string similar to Ethanol.
         /// </summary>
-        public static string Fueltype11 {
+        internal static string Fueltype11 {
             get {
                 return ResourceManager.GetString("Fueltype11", resourceCulture);
             }
@@ -90,7 +162,7 @@ namespace FleetManagement.Business.ConfigFiles {
         /// <summary>
         ///   Looks up a localized string similar to Butane.
         /// </summary>
-        public static string Fueltype12 {
+        internal static string Fueltype12 {
             get {
                 return ResourceManager.GetString("Fueltype12", resourceCulture);
             }
@@ -99,7 +171,7 @@ namespace FleetManagement.Business.ConfigFiles {
         /// <summary>
         ///   Looks up a localized string similar to Electric Basic Charge.
         /// </summary>
-        public static string Fueltype13 {
+        internal static string Fueltype13 {
             get {
                 return ResourceManager.GetString("Fueltype13", resourceCulture);
             }
@@ -108,7 +180,7 @@ namespace FleetManagement.Business.ConfigFiles {
         /// <summary>
         ///   Looks up a localized string similar to Electric Fast Charge.
         /// </summary>
-        public static string Fueltype14 {
+        internal static string Fueltype14 {
             get {
                 return ResourceManager.GetString("Fueltype14", resourceCulture);
             }
@@ -117,81 +189,9 @@ namespace FleetManagement.Business.ConfigFiles {
         /// <summary>
         ///   Looks up a localized string similar to Electric Tesla Charge.
         /// </summary>
-        public static string Fueltype15 {
+        internal static string Fueltype15 {
             get {
                 return ResourceManager.GetString("Fueltype15", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Petrol 95.
-        /// </summary>
-        public static string Fueltype2 {
-            get {
-                return ResourceManager.GetString("Fueltype2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to premium Petrol.
-        /// </summary>
-        public static string Fueltype3 {
-            get {
-                return ResourceManager.GetString("Fueltype3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to super Petrol.
-        /// </summary>
-        public static string Fueltype4 {
-            get {
-                return ResourceManager.GetString("Fueltype4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Diesel.
-        /// </summary>
-        public static string Fueltype5 {
-            get {
-                return ResourceManager.GetString("Fueltype5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to super Diesel.
-        /// </summary>
-        public static string Fueltype6 {
-            get {
-                return ResourceManager.GetString("Fueltype6", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to premium Diesel.
-        /// </summary>
-        public static string Fueltype7 {
-            get {
-                return ResourceManager.GetString("Fueltype7", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Bio Diesel.
-        /// </summary>
-        public static string Fueltype8 {
-            get {
-                return ResourceManager.GetString("Fueltype8", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to LPG.
-        /// </summary>
-        public static string Fueltype9 {
-            get {
-                return ResourceManager.GetString("Fueltype9", resourceCulture);
             }
         }
     }
