@@ -23,7 +23,6 @@ namespace FleetManagement.Business.Entities
         //Ask Client : Vehicle constructor without driver?
         public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
         {
-            try {
             SetVehicleId(vehicleId);
             SetBrand(brand);
             SetModel(model);
@@ -34,10 +33,20 @@ namespace FleetManagement.Business.Entities
             SetVehicleColor(color);
             SetVehicleDoors(doors);
             SetDriver(driver);
-             }catch(Exception ex) {
-                throw new Exception(ex.Message);
-    }
-}
+        }
+
+        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors)
+        {
+            SetVehicleId(vehicleId);
+            SetBrand(brand);
+            SetModel(model);
+            SetChassisNumber(chassisNumber);
+            SetLicensePlate(licensePlate);
+            SetFuelType(fuelType);
+            SetVehicleType(vehicleType);
+            SetVehicleColor(color);
+            SetVehicleDoors(doors);
+        }
 
         public void SetVehicleId(int id)
         {

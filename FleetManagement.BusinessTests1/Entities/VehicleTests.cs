@@ -29,7 +29,8 @@ namespace FleetManagement.Business.Entities.Tests
         [Fact]
         public void Test_SetVehicleId_Valid()
         {
-            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, null);
+            Driver driver = new Driver("Tino", "Pijpers", new DateTime(), "97.05.20-327.78", new List<string> { "B" });
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driver);
             vehicle.SetVehicleId(1);
             Assert.Equal(1, vehicle.VehicleId);
         }
