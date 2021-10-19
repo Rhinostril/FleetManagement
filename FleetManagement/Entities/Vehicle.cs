@@ -174,7 +174,8 @@ namespace FleetManagement.Business.Entities
                     }
                     this.Driver = newDriver;
 
-                } else if (this.Driver != newDriver) //is huidige driver niet gelijk aan nieuwe driver ?
+                } 
+                else if (this.Driver != newDriver) //is huidige driver niet gelijk aan nieuwe driver ?
                 {
                     if (this.Driver.HasVehicle(this))
                     {

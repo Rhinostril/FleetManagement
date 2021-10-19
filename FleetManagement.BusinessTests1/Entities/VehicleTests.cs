@@ -191,30 +191,39 @@ namespace FleetManagement.Business.Entities.Tests
             Assert.Equal(driver, vehicle.Driver);
         }
 
-        //TODO Test_SetDriver_Invalid()
+        /*
+        [Fact]
+        public void Test_SetDriver_Invalid()
+        {
+            Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driver);
+            Assert.Throws<VehicleException>(() => vehicle.SetDriver(driver));
+        }
+        */
 
         [Fact]
         public void Test_HasDriver_Valid()
         {
-
+            Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driver);
+            Assert.True(vehicle.HasDriver(driver));
         }
 
         [Fact]
         public void Test_HasDriver_Invalid()
         {
-
+            Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2);
+            Assert.False(vehicle.HasDriver(driver));
         }
 
         [Fact]
         public void Test_RemoveDriver_Valid()
         {
-
-        }
-
-        [Fact]
-        public void Test_RemoveDriver_Invalid()
-        {
-
+            Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driver);
+            vehicle.RemoveDriver();
+            Assert.Null(vehicle.Driver);
         }
 
     }
