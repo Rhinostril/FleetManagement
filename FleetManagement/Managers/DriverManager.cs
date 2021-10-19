@@ -11,7 +11,64 @@ namespace FleetManagement.Business.Managers
     public class DriverManager
     {
 
-        private IDriverRepository repo; //feedback leerkracht
+        private IDriverRepository repo; // readonly ??
+
+        public DriverManager(IDriverRepository repo)
+        {
+            this.repo = repo;
+        }
+
+        public void AddDriver(Driver driver)
+        {
+            try
+            {
+                if (!repo.DriverExists(driver.DriverID))
+                {
+                    repo.AddDriver(driver);
+                }
+                else
+                {
+                    throw new ManagerException("DriverManager - AddDriver - Driver already added");
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void UpdateDriver(Driver driver)
+        {
+            try
+            {
+                // Bestaat driver met zelfde properties al?
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void DeleteDriver(Driver driver)
+        {
+            try
+            {
+                if (repo.DriverExists(driver.DriverID))
+                {
+                    repo.DeleteDriver(driver);
+                }
+                else
+                {
+                    throw new ManagerException("DriverManager - DeleteDriver - Driver already deleted");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
     }
 }
