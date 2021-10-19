@@ -41,14 +41,9 @@ namespace FleetManagement.Business.Managers
         {
             try
             {
-                if (!repo.FuelCardExists(fuelCard))
-                {
-                    repo.AddFuelCard(fuelCard);
-                }
-                else
-                {
-                    throw new FuelCardManagerException("FuelCardManager - UpdateFuelCard - FuelCard already exists");
-                }
+                // Bestaat fuelCard met zelfde properties al?
+
+
             }
             catch (Exception ex)
             {
