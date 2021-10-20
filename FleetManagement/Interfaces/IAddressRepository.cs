@@ -13,6 +13,6 @@ namespace FleetManagement.Business.Interfaces
         void AddAddress(Address address);
         void UpdateAddress(Address address);
         void DeleteAddress(Address address);
-
+        bool AddressExists(int addressID);
     }
 }
