@@ -107,6 +107,7 @@ namespace FleetManagement.Business.Entities.Tests
 
             Assert.Null(driverorig.Vehicle);
             Assert.Equal(drivernext.Vehicle.ChassisNumber, vehicleOrig.ChassisNumber);
+            //TODO check extra does original vehicle have next driver;
 
         }
         [Fact]
