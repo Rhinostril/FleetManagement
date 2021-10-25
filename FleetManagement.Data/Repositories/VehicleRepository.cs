@@ -6,54 +6,55 @@ using System.Data.SqlClient;
 
 namespace FleetManagement.Data
 {
-    public class FuelCardRepository : IFuelCardRepository
+    public class VehicleRepository : IVehicleRepository
     {
 
         private string connectionString = $"Data Source=fleetmanagserver.database.windows.net;Persist Security Info=True;User ID=fleetadmin;Password=***********";
-
         private SqlConnection getConnection()
         {
             SqlConnection connection = new SqlConnection(connectionString);
             return connection;
         }
-        public void AddFuelCard(FuelCard fuelCard)
+
+        public void AddVehicle(Vehicle vehicle)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteFuelCard(FuelCard fuelCard)
+        public void DeleteVehicle(Vehicle vehicle)
         {
             throw new NotImplementedException();
         }
 
-        public bool FuelCardExists(FuelCard fuelCard)
+        public IReadOnlyList<Vehicle> GetAllVehicles()
         {
             throw new NotImplementedException();
         }
 
-        public IReadOnlyList<FuelCard> GetAllFuelCards()
+        public Vehicle GetVehicle()
         {
             throw new NotImplementedException();
         }
 
-        public FuelCard GetFuelCard()
+        public Vehicle SearchVehicle(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
         {
             throw new NotImplementedException();
         }
 
-        public FuelCard SearchFuelCard(int? fuelCardId, string cardNr, FuelType fuelType)
+        public IReadOnlyList<Vehicle> SearchVehicles(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
         {
             throw new NotImplementedException();
         }
 
-        public IReadOnlyList<FuelCard> SearchFuelCards(int? fuelCardId, string cardNr, FuelType fuelType)
+        public void UpdateVehicle(Vehicle vehicle)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateFuelCard(FuelCard fuelCard)
+        public bool VehicleExists(Vehicle vehicle)
         {
             throw new NotImplementedException();
         }
+
     }
 }
