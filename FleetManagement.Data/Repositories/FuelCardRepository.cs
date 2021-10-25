@@ -10,47 +10,51 @@ namespace FleetManagement.Data
     {
 
         private string connectionString = $"Data Source=fleetmanagserver.database.windows.net;Persist Security Info=True;User ID=fleetadmin;Password=***********";
-
         private SqlConnection getConnection()
         {
             SqlConnection connection = new SqlConnection(connectionString);
             return connection;
         }
 
-
-        IReadOnlyList<FuelCard> GetAllFuelCards()
-        {
-            throw new NotImplementedException();
-        }
-        IReadOnlyList<FuelCard> SearchFuelCards(int? fuelCardId, string cardNr, FuelType fuelType)
-        {
-            throw new NotImplementedException();
-        }
-        FuelCard GetFuelCard()
-        {
-            throw new NotImplementedException();
-        }
-        FuelCard SearchFuelCard(int? fuelCardId, string cardNr, FuelType fuelType)
-        {
-            throw new NotImplementedException();
-        }
-        bool FuelCardExists(FuelCard fuelCard)
-        {
-            throw new NotImplementedException();
-        }
-        void AddFuelCard(FuelCard fuelCard)
-        {
-            throw new NotImplementedException();
-        }
-        void UpdateFuelCard(FuelCard fuelCard)
-        {
-            throw new NotImplementedException();
-        }
-        void DeleteFuelCard(FuelCard fuelCard)
+        public void AddFuelCard(FuelCard fuelCard)
         {
             throw new NotImplementedException();
         }
 
+        public void DeleteFuelCard(FuelCard fuelCard)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool FuelCardExists(FuelCard fuelCard)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IReadOnlyList<FuelCard> GetAllFuelCards()
+        {
+            throw new NotImplementedException();
+        }
+
+        public FuelCard GetFuelCard()
+        {
+            throw new NotImplementedException();
+        }
+
+        public FuelCard SearchFuelCard(int? fuelCardId, string cardNr, FuelType fuelType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IReadOnlyList<FuelCard> SearchFuelCards(int? fuelCardId, string cardNr, FuelType fuelType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateFuelCard(FuelCard fuelCard)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

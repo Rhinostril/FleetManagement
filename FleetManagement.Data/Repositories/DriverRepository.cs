@@ -19,7 +19,26 @@ namespace FleetManagement.Data
 
         public void AddDriver(Driver driver)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = getConnection();
+            string query = "";
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+
+                    // TODO
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
 
         public void DeleteDriver(Driver driver)
