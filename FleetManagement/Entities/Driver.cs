@@ -94,15 +94,8 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        private void SetDriversLicensetypes(List<string> licensetypes) { //feedback leerkrach
+        private void SetDriversLicensetypes(List<string> licensetypes) { 
 
-            //ASK client: Do we check if this list contains any licenses?
-            //Usecase where we might not need license : self driving cars
-
-            //bool iscollectionempty = licensetypes.Any();
-            //if(iscollectionempty) {
-            //    throw new DriverException("driver must have at least 1 driverslicense");
-            //}
             DriversLicenceType.Clear();
             DriversLicenceType.AddRange(licensetypes);
         }

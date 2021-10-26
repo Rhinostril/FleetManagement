@@ -9,12 +9,13 @@ namespace FleetManagement.Business.Interfaces
 
         IReadOnlyList<Driver> GetAllDrivers();
         IReadOnlyList<Driver> SearchDrivers(int? id, string firstName, string lastName, DateTime dateOfBirth, Address address);
-        Driver GetDriver(); //overbodig?
+        Driver GetDriverById(int id);
         Driver SearchDriver(int? id, string firstName, string lastName, DateTime dateOfBirth, Address address);
         bool DriverExists(int id);
         void AddDriver(Driver driver);
         void UpdateDriver(Driver driver);
         void DeleteDriver(Driver driver);
+        bool DoesSecurityNumberExist(string securityNumber);
 
     }
 }
