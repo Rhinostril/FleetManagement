@@ -150,7 +150,7 @@ namespace FleetManagement.Data.Repositories
             SqlConnection connection = getConnection();
 
             string query = "INSERT INTO dbo.Fuelcard (cardNumber, validityDate, pin, fuelType, isEnabled)" +
-                           "VALUES (@fuelCardId, @cardNumber, @validityDate, @pin, @fuelType, @isEnabled)";
+                           "VALUES (@cardNumber, @validityDate, @pin, @fuelType, @isEnabled)";
 
             using(SqlCommand command = connection.CreateCommand())
             {
@@ -170,7 +170,7 @@ namespace FleetManagement.Data.Repositories
                     command.Parameters["@validityDate"].Value = fuelCard.ValidityDate;
                     command.Parameters["@pin"].Value = fuelCard.Pin;
                     command.Parameters["@fuelType"].Value = fuelCard.FuelType;
-                    //command.Parameters["@driverId"].Value = fuelCard.Driver.DriverID;                      zonder driverId
+                    //command.Parameters["@driverId"].Value = fuelCard.Driver.DriverID;             zonder driverId
                     command.Parameters["@isEnabled"].Value = fuelCard.IsEnabled;
 
                     command.CommandText = query;
