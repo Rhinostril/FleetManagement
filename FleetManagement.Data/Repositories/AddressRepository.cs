@@ -62,7 +62,30 @@ namespace FleetManagement.Data.Repositories
 
         public bool AddressExists(Address address)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = getConnection();
+            string query = "SELECT count(*) FROM dbo.Address WHERE addressId=@addressId";
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                connection.Open();
+                try
+                {
+                    command.Parameters.Add(new SqlParameter("@addressId", SqlDbType.Int));
+
+                    command.Parameters["@addressId"].Value = address.AddressID;
+
+                    command.CommandText = query;
+                    int n = (int)command.ExecuteScalar();
+                    if (n > 0) return true; else return false;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
 
         public bool AddressExists(int addressID)
