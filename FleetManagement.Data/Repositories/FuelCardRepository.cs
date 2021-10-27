@@ -5,7 +5,7 @@ using FleetManagement.Business.Interfaces;
 using System.Data.SqlClient;
 using System.Data;
 
-namespace FleetManagement.Data
+namespace FleetManagement.Data.Repositories
 {
     public class FuelCardRepository : IFuelCardRepository
     {

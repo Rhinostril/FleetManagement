@@ -147,6 +147,10 @@ namespace FleetManagement.Business.Entities
             Driver = null;
         }
 
+        public override string ToString()
+        {
+            return $"ID:{FuelCardId}, #{CardNumber}, {ValidityDate}, [{Pin}], {FuelType}, {Driver}, {IsEnabled}";
+        }
 
     }
 }
