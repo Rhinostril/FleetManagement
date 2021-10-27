@@ -29,21 +29,25 @@ namespace FleetManagement.Data
                 connection.Open();
                 try
                 {
-                    //command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
+                    //command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));       zonder id
                     command.Parameters.Add(new SqlParameter("@cardNumber", SqlDbType.NVarChar));
                     command.Parameters.Add(new SqlParameter("@validityDate", SqlDbType.DateTime));
                     command.Parameters.Add(new SqlParameter("@pin", SqlDbType.Int));
                     command.Parameters.Add(new SqlParameter("@fuelType", SqlDbType.NVarChar));
-                    //command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                    //command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));         zonder driverId
                     command.Parameters.Add(new SqlParameter("@isEnabled", SqlDbType.Bit));
 
-                    //command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;
+                    //command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;                zonder id
                     command.Parameters["@cardNumber"].Value = fuelCard.CardNumber;
                     command.Parameters["@validityDate"].Value = fuelCard.ValidityDate;
                     command.Parameters["@pin"].Value = fuelCard.Pin;
                     command.Parameters["@fuelType"].Value = fuelCard.FuelType;
-                    
+                    //command.Parameters["@driverId"].Value = fuelCard.Driver;                      zonder driverId
+                    command.Parameters["@isEnabled"].Value = fuelCard.IsEnabled;
 
+                    command.CommandText = query;
+                    command.ExecuteNonQuery();
+                    
                 }
                 catch(Exception ex)
                 {
