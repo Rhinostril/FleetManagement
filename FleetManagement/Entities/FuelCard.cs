@@ -17,10 +17,10 @@ namespace FleetManagement.Business.Entities
         public FuelType FuelType { get; private set; }
         public Driver Driver { get; private set; }
 
-        //TODO public bool isEnabled { get; private set; }
+        public bool IsEnabled { get; private set; }
 
 
-        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType)
+        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType, bool isEnabled)
         {
             try { 
             SetFuelCardId(fuelCardId);
@@ -28,13 +28,14 @@ namespace FleetManagement.Business.Entities
             ValidityDate = validityDate;
             SetPin(pin);
             SetFuelType(fuelType);
+            IsEnabled = isEnabled;
             }
             catch(Exception ex) {
                 throw new Exception(ex.Message);
             }
         }
 
-        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType, Driver driver)
+        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType, Driver driver, bool isEnabled)
         {
             try {
             SetFuelCardId(fuelCardId);
@@ -43,6 +44,7 @@ namespace FleetManagement.Business.Entities
             SetPin(pin);
             SetFuelType(fuelType);
             SetDriver(driver);
+            IsEnabled = isEnabled;
             }
             catch(Exception ex) {
                 throw new Exception(ex.Message);

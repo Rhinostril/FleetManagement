@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FleetManagement.Business.Entities;
 using FleetManagement.Business.Interfaces;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace FleetManagement.Data
 {
@@ -18,7 +19,41 @@ namespace FleetManagement.Data
 
         public void AddFuelCard(FuelCard fuelCard)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = getConnection();
+
+            string query = "INSERT INTO dbo.Fuelcard (cardNumber, validityDate, pin, fuelType, isEnabled)" +
+                           "VALUES (@fuelCardId, @cardNumber, @validityDate, @pin, @fuelType, @isEnabled)";
+
+            using(SqlCommand command = connection.CreateCommand())
+            {
+                connection.Open();
+                try
+                {
+                    //command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
+                    command.Parameters.Add(new SqlParameter("@cardNumber", SqlDbType.NVarChar));
+                    command.Parameters.Add(new SqlParameter("@validityDate", SqlDbType.DateTime));
+                    command.Parameters.Add(new SqlParameter("@pin", SqlDbType.Int));
+                    command.Parameters.Add(new SqlParameter("@fuelType", SqlDbType.NVarChar));
+                    //command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                    command.Parameters.Add(new SqlParameter("@isEnabled", SqlDbType.Bit));
+
+                    //command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;
+                    command.Parameters["@cardNumber"].Value = fuelCard.CardNumber;
+                    command.Parameters["@validityDate"].Value = fuelCard.ValidityDate;
+                    command.Parameters["@pin"].Value = fuelCard.Pin;
+                    command.Parameters["@fuelType"].Value = fuelCard.FuelType;
+                    
+
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
 
         public void DeleteFuelCard(FuelCard fuelCard)
