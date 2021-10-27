@@ -19,6 +19,21 @@ namespace FleetManagement.Business.Entities
 
         public bool IsEnabled { get; private set; }
 
+        public FuelCard(string cardNumber, DateTime validityDate, string pin, FuelType fuelType, bool isEnabled)
+        {
+            try
+            {
+                SetCardNumber(cardNumber);
+                ValidityDate = validityDate;
+                SetPin(pin);
+                SetFuelType(fuelType);
+                IsEnabled = isEnabled;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType, bool isEnabled)
         {

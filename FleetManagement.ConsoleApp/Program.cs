@@ -10,14 +10,32 @@ namespace FleetManagement.ConsoleApp
         static void Main(string[] args)
         {
             // Testing
+            TestAddFuelCard();
+
+
+
+
+
+
+        }
+
+        private static void TestAddFuelCard()
+        {
             FuelCardManager fuelCardManager = new FuelCardManager(new FuelCardRepository());
 
+            FuelCard fuelCard = new FuelCard("123456789", new DateTime(2021, 10, 27), "0123", new FuelType("Diesel"), true);
+
             Console.WriteLine("Add Fuelcard: ");
-            FuelCard fuelCard = new FuelCard();
+            Console.WriteLine(fuelCard.ToString());
 
-
-
-
+            try
+            {
+                fuelCardManager.AddFuelCard(fuelCard);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
     }
