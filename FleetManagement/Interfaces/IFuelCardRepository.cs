@@ -11,7 +11,7 @@ namespace FleetManagement.Business.Interfaces
     {
         IReadOnlyList<FuelCard> GetAllFuelCards();
         IReadOnlyList<FuelCard> SearchFuelCards(int? fuelCardId, string cardNr, FuelType fuelType);
-        FuelCard GetFuelCard();
+        FuelCard GetFuelCard(int fuelCardId);
         FuelCard SearchFuelCard(int? fuelCardId, string cardNr, FuelType fuelType);
         bool FuelCardExists(FuelCard fuelCard);
         void AddFuelCard(FuelCard fuelCard);
