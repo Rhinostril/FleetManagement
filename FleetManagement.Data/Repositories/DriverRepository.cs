@@ -171,7 +171,7 @@ namespace FleetManagement.Data
                         int? vehicleid = (int?)reader.GetValue(6);
                         int? fuelcardid = (int?)reader.GetValue(7);
                         string licenseTypes = reader.GetString(8);
-                        List<string> SplitLicenseTypes = licenseTypes.Split('|').ToList();
+                        List<string> SplitLicenseTypes = licenseTypes.Split('|').ToList(); //Feedback?
 
                         Driver D = new Driver(firstname, lastname, dateofbirth, securityNumber, SplitLicenseTypes);
                         if(addressId != null) {

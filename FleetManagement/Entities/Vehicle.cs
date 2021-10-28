@@ -20,20 +20,6 @@ namespace FleetManagement.Business.Entities
         public int Doors { get; private set; }
         public Driver Driver { get; private set; } 
 
-        //Ask Client : Vehicle constructor without driver?
-        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
-        {
-            SetVehicleId(vehicleId);
-            SetBrand(brand);
-            SetModel(model);
-            SetChassisNumber(chassisNumber);
-            SetLicensePlate(licensePlate);
-            SetFuelType(fuelType);
-            SetVehicleType(vehicleType);
-            SetVehicleColor(color);
-            SetVehicleDoors(doors);
-            SetDriver(driver);
-        }
 
         public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors)
         {
@@ -46,6 +32,10 @@ namespace FleetManagement.Business.Entities
             SetVehicleType(vehicleType);
             SetVehicleColor(color);
             SetVehicleDoors(doors);
+        }
+
+        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver) : this(vehicleId, brand, model, chassisNumber, licensePlate, fuelType, vehicleType, color, doors) {
+            SetDriver(driver);
         }
 
         public void SetVehicleId(int id)
