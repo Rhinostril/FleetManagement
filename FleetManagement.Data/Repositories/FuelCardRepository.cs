@@ -20,6 +20,8 @@ namespace FleetManagement.Data.Repositories
 
         // SELECT
 
+
+
         public FuelCard GetFuelCard(int fuelCardId)
         {
             SqlConnection connection = getConnection();

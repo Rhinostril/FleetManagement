@@ -10,7 +10,8 @@ namespace FleetManagement.ConsoleApp
         static void Main(string[] args)
         {
             // Testing
-            TestAddFuelCard();
+            // TestAddFuelCard();
+            TestGetAllFuelCards();
 
 
 
@@ -32,6 +33,19 @@ namespace FleetManagement.ConsoleApp
             {
                 FuelCardRepository repo = new FuelCardRepository();
                 repo.AddFuelCard(fuelCard);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message} \n {ex}");
+            }
+        }
+
+        private static void TestGetAllFuelCards()
+        {
+            try
+            {
+                FuelCardRepository repo = new FuelCardRepository();
+                Console.WriteLine(repo.GetAllFuelCards().Count);
             }
             catch (Exception ex)
             {
