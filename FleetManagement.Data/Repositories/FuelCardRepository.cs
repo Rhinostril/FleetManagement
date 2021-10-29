@@ -66,7 +66,7 @@ namespace FleetManagement.Data.Repositories
             
             List<FuelCard> fuelCards = new List<FuelCard>();
 
-            string query = "SELECT * FROM FuelCard";
+            string query = "SELECT * FROM Fuelcard";
 
             using (SqlCommand command = connection.CreateCommand())
             {
