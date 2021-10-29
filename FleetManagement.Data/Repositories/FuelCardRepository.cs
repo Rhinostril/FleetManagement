@@ -10,7 +10,7 @@ namespace FleetManagement.Data.Repositories
     public class FuelCardRepository : IFuelCardRepository
     {
 
-        private string connectionString = $"Data Source=fleetmanagserver.database.windows.net;Persist Security Info=True;User ID=fleetadmin;Password=***********";
+        private string connectionString = $"Data Source=fleetmanagserver.database.windows.net;Persist Security Info=True;User ID=fleetadmin;Password=$qlpassw0rd";
         private SqlConnection getConnection()
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -24,7 +24,7 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = getConnection();
 
-            string query = "SELECT * FROM dbo.FuelCard WHERE fuelCardId=@fuelCardId";
+            string query = "SELECT * FROM FuelCard WHERE fuelCardId=@fuelCardId";
 
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -64,7 +64,7 @@ namespace FleetManagement.Data.Repositories
             
             List<FuelCard> fuelCards = new List<FuelCard>();
 
-            string query = "SELECT * FROM dbo.FuelCard";
+            string query = "SELECT * FROM FuelCard";
 
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -107,7 +107,7 @@ namespace FleetManagement.Data.Repositories
 
             List<FuelCard> fuelCards = new List<FuelCard>();
 
-            string query = "SELECT * FROM dbo.FuelCard WHERE fuelCardId=@fuelCardId AND cardNumber=@cardNumber AND fuelType=@fuelType";
+            string query = "SELECT * FROM FuelCard WHERE fuelCardId=@fuelCardId AND cardNumber=@cardNumber AND fuelType=@fuelType";
 
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -149,7 +149,7 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = getConnection();
 
-            string query = "INSERT INTO dbo.Fuelcard (cardNumber, validityDate, pin, fuelType, isEnabled)" +
+            string query = "INSERT INTO Fuelcard (cardNumber, validityDate, pin, fuelType, isEnabled)" +
                            "VALUES (@cardNumber, @validityDate, @pin, @fuelType, @isEnabled)";
 
             using(SqlCommand command = connection.CreateCommand())
@@ -191,7 +191,7 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = getConnection();
 
-            string query = "UPDATE dbo.Fuelcard" +
+            string query = "UPDATE Fuelcard" +
                            "SET cardNumber=@cardNumber, validityDate=@validityDate, pin=@pin, fuelType=@fuelType, driverId=@driverId, isEnabled=@isEnabled" +
                            "WHERE fuelCardId=@fuelCardId";
 
@@ -232,7 +232,7 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = getConnection();
 
-            string query = "DELETE FROM dbo.Fuelcard WHERE (@fuelCardId=fuelCardId)";
+            string query = "DELETE FROM Fuelcard WHERE fuelCardId=@fuelCardId";
             
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -260,7 +260,7 @@ namespace FleetManagement.Data.Repositories
         public bool FuelCardExists(FuelCard fuelCard)
         {
             SqlConnection connection = getConnection();
-            string query = "SELECT count(*) FROM dbo.FuelCard WHERE fuelCardId=@fuelCardId OR cardNumber=@cardNumber";
+            string query = "SELECT count(*) FROM FuelCard WHERE fuelCardId=@fuelCardId OR cardNumber=@cardNumber";
             using (SqlCommand command = connection.CreateCommand())
             {
                 connection.Open();

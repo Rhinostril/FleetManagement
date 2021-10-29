@@ -25,7 +25,7 @@ namespace FleetManagement.ConsoleApp
 
             FuelCard fuelCard = new FuelCard("123456789", new DateTime(2021, 10, 27), "0123", new FuelType("Diesel"), true);
 
-            Console.WriteLine("Add Fuelcard: ");
+            Console.WriteLine("TEST Add Fuelcard: ");
             Console.WriteLine(fuelCard.ToString());
 
             try
@@ -34,7 +34,7 @@ namespace FleetManagement.ConsoleApp
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace} \n {ex.Source} \n {ex.InnerException}");
             }
         }
 

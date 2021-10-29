@@ -20,6 +20,8 @@ namespace FleetManagement.Business.Managers
 
         public void AddFuelCard(FuelCard fuelCard)
         {
+            repo.AddFuelCard(fuelCard);
+            /*
             try
             {
                 if (!repo.FuelCardExists(fuelCard))
@@ -35,6 +37,7 @@ namespace FleetManagement.Business.Managers
             {
                 throw new Exception(ex.Message);
             }
+            */
         }
 
         public void UpdateFuelCard(FuelCard fuelCard)
