@@ -169,7 +169,7 @@ namespace FleetManagement.Data.Repositories
                     command.Parameters["@cardNumber"].Value = fuelCard.CardNumber;
                     command.Parameters["@validityDate"].Value = fuelCard.ValidityDate;
                     command.Parameters["@pin"].Value = fuelCard.Pin;
-                    command.Parameters["@fuelType"].Value = fuelCard.FuelType;
+                    command.Parameters["@fuelType"].Value = fuelCard.FuelType.FuelName;
                     //command.Parameters["@driverId"].Value = fuelCard.Driver.DriverID;             zonder driverId
                     command.Parameters["@isEnabled"].Value = fuelCard.IsEnabled;
 

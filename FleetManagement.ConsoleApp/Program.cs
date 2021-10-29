@@ -30,11 +30,12 @@ namespace FleetManagement.ConsoleApp
 
             try
             {
-                fuelCardManager.AddFuelCard(fuelCard);
+                FuelCardRepository repo = new FuelCardRepository();
+                repo.AddFuelCard(fuelCard);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"{ex.Message} \n {ex.StackTrace} \n {ex.Source} \n {ex.InnerException}");
+                Console.WriteLine($"{ex.Message} \n {ex}");
             }
         }
 
