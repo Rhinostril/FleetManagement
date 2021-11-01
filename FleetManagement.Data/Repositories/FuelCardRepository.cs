@@ -20,7 +20,7 @@ namespace FleetManagement.Data.Repositories
 
         // SELECT
 
-
+        
 
         public FuelCard GetFuelCard(int fuelCardId)
         {
