@@ -10,7 +10,7 @@ namespace FleetManagement.Data.Repositories
     public class FuelCardRepository : IFuelCardRepository
     {
 
-        private string connectionString = $"Data Source=fleetmanagserver.database.windows.net;Persist Security Info=True;User ID=fleetadmin;Password=***********";
+        private string connectionString = $"Data Source=fleetmanagserver.database.windows.net;Persist Security Info=True;User ID=fleetadmin;Password=$qlpassw0rd";
         private SqlConnection getConnection()
         {
             SqlConnection connection = new SqlConnection(connectionString);
