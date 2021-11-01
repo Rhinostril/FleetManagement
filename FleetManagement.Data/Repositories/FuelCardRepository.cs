@@ -26,7 +26,11 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = getConnection();
 
-            string query = "SELECT * FROM FuelCard WHERE fuelCardId=@fuelCardId";
+            string query = "SELECT *" +
+                           "FROM FuelCard" +
+                           "LEFT JOIN Driver" +
+                           "ON FuelCard.driverId = Driver.driverId " +
+                           "WHERE fuelCardId=@fuelCardId";
 
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -46,7 +50,16 @@ namespace FleetManagement.Data.Repositories
                     string pin = (string)reader["pin"];
                     FuelType fuelType = new FuelType((string)reader["fuelType"]);
                     bool isEnabled = (bool)reader["isEnabled"];
-                    FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, fuelType, isEnabled);
+
+                    string firstName = (string)reader["firstName"];
+                    string lastName = (string)reader["lastName"];
+                    DateTime dateOfBirth = (DateTime)reader["dateOfBirth"];
+                    string securityNr = (string)reader["securityNumber"];
+
+                    Driver driver = new Driver(firstName, lastName, dateOfBirth, securityNr, new List<string>());
+
+                    FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, fuelType, driver, isEnabled);
+                    
                     reader.Close();
                     return fuelCard;
                 }
