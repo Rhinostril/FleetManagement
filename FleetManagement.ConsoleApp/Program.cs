@@ -10,7 +10,7 @@ namespace FleetManagement.ConsoleApp
         static void Main(string[] args)
         {
             // Testing
-            // TestAddFuelCard();
+            //TestAddFuelCard();
             TestGetAllFuelCards();
 
 

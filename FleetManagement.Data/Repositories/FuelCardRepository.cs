@@ -9,19 +9,15 @@ namespace FleetManagement.Data.Repositories
 {
     public class FuelCardRepository : IFuelCardRepository
     {
-
-        private string connectionString = $"Data Source=fleetmanagserver.database.windows.net;Persist Security Info=True;User ID=fleetadmin;Password=$qlpassw0rd";
+        private string connectionStringTino = @"Data Source=DESKTOP-UQN0VAO\SQLEXPRESS;Initial Catalog=dboFleetManagement;Integrated Security=True";
+        private string connectionString = @"Data Source=fleetmanagserver.database.windows.net;Persist Security Info=True;User ID=fleetadmin;Password=$qlpassw0rd";
         private SqlConnection getConnection()
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(connectionStringTino);
             return connection;
         }
 
-
         // SELECT
-
-        
-
         public FuelCard GetFuelCard(int fuelCardId)
         {
             SqlConnection connection = getConnection();
@@ -164,8 +160,8 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = getConnection();
 
-            string query = "INSERT INTO Fuelcard (cardNumber, validityDate, pin, fuelType, isEnabled)" +
-                           "VALUES (@cardNumber, @validityDate, @pin, @fuelType, @isEnabled)";
+            string query = "INSERT INTO Fuelcard (cardNumber, validityDate, pin, isEnabled)" +
+                           "VALUES (@cardNumber, @validityDate, @pin, @isEnabled)";
 
             using(SqlCommand command = connection.CreateCommand())
             {
@@ -176,7 +172,7 @@ namespace FleetManagement.Data.Repositories
                     command.Parameters.Add(new SqlParameter("@cardNumber", SqlDbType.NVarChar));
                     command.Parameters.Add(new SqlParameter("@validityDate", SqlDbType.DateTime));
                     command.Parameters.Add(new SqlParameter("@pin", SqlDbType.Int));
-                    command.Parameters.Add(new SqlParameter("@fuelType", SqlDbType.NVarChar));
+                    //command.Parameters.Add(new SqlParameter("@fuelType", SqlDbType.NVarChar));
                     //command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));         zonder driverId
                     command.Parameters.Add(new SqlParameter("@isEnabled", SqlDbType.Bit));
 
@@ -184,7 +180,7 @@ namespace FleetManagement.Data.Repositories
                     command.Parameters["@cardNumber"].Value = fuelCard.CardNumber;
                     command.Parameters["@validityDate"].Value = fuelCard.ValidityDate;
                     command.Parameters["@pin"].Value = fuelCard.Pin;
-                    command.Parameters["@fuelType"].Value = fuelCard.FuelType.FuelName;
+                    //command.Parameters["@fuelType"].Value = fuelCard.FuelType.FuelName;
                     //command.Parameters["@driverId"].Value = fuelCard.Driver.DriverID;             zonder driverId
                     command.Parameters["@isEnabled"].Value = fuelCard.IsEnabled;
 
