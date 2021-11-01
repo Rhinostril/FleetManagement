@@ -12,8 +12,8 @@ namespace FleetManagement.Data.Repositories
 {
     public class AddressRepository : IAddressRepository
     {
-        
-        private string connectionString = $"Data Source=fleetmanagserver.database.windows.net;Persist Security Info=True;User ID=fleetadmin;Password=$qlpassw0rd";
+      
+        private string connectionString = $"Data Source=tcp:fleetmanagserver.database.windows.net,1433;Initial Catalog=dboFleetmanagement;Persist Security Info=False;User ID=fleetadmin;Password=$qlpassw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         private SqlConnection getConnection()
         {
             SqlConnection connection = new SqlConnection(connectionString);
