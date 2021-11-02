@@ -18,15 +18,17 @@ namespace FleetManagement.Business.Entities
         public Vehicle Vehicle { get; private set; }
         public FuelCard FuelCard { get; private set; }
 
-        public Driver(string firstname, string lastname, DateTime dateofBirth, string securitynumber, List<string> licensetypes) {
+        public Driver(string firstName, string lastName, DateTime dateOfBirth, string securityNumber) {
+            SetFirstName(firstName);
+            SetLastName(lastName);
+            SetDateOfBirth(dateOfBirth);
+            SetSecurityNumber(securityNumber);
+        }
+        public Driver(string firstname, string lastname, DateTime dateofBirth, string securitynumber, List<string> licensetypes) : this (firstname, lastname, dateofBirth, securitynumber) {
 
             try {
+            SetDriversLicensetypes(licensetypes);
               
-                SetFirstName(firstname);
-                SetLastName(lastname);
-                SetDateOfBirth(dateofBirth);
-                SetDriversLicensetypes(licensetypes);
-                SetSecurityNumber(securitynumber);
             }catch(Exception ex) {
                 throw new Exception(ex.Message);
             }
@@ -49,16 +51,15 @@ namespace FleetManagement.Business.Entities
                 throw new Exception(ex.Message);
             }
         }
+        public Driver(string firstname, string lastname, DateTime dateofBirth, Address address,string securitynumber, List<string> licensetypes, Vehicle vehicle, FuelCard fuelcard) : this(firstname, lastname, dateofBirth, securitynumber, licensetypes, vehicle, fuelcard) {
 
-        public Driver(string firstName, string lastName, DateTime dateOfBirth, string securityNumber)
-        {
-            SetFirstName(firstName);
-            SetLastName(lastName);
-            SetDateOfBirth(dateOfBirth);
-            SetSecurityNumber(securityNumber);
+            try {
+                SetAddress(address);
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
         }
 
-        //TODO Driver with address
 
         private void SetFirstName(string firstname) {
             

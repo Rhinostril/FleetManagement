@@ -18,24 +18,38 @@ namespace FleetManagement.Business.Entities
         public string VehicleType { get; private set; }
         public string Color { get; private set; }
         public int Doors { get; private set; }
-        public Driver Driver { get; private set; } 
+        public Driver Driver { get; private set; }
 
+        public Vehicle(string brand, string model, string chassisNumber, string licensePlate, List<FuelType> fuelTypes, string vehicleType, string color, int doors) {
+            try {
+                SetBrand(brand);
+                SetModel(model);
+                SetChassisNumber(chassisNumber);
+                SetLicensePlate(licensePlate);
+                SetFuelTypes(fuelTypes);
+                SetVehicleType(vehicleType);
+                SetVehicleColor(color);
+                SetVehicleDoors(doors);
+            }catch(Exception ex) { 
+            
+            }
+            
+        }
 
-        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, List<FuelType> fuelTypes, string vehicleType, string color, int doors)
-        {
-            SetVehicleId(vehicleId);
-            SetBrand(brand);
-            SetModel(model);
-            SetChassisNumber(chassisNumber);
-            SetLicensePlate(licensePlate);
-            SetFuelTypes(fuelTypes);
-            SetVehicleType(vehicleType);
-            SetVehicleColor(color);
-            SetVehicleDoors(doors);
+        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, List<FuelType> fuelTypes, string vehicleType, string color, int doors) : this(brand, model, chassisNumber, licensePlate, fuelTypes, vehicleType, color, doors) {
+            try {
+                SetVehicleId(vehicleId);
+            } catch (Exception ex) {
+
+            }
         }
 
         public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, List<FuelType> fuelTypes, string vehicleType, string color, int doors, Driver driver) : this(vehicleId, brand, model, chassisNumber, licensePlate, fuelTypes, vehicleType, color, doors) {
-            SetDriver(driver);
+            try {
+                SetDriver(driver);
+            } catch (Exception ex) {
+
+            }
         }
 
         public void SetVehicleId(int id)

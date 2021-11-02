@@ -34,31 +34,20 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, List<FuelType> fuelTypes, bool isEnabled)
+        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, List<FuelType> fuelTypes, bool isEnabled):this(cardNumber,validityDate,pin,fuelTypes,isEnabled)
         {
             try { 
             SetFuelCardId(fuelCardId);
-            SetCardNumber(cardNumber);
-            ValidityDate = validityDate;
-            SetPin(pin);
-            SetFuelTypes(fuelTypes);
-            IsEnabled = isEnabled;
             }
             catch(Exception ex) {
                 throw new Exception(ex.Message);
             }
         }
 
-        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, List<FuelType> fuelTypes, Driver driver, bool isEnabled)
-        {
+        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, List<FuelType> fuelTypes, Driver driver, bool isEnabled) : this(fuelCardId,cardNumber, validityDate, pin, fuelTypes, isEnabled) {
             try {
-            SetFuelCardId(fuelCardId);
-            SetCardNumber(cardNumber);
-            ValidityDate = validityDate;
-            SetPin(pin);
-            SetFuelTypes(fuelTypes);
             SetDriver(driver);
-            IsEnabled = isEnabled;
+            
             }
             catch(Exception ex) {
                 throw new Exception(ex.Message);
