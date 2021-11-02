@@ -46,7 +46,7 @@ namespace FleetManagement.ConsoleApp
             "Electric Fast Charge",
             "Electric Tesla Charge"
         };
-        private static List<Vehicle> vehicles = CreateVehicles();
+        private static List<Vehicle> vehicles = new List<Vehicle>();
 
 
         // CREATION OF RANDOM VEHICLES
@@ -125,7 +125,7 @@ namespace FleetManagement.ConsoleApp
             {
                 chassis += alph[r.Next(0, 26)];
             }
-            for(int i = 8; i < 16; i++)
+            for(int i = 8; i < 17; i++)
             {
                 chassis += r.Next(0, 10);
             }
@@ -178,7 +178,7 @@ namespace FleetManagement.ConsoleApp
             //TestAddFuelCard();
             //TestGetAllFuelCards();
             //TestGetFuelCard();
-
+            vehicles = CreateVehicles();
             foreach(Vehicle v in vehicles)
             {
                 Console.WriteLine(v.ToString());
