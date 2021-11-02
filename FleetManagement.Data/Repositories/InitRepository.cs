@@ -110,6 +110,7 @@ namespace FleetManagement.Data.Repositories
             {
                 DataTable dt = new DataTable("Vehicle");
 
+                dt.Columns.Add(new DataColumn("vehicleId", typeof(int)));
                 dt.Columns.Add(new DataColumn("brand", typeof(string)));
                 dt.Columns.Add(new DataColumn("model", typeof(string)));
                 dt.Columns.Add(new DataColumn("chassisNumber", typeof(string)));
