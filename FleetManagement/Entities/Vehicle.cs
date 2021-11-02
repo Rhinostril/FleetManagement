@@ -248,6 +248,5 @@ namespace FleetManagement.Business.Entities
 
 
 
-
     }
 }
