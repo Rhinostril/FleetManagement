@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FleetManagement.Business.Entities.Tests
+namespace FleetManagement.Business.Tests
 {
     [TestClass()]
     public class FuelCardTests

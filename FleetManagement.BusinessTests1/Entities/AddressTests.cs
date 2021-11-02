@@ -7,9 +7,28 @@ using Xunit;
 using FleetManagement.Business.Entities;
 using FleetManagement.Business.Exceptions;
 
-namespace FleetManagement.BusinessTests {
+namespace FleetManagement.Business.Tests {
     public class AddressTests {
 
+        [Fact]
+        public void Test_AdressCTor1Valid() {
+            Address adr = new Address("KeizerKarel Straat", "1323", "9000", "Gent", "Belgium");
+            Assert.Equal("KeizerKarel Straat", adr.Street);
+            Assert.Equal("1323", adr.HouseNr);
+            Assert.Equal("9000", adr.PostalCode);
+            Assert.Equal("Gent", adr.City);
+            Assert.Equal("Belgium", adr.Country);
+        }
+        [Fact]
+        public void Test_AdressCTor2Valid() {
+            Address adr = new Address(1,"KeizerKarel Straat", "1323", "9000", "Gent", "Belgium");
+            Assert.Equal(1, adr.AddressID);
+            Assert.Equal("KeizerKarel Straat", adr.Street);
+            Assert.Equal("1323", adr.HouseNr);
+            Assert.Equal("9000", adr.PostalCode);
+            Assert.Equal("Gent", adr.City);
+            Assert.Equal("Belgium", adr.Country);
+        }
         [Fact]
         public void Test_AdressID_Valid() {
 

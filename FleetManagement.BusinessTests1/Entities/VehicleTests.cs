@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace FleetManagement.Business.Entities.Tests
+namespace FleetManagement.Business.Tests
 {
     public class VehicleTests
     {

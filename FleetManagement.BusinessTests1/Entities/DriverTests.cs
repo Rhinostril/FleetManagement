@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Assert = Xunit.Assert;
 
-namespace FleetManagement.Business.Entities.Tests
+namespace FleetManagement.Business.Tests
 {
     [TestClass()]
     public class DriverTests
@@ -16,12 +16,21 @@ namespace FleetManagement.Business.Entities.Tests
         [Fact]
         public void Test_Constructor_Valid()
         {
-            Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
+            Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78");
             Assert.Equal("Elvis", driver.FirstName);
             Assert.Equal("Presley", driver.LastName);
             Assert.Equal("97.05.20-327.78",driver.SecurityNumber);
             Assert.Equal(new DateTime(1997,05,20), driver.DateOfBirth);
-            Assert.Equal(new List<string>{"B","A1"}, driver.DriversLicenceType);
+        }
+        [Fact]
+        public void Test_Constructor2_Valid() {
+            Driver driver = new Driver("Donald", "Duck", new DateTime(1997, 05, 24), "97.05.20-327.78", new List<string> { "B", "A1" });
+            Assert.Equal("Donald", driver.FirstName);
+            Assert.Equal("Duck", driver.LastName);
+            Assert.Equal("97.05.20-327.78", driver.SecurityNumber);
+            Assert.Equal(new DateTime(1997, 05, 20), driver.DateOfBirth);
+            Assert.Equal("B",driver.DriversLicenceType[0]);
+            Assert.Equal("A1", driver.DriversLicenceType[0]);
         }
 
         [Fact]
@@ -62,19 +71,13 @@ namespace FleetManagement.Business.Entities.Tests
         [Fact]
         public void RemoveAddressTest()
         {
-            //Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
+            Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
 
-            //Address a = new Address();
-            //a.Street = "street";
-            //a.PostalCode = "9000";
-            //a.HouseNr = "2";
-            //a.Country = "belgium";
-            //a.City = "gent";
-            //a.AddressID = 1;
-            //driver.setAddress(a);
-            //driver.removeAddress(a);
+            Address a = new Address(1, "KeizerKarel Straat", "1323", "9000", "Gent", "Belgium");
+            driver.SetAddress(a);
+            driver.RemoveAddress(a);
 
-            //Assert.Null(a);
+            Assert.Null(driver.Address);
 
 
         }

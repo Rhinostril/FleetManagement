@@ -2,7 +2,7 @@
 using FleetManagement.Business.Entities;
 using FleetManagement.Business.Exceptions;
 
-namespace FleetManagement.Business.Entities.Tests
+namespace FleetManagement.Business.Tests
 {
 
     public class FuelTypeTests

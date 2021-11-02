@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using FleetManagement.Business.Tools;
 using Xunit;
 
-namespace FleetManagement.Business.Entities.Tests {
+namespace FleetManagement.Business.Tools.Tests {
 
     public class SecurityNumberTests {
         private Dictionary<int, string> ValidtestSecurityNumbers;

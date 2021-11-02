@@ -17,14 +17,21 @@ namespace FleetManagement.Business.Entities {
         public Address() {
 
         }
-        public Address(int addressid, string street, string housenr, string postalcode, string city, string country) {
+        public Address(string street, string housenr, string postalcode, string city, string country) {
             try {
-                SetAddressID(addressid);
                 SetStreet(street);
                 SetHouseNr(housenr);
                 SetPostalCode(postalcode);
                 SetCity(city);
                 SetCountry(country);
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Address(int addressid, string street, string housenr, string postalcode, string city, string country):this(street, housenr, postalcode, city, country) {
+            try {
+                SetAddressID(addressid);
             }
             catch(Exception ex) {
                 throw new Exception(ex.Message);
