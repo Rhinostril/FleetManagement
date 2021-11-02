@@ -45,7 +45,7 @@ namespace FleetManagement.Data.Repositories
                     string cardNumber = (string)reader["cardNumber"];
                     DateTime validityDate = (DateTime)reader["validityDate"];
                     string pin = (string)reader["pin"];
-                    FuelType fuelType = new FuelType((string)reader["fuelType"]);
+                    //FuelType fuelType = new FuelType((string)reader["fuelType"]);
                     bool isEnabled = (bool)reader["isEnabled"];
 
                     string firstName = (string)reader["firstName"];
@@ -55,7 +55,7 @@ namespace FleetManagement.Data.Repositories
 
                     Driver driver = new Driver(firstName, lastName, dateOfBirth, securityNr, new List<string>());
 
-                    FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, fuelType, driver, isEnabled);
+                    FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, new List<FuelType>(), driver, isEnabled);
                     
                     reader.Close();
                     return fuelCard;
@@ -93,7 +93,7 @@ namespace FleetManagement.Data.Repositories
                         string pin = (string)reader["pin"];
                         FuelType fuelType = new FuelType((string)reader["fuelType"]);
                         bool isEnabled = (bool)reader["isEnabled"];
-                        fuelCards.Add(new FuelCard(fuelCardId, cardNumber, validityDate, pin, fuelType, isEnabled));
+                        fuelCards.Add(new FuelCard(fuelCardId, cardNumber, validityDate, pin, new List<FuelType>(), isEnabled));
                     }
                 }
                 catch (Exception ex)
@@ -141,7 +141,7 @@ namespace FleetManagement.Data.Repositories
                         DateTime validityDate = (DateTime)reader["validityDate"];
                         string pin = (string)reader["pin"];
                         bool isEnabled = (bool)reader["isEnabled"];
-                        fuelCards.Add(new FuelCard(cardNr, validityDate, pin, fuelType, isEnabled));
+                        fuelCards.Add(new FuelCard(cardNr, validityDate, pin, new List<FuelType>(), isEnabled));
                     }
                 }
                 catch (Exception ex)
@@ -222,7 +222,7 @@ namespace FleetManagement.Data.Repositories
                     command.Parameters["@cardNumber"].Value = fuelCard.CardNumber;
                     command.Parameters["@validityDate"].Value = fuelCard.ValidityDate;
                     command.Parameters["@pin"].Value = fuelCard.Pin;
-                    command.Parameters["@fuelType"].Value = fuelCard.FuelType;
+                    //command.Parameters["@fuelType"].Value = fuelCard.FuelTypes;
                     command.Parameters["@driverId"].Value = fuelCard.Driver.DriverID;
                     command.Parameters["@isEnabled"].Value = fuelCard.IsEnabled;
 

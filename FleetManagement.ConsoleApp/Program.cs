@@ -2,6 +2,7 @@
 using FleetManagement.Business.Managers;
 using FleetManagement.Business.Entities;
 using FleetManagement.Data.Repositories;
+using System.Collections.Generic;
 
 namespace FleetManagement.ConsoleApp
 {
@@ -24,7 +25,7 @@ namespace FleetManagement.ConsoleApp
         {
             FuelCardManager fuelCardManager = new FuelCardManager(new FuelCardRepository());
 
-            FuelCard fuelCard = new FuelCard("123456789", new DateTime(2021, 10, 27), "0123", new FuelType("Diesel"), true);
+            FuelCard fuelCard = new FuelCard("123456789", new DateTime(2021, 10, 27), "0123", new List<FuelType>(), true);
 
             Console.WriteLine("TEST Add Fuelcard: ");
             Console.WriteLine(fuelCard.ToString());

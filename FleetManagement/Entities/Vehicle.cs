@@ -14,27 +14,27 @@ namespace FleetManagement.Business.Entities
         public string Model { get; private set; }
         public string ChassisNumber { get; private set; }
         public string LicensePlate { get; private set; }
-        public FuelType FuelType { get; private set; }
+        public List<FuelType> FuelTypes { get; private set; }
         public string VehicleType { get; private set; }
         public string Color { get; private set; }
         public int Doors { get; private set; }
         public Driver Driver { get; private set; } 
 
 
-        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors)
+        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, List<FuelType> fuelTypes, string vehicleType, string color, int doors)
         {
             SetVehicleId(vehicleId);
             SetBrand(brand);
             SetModel(model);
             SetChassisNumber(chassisNumber);
             SetLicensePlate(licensePlate);
-            SetFuelType(fuelType);
+            SetFuelTypes(fuelTypes);
             SetVehicleType(vehicleType);
             SetVehicleColor(color);
             SetVehicleDoors(doors);
         }
 
-        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver) : this(vehicleId, brand, model, chassisNumber, licensePlate, fuelType, vehicleType, color, doors) {
+        public Vehicle(int vehicleId, string brand, string model, string chassisNumber, string licensePlate, List<FuelType> fuelTypes, string vehicleType, string color, int doors, Driver driver) : this(vehicleId, brand, model, chassisNumber, licensePlate, fuelTypes, vehicleType, color, doors) {
             SetDriver(driver);
         }
 
@@ -105,16 +105,9 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        public void SetFuelType(FuelType fuelType)
+        public void SetFuelTypes(List<FuelType> fuelTypes)
         {
-            if (fuelType != null)
-            {
-                FuelType = fuelType;
-            }
-            else
-            {
-                throw new VehicleException("Vehicle fueltype can't be empty!");
-            }
+            // TODO
         }
         public void SetVehicleType(string vehicleType)
         {

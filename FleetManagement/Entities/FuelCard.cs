@@ -14,18 +14,18 @@ namespace FleetManagement.Business.Entities
         public string CardNumber { get; private set; }
         public DateTime ValidityDate { get; set; }
         public string Pin { get; private set; }
-        public FuelType FuelType { get; private set; }
+        public List<FuelType> FuelTypes { get; private set; }
         public Driver Driver { get; private set; }
         public bool IsEnabled { get; private set; }
 
-        public FuelCard(string cardNumber, DateTime validityDate, string pin, FuelType fuelType, bool isEnabled)
+        public FuelCard(string cardNumber, DateTime validityDate, string pin, List<FuelType> fuelTypes, bool isEnabled)
         {
             try
             {
                 SetCardNumber(cardNumber);
                 ValidityDate = validityDate;
                 SetPin(pin);
-                SetFuelType(fuelType);
+                SetFuelTypes(fuelTypes);
                 IsEnabled = isEnabled;
             }
             catch (Exception ex)
@@ -34,14 +34,14 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType, bool isEnabled)
+        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, List<FuelType> fuelTypes, bool isEnabled)
         {
             try { 
             SetFuelCardId(fuelCardId);
             SetCardNumber(cardNumber);
             ValidityDate = validityDate;
             SetPin(pin);
-            SetFuelType(fuelType);
+            SetFuelTypes(fuelTypes);
             IsEnabled = isEnabled;
             }
             catch(Exception ex) {
@@ -49,14 +49,14 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, FuelType fuelType, Driver driver, bool isEnabled)
+        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, List<FuelType> fuelTypes, Driver driver, bool isEnabled)
         {
             try {
             SetFuelCardId(fuelCardId);
             SetCardNumber(cardNumber);
             ValidityDate = validityDate;
             SetPin(pin);
-            SetFuelType(fuelType);
+            SetFuelTypes(fuelTypes);
             SetDriver(driver);
             IsEnabled = isEnabled;
             }
@@ -106,15 +106,15 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        public void SetFuelType(FuelType fuelType)
+        public void SetFuelTypes(List<FuelType> fuelTypes)
         {
-            if(fuelType != null)
+            if(fuelTypes.Count > 0)
             {
-                FuelType = fuelType;
+                FuelTypes = fuelTypes;
             }
             else
             {
-                throw new FuelCardException("FuelType cannot be null!");
+                throw new FuelCardException("FuelCard - SetFuelTypes: Fueltypes must contain at least 1 fueltype!");
             }
         }
 
@@ -163,7 +163,7 @@ namespace FleetManagement.Business.Entities
 
         public override string ToString()
         {
-            return $"ID:{FuelCardId}, #{CardNumber}, {ValidityDate}, [{Pin}], {FuelType.FuelName}, {Driver}, {IsEnabled}";
+            return $"ID:{FuelCardId}, #{CardNumber}, {ValidityDate}, [{Pin}], {Driver}, {IsEnabled}";
         }
 
     }
