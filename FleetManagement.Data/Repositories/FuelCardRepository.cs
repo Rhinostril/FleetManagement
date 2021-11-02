@@ -23,11 +23,11 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = getConnection();
 
-            string query = "SELECT * FROM Fuelcard AS t1" +
-                           "LEFT OUTER JOIN Driver AS t2 ON t1.driverId = t2.driverId" +
-                           "LEFT OUTER JOIN FuelCardFuelType AS t3 ON t1.fuelCardId = t3.fuelCardId" +
-                           "LEFT OUTER JOIN FuelType AS t4 ON t3.fuelTypeId = t4.fuelTypeId" + 
-                           "WHERE t4.fuelCardId=@fuelCardId";
+            string query = "SELECT * FROM Fuelcard AS t1 " +
+                           "LEFT OUTER JOIN Driver AS t2 ON t1.driverId = t2.driverId " +
+                           "LEFT OUTER JOIN FuelCardFuelType AS t3 ON t1.fuelCardId = t3.fuelCardId " +
+                           "LEFT OUTER JOIN FuelType AS t4 ON t3.fuelTypeId = t4.fuelTypeId " + 
+                           "WHERE t3.fuelCardId=@fuelCardId";
 
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -63,8 +63,8 @@ namespace FleetManagement.Data.Repositories
                         fuelTypes.Add(new FuelType(fuel));
                     }
 
-                    Driver driver = new Driver(firstName, lastName, dateOfBirth, securityNr, new List<string>());
-                    FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, new List<FuelType>(), driver, isEnabled);
+                    Driver driver = new Driver(firstName, lastName, dateOfBirth, securityNr);
+                    FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, fuelTypes, driver, isEnabled);
                     
                     reader.Close();
                     return fuelCard;
@@ -178,25 +178,18 @@ namespace FleetManagement.Data.Repositories
                 connection.Open();
                 try
                 {
-                    //command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));       zonder id
                     command.Parameters.Add(new SqlParameter("@cardNumber", SqlDbType.NVarChar));
                     command.Parameters.Add(new SqlParameter("@validityDate", SqlDbType.DateTime));
                     command.Parameters.Add(new SqlParameter("@pin", SqlDbType.Int));
-                    //command.Parameters.Add(new SqlParameter("@fuelType", SqlDbType.NVarChar));
-                    //command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));         zonder driverId
                     command.Parameters.Add(new SqlParameter("@isEnabled", SqlDbType.Bit));
 
-                    //command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;                zonder id
                     command.Parameters["@cardNumber"].Value = fuelCard.CardNumber;
                     command.Parameters["@validityDate"].Value = fuelCard.ValidityDate;
                     command.Parameters["@pin"].Value = fuelCard.Pin;
-                    //command.Parameters["@fuelType"].Value = fuelCard.FuelType.FuelName;
-                    //command.Parameters["@driverId"].Value = fuelCard.Driver.DriverID;             zonder driverId
                     command.Parameters["@isEnabled"].Value = fuelCard.IsEnabled;
 
                     command.CommandText = query;
                     command.ExecuteNonQuery();
-                    
                 }
                 catch(Exception ex)
                 {
