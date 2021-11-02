@@ -162,6 +162,7 @@ namespace FleetManagement.ConsoleApp
             for(int i = 0; i < 1000; i++)
             {
                 Vehicle vehicle = new Vehicle(RndOfList(carBrands), RndOfList(carModels), RandomChassis(), RandomLicense(), new List<FuelType> { new FuelType("Diesel")}, RndOfList(carType), RndOfList(carColors),  r.Next(5, 8));
+                vehicles.Add(vehicle);
             }
 
             return vehicles;
