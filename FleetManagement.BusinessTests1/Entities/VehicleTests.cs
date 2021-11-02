@@ -178,14 +178,14 @@ namespace FleetManagement.Business.Entities.Tests
         [InlineData(27)]
         public void Test_SetVehicleDoors_Invalid(int doors)
         {
-            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2);
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2);
             Assert.Throws<VehicleException>(() => vehicle.SetVehicleDoors(doors));
         }
 
         [Fact]
         public void Test_SetDriver_Valid()
         {
-            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2);
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2);
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
             vehicle.SetDriver(driver);
             Assert.Equal(driver, vehicle.Driver);
@@ -205,7 +205,7 @@ namespace FleetManagement.Business.Entities.Tests
         public void Test_HasDriver_Valid()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
-            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driver);
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2, driver);
             Assert.True(vehicle.HasDriver(driver));
         }
 
@@ -213,7 +213,7 @@ namespace FleetManagement.Business.Entities.Tests
         public void Test_HasDriver_Invalid()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
-            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2);
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2);
             Assert.False(vehicle.HasDriver(driver));
         }
 
@@ -221,7 +221,7 @@ namespace FleetManagement.Business.Entities.Tests
         public void Test_RemoveDriver_Valid()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
-            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driver);
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2, driver);
             vehicle.RemoveDriver();
             Assert.Null(vehicle.Driver);
         }
