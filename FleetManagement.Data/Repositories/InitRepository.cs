@@ -121,7 +121,7 @@ namespace FleetManagement.Data.Repositories
 
                 foreach(var vehicle in vehicles)
                 {
-                    dt.Rows.Add(vehicle.Brand, vehicle.Model, vehicle.ChassisNumber, vehicle.LicensePlate, vehicle.VehicleType, vehicle.Color, vehicle.Doors);
+                    dt.Rows.Add(null,vehicle.Brand, vehicle.Model, vehicle.ChassisNumber, vehicle.LicensePlate, vehicle.VehicleType, vehicle.Color, vehicle.Doors);
                 }
 
                 bc.DestinationTableName = "Vehicle";
