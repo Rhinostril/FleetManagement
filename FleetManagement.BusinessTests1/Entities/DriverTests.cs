@@ -28,9 +28,21 @@ namespace FleetManagement.Business.Tests
             Assert.Equal("Donald", driver.FirstName);
             Assert.Equal("Duck", driver.LastName);
             Assert.Equal("97.05.20-327.78", driver.SecurityNumber);
-            Assert.Equal(new DateTime(1997, 05, 20), driver.DateOfBirth);
+            Assert.Equal(new DateTime(1997, 05, 24), driver.DateOfBirth);
             Assert.Equal("B",driver.DriversLicenceType[0]);
-            Assert.Equal("A1", driver.DriversLicenceType[0]);
+            Assert.Equal("A1", driver.DriversLicenceType[1]);
+        }
+        [Fact]
+        public void Test_Constructor3_Valid() {
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2);
+            Driver driver = new Driver("Dagobert", "Duck", new DateTime(1967, 05, 24), "97.05.20-327.78", new List<string> { "B", "A1" }, vehicle);
+            Assert.Equal("Dagobert", driver.FirstName);
+            Assert.Equal("Duck", driver.LastName);
+            Assert.Equal("97.05.20-327.78", driver.SecurityNumber);
+            Assert.Equal(new DateTime(1967, 05, 24), driver.DateOfBirth);
+            Assert.Equal("B", driver.DriversLicenceType[0]);
+            Assert.Equal("A1", driver.DriversLicenceType[1]);
+            Assert.Equal(vehicle.ChassisNumber, driver.Vehicle.ChassisNumber);
         }
 
         [Fact]
