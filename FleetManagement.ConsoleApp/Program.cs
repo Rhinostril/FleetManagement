@@ -55,8 +55,6 @@ namespace FleetManagement.ConsoleApp
             //TestGetAllFuelCards();
             //TestGetFuelCard();
 
-            TestInsertFuelTypes();
-
 
 
 
