@@ -3,12 +3,13 @@ using FleetManagement.Business.Managers;
 using FleetManagement.Business.Entities;
 using FleetManagement.Data.Repositories;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FleetManagement.ConsoleApp
 {
     class Program
     {
-
+        // CREATION OF DUMMY DATA LISTS
         private static List<string> licenseTypes = new List<string>
         {
             "AM",
@@ -27,7 +28,6 @@ namespace FleetManagement.ConsoleApp
             "DE",
             "G"
         };
-
         private static List<string> fuelTypes = new List<string>
         {
             "Petrol 98",
@@ -46,6 +46,130 @@ namespace FleetManagement.ConsoleApp
             "Electric Fast Charge",
             "Electric Tesla Charge"
         };
+        private static List<Vehicle> vehicles = CreateVehicles();
+
+
+        // CREATION OF RANDOM VEHICLES
+        private static List<string> carBrands = new List<string>
+        {
+            "BMW",
+            "Audi",
+            "Mercedes",
+            "Volkswagen",
+            "Volvo",
+            "Porsche",
+            "Ferrari",
+            "Toyota",
+            "Ford",
+            "Bugatti",
+            "Lamborghini",
+            "Bentley",
+            "Aston Martin",
+            "Lexus"
+        };
+        private static List<string> carModels = new List<string>
+        {
+            "911 Turbo",
+            "911 GT2 RS",
+            "911 GT3 RS",
+            "M1",
+            "M2",
+            "M3",
+            "M4",
+            "M5",
+            "Golf",
+            "Golf GTI",
+            "Golf R",
+            "AMG C63",
+            "RS6",
+            "RS3",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        };
+        private static List<string> carColors = new List<string>
+        {
+            "Red",
+            "Magenta",
+            "British Racing Green",
+            "Blue",
+            "Silver Metallic",
+            "Black",
+            "Black Matte",
+            "Black Metallic",
+            "Dark Blue",
+            "White",
+            "Grey",
+            "Blue Grey",
+            "Melange White",
+            "Yellow",
+            "Brown",
+            "Green"
+        };
+        private static List<string> carType = new List<string>
+        {
+            "Personenwagen",
+            "Sportwagen",
+            "SUV",
+            "Stationwagen",
+            "Bestelwagen"
+        };
+        private static string RandomChassis()
+        {
+            Random r = new Random();
+            string alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string chassis = "";
+            for (int i = 0; i < 8; i++)
+            {
+                chassis += alph[r.Next(0, 26)];
+            }
+            for(int i = 8; i < 16; i++)
+            {
+                chassis += r.Next(0, 10);
+            }
+            return chassis;
+        }
+        private static string RandomLicense()
+        {
+            Random r = new Random();
+            string alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string license = "";
+            license += r.Next(0, 2);
+            license += "-";
+            for (int i = 0; i < 3; i++)
+            {
+                license += alph[r.Next(0, 26)];
+            }
+            license += "-";
+            for (int i = 0; i < 3; i++)
+            {
+                license += r.Next(0, 10);
+            }
+            return license;
+        }
+        private static string RndOfList(List<string> list)
+        {
+            Random r = new Random();
+            return list[r.Next(0, list.Count - 1)];
+        }
+        private static List<Vehicle> CreateVehicles()
+        {
+            Random r = new Random();
+            List<Vehicle> vehicles = new List<Vehicle>();
+
+            for(int i = 0; i < 1000; i++)
+            {
+                Vehicle vehicle = new Vehicle(RndOfList(carBrands), RndOfList(carModels), RandomChassis(), RandomLicense(), new List<FuelType>(), RndOfList(carType), RndOfList(carColors),  r.Next(5, 8));
+            }
+
+            return vehicles;
+        }
+
+
+
+
 
 
         static void Main(string[] args)
@@ -55,7 +179,10 @@ namespace FleetManagement.ConsoleApp
             //TestGetAllFuelCards();
             //TestGetFuelCard();
 
-
+            foreach(Vehicle v in vehicles)
+            {
+                Console.WriteLine(v.ToString());
+            }
 
 
         }
@@ -78,7 +205,6 @@ namespace FleetManagement.ConsoleApp
                 Console.WriteLine(s);
             }
         }
-
         private static void TestAddFuelCard()
         {
             FuelCardManager fuelCardManager = new FuelCardManager(new FuelCardRepository());
