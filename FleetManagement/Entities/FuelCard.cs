@@ -108,8 +108,9 @@ namespace FleetManagement.Business.Entities
 
         public void SetFuelTypes(List<FuelType> fuelTypes)
         {
-
-            if (fuelTypes.Any()) {
+            if (fuelTypes == null) {
+                throw new FuelCardException("fueltype list can't be missing!");
+            } else if (!fuelTypes.Any()) {
                 throw new FuelCardException("FuelCard - SetFuelTypes: Fueltypes must contain at least 1 fueltype!");
             } else {
                 this.FuelTypes.Clear();

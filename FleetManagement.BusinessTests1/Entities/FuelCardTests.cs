@@ -15,12 +15,11 @@ namespace FleetManagement.Business.Entities.Tests
         public void FuelCardTest()
         {
             FuelCard f = new FuelCard("123", new DateTime(1997,03,20), "1324", new List<FuelType> { new FuelType("gasoline") },true);
-            Assert.AreEqual(1, f.FuelCardId);
             Assert.AreEqual("123", f.CardNumber);
             Assert.AreEqual(new DateTime(1997, 03, 20), f.ValidityDate);
             Assert.AreEqual("1324", f.Pin);
            }
-
+        //TODO other constructors
         [TestMethod()]
         public void SetFuelCardIdTest()
         {

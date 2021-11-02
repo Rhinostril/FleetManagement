@@ -116,16 +116,16 @@ namespace FleetManagement.Business.Entities.Tests
         public void Test_SetFuelType_Valid()
         {
             Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2);
-            vehicle.SetFuelType(new FuelType("Diesel"));
-            Assert.Equal("Diesel", vehicle.FuelType.FuelName);
+            vehicle.SetFuelTypes(new List<FuelType> { new FuelType("Diesel") });
+            Assert.Equal("Diesel", vehicle.FuelTypes[0].FuelName);
         }
 
         [Theory]
         [InlineData(null)]
-        public void Test_SetFuelType_Invalid(FuelType fuelType)
+        public void Test_SetFuelType_Invalid(List<FuelType> fuelType)
         {
             Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2);
-            Assert.Throws<VehicleException>(() => vehicle.SetFuelType(fuelType));
+            Assert.Throws<VehicleException>(() => vehicle.SetFuelTypes(fuelType));
         }
 
         [Fact]

@@ -107,7 +107,10 @@ namespace FleetManagement.Business.Entities
 
         public void SetFuelTypes(List<FuelType> fuelTypes)
         {
-            if (fuelTypes.Any()) {
+            if(fuelTypes == null) {
+                throw new VehicleException("fueltype list can't be missing!");
+            }              
+            else if (!fuelTypes.Any()) {
                 throw new VehicleException("fueltype list can't be empty!");
             } else {
                 this.FuelTypes.Clear();
