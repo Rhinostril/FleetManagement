@@ -49,6 +49,15 @@ namespace FleetManagement.Business.Entities
                 throw new Exception(ex.Message);
             }
         }
+
+        public Driver(string firstName, string lastName, DateTime dateOfBirth, string securityNumber)
+        {
+            SetFirstName(firstName);
+            SetLastName(lastName);
+            SetDateOfBirth(dateOfBirth);
+            SetSecurityNumber(securityNumber);
+        }
+
         //TODO Driver with address
 
         private void SetFirstName(string firstname) {
