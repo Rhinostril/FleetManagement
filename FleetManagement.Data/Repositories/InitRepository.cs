@@ -24,10 +24,10 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = getConnection();
 
-            string query = "INSERT INTO FuelType (name)" +
+            string query = "INSERT INTO LicenseType (name)" +
                            "VALUES (@name)";
 
-            using(SqlCommand command = new SqlCommand())
+            using(SqlCommand command = connection.CreateCommand())
             {
                 try
                 {
@@ -50,21 +50,21 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
-        public void InsertFuelType(FuelType fuelType)
+        public void InsertFuelType(string fuelType)
         {
             SqlConnection connection = getConnection();
 
             string query = "INSERT INTO FuelType (name)" +
                            "VALUES (@name)";
 
-            using (SqlCommand command = new SqlCommand())
+            using (SqlCommand command = connection.CreateCommand())
             {
                 try
                 {
                     connection.Open();
 
                     command.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
-                    command.Parameters["@name"].Value = fuelType.FuelName;
+                    command.Parameters["@name"].Value = fuelType;
 
                     command.CommandText = query;
                     command.ExecuteNonQuery();

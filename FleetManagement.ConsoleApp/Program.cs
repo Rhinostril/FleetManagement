@@ -55,7 +55,6 @@ namespace FleetManagement.ConsoleApp
             //TestGetAllFuelCards();
             //TestGetFuelCard();
 
-            TestInsertLicenseTypes();
             TestInsertFuelTypes();
 
 
@@ -68,7 +67,7 @@ namespace FleetManagement.ConsoleApp
             InitRepository repo = new InitRepository();
             foreach(string s in licenseTypes)
             {
-                repo.InsertFuelType(new FuelType(s));
+                repo.InsertLicenseType(s);
                 Console.WriteLine(s);
             }
         }
@@ -77,7 +76,7 @@ namespace FleetManagement.ConsoleApp
             InitRepository repo = new InitRepository();
             foreach (string s in fuelTypes)
             {
-                repo.InsertLicenseType(s);
+                repo.InsertFuelType(s);
                 Console.WriteLine(s);
             }
         }
