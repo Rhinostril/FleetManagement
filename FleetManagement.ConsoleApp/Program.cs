@@ -9,7 +9,7 @@ namespace FleetManagement.ConsoleApp
     class Program
     {
 
-        private List<string> licenseTypes = new List<string>
+        private static List<string> licenseTypes = new List<string>
         {
             "AM",
             "A1",
@@ -28,22 +28,58 @@ namespace FleetManagement.ConsoleApp
             "G"
         };
 
-        private List<string> fuelTypes = new List<string>
+        private static List<string> fuelTypes = new List<string>
         {
-
+            "Petrol 98",
+            "Petrol 95",
+            "Premium Petrol",
+            "Super Petrol",
+            "Diesel",
+            "Super Diesel",
+            "Premium Diesel",
+            "Bio Diesel",
+            "LPG",
+            "Hydrogen",
+            "Ethanol",
+            "Butane",
+            "Electric Basic Charge",
+            "Electric Fast Charge",
+            "Electric Tesla Charge"
         };
+
+
         static void Main(string[] args)
         {
             // Testing
             //TestAddFuelCard();
             //TestGetAllFuelCards();
-            TestGetFuelCard();
+            //TestGetFuelCard();
+
+            TestInsertLicenseTypes();
+            TestInsertFuelTypes();
 
 
 
 
+        }
 
-
+        private static void TestInsertLicenseTypes()
+        {
+            InitRepository repo = new InitRepository();
+            foreach(string s in licenseTypes)
+            {
+                repo.InsertFuelType(new FuelType(s));
+                Console.WriteLine(s);
+            }
+        }
+        private static void TestInsertFuelTypes()
+        {
+            InitRepository repo = new InitRepository();
+            foreach (string s in fuelTypes)
+            {
+                repo.InsertLicenseType(s);
+                Console.WriteLine(s);
+            }
         }
 
         private static void TestAddFuelCard()
@@ -65,7 +101,6 @@ namespace FleetManagement.ConsoleApp
                 Console.WriteLine($"{ex.Message} \n {ex}");
             }
         }
-
         private static void TestGetAllFuelCards()
         {
             try
@@ -78,8 +113,6 @@ namespace FleetManagement.ConsoleApp
                 Console.WriteLine($"{ex.Message} \n {ex}");
             }
         }
-
-
         private static void TestGetFuelCard()
         {
             try
