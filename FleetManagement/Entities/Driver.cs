@@ -14,14 +14,14 @@ namespace FleetManagement.Business.Entities
         public DateTime DateOfBirth { get; private set; }
         public Address Address { get; private set; }
         public string SecurityNumber { get; private set; }
-        public List<string> DriversLicenceType { get; private set; }
+        public List<string> DriversLicenceType { get; private set; } = new List<string>();
         public Vehicle Vehicle { get; private set; }
         public FuelCard FuelCard { get; private set; }
 
         public Driver(string firstname, string lastname, DateTime dateofBirth, string securitynumber, List<string> licensetypes) {
 
             try {
-                DriversLicenceType = new List<string>();
+              
                 SetFirstName(firstname);
                 SetLastName(lastname);
                 SetDateOfBirth(dateofBirth);
@@ -95,8 +95,17 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        private void SetDriversLicensetypes(List<string> licensetypes) { 
+        private void SetDriversLicensetypes(List<string> licensetypes) {
+            try {
+                foreach (string Ltype in licensetypes) {
 
+                    if (String.IsNullOrEmpty(Ltype)) {
+                        throw new DriverException("Driver - SetDriversLicensetypes: licensetype cannot be null or empty");
+                    }
+                }
+            }catch(Exception ex) {
+                return;
+            }
             DriversLicenceType.Clear();
             DriversLicenceType.AddRange(licensetypes);
         }
@@ -108,7 +117,7 @@ namespace FleetManagement.Business.Entities
                 }//else it should be ignored
             }
         }
-        //Ask Client: removeDriversLicenseType?
+        
         public void SetAddress(Address address) {
             if(address != null)
             {

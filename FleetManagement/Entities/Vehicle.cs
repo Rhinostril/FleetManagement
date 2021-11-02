@@ -14,7 +14,7 @@ namespace FleetManagement.Business.Entities
         public string Model { get; private set; }
         public string ChassisNumber { get; private set; }
         public string LicensePlate { get; private set; }
-        public List<FuelType> FuelTypes { get; private set; }
+        public List<FuelType> FuelTypes { get; private set; } = new List<FuelType>();
         public string VehicleType { get; private set; }
         public string Color { get; private set; }
         public int Doors { get; private set; }
@@ -107,7 +107,18 @@ namespace FleetManagement.Business.Entities
 
         public void SetFuelTypes(List<FuelType> fuelTypes)
         {
-            // TODO
+            if (fuelTypes.Any()) {
+                throw new VehicleException("fueltype list can't be empty!");
+            } else {
+                this.FuelTypes.Clear();
+                foreach (FuelType type in fuelTypes) {
+                    if (!String.IsNullOrEmpty(type.FuelName)) {
+                        this.FuelTypes.Add(type);
+                    } else {
+                        throw new VehicleException("fueltype fuelname can't be empty!");
+                    }
+                }
+            }
         }
         public void SetVehicleType(string vehicleType)
         {

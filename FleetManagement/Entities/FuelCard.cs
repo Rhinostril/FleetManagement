@@ -14,7 +14,7 @@ namespace FleetManagement.Business.Entities
         public string CardNumber { get; private set; }
         public DateTime ValidityDate { get; set; }
         public string Pin { get; private set; }
-        public List<FuelType> FuelTypes { get; private set; }
+        public List<FuelType> FuelTypes { get; private set; } = new List<FuelType>();
         public Driver Driver { get; private set; }
         public bool IsEnabled { get; private set; }
 
@@ -108,13 +108,18 @@ namespace FleetManagement.Business.Entities
 
         public void SetFuelTypes(List<FuelType> fuelTypes)
         {
-            if(fuelTypes.Count > 0)
-            {
-                FuelTypes = fuelTypes;
-            }
-            else
-            {
+
+            if (fuelTypes.Any()) {
                 throw new FuelCardException("FuelCard - SetFuelTypes: Fueltypes must contain at least 1 fueltype!");
+            } else {
+                this.FuelTypes.Clear();
+                foreach (FuelType type in fuelTypes) {
+                    if (!String.IsNullOrEmpty(type.FuelName)) {
+                        this.FuelTypes.Add(type);
+                    } else {
+                        throw new VehicleException("FuelCard - SetFuelTypes: fuelname can't be empty!");
+                    }
+                }
             }
         }
 
