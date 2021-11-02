@@ -98,14 +98,12 @@ namespace FleetManagement.Data.Repositories
                 connection.Open();
                 try
                 {
-                    //command.Parameters.Add(new SqlParameter("@addressId", SqlDbType.Int));       zonder id
                     command.Parameters.Add(new SqlParameter("@street", SqlDbType.NVarChar));
                     command.Parameters.Add(new SqlParameter("@houseNr", SqlDbType.DateTime));
                     command.Parameters.Add(new SqlParameter("@postalCode", SqlDbType.Int));
                     command.Parameters.Add(new SqlParameter("@city", SqlDbType.NVarChar));
                     command.Parameters.Add(new SqlParameter("@country", SqlDbType.Bit));
 
-                    //command.Parameters["@addressId"].Value = address.AddressID;                zonder id
                     command.Parameters["@street"].Value = address.Street;
                     command.Parameters["@houseNr"].Value = address.HouseNr;
                     command.Parameters["@postalCode"].Value = address.PostalCode;

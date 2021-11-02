@@ -48,11 +48,6 @@ namespace FleetManagement.Data
                     parDriverSecurityNr.SqlDbType = System.Data.SqlDbType.NVarChar;
                     command.Parameters.Add(parDriverSecurityNr);
 
-                    SqlParameter parDriverlicenceType = new SqlParameter();
-                    parDriverlicenceType.ParameterName = "@licenceType";
-                    parDriverlicenceType.SqlDbType = System.Data.SqlDbType.NVarChar;
-                    command.Parameters.Add(parDriverlicenceType);
-
                     command.Parameters["@firstName"].Value = driver.FirstName;
                     command.Parameters["@lastName"].Value = driver.LastName;
                     command.Parameters["@dateOfBirth"].Value = driver.DateOfBirth;

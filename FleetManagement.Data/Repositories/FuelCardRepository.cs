@@ -9,8 +9,8 @@ namespace FleetManagement.Data.Repositories
 {
     public class FuelCardRepository : IFuelCardRepository
     {
-        private string connectionStringTino = @"Data Source=DESKTOP-UQN0VAO\SQLEXPRESS;Initial Catalog=dboFleetManagement;Integrated Security=True";
-        private string connectionString = $"Data Source=tcp:fleetmanagserver.database.windows.net,1433;Initial Catalog=dboFleetmanagement;Persist Security Info=False;User ID=fleetadmin;Password=$qlpassw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        
+       private string connectionString = $"Data Source=tcp:fleetmanagserver.database.windows.net,1433;Initial Catalog=dboFleetmanagement;Persist Security Info=False;User ID=fleetadmin;Password=$qlpassw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
        private SqlConnection getConnection()
         {
@@ -23,11 +23,11 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = getConnection();
 
-            string query = "SELECT *" +
-                           "FROM FuelCard" +
-                           "LEFT JOIN Driver" +
-                           "ON FuelCard.driverId = Driver.driverId " +
-                           "WHERE fuelCardId=@fuelCardId";
+            string query = "SELECT * FROM Fuelcard AS t1" +
+                           "LEFT OUTER JOIN Driver AS t2 ON t1.driverId = t2.driverId" +
+                           "LEFT OUTER JOIN FuelCardFuelType AS t3 ON t1.fuelCardId = t3.fuelCardId" +
+                           "LEFT OUTER JOIN FuelType AS t4 ON t3.fuelTypeId = t4.fuelTypeId" + 
+                           "WHERE t4.fuelCardId=@fuelCardId";
 
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -38,14 +38,15 @@ namespace FleetManagement.Data.Repositories
                 paramId.Value = fuelCardId;
                 command.Parameters.Add(paramId);
                 connection.Open();
+                List<FuelType> fuelTypes = new List<FuelType>();
                 try
                 {
                     SqlDataReader reader = command.ExecuteReader();
                     reader.Read();
+
                     string cardNumber = (string)reader["cardNumber"];
                     DateTime validityDate = (DateTime)reader["validityDate"];
                     string pin = (string)reader["pin"];
-                    //FuelType fuelType = new FuelType((string)reader["fuelType"]);
                     bool isEnabled = (bool)reader["isEnabled"];
 
                     string firstName = (string)reader["firstName"];
@@ -53,8 +54,16 @@ namespace FleetManagement.Data.Repositories
                     DateTime dateOfBirth = (DateTime)reader["dateOfBirth"];
                     string securityNr = (string)reader["securityNumber"];
 
-                    Driver driver = new Driver(firstName, lastName, dateOfBirth, securityNr, new List<string>());
+                    string fuelName = (string)reader["name"];
+                    fuelTypes.Add(new FuelType(fuelName));
 
+                    while (reader.Read())
+                    {
+                        string fuel = (string)reader["name"];
+                        fuelTypes.Add(new FuelType(fuel));
+                    }
+
+                    Driver driver = new Driver(firstName, lastName, dateOfBirth, securityNr, new List<string>());
                     FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, new List<FuelType>(), driver, isEnabled);
                     
                     reader.Close();
