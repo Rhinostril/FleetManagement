@@ -109,7 +109,7 @@ namespace FleetManagement.Data.Repositories
             using(SqlBulkCopy bc = new SqlBulkCopy(connectionString))
             {
                 DataTable dt = new DataTable("Vehicle");
-
+                dt.Columns.Add(new DataColumn("id", typeof(int?)));
                 dt.Columns.Add(new DataColumn("brand", typeof(string)));
                 dt.Columns.Add(new DataColumn("model", typeof(string)));
                 dt.Columns.Add(new DataColumn("chassisNumber", typeof(string)));
@@ -120,7 +120,7 @@ namespace FleetManagement.Data.Repositories
 
                 foreach(var vehicle in vehicles)
                 {
-                    dt.Rows.Add(vehicle.Brand, vehicle.Model, vehicle.ChassisNumber, vehicle.LicensePlate, vehicle.VehicleType, vehicle.Color, vehicle.Doors);
+                    dt.Rows.Add(null,vehicle.Brand, vehicle.Model, vehicle.ChassisNumber, vehicle.LicensePlate, vehicle.VehicleType, vehicle.Color, vehicle.Doors);
                 }
 
                 bc.DestinationTableName = "Vehicle";
