@@ -9,6 +9,18 @@ namespace FleetManagement.ConsoleApp
 {
     class Program
     {
+        static void Main(string[] args)
+        {
+            // Testing
+            //TestAddFuelCard();
+            //TestGetAllFuelCards();
+            //TestGetFuelCard();
+            TestBulkInsertVehicle();
+
+
+        }
+
+
         // CREATION OF DUMMY DATA LISTS
         private static List<string> licenseTypes = new List<string>
         {
@@ -173,20 +185,10 @@ namespace FleetManagement.ConsoleApp
 
 
 
-        static void Main(string[] args)
-        {
-            // Testing
-            //TestAddFuelCard();
-            //TestGetAllFuelCards();
-            //TestGetFuelCard();
-            vehicles = CreateVehicles();
-            foreach(Vehicle v in vehicles)
-            {
-                Console.WriteLine(v.ToString());
-            }
 
 
-        }
+
+
 
         private static void TestInsertLicenseTypes()
         {
@@ -249,6 +251,24 @@ namespace FleetManagement.ConsoleApp
                 Console.WriteLine(ex.Message);
             }
         }
+
+        private static void TestBulkInsertVehicle()
+        {
+            try
+            {
+                InitRepository repo = new InitRepository();
+                repo.BulkInsertVehicle(CreateVehicles());
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
+
+
+
 
     }
 

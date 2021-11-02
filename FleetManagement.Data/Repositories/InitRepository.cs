@@ -80,5 +80,68 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
+
+        // BULK COPY
+
+        public void BulkInsertAddress(List<Address> addresses)
+        {
+
+            // TODO
+
+        }
+
+        public void BulkInsertDriver(List<Driver> drivers)
+        {
+
+            // TODO
+
+        }
+
+        public void BulkInsertFuelCard(List<FuelCard> fuelCards)
+        {
+
+            // TODO
+
+        }
+
+        public void BulkInsertVehicle(List<Vehicle> vehicles)
+        {
+            using(SqlBulkCopy bc = new SqlBulkCopy(connectionString))
+            {
+                DataTable dt = new DataTable("Vehicle");
+
+                dt.Columns.Add(new DataColumn("brand", typeof(string)));
+                dt.Columns.Add(new DataColumn("model", typeof(string)));
+                dt.Columns.Add(new DataColumn("chassisNumber", typeof(string)));
+                dt.Columns.Add(new DataColumn("licensePlate", typeof(string)));
+                dt.Columns.Add(new DataColumn("vehicleType", typeof(string)));
+                dt.Columns.Add(new DataColumn("color", typeof(string)));
+                dt.Columns.Add(new DataColumn("doors", typeof(int)));
+
+                foreach(var vehicle in vehicles)
+                {
+                    dt.Rows.Add(vehicle.Brand, vehicle.Model, vehicle.ChassisNumber, vehicle.LicensePlate, vehicle.VehicleType, vehicle.Color, vehicle.Doors);
+                }
+
+                bc.DestinationTableName = "Vehicle";
+
+                try
+                {
+                    bc.WriteToServer(dt);
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
+            }
+        }
+
+
+
+
+
+
+
     }
 }
