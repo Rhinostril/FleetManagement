@@ -241,6 +241,12 @@ namespace FleetManagement.Business.Entities
             Driver = null;
         }
 
+        public override string ToString()
+        {
+            return $"{Brand}, {Model}, {ChassisNumber}, {LicensePlate}, {VehicleType}, {Color}, {Doors}";
+        }
+
+
 
 
     }
