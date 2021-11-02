@@ -92,7 +92,7 @@ namespace FleetManagement.Business.Entities.Tests
         public void SetVehicleTest()
         {
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
-            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driver);
+            Vehicle vehicle = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2, driver);
           
             Assert.NotNull(vehicle);
 
@@ -102,7 +102,7 @@ namespace FleetManagement.Business.Entities.Tests
             Driver driverorig = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.10.27-363.61", new List<string> { "B", "A1" });
             Driver drivernext= new Driver("Bradley", "Cooper", new DateTime(1977, 05, 10), "97.10.27-363.61", new List<string> { "B", "A1" });
             
-            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driverorig);
+            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2, driverorig);
             drivernext.SetVehicle(vehicleOrig);
 
             Assert.Null(driverorig.Vehicle);
@@ -116,8 +116,8 @@ namespace FleetManagement.Business.Entities.Tests
             Driver drivernext = new Driver("Bradley", "Cooper", new DateTime(1977, 05, 10), "97.10.27-363.61", new List<string> { "B", "A1" });
 
             
-            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driverorig);
-            Vehicle vehiclesecond = new Vehicle(1, "Porsche", "GT2RS", "1234-1334-1234-12", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, drivernext);
+            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2, driverorig);
+            Vehicle vehiclesecond = new Vehicle(1, "Porsche", "GT2RS", "1234-1334-1234-12", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2, drivernext);
 
             drivernext.SetVehicle(vehicleOrig);
             driverorig.SetVehicle(vehiclesecond);
@@ -131,8 +131,8 @@ namespace FleetManagement.Business.Entities.Tests
             Driver drivernext = new Driver("Bradley", "Cooper", new DateTime(1977, 05, 10), "97.10.27-363.61", new List<string> { "B", "A1" });
             //Driver driverNr3 = new Driver("Tronald", "Dump", new DateTime(1947, 05, 10), "97.10.27-363.61", new List<string> { "B", "A3" });
 
-            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driverorig);
-            Vehicle vehiclesecond = new Vehicle(1, "Porsche", "GT2RS", "1234-1334-1234-12", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, drivernext);
+            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2, driverorig);
+            Vehicle vehiclesecond = new Vehicle(1, "Porsche", "GT2RS", "1234-1334-1234-12", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2, drivernext);
             //Vehicle vehiclenr3 = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driverorig);
 
             drivernext.SetVehicle(vehicleOrig);
@@ -148,9 +148,9 @@ namespace FleetManagement.Business.Entities.Tests
             Driver drivernext = new Driver("Bradley", "Cooper", new DateTime(1977, 05, 10), "97.10.27-363.61", new List<string> { "B", "A1" });
             Driver driverNr3 = new Driver("Tronald", "Dump", new DateTime(1947, 05, 10), "97.10.27-363.61", new List<string> { "B", "A3" });
 
-            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driverorig);
-            Vehicle vehiclesecond = new Vehicle(2, "Porsche", "GT2RS", "1234-1334-1234-12", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, drivernext);
-            Vehicle vehiclenr3 = new Vehicle(3, "Porsche", "GT2RS", "0004-1234-1234-17", "KAPPER FURKAN", new FuelType("Gasoline"), "Sportauto", "Donkergrijs", 2, driverorig);
+            Vehicle vehicleOrig = new Vehicle(1, "Porsche", "GT2RS", "1234-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2, driverorig);
+            Vehicle vehiclesecond = new Vehicle(2, "Porsche", "GT2RS", "1234-1334-1234-12", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2, drivernext);
+            Vehicle vehiclenr3 = new Vehicle(3, "Porsche", "GT2RS", "0004-1234-1234-17", "KAPPER FURKAN", new List<FuelType> { new FuelType("gasoline") }, "Sportauto", "Donkergrijs", 2, driverorig);
 
             drivernext.SetVehicle(vehicleOrig);
             driverorig.SetVehicle(vehiclesecond);
@@ -171,7 +171,7 @@ namespace FleetManagement.Business.Entities.Tests
         [Fact]
         public void SetFuelCardTest()
         {
-            FuelCard f = new FuelCard(1, "123", new DateTime(), "1324", new FuelType("Gasoline"));
+            FuelCard f = new FuelCard("123", new DateTime(1997, 03, 20), "1324", new List<FuelType> { new FuelType("gasoline") }, true);
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
             driver.SetFuelCard(f);
             Assert.NotNull(driver.FuelCard);
@@ -180,11 +180,13 @@ namespace FleetManagement.Business.Entities.Tests
         }
         [Fact]
         public void SetFuelCardTest2() {
-            FuelCard f = new FuelCard(1, "123", new DateTime(), "1324", new FuelType("Gasoline"));
-            FuelCard f2 = new FuelCard(3, "1333", new DateTime(), "1325", new FuelType("Diesel"));
+            FuelCard f1= new FuelCard("123", new DateTime(1997, 03, 20), "1324", new List<FuelType> { new FuelType("gasoline") }, true);
+            FuelCard f2 = new FuelCard("1333", new DateTime(1957, 03, 20), "1325", new List<FuelType> { new FuelType("diesel") }, true);
+            
             Driver driver = new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" });
             driver.SetFuelCard(f2);
             Assert.NotNull(driver.FuelCard);
+            Assert.True(driver.FuelCard.Pin == "1325");
 
         }
 
