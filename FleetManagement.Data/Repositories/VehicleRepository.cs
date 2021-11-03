@@ -19,7 +19,43 @@ namespace FleetManagement.Data
 
         public void AddVehicle(Vehicle vehicle)
         {
-            throw new NotImplementedException();
+            SqlConnection cn = getConnection();
+            string query = "INSERT INTO vehicle (brand,model,chasisNumber,licensePlate,vehicleType,color,doors)VALUES(@brand,@model,@chasisNumber,@licensePlate,@vehicleType,@color,@doors)";
+            using (SqlCommand cmd = cn.CreateCommand())
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@brand", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@chasisNumber", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@vehicleType", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@color", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@doors", SqlDbType.NVarChar));
+
+                    cmd.Parameters["@brand"].Value = vehicle.Brand;
+                    cmd.Parameters["@model"].Value = vehicle.Model;
+                    cmd.Parameters["@chasisNumber"].Value = vehicle.ChassisNumber;
+                    cmd.Parameters["@licensePlate"].Value = vehicle.LicensePlate;
+                    cmd.Parameters["@vehicleType"].Value = vehicle.VehicleType;
+                    cmd.Parameters["@color"].Value = vehicle.Color;
+                    cmd.Parameters["@doors"].Value = vehicle.Doors;
+
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    cn.Close();
+                }
+            }
         }
 
         public void DeleteVehicle(Vehicle vehicle)
