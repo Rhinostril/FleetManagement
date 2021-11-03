@@ -53,7 +53,7 @@ namespace FleetManagement.Data
                 }
                 finally
                 {
-                    cn.Close();
+                    cn.Close(); 
                 }
             }
         }
