@@ -105,7 +105,7 @@ namespace FleetManagement.Business.Entities
             }
         }
 
-        private void SetDriversLicensetypes(List<string> licensetypes) {
+        public void SetDriversLicensetypes(List<string> licensetypes) {
             try {
                 foreach (string Ltype in licensetypes) {
 
