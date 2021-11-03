@@ -15,6 +15,16 @@ namespace FleetManagement.Business.Tests
             fuelType.SetFuelName("Diesel");
             Assert.Equal("Diesel", fuelType.FuelName);
         }
+        [Fact]
+        public void Test_SetFuelId_valid()
+        {
+            FuelType fuelType = new FuelType(1,"Gasoline");
+            fuelType.SetFuelName("Diesel");
+            Assert.Equal(1, fuelType.FuelTypeId);
+            Assert.Equal("Diesel", fuelType.FuelName);
+
+        }
+
 
         [Fact]
         public void Test_SetFuelName_Invalid()

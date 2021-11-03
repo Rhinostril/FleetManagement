@@ -12,14 +12,39 @@ namespace FleetManagement.Business.Tests
     public class FuelCardTests
     {
         [TestMethod()]
-        public void FuelCardTest()
+        public void FuelCardTestCtor()
         {
             FuelCard f = new FuelCard("123", new DateTime(1997,03,20), "1324", new List<FuelType> { new FuelType("gasoline") },true);
             Assert.AreEqual("123", f.CardNumber);
             Assert.AreEqual(new DateTime(1997, 03, 20), f.ValidityDate);
             Assert.AreEqual("1324", f.Pin);
            }
-        //TODO other constructors
+        [TestMethod()]
+        public void FuelCardTestCtor_setFuelCardiD()
+        {
+            FuelCard f = new FuelCard(1,"123",new DateTime(1980,08,16),"9876",new List<FuelType> { new FuelType("diesel")},true);
+         
+            Assert.AreEqual(1, f.FuelCardId);
+            Assert.AreEqual("123", f.CardNumber);
+            Assert.AreEqual(new DateTime(1980, 08, 16), f.ValidityDate);
+            Assert.AreEqual("9876", f.Pin);
+            Assert.AreEqual(true, f.IsEnabled);
+
+            
+
+        }
+        [TestMethod()]
+        public void FuelCardTestCtor_setDriver()
+        {
+            FuelCard f = new FuelCard(1, "123", new DateTime(1980, 08, 16), "9876", new List<FuelType> { new FuelType("diesel") }, new Driver("Elvis", "Presley", new DateTime(1997, 05, 20), "97.05.20-327.78", new List<string> { "B", "A1" }), true);
+            Assert.AreEqual(1, f.FuelCardId);
+            Assert.AreEqual("123", f.CardNumber);
+            Assert.AreEqual(new DateTime(1980, 08, 16), f.ValidityDate);
+            Assert.AreEqual("9876", f.Pin);
+
+        }
+      
+
         [TestMethod()]
         public void SetFuelCardIdTest()
         {
