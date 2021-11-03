@@ -15,7 +15,9 @@ namespace FleetManagement.ConsoleApp
             //TestAddFuelCard();
             //TestGetAllFuelCards();
             //TestGetFuelCard();
-            TestBulkInsertVehicle();
+            //TestBulkInsertVehicle();
+
+
 
 
         }
@@ -179,6 +181,7 @@ namespace FleetManagement.ConsoleApp
 
             return vehicles;
         }
+
 
 
 

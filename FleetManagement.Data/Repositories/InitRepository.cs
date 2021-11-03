@@ -92,8 +92,36 @@ namespace FleetManagement.Data.Repositories
 
         public void BulkInsertDriver(List<Driver> drivers)
         {
+            using (SqlBulkCopy bc = new SqlBulkCopy(connectionString))
+            {
+                DataTable dt = new DataTable("driver");
 
-            // TODO
+                dt.Columns.Add(new DataColumn("driverId", typeof(int)));
+                dt.Columns.Add(new DataColumn("firstname", typeof(string)));
+                dt.Columns.Add(new DataColumn("lastname", typeof(string)));
+                dt.Columns.Add(new DataColumn("dateOfBirth", typeof(DateTime)));
+                dt.Columns.Add(new DataColumn("addressId", typeof(int)));
+                dt.Columns.Add(new DataColumn("securityNumber", typeof(int)));
+                dt.Columns.Add(new DataColumn("vehicleId", typeof(int)));
+                dt.Columns.Add(new DataColumn("fuelcardId", typeof(int)));
+
+                foreach (var driver in drivers)
+                {
+                    dt.Rows.Add(null, driver.DriverID, driver.FirstName, driver.LastName, driver.DateOfBirth, driver.Address, driver.SecurityNumber, driver.Vehicle, driver.FuelCard);
+                }
+
+                bc.DestinationTableName = "driver";
+
+                try
+                {
+                    bc.WriteToServer(dt);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
+            }
 
         }
 
@@ -138,7 +166,7 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
-
+    
 
 
 
