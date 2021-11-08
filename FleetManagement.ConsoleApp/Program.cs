@@ -182,7 +182,25 @@ namespace FleetManagement.ConsoleApp
             return vehicles;
         }
 
+        // CREATION OF RANDOM FUELCARDS
+        private static string RandomCardNumber()
+        {
+            string cardNr = "";
 
+
+            return cardNr;
+        }
+
+        private static string RandomPin()
+        {
+            string pin = "";
+            Random r = new Random();
+            for (int i = 0; i < 4; i++)
+            {
+                pin += r.Next(0, 10).ToString();
+            }
+            return pin;
+        }
 
 
 

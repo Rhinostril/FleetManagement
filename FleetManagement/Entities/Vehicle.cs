@@ -30,8 +30,8 @@ namespace FleetManagement.Business.Entities
                 SetVehicleType(vehicleType);
                 SetVehicleColor(color);
                 SetVehicleDoors(doors);
-            }catch(Exception ex) { 
-            
+            }catch(Exception ex) {
+                throw new VehicleException(ex.Message);
             }
             
         }
@@ -40,7 +40,7 @@ namespace FleetManagement.Business.Entities
             try {
                 SetVehicleId(vehicleId);
             } catch (Exception ex) {
-
+                throw new VehicleException(ex.Message);
             }
         }
 
@@ -48,7 +48,7 @@ namespace FleetManagement.Business.Entities
             try {
                 SetDriver(driver);
             } catch (Exception ex) {
-
+                throw new VehicleException(ex.Message);
             }
         }
 
