@@ -185,12 +185,14 @@ namespace FleetManagement.ConsoleApp
         // CREATION OF RANDOM FUELCARDS
         private static string RandomCardNumber()
         {
+            Random r = new Random();
             string cardNr = "";
-
-
+            for(int i = 0; i < 6; i++)
+            {
+                cardNr += r.Next(0, 10).ToString();
+            }
             return cardNr;
         }
-
         private static string RandomPin()
         {
             string pin = "";
@@ -201,6 +203,13 @@ namespace FleetManagement.ConsoleApp
             }
             return pin;
         }
+        private static DateTime RandomValidityDate()
+        {
+            Random r = new Random();
+            DateTime dte = new DateTime(r.Next(1, 28), r.Next(1, 13), 2021 + r.Next(5, 10));
+            return dte;
+        }
+        
 
 
 
