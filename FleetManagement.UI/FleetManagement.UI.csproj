@@ -11,4 +11,8 @@
     <ProjectReference Include="..\FleetManagement\FleetManagement.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="config\" />
+  </ItemGroup>
+
 </Project>

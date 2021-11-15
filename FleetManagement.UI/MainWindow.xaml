@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FleetManagement.UI"
         mc:Ignorable="d"
-        Title="Fleet Management App" Height="450" Width="800">
+        Title="Fleet Management App" Height="512" Width="800">
     <Grid>
         <TabControl>
             <TabItem Header="  Home  ">
@@ -27,7 +27,55 @@
 
             </TabItem>
             <TabItem Header="  Vehicles  ">
-
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Brand" Margin="5"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
+                    <Label Grid.Row="0" Grid.Column="2" Content="Model" Margin="5"/>
+                    <TextBox Grid.Row="0" Grid.Column="3" Margin="5"/>
+                    <Label Grid.Row="0" Grid.Column="4" Content="Type" Margin="5"/>
+                    <TextBox Grid.Row="0" Grid.Column="5" Margin="5"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Chassis number" Margin="5"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5"/>
+                    <Label Grid.Row="1" Grid.Column="2" Content="License plate" Margin="5"/>
+                    <TextBox Grid.Row="1" Grid.Column="3" Margin="5"/>
+                    <Label Grid.Row="1" Grid.Column="4" Content="Color" Margin="5"/>
+                    <TextBox Grid.Row="1" Grid.Column="5" Margin="5"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Amount of doors" Margin="5"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5"/>
+                    <Button x:Name="SearchVehiclesButton" Content="  Search Vehicles  " Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="5"/>
+                    <Button x:Name="NewVehicleButton" Content="  New Vehicle  " Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="5"/>
+                    <DataGrid x:Name="VehiclesDataGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="1*" Header="Chassis number"/>
+                            <DataGridTextColumn Width="1*" Header="License plate"/>
+                            <DataGridTextColumn Width="1*" Header="Brand"/>
+                            <DataGridTextColumn Width="1*" Header="Model"/>
+                            <DataGridTextColumn Width="1*" Header="Color"/>
+                            <DataGridTextColumn Width="1*" Header="Driver"/>
+                        </DataGrid.Columns>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Vehicles Details"/>
+                                <MenuItem Header="Update Vehicle"/>
+                                <MenuItem Header="Delete Vehicle"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
+                </Grid>
             </TabItem>
             <TabItem Header="  Fuelcards  ">
 
