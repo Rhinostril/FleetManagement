@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Data;
 
-namespace FleetManagement.Data
+namespace FleetManagement.Data.Repositories;
 {
     public class DriverRepository : IDriverRepository
     {

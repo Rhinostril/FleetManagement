@@ -102,7 +102,7 @@
                     <TextBox Grid.Row="1" Grid.Column="5" Margin="5"/>
                     <Label Grid.Row="2" Grid.Column="0" Content="Amount of doors" Margin="5"/>
                     <TextBox Grid.Row="2" Grid.Column="1" Margin="5"/>
-                    <Button x:Name="SearchVehiclesButton" Content="  Search Vehicles  " Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="5"/>
+                    <Button x:Name="SearchVehiclesButton" Content="  Search Vehicles  " Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="5" Click="SearchVehiclesButton_Click"/>
                     <Button x:Name="NewVehicleButton" Content="  New Vehicle  " Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="5"/>
                     <DataGrid x:Name="VehiclesDataGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single">
                         <DataGrid.Columns>
