@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,10 +28,16 @@ namespace FleetManagement.UI
 
         private VehicleManager vehicleManager = new VehicleManager(new VehicleRepository());
         private DriverManager driverManager = new DriverManager(new DriverRepository());
+        private FuelCardManager fuelCardManager = new FuelCardManager(new FuelCardRepository());
+        private AddressManager addressManager = new AddressManager(new AddressRepository());
+
+        private ObservableCollection<Vehicle> vehicles = new ObservableCollection<Vehicle>();
 
         public MainWindow()
         {
             InitializeComponent();
+            vehicles = (ObservableCollection<Vehicle>)vehicleManager.GetAllVehicles();
+            VehiclesDataGrid.ItemsSource = vehicles;
         }
 
         private void SearchVehiclesButton_Click(object sender, RoutedEventArgs e)

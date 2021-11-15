@@ -70,5 +70,18 @@ namespace FleetManagement.Business.Managers
             }
         }
 
+        public IReadOnlyList<Vehicle> GetAllVehicles()
+        {
+            try
+            {
+                return repo.GetAllVehicles();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
     }
 }
