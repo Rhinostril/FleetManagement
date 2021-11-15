@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FleetManagement.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Fleet Management App" Height="450" Width="800">
     <Grid>
+        <TabControl>
+            <TabItem Header="  Home  ">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="  Welcome back!  " Grid.Row="0" Grid.Column="0" FontSize="32" Margin="10"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="  Drivers  ">
 
+            </TabItem>
+            <TabItem Header="  Vehicles  ">
+
+            </TabItem>
+            <TabItem Header="  Fuelcards  ">
+
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
