@@ -36,8 +36,7 @@ namespace FleetManagement.UI
         public MainWindow()
         {
             InitializeComponent();
-            vehicles = (ObservableCollection<Vehicle>)vehicleManager.GetAllVehicles();
-            VehiclesDataGrid.ItemsSource = vehicles;
+
         }
 
         private void SearchVehiclesButton_Click(object sender, RoutedEventArgs e)
