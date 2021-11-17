@@ -46,5 +46,15 @@ namespace FleetManagement.UI
             
 
         }
+
+
+        private void Details_Click(object sender, RoutedEventArgs e)
+        {
+            Vehicle vehicle = (Vehicle)VehiclesDataGrid.SelectedItem;
+            VehicleDetailsWindow objWindow = new VehicleDetailsWindow(vehicle.VehicleId);
+            objWindow.Show();
+        }
+
+
     }
 }
