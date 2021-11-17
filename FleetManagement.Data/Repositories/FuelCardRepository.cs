@@ -117,6 +117,63 @@ namespace FleetManagement.Data.Repositories
             return fuelCards.AsReadOnly();
         }
 
+        public IReadOnlyList<FuelCard> GetTop50FuelCards() {
+            SqlConnection connection = getConnection();
+            List<FuelCard> fuelCards = new List<FuelCard>();
+            string query = "SELECT TOP 50 * FROM Fuelcard ORDER BY fuelCardId DESC; ";
+
+            using (SqlCommand command = connection.CreateCommand()) {
+                command.CommandText = query;
+                connection.Open();
+                try {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read()) {
+                        int fuelCardId = (int)reader["fuelCardId"];
+                        string cardNumber = (string)reader["cardNumber"];
+                        DateTime validityDate = (DateTime)reader["validityDate"];
+                        string pin = (string)reader["pin"];
+                        FuelType fuelType = new FuelType((string)reader["fuelType"]);
+                        bool isEnabled = (bool)reader["isEnabled"];
+                        fuelCards.Add(new FuelCard(fuelCardId, cardNumber, validityDate, pin, new List<FuelType>(), isEnabled));
+                    }
+                } catch (Exception ex) {
+                    throw new Exception(ex.Message);
+                } finally {
+                    connection.Close();
+                }
+            }
+            return fuelCards.AsReadOnly();
+        }
+
+        public IReadOnlyList<FuelCard> GetFuelCardsByAmount(int amount) {
+            SqlConnection connection = getConnection();
+            List<FuelCard> fuelCards = new List<FuelCard>();
+            string query = "SELECT TOP @amount * FROM Fuelcard ORDER BY fuelCardId DESC; ";
+
+            using (SqlCommand command = connection.CreateCommand()) {
+                command.CommandText = query;
+                command.Parameters.AddWithValue("@amount", amount);
+                connection.Open();
+                try {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read()) {
+                        int fuelCardId = (int)reader["fuelCardId"];
+                        string cardNumber = (string)reader["cardNumber"];
+                        DateTime validityDate = (DateTime)reader["validityDate"];
+                        string pin = (string)reader["pin"];
+                        FuelType fuelType = new FuelType((string)reader["fuelType"]);
+                        bool isEnabled = (bool)reader["isEnabled"];
+                        fuelCards.Add(new FuelCard(fuelCardId, cardNumber, validityDate, pin, new List<FuelType>(), isEnabled));
+                    }
+                } catch (Exception ex) {
+                    throw new Exception(ex.Message);
+                } finally {
+                    connection.Close();
+                }
+            }
+            return fuelCards.AsReadOnly();
+        }
+
         public FuelCard SearchFuelCard(int? fuelCardId, string cardNr, FuelType fuelType)
         {
             throw new NotImplementedException();
@@ -300,6 +357,8 @@ namespace FleetManagement.Data.Repositories
                 }
             }
         }
+
+       
 
 
 

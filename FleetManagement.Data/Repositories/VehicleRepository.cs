@@ -89,7 +89,7 @@ namespace FleetManagement.Data.Repositories
         public IReadOnlyList<Vehicle> GetAllVehicles()
         {
             SqlConnection connection = GetConnection();
-            string query = "SELECT TOP 50 * FROM Vehicle";
+            string query = "SELECT * FROM Vehicle";
             List<Vehicle> vehicles = new List<Vehicle>();
             using(SqlCommand command = connection.CreateCommand())
             {
@@ -119,6 +119,68 @@ namespace FleetManagement.Data.Repositories
                 }
                 finally
                 {
+                    connection.Close();
+                }
+            }
+        }
+
+        public IReadOnlyList<Vehicle> GetTop50Vehicles() {
+            SqlConnection connection = GetConnection();
+            string query = "SELECT TOP 50 * FROM Vehicle";
+            List<Vehicle> vehicles = new List<Vehicle>();
+            using (SqlCommand command = connection.CreateCommand()) {
+                try {
+                    connection.Open();
+                    command.CommandText = query;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read()) {
+                        int vehicleId = (int)reader["vehicleId"];
+                        string brand = (string)reader["brand"];
+                        string model = (string)reader["model"];
+                        string chassisNumber = (string)reader["chassisNumber"];
+                        string licensePlate = (string)reader["licensePlate"];
+                        string vehicleType = (string)reader["vehicleType"];
+                        string color = (string)reader["color"];
+                        int doors = (int)reader["doors"];
+                        Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNumber, licensePlate, new List<FuelType> { new FuelType("#") }, vehicleType, color, doors);
+                        vehicles.Add(vehicle);
+                    }
+                    return vehicles.AsReadOnly();
+                } catch (Exception ex) {
+                    throw new Exception(ex.Message);
+                } finally {
+                    connection.Close();
+                }
+            }
+        }
+
+        public IReadOnlyList<Vehicle> GetVehiclesByAmount(int amount) {
+            SqlConnection connection = GetConnection();
+            string query = "SELECT TOP @amount * FROM Vehicle";
+            List<Vehicle> vehicles = new List<Vehicle>();
+            using (SqlCommand command = connection.CreateCommand()) {
+                try {
+                    command.Parameters.AddWithValue("@amount",amount);
+                    command.CommandText = query;
+                    connection.Open();
+                   
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read()) {
+                        int vehicleId = (int)reader["vehicleId"];
+                        string brand = (string)reader["brand"];
+                        string model = (string)reader["model"];
+                        string chassisNumber = (string)reader["chassisNumber"];
+                        string licensePlate = (string)reader["licensePlate"];
+                        string vehicleType = (string)reader["vehicleType"];
+                        string color = (string)reader["color"];
+                        int doors = (int)reader["doors"];
+                        Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNumber, licensePlate, new List<FuelType> { new FuelType("#") }, vehicleType, color, doors);
+                        vehicles.Add(vehicle);
+                    }
+                    return vehicles.AsReadOnly();
+                } catch (Exception ex) {
+                    throw new Exception(ex.Message);
+                } finally {
                     connection.Close();
                 }
             }

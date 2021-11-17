@@ -366,6 +366,138 @@ namespace FleetManagement.Data.Repositories
             }
             return driverlist.AsReadOnly();
         }
+        public IReadOnlyList<Driver> GetTop50Drivers() {
+            string query = $"SELECT TOP 50 * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId ORDER BY Driver.driverid DESC ;";
+            List<Driver> driverlist = new List<Driver>();
+            SqlConnection connection = getConnection();
+            using (SqlCommand command = new SqlCommand(query, connection)) {
+                connection.Open();
+                try {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read()) {
+                        int driverid = (int)reader.GetValue("Driver.driverId");
+                        string firstname = reader.GetString("firstName");
+                        string lastname = reader.GetString("lastName");
+                        DateTime dateofbirth = (DateTime)reader.GetValue("dateOfBirth");
+                        int? addressId = (int?)reader.GetValue("Driver.addressId"); //nullable int
+                        string securityNumber = reader.GetString("securityNumber");
+                        int? vehicleid = (int?)reader.GetValue("Driver.vehicleId");
+                        int? fuelcardid = (int?)reader.GetValue("Driver.fuelcardId");
+                        List<string> LicenseTypes = GetLicensesByDriverID(driverid);
+
+                        Driver D = new Driver(firstname, lastname, dateofbirth, securityNumber);
+                        if (addressId != null) {
+                            string street = (string)reader.GetValue("street");
+                            string houseNr = (string)reader.GetValue("houseNr");
+                            string postalCode = (string)reader.GetValue("postalCode");
+                            string city = (string)reader.GetValue("city");
+                            string country = (string)reader.GetValue("country");
+                            Address a = new Address((int)addressId, street, houseNr, postalCode, city, country);
+                            D.SetAddress(a);
+                        }
+                        if (vehicleid != null) {
+                            string brand = (string)reader.GetValue("brand");
+                            string model = (string)reader.GetValue("model");
+                            string chassisNr = (string)reader.GetValue("chassisNumber");
+                            string licensePlate = (string)reader.GetValue("licensePlate");
+                            string vehicleType = (string)reader.GetValue("vehicleType");
+                            string color = (string)reader.GetValue("color");
+                            int doors = (int)reader.GetValue("doors");
+                            List<FuelType> vehiclefueltypes = GetvehcileFueltypes((int)vehicleid);
+                            Vehicle v = new Vehicle(brand, model, chassisNr, licensePlate, vehiclefueltypes, vehicleType, color, doors);
+                            D.SetVehicle(v);
+                        }
+                        if (fuelcardid != null) {
+                            string cardNumber = (string)reader.GetValue("cardNumber");
+                            DateTime validityDate = (DateTime)reader.GetValue("validityDate");
+                            string pin = (string)reader.GetValue("pin");
+                            List<FuelType> fuelcardFueltypes = GetfuelcardFueltypes((int)fuelcardid);
+                            bool isEnabled = (bool)reader.GetValue("isEnabled");
+                            FuelCard fc = new FuelCard(cardNumber, validityDate, pin, fuelcardFueltypes, isEnabled);
+                            D.SetFuelCard(fc);
+                        }
+                        if (LicenseTypes.Any()) {
+                            D.SetDriversLicensetypes(LicenseTypes);
+                        }
+                        driverlist.Add(D);
+
+                    }
+                    reader.Close();
+                } catch (Exception e) {
+
+                } finally {
+                    connection.Close();
+                }
+            }
+            return driverlist.AsReadOnly();
+        }
+
+        public IReadOnlyList<Driver> GetDriversByAmount(int amount) {
+            string query = $"SELECT TOP @amount * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId ORDER BY Driver.driverid DESC ;";
+            List<Driver> driverlist = new List<Driver>();
+            SqlConnection connection = getConnection();
+            using (SqlCommand command = new SqlCommand(query, connection)) {
+                command.Parameters.AddWithValue("@amount", amount);
+                connection.Open();
+                try {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read()) {
+                        int driverid = (int)reader.GetValue("Driver.driverId");
+                        string firstname = reader.GetString("firstName");
+                        string lastname = reader.GetString("lastName");
+                        DateTime dateofbirth = (DateTime)reader.GetValue("dateOfBirth");
+                        int? addressId = (int?)reader.GetValue("Driver.addressId"); //nullable int
+                        string securityNumber = reader.GetString("securityNumber");
+                        int? vehicleid = (int?)reader.GetValue("Driver.vehicleId");
+                        int? fuelcardid = (int?)reader.GetValue("Driver.fuelcardId");
+                        List<string> LicenseTypes = GetLicensesByDriverID(driverid);
+
+                        Driver D = new Driver(firstname, lastname, dateofbirth, securityNumber);
+                        if (addressId != null) {
+                            string street = (string)reader.GetValue("street");
+                            string houseNr = (string)reader.GetValue("houseNr");
+                            string postalCode = (string)reader.GetValue("postalCode");
+                            string city = (string)reader.GetValue("city");
+                            string country = (string)reader.GetValue("country");
+                            Address a = new Address((int)addressId, street, houseNr, postalCode, city, country);
+                            D.SetAddress(a);
+                        }
+                        if (vehicleid != null) {
+                            string brand = (string)reader.GetValue("brand");
+                            string model = (string)reader.GetValue("model");
+                            string chassisNr = (string)reader.GetValue("chassisNumber");
+                            string licensePlate = (string)reader.GetValue("licensePlate");
+                            string vehicleType = (string)reader.GetValue("vehicleType");
+                            string color = (string)reader.GetValue("color");
+                            int doors = (int)reader.GetValue("doors");
+                            List<FuelType> vehiclefueltypes = GetvehcileFueltypes((int)vehicleid);
+                            Vehicle v = new Vehicle(brand, model, chassisNr, licensePlate, vehiclefueltypes, vehicleType, color, doors);
+                            D.SetVehicle(v);
+                        }
+                        if (fuelcardid != null) {
+                            string cardNumber = (string)reader.GetValue("cardNumber");
+                            DateTime validityDate = (DateTime)reader.GetValue("validityDate");
+                            string pin = (string)reader.GetValue("pin");
+                            List<FuelType> fuelcardFueltypes = GetfuelcardFueltypes((int)fuelcardid);
+                            bool isEnabled = (bool)reader.GetValue("isEnabled");
+                            FuelCard fc = new FuelCard(cardNumber, validityDate, pin, fuelcardFueltypes, isEnabled);
+                            D.SetFuelCard(fc);
+                        }
+                        if (LicenseTypes.Any()) {
+                            D.SetDriversLicensetypes(LicenseTypes);
+                        }
+                        driverlist.Add(D);
+
+                    }
+                    reader.Close();
+                } catch (Exception e) {
+
+                } finally {
+                    connection.Close();
+                }
+            }
+            return driverlist.AsReadOnly();
+        }
 
         public List<FuelType> GetfuelcardFueltypes(int fuelcardid) {
             List<FuelType> fuelTypes = new List<FuelType>();
@@ -565,5 +697,7 @@ namespace FleetManagement.Data.Repositories
                 return false;
             }
         }
+
+       
     }
 }
