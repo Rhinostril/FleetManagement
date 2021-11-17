@@ -30,8 +30,8 @@
 
         <TextBox Name="txtFirstName" Grid.Row="1" Grid.Column="1"  Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
         <TextBox Name="txtLastName" Grid.Row="2" Grid.Column="1"  Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
-        <TextBox Name="txtDateOfBirth" Grid.Row="3" Grid.Column="1"  Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
+        <DatePicker Grid.Row="3" Grid.Column="1" Name="DriverDateOfBirthPicker" SelectedDateFormat="Short" IsTodayHighlighted="true" Margin="5"/>
         <TextBox Name="txtSecurityNumber" Grid.Row="4" Grid.Column="1"  Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
-        <Button Content="Add Driver" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="140"/>
+        <Button  Name="buttonAddDriver" Content="Add Driver" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
     </Grid>
 </Window>

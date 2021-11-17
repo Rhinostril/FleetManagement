@@ -60,5 +60,17 @@ namespace FleetManagement.UI
             AddNewDriver addNewDriver = new AddNewDriver();
             addNewDriver.Show();
         }
+
+        private void NewVehicleButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewVehicle addNewVehicle = new AddNewVehicle();
+            addNewVehicle.Show();
+        }
+
+        private void NewFuelCardButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewFuelCard addNewFuelCard = new AddNewFuelCard();
+            addNewFuelCard.Show();
+        }
     }
 }
