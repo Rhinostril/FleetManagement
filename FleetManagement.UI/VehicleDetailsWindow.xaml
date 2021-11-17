@@ -35,14 +35,14 @@
         <Label Grid.Row="8" Grid.Column="0" Content="Doors" Margin="5" FontSize="16"/>
         <Label Grid.Row="1" Grid.Column="2" Content="Fueltypes" Margin="5" FontSize="16"/>
         
-        <TextBox Grid.Row="1" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="Aston Martin" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Text="Vanquish" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox Grid.Row="5" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox Grid.Row="6" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox Grid.Row="7" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox Grid.Row="8" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <ListBox Grid.Row="1" Grid.Column="3" Grid.RowSpan="4" Margin="5"/>
+        <TextBox Name="txtVehicleId" Grid.Row="1" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox Name="txtBrand" Grid.Row="2" Grid.Column="1" Text="Aston Martin" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox Name="txtModel" Grid.Row="3" Grid.Column="1" Text="Vanquish" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox Name="txtChassisNumber" Grid.Row="4" Grid.Column="1" Text="dummy data" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox Name="txtLicensePlate" Grid.Row="5" Grid.Column="1" Text="dummy data" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox Name="txtVehicleType" Grid.Row="6" Grid.Column="1" Text="Supercar" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox Name="txtColor" Grid.Row="7" Grid.Column="1" Text="Deep Purple" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox Name="txtDoors" Grid.Row="8" Grid.Column="1" Text="3" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <ListBox Name="lstFuelTypes" Grid.Row="1" Grid.Column="3" Grid.RowSpan="4" Margin="5" SelectionMode="Single"/>
     </Grid>
 </Window>
