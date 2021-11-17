@@ -167,7 +167,7 @@ namespace FleetManagement.Data.Repositories
         }
 
     
-        // CONNECTING FUELTYPES TO VEHICLES
+        // CONNECTING FUELTYPES TO VEHICLES IN TABLE VEHICLEFUELTYPES
         public void BulkInsertVehicleFuelType(List<(int, int)> vehicleFueltypes)
         {
             using (SqlBulkCopy bc = new SqlBulkCopy(connectionString))

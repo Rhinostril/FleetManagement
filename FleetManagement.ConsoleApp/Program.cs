@@ -11,6 +11,8 @@ namespace FleetManagement.ConsoleApp
     {
         static void Main(string[] args)
         {
+            // InitRepository repo = new InitRepository();
+
             
 
 
@@ -30,12 +32,33 @@ namespace FleetManagement.ConsoleApp
 
             for (int v = 1001; v < 2001; v++) // LOOP EVERY VEHICLE
             {
-                int fuelTypes = r.Next(61, 76);
-                for (int f= fuelTypes; f < 76; f++) // LOOP EVERY FUELTYPE
+                int fuelKind = r.Next(1, 5);
+                switch (fuelKind)
                 {
-
-                    vehicleFuelTypes.Add((v, f));
-
+                    case 1: // Petrol
+                        for(int f = 61; f <= 64; f++)
+                        {
+                            vehicleFuelTypes.Add((v, f));
+                        }
+                        break;
+                    case 2: // Diesel
+                        for (int f = 65; f <= 68; f++)
+                        {
+                            vehicleFuelTypes.Add((v, f));
+                        }
+                        break;
+                    case 3: // Other
+                        for (int f = 69; f <= 72; f++)
+                        {
+                            vehicleFuelTypes.Add((v, f));
+                        }
+                        break;
+                    case 4: // Electric
+                        for (int f = 73; f <= 75; f++)
+                        {
+                            vehicleFuelTypes.Add((v, f));
+                        }
+                        break;
                 }
 
             }
