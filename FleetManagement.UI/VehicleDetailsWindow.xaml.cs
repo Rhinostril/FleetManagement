@@ -24,7 +24,7 @@ namespace FleetManagement.UI
     public partial class VehicleDetailsWindow : Window
     {
 
-        private VehicleManager vehicleManager = new VehicleManager(new VehicleRepository());
+       
 
         private ObservableCollection<FuelType> fuelTypes = new ObservableCollection<FuelType>();
 

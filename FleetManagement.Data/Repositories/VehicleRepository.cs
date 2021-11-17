@@ -220,16 +220,14 @@ namespace FleetManagement.Data.Repositories
                     fuelTypes.Add(fuelType);
 
                     Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNr, licensePlate, fuelTypes, vehicleType, color, doors); // Init Vehicle met FuelType
-                    
-                    /*
-                     
+
                     Driver driver = null;
-                    if ((int?)reader["driverId"] != null) // Heeft Vehicle een driver ?
+
+                    if (!reader.IsDBNull(12)) // Heeft Vehicle een driver ?
                     {
                         driver = new Driver((string)reader["firstName"], (string)reader["lastName"]);
+                        vehicle.SetDriver(driver);
                     }
-
-                    vehicle.SetDriver(driver); // Assign Driver
 
                     while (reader.Read())
                     {
@@ -238,8 +236,6 @@ namespace FleetManagement.Data.Repositories
                     }
 
                     vehicle.SetFuelTypes(fuelTypes); // Assign FuelTypes List
-
-                    */
 
                     reader.Close();
                     return vehicle;

@@ -1,0 +1,49 @@
+﻿<Window x:Class="FleetManagement.UI.DriverDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FleetManagement.UI"
+        mc:Ignorable="d"
+        Title="Driver Detail" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="1.3*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Driver Details" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="28" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Driver ID" Margin="5" FontSize="16"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="First Name" Margin="5" FontSize="16"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Last Name" Margin="5" FontSize="16"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Date of birth" Margin="5" FontSize="16"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="Security Number" Margin="5" FontSize="16"/>
+        <Label Grid.Row="6" Grid.Column="0" Content="Adres" Margin="5" FontSize="16"/>
+        <Label Grid.Row="7" Grid.Column="0" Content="Vehicle" Margin="5" FontSize="16"/>
+        <Label Grid.Row="8" Grid.Column="0" Content="FuelCard" Margin="5" FontSize="16"/>
+        
+
+        <TextBox x:Name="TxtDriverId" Grid.Row="1" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox x:Name="TxtFirstname" Grid.Row="2" Grid.Column="1" Text="Aston Martin" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox x:Name="TxtLastname"  Grid.Row="3" Grid.Column="1" Text="Vanquish" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <DatePicker x:Name="DateOfBirth" Grid.Row="4" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox x:Name="TxtSecurityNumber" Grid.Row="5" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox x:Name="TxtAdres"  Grid.Row="6" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox x:Name="TxtVehicle" Grid.Row="7" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+
+        <TextBox x:Name="TxtFuelCard" Grid.Row="8" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+    </Grid>
+    
+</Window>
