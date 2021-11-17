@@ -592,6 +592,8 @@ namespace FleetManagement.Data.Repositories
 
         public void UpdateDriver(Driver driver)
         {
+
+            //TODO UPDATE METHOD WITH UNCERTAIN FIELDS
             throw new NotImplementedException();
         }
 
@@ -616,6 +618,7 @@ namespace FleetManagement.Data.Repositories
                         List<string> LicenseTypes = GetLicensesByDriverID(driverid);
 
                         Driver D = new Driver(firstname, lastname, dateofbirth, securityNumber);
+                        D.SetDriverID(driverid);
                         if (addressId != null) {
                             string street = (string)reader.GetValue("street");
                             string houseNr = (string)reader.GetValue("houseNr");

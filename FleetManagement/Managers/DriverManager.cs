@@ -49,6 +49,15 @@ namespace FleetManagement.Business.Managers
                 throw new Exception(ex.Message);
             }
         }
+        public Driver GetDriverByID(int driverID) {
+            try {
+
+                Driver diver = repo.GetDriverById(driverID);
+                return diver;
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public void DeleteDriver(Driver driver)
         {
