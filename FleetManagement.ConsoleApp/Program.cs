@@ -11,15 +11,36 @@ namespace FleetManagement.ConsoleApp
     {
         static void Main(string[] args)
         {
-            // Testing
-            //TestAddFuelCard();
-            //TestGetAllFuelCards();
-            //TestGetFuelCard();
-            //TestBulkInsertVehicle();
+            
 
 
 
 
+
+        }
+
+        // CREATION OF VEHICLE FUELTYPES LIST
+        private static List<(int, int)> VehicleFuelTypes()
+        {
+            // FuelType ID's = 61-75
+            // Vehicle ID's = 1001-2000
+
+            Random r = new Random();
+            List<(int, int)> vehicleFuelTypes = new List<(int, int)>();
+
+            for (int v = 1001; v < 2001; v++) // LOOP EVERY VEHICLE
+            {
+                int fuelTypes = r.Next(61, 76);
+                for (int f= fuelTypes; f < 76; f++) // LOOP EVERY FUELTYPE
+                {
+
+                    vehicleFuelTypes.Add((v, f));
+
+                }
+
+            }
+
+            return vehicleFuelTypes;
         }
 
 
@@ -139,7 +160,7 @@ namespace FleetManagement.ConsoleApp
             {
                 chassis += alph[r.Next(0, 26)];
             }
-            for(int i = 8; i < 17; i++)
+            for (int i = 8; i < 17; i++)
             {
                 chassis += r.Next(0, 10);
             }
@@ -173,13 +194,25 @@ namespace FleetManagement.ConsoleApp
             Random r = new Random();
             List<Vehicle> vehicles = new List<Vehicle>();
 
-            for(int i = 0; i < 1000; i++)
+            for (int i = 0; i < 1000; i++)
             {
-                Vehicle vehicle = new Vehicle(RndOfList(carBrands), RndOfList(carModels), RandomChassis(), RandomLicense(), new List<FuelType> { new FuelType("Diesel")}, RndOfList(carType), RndOfList(carColors),  r.Next(5, 8));
+                Vehicle vehicle = new Vehicle(RndOfList(carBrands), RndOfList(carModels), RandomChassis(), RandomLicense(), new List<FuelType> { new FuelType("Diesel") }, RndOfList(carType), RndOfList(carColors), r.Next(5, 8));
                 vehicles.Add(vehicle);
             }
 
             return vehicles;
+        }
+        private static void TestBulkInsertVehicle()
+        {
+            try
+            {
+                InitRepository repo = new InitRepository();
+                repo.BulkInsertVehicle(CreateVehicles());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         // CREATION OF RANDOM FUELCARDS
@@ -187,7 +220,7 @@ namespace FleetManagement.ConsoleApp
         {
             Random r = new Random();
             string cardNr = "";
-            for(int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++)
             {
                 cardNr += r.Next(0, 10).ToString();
             }
@@ -209,21 +242,10 @@ namespace FleetManagement.ConsoleApp
             DateTime dte = new DateTime(r.Next(1, 28), r.Next(1, 13), 2021 + r.Next(5, 10));
             return dte;
         }
-        
-
-
-
-
-
-
-
-
-
-
         private static void TestInsertLicenseTypes()
         {
             InitRepository repo = new InitRepository();
-            foreach(string s in licenseTypes)
+            foreach (string s in licenseTypes)
             {
                 repo.InsertLicenseType(s);
                 Console.WriteLine(s);
@@ -276,34 +298,21 @@ namespace FleetManagement.ConsoleApp
                 FuelCardRepository repo = new FuelCardRepository();
                 Console.WriteLine(repo.GetFuelCard(1).ToString());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
 
-        private static void TestBulkInsertVehicle()
-        {
-            try
-            {
-                InitRepository repo = new InitRepository();
-                repo.BulkInsertVehicle(CreateVehicles());
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-
+        
 
 
 
 
     }
 
-
 }
+
 
 
 

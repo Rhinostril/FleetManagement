@@ -179,7 +179,7 @@ namespace FleetManagement.Data.Repositories
 
                 foreach (var vehicleFuelType in vehicleFueltypes)
                 {
-                    dt.Rows.Add();
+                    dt.Rows.Add(vehicleFuelType.Item1, vehicleFuelType.Item2);
                 }
 
                 bc.DestinationTableName = "VehicleFuelType";
