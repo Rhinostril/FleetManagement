@@ -32,7 +32,6 @@ namespace FleetManagement.UI
         {
             InitializeComponent();
             Vehicle vehicle = vehicleManager.GetVehicle(vehicleId);
-            Driver driver = vehicle.Driver;
             fuelTypes = new ObservableCollection<FuelType>(vehicle.FuelTypes);
             txtVehicleId.Text = $"{vehicle.VehicleId}";
             txtBrand.Text = vehicle.Brand;
@@ -41,7 +40,14 @@ namespace FleetManagement.UI
             txtLicensePlate.Text = vehicle.LicensePlate;
             txtColor.Text = vehicle.Color;
             txtDoors.Text = $"{vehicle.Doors}";
-            txtDriver.Text = $"{driver.FirstName} {driver.LastName}";
+            if(vehicle.Driver != null)
+            {
+                txtDriver.Text = $"{vehicle.Driver.FirstName} {vehicle.Driver.LastName}";
+            }
+            else
+            {
+                txtDriver.Text = "";
+            }
             lstFuelTypes.ItemsSource = fuelTypes;
         }
     }
