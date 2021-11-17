@@ -55,6 +55,10 @@ namespace FleetManagement.UI
             objWindow.Show();
         }
 
-
+        private void NewDriverButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewDriver addNewDriver = new AddNewDriver();
+            addNewDriver.Show();
+        }
     }
 }
