@@ -24,6 +24,13 @@ namespace FleetManagement.Business.Entities
             SetDateOfBirth(dateOfBirth);
             SetSecurityNumber(securityNumber);
         }
+
+        public Driver(string firstName, string lastName)
+        {
+            SetFirstName(firstName);
+            SetLastName(lastName);
+        }
+
         public Driver(string firstname, string lastname, DateTime dateofBirth, string securitynumber, List<string> licensetypes) : this (firstname, lastname, dateofBirth, securitynumber) {
 
             try {

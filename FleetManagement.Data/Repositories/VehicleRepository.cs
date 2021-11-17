@@ -204,6 +204,9 @@ namespace FleetManagement.Data.Repositories
                 try
                 {
                     SqlDataReader reader = command.ExecuteReader();
+                    Vehicle vehicle;
+                    Driver driver = null;
+                    List<FuelType> fuelTypes = new List<FuelType>();
                     reader.Read();
 
                     string brand = (string)reader["brand"];
@@ -214,9 +217,25 @@ namespace FleetManagement.Data.Repositories
                     string color = (string)reader["color"];
                     int doors = (int)reader["doors"];
 
+                    FuelType fuelType = new FuelType((string)reader["name"]);
+                    fuelTypes.Add(fuelType);
 
+                    vehicle = new Vehicle(brand, model, chassisNr, licensePlate, fuelTypes, vehicleType, color, doors);
 
-                    Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNr, licensePlate, new List<FuelType>(), vehicleType, color, doors);
+                    if ((int?)reader["driverId"] != null)
+                    {
+                        driver = new Driver((string)reader["firstName"], (string)reader["lastName"]);
+                    }
+
+                    vehicle.SetDriver(driver);
+
+                    while (reader.Read())
+                    {
+                        fuelType = new FuelType((string)reader["name"]);
+                        fuelTypes.Add(fuelType);
+                    }
+
+                    vehicle.SetFuelTypes(fuelTypes);
 
                     reader.Close();
                     return vehicle;
