@@ -46,21 +46,6 @@ namespace FleetManagement.UI {
             { 
                 TxtFuelCard.Text = $"{driver.FuelCard.CardNumber}, PIN:{driver.FuelCard.Pin}";
             }
-                //fuelTypes = new ObservableCollection<FuelType>(vehicle.FuelTypes);
-                //txtVehicleId.Text = $"{vehicle.VehicleId}";
-                //txtBrand.Text = vehicle.Brand;
-                //txtModel.Text = vehicle.Model;
-                //txtChassisNumber.Text = vehicle.ChassisNumber;
-                //txtLicensePlate.Text = vehicle.LicensePlate;
-                //txtColor.Text = vehicle.Color;
-                //txtDoors.Text = $"{vehicle.Doors}";
-                //if (vehicle.Driver != null) {
-                //    txtDriver.Text = $"{vehicle.Driver.FirstName} {vehicle.Driver.LastName}";
-                //} else {
-                //    txtDriver.Text = "";
-                //}
-                //lstFuelTypes.ItemsSource = fuelTypes;
-
-            }
+        }
     }
 }
