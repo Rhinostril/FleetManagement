@@ -82,6 +82,18 @@ namespace FleetManagement.Business.Managers
             }
         }
 
+        public Vehicle GetVehicle(int vehicleId)
+        {
+            try
+            {
+                return repo.GetVehicle(vehicleId);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
     }
 }

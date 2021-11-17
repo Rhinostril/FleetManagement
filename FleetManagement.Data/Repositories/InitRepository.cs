@@ -167,7 +167,35 @@ namespace FleetManagement.Data.Repositories
         }
 
     
+        // CONNECTING FUELTYPES TO VEHICLES IN TABLE VEHICLEFUELTYPES
+        public void BulkInsertVehicleFuelType(List<(int, int)> vehicleFueltypes)
+        {
+            using (SqlBulkCopy bc = new SqlBulkCopy(connectionString))
+            {
+                DataTable dt = new DataTable("VehicleFuelType");
 
+                dt.Columns.Add(new DataColumn("vehicleId", typeof(int)));
+                dt.Columns.Add(new DataColumn("fuelTypeId", typeof(int)));
+
+                foreach (var vehicleFuelType in vehicleFueltypes)
+                {
+                    dt.Rows.Add(vehicleFuelType.Item1, vehicleFuelType.Item2);
+                }
+
+                bc.DestinationTableName = "VehicleFuelType";
+
+                try
+                {
+                    bc.WriteToServer(dt);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
+            }
+
+        }
 
 
 

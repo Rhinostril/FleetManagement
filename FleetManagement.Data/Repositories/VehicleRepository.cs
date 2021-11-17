@@ -190,11 +190,7 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = GetConnection();
 
-            string query = "SELECT *" +
-                           "FROM Vehicle" +
-                           "LEFT JOIN Driver" +
-                           "ON Vehicle.driverId = Driver.driverId " +
-                           "WHERE vehicleId=@vehicleId";
+            string query = "SELECT * FROM FuelType AS t1 JOIN VehicleFuelType AS t2 ON t1.fuelTypeId=t2.fuelTypeId JOIN Vehicle AS t3 ON t2.vehicleId=t3.vehicleId LEFT JOIN Driver AS t4 ON t3.driverId=t4.driverId WHERE t2.vehicleId=@vehicleId";
 
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -208,6 +204,7 @@ namespace FleetManagement.Data.Repositories
                 try
                 {
                     SqlDataReader reader = command.ExecuteReader();
+                    
                     reader.Read();
 
                     string brand = (string)reader["brand"];
@@ -218,14 +215,38 @@ namespace FleetManagement.Data.Repositories
                     string color = (string)reader["color"];
                     int doors = (int)reader["doors"];
 
-                    Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNr, licensePlate, new List<FuelType>(), vehicleType, color, doors);
+                    List<FuelType> fuelTypes = new List<FuelType>();
+                    FuelType fuelType = new FuelType((string)reader["name"]);
+                    fuelTypes.Add(fuelType);
+
+                    Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNr, licensePlate, fuelTypes, vehicleType, color, doors); // Init Vehicle met FuelType
+                    
+                    /*
+                     
+                    Driver driver = null;
+                    if ((int?)reader["driverId"] != null) // Heeft Vehicle een driver ?
+                    {
+                        driver = new Driver((string)reader["firstName"], (string)reader["lastName"]);
+                    }
+
+                    vehicle.SetDriver(driver); // Assign Driver
+
+                    while (reader.Read())
+                    {
+                        fuelType = new FuelType((string)reader["name"]);
+                        fuelTypes.Add(fuelType);
+                    }
+
+                    vehicle.SetFuelTypes(fuelTypes); // Assign FuelTypes List
+
+                    */
 
                     reader.Close();
                     return vehicle;
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(ex.Message);
+                    throw new Exception("VehicleRepository - GetVehicle(int vehicleId)", ex);
                 }
                 finally
                 {
