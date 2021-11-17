@@ -11,7 +11,7 @@ namespace FleetManagement.Data.Repositories
     {
 
         private string connectionString = $"Data Source=tcp:fleetmanagserver.database.windows.net,1433;Initial Catalog=dboFleetmanagement;Persist Security Info=False;User ID=fleetadmin;Password=$qlpassw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-        private SqlConnection getConnection()
+        private SqlConnection GetConnection()
         {
             SqlConnection connection = new SqlConnection(connectionString);
             return connection;
@@ -19,7 +19,7 @@ namespace FleetManagement.Data.Repositories
 
         public void AddVehicle(Vehicle vehicle)
         {
-            SqlConnection cn = getConnection();
+            SqlConnection cn = GetConnection();
             string query = "INSERT INTO vehicle (brand,model,chasisNumber,licensePlate,vehicleType,color,doors)VALUES(@brand,@model,@chasisNumber,@licensePlate,@vehicleType,@color,@doors)";
             using (SqlCommand cmd = cn.CreateCommand())
             {
@@ -60,7 +60,7 @@ namespace FleetManagement.Data.Repositories
 
         public void DeleteVehicle(Vehicle vehicle)
         {
-            SqlConnection cn = getConnection();
+            SqlConnection cn = GetConnection();
             string query = "DELETE FROM vehicle WHERE vehicleId=@vehicleId";
             using (SqlCommand cmd = cn.CreateCommand())
             {
@@ -88,12 +88,45 @@ namespace FleetManagement.Data.Repositories
 
         public IReadOnlyList<Vehicle> GetAllVehicles()
         {
-            throw new NotImplementedException();
+            SqlConnection connection = GetConnection();
+            string query = "SELECT * FROM Vehicle LIMIT 50";
+            List<Vehicle> vehicles = new List<Vehicle>();
+            using(SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.CommandText = query;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int vehicleId = (int)reader["vehicleId"];
+                        string brand = (string)reader["brand"];
+                        string model = (string)reader["model"];
+                        string chassisNumber = (string)reader["chassisNumber"];
+                        string licensePlate = (string)reader["licensePlate"];
+                        string vehicleType = (string)reader["vehicleType"];
+                        string color = (string)reader["color"];
+                        int doors = (int)reader["doors"];
+                        Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNumber, licensePlate, new List<FuelType>(), vehicleType, color, doors);
+                        vehicles.Add(vehicle);
+                    }
+                    return vehicles.AsReadOnly();
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
 
         public Vehicle GetVehicle(int vehicleId)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
 
             string query = "SELECT *" +
                            "FROM Vehicle" +
@@ -146,7 +179,7 @@ namespace FleetManagement.Data.Repositories
 
         public IReadOnlyList<Vehicle> SearchVehicles(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
         {
-            SqlConnection cn = getConnection();
+            SqlConnection cn = GetConnection();
             List<Vehicle> vehicles = new List<Vehicle>();
             string query = "SELECT * FROM vehicle WHERE brand=@brand,model=@model,chasisNumber=@chasisNumber,licensePlate=@licensePlate,vehicleType=@vehicleType,color=@color,doors=@doors";
              using (SqlCommand cmd = cn.CreateCommand())
@@ -195,7 +228,7 @@ namespace FleetManagement.Data.Repositories
 
         public void UpdateVehicle(Vehicle vehicle)
         {
-            SqlConnection cn = getConnection();
+            SqlConnection cn = GetConnection();
             string query = "UPDATE vehicle" +
                 "SET brand=@brand,model=@model,chasisNumber=@chasisNumber,licensePlate=@licensePlate,vehicleType=@vehicleType,color=@color,doors=@doors"
                 + "WHERE vehicleId=@vehicleId";
@@ -239,7 +272,7 @@ namespace FleetManagement.Data.Repositories
 
         public bool VehicleExists(Vehicle vehicle)
         {
-            SqlConnection cn = getConnection();
+            SqlConnection cn = GetConnection();
             string query = "SELECT count(*) FROM vehicle WHERE vehicle=@vehicleId";
             using(SqlCommand cmd = cn.CreateCommand())
             {
