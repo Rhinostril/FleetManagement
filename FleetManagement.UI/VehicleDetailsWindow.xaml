@@ -53,6 +53,7 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <!--dit is een probeersel, dus feel free om het anders te doen-->
             
         </ListBox>
     </Grid>
