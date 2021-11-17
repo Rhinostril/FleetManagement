@@ -89,7 +89,7 @@ namespace FleetManagement.Data.Repositories
         public IReadOnlyList<Vehicle> GetAllVehicles()
         {
             SqlConnection connection = GetConnection();
-            string query = "SELECT * FROM Vehicle LIMIT 50";
+            string query = "SELECT TOP 50 * FROM Vehicle";
             List<Vehicle> vehicles = new List<Vehicle>();
             using(SqlCommand command = connection.CreateCommand())
             {
@@ -108,7 +108,7 @@ namespace FleetManagement.Data.Repositories
                         string vehicleType = (string)reader["vehicleType"];
                         string color = (string)reader["color"];
                         int doors = (int)reader["doors"];
-                        Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNumber, licensePlate, new List<FuelType>(), vehicleType, color, doors);
+                        Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNumber, licensePlate, new List<FuelType> { new FuelType("#") }, vehicleType, color, doors);
                         vehicles.Add(vehicle);
                     }
                     return vehicles.AsReadOnly();
