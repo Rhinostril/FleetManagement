@@ -43,6 +43,6 @@
         <TextBox Name="txtVehicleType" Grid.Row="6" Grid.Column="1" Text="Supercar" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <TextBox Name="txtColor" Grid.Row="7" Grid.Column="1" Text="Deep Purple" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <TextBox Name="txtDoors" Grid.Row="8" Grid.Column="1" Text="3" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <ListBox Name="lstFuelTypes" Grid.Row="1" Grid.Column="3" Grid.RowSpan="4" Margin="5" SelectionMode="Single"/>
+        <ListBox Name="lstFuelTypes" Grid.Row="12" Grid.Column="3" Grid.RowSpan="4" Margin="5" SelectionMode="Single"/>
     </Grid>
 </Window>
