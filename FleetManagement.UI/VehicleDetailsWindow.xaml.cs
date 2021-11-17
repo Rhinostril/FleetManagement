@@ -31,9 +31,18 @@ namespace FleetManagement.UI
         public VehicleDetailsWindow(int vehicleId)
         {
             InitializeComponent();
-            
-
-
+            Vehicle vehicle = vehicleManager.GetVehicle(vehicleId);
+            Driver driver = vehicle.Driver;
+            fuelTypes = new ObservableCollection<FuelType>(vehicle.FuelTypes);
+            txtVehicleId.Text = $"{vehicle.VehicleId}";
+            txtBrand.Text = vehicle.Brand;
+            txtModel.Text = vehicle.Model;
+            txtChassisNumber.Text = vehicle.ChassisNumber;
+            txtLicensePlate.Text = vehicle.LicensePlate;
+            txtColor.Text = vehicle.Color;
+            txtDoors.Text = $"{vehicle.Doors}";
+            txtDriver.Text = $"{driver.FirstName} {driver.LastName}";
+            lstFuelTypes.ItemsSource = fuelTypes;
         }
     }
 }
