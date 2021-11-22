@@ -33,6 +33,20 @@ namespace FleetManagement.Business.Entities
                 throw new Exception(ex.Message);
             }
         }
+        public FuelCard(string cardNumber, DateTime validityDate, string pin,  bool isEnabled)
+        {
+            try
+            {
+                SetCardNumber(cardNumber);
+                ValidityDate = validityDate;
+                SetPin(pin);
+                IsEnabled = isEnabled;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, List<FuelType> fuelTypes, bool isEnabled):this(cardNumber,validityDate,pin,fuelTypes,isEnabled)
         {
