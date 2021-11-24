@@ -16,4 +16,10 @@
     <Folder Include="config\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
