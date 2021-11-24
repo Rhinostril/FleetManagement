@@ -40,7 +40,7 @@ namespace FleetManagement.UI
             InitializeComponent();
             vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetLatestVehicles());
             VehiclesDataGrid.ItemsSource = vehicles;
-            drivers = new ObservableCollection<Driver>(driverManager.GetAllDrivers());
+            drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
             DriversDataGrid.ItemsSource = drivers;
             fuelCards = new ObservableCollection<FuelCard>();
             FuelCardsDataGrid.ItemsSource = fuelCards;

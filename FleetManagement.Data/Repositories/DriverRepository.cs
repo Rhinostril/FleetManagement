@@ -701,6 +701,48 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
+
+
+        public IReadOnlyList<Driver> GetDrivers(int? amount)
+        {
+            SqlConnection connection = getConnection();
+            string query = "SELECT * FROM Driver";
+            if (amount != null)
+            {
+                query = $"SELECT TOP {amount} FROM Driver";
+            }
+            using(SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.CommandText = query;
+                    SqlDataReader reader = command.ExecuteReader();
+                    List<Driver> drivers = new List<Driver>();
+                    while (reader.Read())
+                    {
+                        int driverId = (int)reader["driverId"];
+                        string firstName = (string)reader["firstName"];
+                        string lastName = (string)reader["lastName"];
+                        DateTime dateOfBirth = (DateTime)reader["dateOfBirth"];
+                        string securityNumber = (string)reader["securityNumber"];
+                        Driver driver = new Driver(firstName, lastName, dateOfBirth, securityNumber);
+                        drivers.Add(driver);
+                    }
+                    return drivers.AsReadOnly();
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+        }
+
        
     }
 }
