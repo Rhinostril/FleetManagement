@@ -96,12 +96,11 @@ namespace FleetManagement.Data.Repositories
             {
                 DataTable dt = new DataTable("LicenseType");
 
-                dt.Columns.Add(new DataColumn("licenseTypeId", typeof(int)));
                 dt.Columns.Add(new DataColumn("name", typeof(string)));
 
                 foreach (string s in licenseTypes)
                 {
-                    dt.Rows.Add(null, s);
+                    dt.Rows.Add(s);
                 }
 
                 bc.DestinationTableName = "LicenseType";
@@ -156,10 +155,36 @@ namespace FleetManagement.Data.Repositories
 
         public void BulkInsertFuelCard(List<FuelCard> fuelCards)
         {
+            using (SqlBulkCopy bc = new SqlBulkCopy(connectionString))
+            {
+                DataTable dt = new DataTable("FuelCard");
 
-            // TODO
+                dt.Columns.Add(new DataColumn("fuelCardId", typeof(int)));
+                dt.Columns.Add(new DataColumn("cardNumber", typeof(string)));
+                dt.Columns.Add(new DataColumn("validityDate", typeof(DateTime)));
+                dt.Columns.Add(new DataColumn("pin", typeof(string)));
+                dt.Columns.Add(new DataColumn("isEnabled", typeof(bool)));
+                dt.Columns.Add(new DataColumn("driverId", typeof(int)));
 
-        }
+                foreach (FuelCard card in fuelCards)
+                {
+                    dt.Rows.Add(null, card.CardNumber, card.ValidityDate, card.Pin, true, null);
+                }
+
+                bc.DestinationTableName = "FuelCard";
+
+                try
+                {
+                    bc.WriteToServer(dt);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
+            }
+
+        } // DONE
 
         public void BulkInsertVehicle(List<Vehicle> vehicles)
         {
@@ -193,7 +218,7 @@ namespace FleetManagement.Data.Repositories
                 }
 
             }
-        }
+        } // DONE
 
     
         // CONNECTING FUELTYPES TO VEHICLES IN TABLE VEHICLEFUELTYPES
@@ -224,9 +249,36 @@ namespace FleetManagement.Data.Repositories
 
             }
 
+        } // DONE
+
+        public void BulkInsertFuelCardFuelType(List<(int, int)> fuelCardFueltypes)
+        {
+            using (SqlBulkCopy bc = new SqlBulkCopy(connectionString))
+            {
+                DataTable dt = new DataTable("FuelCardFuelType");
+
+                dt.Columns.Add(new DataColumn("fuelCardId", typeof(int)));
+                dt.Columns.Add(new DataColumn("fuelTypeId", typeof(int)));
+
+                foreach (var fuelCardFuelType in fuelCardFueltypes)
+                {
+                    dt.Rows.Add(fuelCardFuelType.Item1, fuelCardFuelType.Item2);
+                }
+
+                bc.DestinationTableName = "FuelCardFuelType";
+
+                try
+                {
+                    bc.WriteToServer(dt);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
+            }
+
         }
-
-
 
 
     }

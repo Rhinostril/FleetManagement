@@ -15,7 +15,22 @@ namespace FleetManagement.ConsoleApp
 
             Console.WriteLine("Working...");
 
-            repo.BulkInsertLicenseTypes(licenseTypes);
+            List<FuelCard> fuelCards = new List<FuelCard>();
+
+            for(int i = 0; i < 1000; i++)
+            {
+                FuelCard fuelCard = RandomFuelCard();
+                fuelCards.Add(RandomFuelCard());
+            }
+
+            fuelCards.GroupBy(x => x.CardNumber).Select(y => y.First()).ToList();
+
+            foreach(FuelCard c in fuelCards)
+            {
+                Console.WriteLine(c.ToString());
+            }
+
+            repo.BulkInsertFuelCard(fuelCards);
 
             Console.WriteLine("Done!");
 
@@ -24,6 +39,7 @@ namespace FleetManagement.ConsoleApp
 
 
         }
+
 
         // CREATION OF DRIVERS
         private static List<string> firstNames = new List<string>
@@ -112,13 +128,55 @@ namespace FleetManagement.ConsoleApp
             Random r = new Random();
             string c = "abcdefghijklmnopqrstuvwxyz";
             string v = "aeiouy";
-            List<string> cities = new List<string> { "London", ""};
+            List<string> cities = new List<string> {
+                "Aberdeen",
+                "Armagh",
+                "Bangor",
+                "Bath",
+                "Belfast",
+                "Birmingham",
+                "Bradfort",
+                "Cambridge",
+                "Cardiff",
+                "Carlisle",
+                "Chelmsford",
+                "Chester",
+                "Derby",
+                "Dundee",
+                "Durham",
+                "Edinburgh",
+                "Ely",
+                "Glasgow",
+                "Hereford",
+                "Leeds",
+                "Lancaster",
+                "Leicester",
+                "Lichfield",
+                "Lincoln",
+                "Liverpool",
+                "London",
+                "Manchester",
+                "Newcastle",
+                "Newport",
+                "Norwich",
+                "Nottingham",
+                "Oxford",
+                "Petersborough"
+            };
+
             List<string> countries = new List<string> { "Wales", "Scotland", "England", "North-America", "Ireland" };
 
             string street = c[r.Next(1, 27)].ToString().ToUpper() + v[r.Next(1, 7)].ToString() + c[r.Next(1, 27)].ToString() + " Road";
             string houseNr = r.Next(1, 300).ToString();
             string postalCode = r.Next(1, 10).ToString() + r.Next(1, 10).ToString() + r.Next(1, 10).ToString() + r.Next(1, 10).ToString();
 
+            Address address = new Address(street, houseNr, postalCode, cities[r.Next(1, cities.Count())], countries[r.Next(1, countries.Count())]);
+
+            return address;
+        }
+        private static string randomSecurityNumber()
+        {
+            return "";
         }
 
 
@@ -367,9 +425,21 @@ namespace FleetManagement.ConsoleApp
         private static DateTime RandomValidityDate()
         {
             Random r = new Random();
-            DateTime dte = new DateTime(r.Next(1, 28), r.Next(1, 13), 2021 + r.Next(5, 10));
+            DateTime dte = new DateTime(2021 + r.Next(5, 11), r.Next(1, 13), r.Next(1, 28));
             return dte;
         }
+        private static FuelCard RandomFuelCard()
+        {
+            FuelCard fuelCard = new FuelCard(RandomCardNumber(), RandomValidityDate(), RandomPin(), true);
+            return fuelCard;
+        }
+
+
+
+
+
+
+
         private static void TestInsertLicenseTypes()
         {
             InitRepository repo = new InitRepository();
