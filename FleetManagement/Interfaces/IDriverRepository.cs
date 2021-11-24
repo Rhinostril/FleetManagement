@@ -8,6 +8,7 @@ namespace FleetManagement.Business.Interfaces
 
         IReadOnlyList<Driver> GetAllDrivers();
         IReadOnlyList<Driver> GetTop50Drivers();
+        IReadOnlyList<Driver> GetDrivers(int? amount);
         IReadOnlyList<Driver> GetDriversByAmount(int amount);
         IReadOnlyList<Driver> SearchDrivers(int? id, string firstName, string lastName, DateTime dateOfBirth, Address address);
         Driver GetDriverById(int id);
@@ -17,6 +18,8 @@ namespace FleetManagement.Business.Interfaces
         void UpdateDriver(Driver driver);
         void DeleteDriver(Driver driver);
         bool DoesSecurityNumberExist(string securityNumber);
+
+
 
     }
 }
