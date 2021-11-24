@@ -310,17 +310,27 @@ namespace FleetManagement.Data.Repositories
                 try {
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read()) {
-                        int driverid = (int)reader.GetValue("Driver.driverId");
+                        int driverid = (int)reader.GetValue("driverId");
                         string firstname = reader.GetString("firstName");
                         string lastname = reader.GetString("lastName");
                         DateTime dateofbirth = (DateTime)reader.GetValue("dateOfBirth");
-                        int? addressId = (int?)reader.GetValue("Driver.addressId"); //nullable int
+                        int? addressId = null;
+                        if (!reader.IsDBNull("addressId")) {
+                            addressId = (int?)reader.GetValue("addressId");
+                        }
                         string securityNumber = reader.GetString("securityNumber");
-                        int? vehicleid = (int?)reader.GetValue("Driver.vehicleId");
-                        int? fuelcardid = (int?)reader.GetValue("Driver.fuelcardId");
+                        int? vehicleid = null;
+                        if (!reader.IsDBNull("vehicleId")) {
+                            vehicleid = (int?)reader.GetValue("vehicleId");
+                        }
+                        int? fuelcardid = null;
+                        if (!reader.IsDBNull("fuelcardId")) {
+                            fuelcardid = (int?)reader.GetValue("fuelcardId");
+                        }
                         List<string> LicenseTypes = GetLicensesByDriverID(driverid);
 
                         Driver D = new Driver(firstname, lastname, dateofbirth, securityNumber);
+                        D.SetDriverID(driverid);
                         if (addressId != null) {
                             string street = (string)reader.GetValue("street");
                             string houseNr = (string)reader.GetValue("houseNr");
@@ -359,7 +369,6 @@ namespace FleetManagement.Data.Repositories
                     }
                     reader.Close();
                 } catch (Exception e) {
-
                 } finally {
                     connection.Close();
                 }
@@ -375,17 +384,27 @@ namespace FleetManagement.Data.Repositories
                 try {
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read()) {
-                        int driverid = (int)reader.GetValue("Driver.driverId");
+                        int driverid = (int)reader.GetValue("driverId");
                         string firstname = reader.GetString("firstName");
                         string lastname = reader.GetString("lastName");
                         DateTime dateofbirth = (DateTime)reader.GetValue("dateOfBirth");
-                        int? addressId = (int?)reader.GetValue("Driver.addressId"); //nullable int
+                        int? addressId = null;
+                        if (!reader.IsDBNull("addressId")) {
+                            addressId = (int?)reader.GetValue("addressId");
+                        }
                         string securityNumber = reader.GetString("securityNumber");
-                        int? vehicleid = (int?)reader.GetValue("Driver.vehicleId");
-                        int? fuelcardid = (int?)reader.GetValue("Driver.fuelcardId");
+                        int? vehicleid = null;
+                        if (!reader.IsDBNull("vehicleId")) {
+                            vehicleid = (int?)reader.GetValue("vehicleId");
+                        }
+                        int? fuelcardid = null;
+                        if (!reader.IsDBNull("fuelcardId")) {
+                            fuelcardid = (int?)reader.GetValue("fuelcardId");
+                        }
                         List<string> LicenseTypes = GetLicensesByDriverID(driverid);
 
                         Driver D = new Driver(firstname, lastname, dateofbirth, securityNumber);
+                        D.SetDriverID(driverid);
                         if (addressId != null) {
                             string street = (string)reader.GetValue("street");
                             string houseNr = (string)reader.GetValue("houseNr");
@@ -429,6 +448,7 @@ namespace FleetManagement.Data.Repositories
                     connection.Close();
                 }
             }
+            
             return driverlist.AsReadOnly();
         }
 
