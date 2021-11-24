@@ -168,7 +168,7 @@ namespace FleetManagement.Data.Repositories
 
                 foreach (FuelCard card in fuelCards)
                 {
-                    dt.Rows.Add(null, card.CardNumber, card.ValidityDate, card.Pin, true, null);
+                    dt.Rows.Add(null, card.CardNumber, card.ValidityDate, card.Pin, card.IsEnabled, null);
                 }
 
                 bc.DestinationTableName = "FuelCard";
