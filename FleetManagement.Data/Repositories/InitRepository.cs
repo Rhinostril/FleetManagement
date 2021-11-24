@@ -157,13 +157,13 @@ namespace FleetManagement.Data.Repositories
                 dt.Columns.Add(new DataColumn("lastname", typeof(string)));
                 dt.Columns.Add(new DataColumn("dateOfBirth", typeof(DateTime)));
                 dt.Columns.Add(new DataColumn("addressId", typeof(int)));
-                dt.Columns.Add(new DataColumn("securityNumber", typeof(int)));
+                dt.Columns.Add(new DataColumn("securityNumber", typeof(string)));
                 dt.Columns.Add(new DataColumn("vehicleId", typeof(int)));
                 dt.Columns.Add(new DataColumn("fuelcardId", typeof(int)));
 
-                foreach (var driver in drivers)
+                for(int i = 0; i < 1000; i++)
                 {
-                    dt.Rows.Add(null, driver.DriverID, driver.FirstName, driver.LastName, driver.DateOfBirth, driver.Address, driver.SecurityNumber, driver.Vehicle, driver.FuelCard);
+                    dt.Rows.Add(null, drivers[i].FirstName, drivers[i].LastName, drivers[i].DateOfBirth, i+1, drivers[i].SecurityNumber, null, null);
                 }
 
                 bc.DestinationTableName = "driver";
@@ -179,7 +179,7 @@ namespace FleetManagement.Data.Repositories
 
             }
 
-        }
+        } // DONE
 
         public void BulkInsertFuelCard(List<FuelCard> fuelCards)
         {
@@ -196,7 +196,7 @@ namespace FleetManagement.Data.Repositories
 
                 foreach (FuelCard card in fuelCards)
                 {
-                    dt.Rows.Add(null, card.CardNumber, card.ValidityDate, card.Pin, true, null);
+                    dt.Rows.Add(null, card.CardNumber, card.ValidityDate, card.Pin, 1, null);
                 }
 
                 bc.DestinationTableName = "FuelCard";
@@ -212,7 +212,7 @@ namespace FleetManagement.Data.Repositories
 
             }
 
-        } // DONE
+        }
 
         public void BulkInsertVehicle(List<Vehicle> vehicles)
         {
