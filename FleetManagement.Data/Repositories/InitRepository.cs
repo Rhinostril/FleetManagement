@@ -85,10 +85,37 @@ namespace FleetManagement.Data.Repositories
 
         public void BulkInsertAddress(List<Address> addresses)
         {
+            using (SqlBulkCopy bc = new SqlBulkCopy(connectionString))
+            {
+                DataTable dt = new DataTable("Address");
 
-            // TODO
+                dt.Columns.Add(new DataColumn("addressId", typeof(int)));
+                dt.Columns.Add(new DataColumn("street", typeof(string)));
+                dt.Columns.Add(new DataColumn("houseNr", typeof(string)));
+                dt.Columns.Add(new DataColumn("postalCode", typeof(string)));
+                dt.Columns.Add(new DataColumn("city", typeof(string)));
+                dt.Columns.Add(new DataColumn("country", typeof(string)));
 
-        }
+                foreach (Address a in addresses)
+                {
+                    dt.Rows.Add(null, a.Street, a.HouseNr, a.PostalCode, a.City, a.Country);
+                }
+
+                bc.DestinationTableName = "Address";
+
+                try
+                {
+                    bc.WriteToServer(dt);
+                    
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
+            }
+
+        } // DONE
 
         public void BulkInsertLicenseTypes(List<string> licenseTypes)
         {
@@ -96,11 +123,12 @@ namespace FleetManagement.Data.Repositories
             {
                 DataTable dt = new DataTable("LicenseType");
 
+                dt.Columns.Add(new DataColumn("licenseTypeId", typeof(int)));
                 dt.Columns.Add(new DataColumn("name", typeof(string)));
 
                 foreach (string s in licenseTypes)
                 {
-                    dt.Rows.Add(s);
+                    dt.Rows.Add(null, s);
                 }
 
                 bc.DestinationTableName = "LicenseType";
@@ -168,7 +196,7 @@ namespace FleetManagement.Data.Repositories
 
                 foreach (FuelCard card in fuelCards)
                 {
-                    dt.Rows.Add(null, card.CardNumber, card.ValidityDate, card.Pin, card.IsEnabled, null);
+                    dt.Rows.Add(null, card.CardNumber, card.ValidityDate, card.Pin, true, null);
                 }
 
                 bc.DestinationTableName = "FuelCard";
@@ -179,7 +207,7 @@ namespace FleetManagement.Data.Repositories
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(ex.Message);
+                    throw new Exception($"{ex.Message}", ex.InnerException);
                 }
 
             }
@@ -203,7 +231,7 @@ namespace FleetManagement.Data.Repositories
 
                 foreach(var vehicle in vehicles)
                 {
-                    dt.Rows.Add(null,vehicle.Brand, vehicle.Model, vehicle.ChassisNumber, vehicle.LicensePlate, vehicle.VehicleType, vehicle.Color, vehicle.Doors);
+                    dt.Rows.Add(null, vehicle.Brand, vehicle.Model, vehicle.ChassisNumber, vehicle.LicensePlate, vehicle.VehicleType, vehicle.Color, vehicle.Doors);
                 }
 
                 bc.DestinationTableName = "Vehicle";
