@@ -25,7 +25,7 @@ namespace FleetManagement.UI
     {
 
 
-        private VehicleManager vehicleManager;
+        private VehicleManager vehicleManager = new VehicleManager(new VehicleRepository());
         private ObservableCollection<FuelType> fuelTypes = new ObservableCollection<FuelType>();
 
         //public VehicleDetailsWindow(int vehicleId)

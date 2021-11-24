@@ -18,6 +18,15 @@ namespace FleetManagement.Business.Managers
             this.repo = repo;
         }
 
+        public FuelCard getFuelCardByID(int fuelcardId) {
+            try {
+                FuelCard fuelcard = repo.GetFuelCard(fuelcardId);
+                return fuelcard;
+                
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
         public void AddFuelCard(FuelCard fuelCard)
         {
             try
