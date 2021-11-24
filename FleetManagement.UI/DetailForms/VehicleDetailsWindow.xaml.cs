@@ -28,28 +28,27 @@ namespace FleetManagement.UI
         private VehicleManager vehicleManager;
         private ObservableCollection<FuelType> fuelTypes = new ObservableCollection<FuelType>();
 
-        public VehicleDetailsWindow(int vehicleId)
-        {
-            vehicleManager = new VehicleManager(new VehicleRepository());
-            InitializeComponent();
-            Vehicle vehicle = vehicleManager.GetVehicle(vehicleId);
-            fuelTypes = new ObservableCollection<FuelType>(vehicle.FuelTypes);
-            txtVehicleId.Text = $"{vehicle.VehicleId}";
-            txtBrand.Text = vehicle.Brand;
-            txtModel.Text = vehicle.Model;
-            txtChassisNumber.Text = vehicle.ChassisNumber;
-            txtLicensePlate.Text = vehicle.LicensePlate;
-            txtColor.Text = vehicle.Color;
-            txtDoors.Text = $"{vehicle.Doors}";
-            if(vehicle.Driver != null)
-            {
-                txtDriver.Text = $"{vehicle.Driver.FirstName} {vehicle.Driver.LastName}";
-            }
-            else
-            {
-                txtDriver.Text = "";
-            }
-            lstFuelTypes.ItemsSource = fuelTypes;
-        }
+        //public VehicleDetailsWindow(int vehicleId)
+        //{
+        //    InitializeComponent();
+        //    Vehicle vehicle = vehicleManager.GetVehicle(vehicleId);
+        //    fuelTypes = new ObservableCollection<FuelType>(vehicle.FuelTypes);
+        //    txtVehicleId.Text = $"{vehicle.VehicleId}";
+        //    txtBrand.Text = vehicle.Brand;
+        //    txtModel.Text = vehicle.Model;
+        //    txtChassisNumber.Text = vehicle.ChassisNumber;
+        //    txtLicensePlate.Text = vehicle.LicensePlate;
+        //    txtColor.Text = vehicle.Color;
+        //    txtDoors.Text = $"{vehicle.Doors}";
+        //    if(vehicle.Driver != null)
+        //    {
+        //        txtDriver.Text = $"{vehicle.Driver.FirstName} {vehicle.Driver.LastName}";
+        //    }
+        //    else
+        //    {
+        //        txtDriver.Text = "";
+        //    }
+        //    lstFuelTypes.ItemsSource = fuelTypes;
+        //}
     }
 }

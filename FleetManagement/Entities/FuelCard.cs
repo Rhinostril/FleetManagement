@@ -33,6 +33,20 @@ namespace FleetManagement.Business.Entities
                 throw new Exception(ex.Message);
             }
         }
+        public FuelCard(string cardNumber, DateTime validityDate, string pin,  bool isEnabled)
+        {
+            try
+            {
+                SetCardNumber(cardNumber);
+                ValidityDate = validityDate;
+                SetPin(pin);
+                IsEnabled = isEnabled;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, List<FuelType> fuelTypes, bool isEnabled):this(cardNumber,validityDate,pin,fuelTypes,isEnabled)
         {
@@ -158,7 +172,7 @@ namespace FleetManagement.Business.Entities
 
         public override string ToString()
         {
-            return $"ID:{FuelCardId}, #{CardNumber}, {ValidityDate}, [{Pin}], {Driver}, {IsEnabled}";
+            return $"ID:{FuelCardId}, #{CardNumber}, {ValidityDate}, [{Pin}], {IsEnabled}, {Driver}";
         }
 
     }

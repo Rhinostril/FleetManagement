@@ -102,5 +102,10 @@ namespace FleetManagement.Business.Entities {
             }
         }
 
+        public override string ToString()
+        {
+            return $"{AddressID}, {Street}, {HouseNr}, {PostalCode}, {City}, {Country}";
+        }
+
     }
 }
