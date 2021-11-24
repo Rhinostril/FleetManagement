@@ -57,7 +57,11 @@ namespace FleetManagement.UI
             try
             {
                 string cardNr = txtFuelCardNumber.Text;
-                DateTime valDate = (DateTime)FuelCardValidityDatePicker.SelectedDate;
+                DateTime? valDate = null;
+                if(FuelCardValidityDatePicker.SelectedDate != null)
+                {
+                    valDate = FuelCardValidityDatePicker.SelectedDate;
+                }
                 fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.SearchFuelCards(cardNr, valDate));
                 FuelCardsDataGrid.ItemsSource = fuelCards;
             }

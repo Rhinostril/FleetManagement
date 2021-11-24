@@ -18,7 +18,7 @@ namespace FleetManagement.Business.Managers
             this.repo = repo;
         }
 
-        public IReadOnlyList<FuelCard> SearchFuelCards(string cardNr, DateTime valDate)
+        public IReadOnlyList<FuelCard> SearchFuelCards(string cardNr, DateTime? valDate)
         {
             try
             {
