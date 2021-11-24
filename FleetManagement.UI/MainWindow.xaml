@@ -56,13 +56,7 @@
                     <TextBox Grid.Row="2" Grid.Column="1" Margin="5"/>
                     <Button x:Name="SearchDriversButton" Content="  Search Drivers  " Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="5"/>
                     <Button x:Name="NewDriverButton" Content="  New Driver  " Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Margin="5" Click="NewDriverButton_Click" MinHeight="28"/>
-                    <DataGrid x:Name="DriversDataGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="1.5*" Header="Last Name"/>
-                            <DataGridTextColumn Width="1*" Header="First Name"/>
-                            <DataGridTextColumn Width="2*" Header="Date Of Birth"/>
-                            <DataGridTextColumn Width="2*" Header="Social Security Number"/>
-                        </DataGrid.Columns>
+                    <DataGrid x:Name="DriversDataGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single" ColumnWidth="*">
                         <DataGrid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Details"/>
