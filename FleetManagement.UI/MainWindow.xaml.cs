@@ -32,13 +32,18 @@ namespace FleetManagement.UI
         private AddressManager addressManager = new AddressManager(new AddressRepository());
 
         private ObservableCollection<Vehicle> vehicles = new ObservableCollection<Vehicle>();
+        private ObservableCollection<Driver> drivers = new ObservableCollection<Driver>();
+        private ObservableCollection<FuelCard> fuelCards = new ObservableCollection<FuelCard>();
 
         public MainWindow()
         {
             InitializeComponent();
             vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetAllVehicles());
             VehiclesDataGrid.ItemsSource = vehicles;
-
+            drivers = new ObservableCollection<Driver>();
+            DriversDataGrid.ItemsSource = drivers;
+            fuelCards = new ObservableCollection<FuelCard>();
+            FuelCardsDataGrid.ItemsSource = fuelCards;
         }
 
         private void SearchVehiclesButton_Click(object sender, RoutedEventArgs e)
