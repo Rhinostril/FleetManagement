@@ -40,7 +40,10 @@ namespace FleetManagement.UI
             InitializeComponent();
             vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetAllVehicles());
             VehiclesDataGrid.ItemsSource = vehicles;
-
+            drivers = new ObservableCollection<Driver>();
+            DriversDataGrid.ItemsSource = drivers;
+            fuelCards = new ObservableCollection<FuelCard>();
+            FuelCardsDataGrid.ItemsSource = fuelCards;
         }
 
         private void SearchVehiclesButton_Click(object sender, RoutedEventArgs e)
