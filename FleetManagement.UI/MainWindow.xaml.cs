@@ -60,6 +60,13 @@ namespace FleetManagement.UI
             objWindow.Show();
         }
 
+        private void DriverDetails_Click(object sender, RoutedEventArgs e)
+        {
+            Driver driver = (Driver)DriversDataGrid.SelectedItem;
+            DriverDetailWindow objWindow = new DriverDetailWindow(driver.DriverID);
+            objWindow.Show();
+        }
+
         private void NewDriverButton_Click(object sender, RoutedEventArgs e)
         {
             AddNewDriver addNewDriver = new AddNewDriver();
@@ -77,5 +84,8 @@ namespace FleetManagement.UI
             AddNewFuelCard addNewFuelCard = new AddNewFuelCard();
             addNewFuelCard.Show();
         }
+
+
+
     }
 }

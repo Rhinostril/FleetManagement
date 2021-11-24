@@ -60,7 +60,7 @@
                     <DataGrid x:Name="DriversDataGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single" ColumnWidth="*">
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Details"/>
+                                <MenuItem Header="Details" Click="DriverDetails_Click"/>
                                 <MenuItem Header="Update"/>
                                 <MenuItem Header="Delete"/>
                             </ContextMenu>
