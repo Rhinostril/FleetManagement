@@ -44,9 +44,9 @@ namespace FleetManagement.Business.Tools {
                                     if(yearIsAfter2000) {
                                         combinednumberstring = "2" + DateSplitInto3[0] + DateSplitInto3[1] + DateSplitInto3[2] + amountOfBirths; //extra validation needed for people born after 2000
                                     }
-                                    int numberToDivide = int.Parse(combinednumberstring); //Example  900201999
-                                    int computedmodulo = numberToDivide % 97;
-                                    int computedControlNumber = 97 - computedmodulo;
+                                    long numberToDivide = long.Parse(combinednumberstring); //Example  900201999
+                                    long computedmodulo = numberToDivide % 97;
+                                    long computedControlNumber = 97 - computedmodulo;
                                     string computedcontrolnumberAstext = computedControlNumber.ToString("00"); // should make numbers less than 10 into "02"
                                     if(computedcontrolnumberAstext == securitynumber.Substring(13, 2)) {
                                         validationsucceeded = true;
