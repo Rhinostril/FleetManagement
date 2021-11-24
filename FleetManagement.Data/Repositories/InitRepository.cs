@@ -90,6 +90,35 @@ namespace FleetManagement.Data.Repositories
 
         }
 
+        public void BulkInsertLicenseTypes(List<string> licenseTypes)
+        {
+            using (SqlBulkCopy bc = new SqlBulkCopy(connectionString))
+            {
+                DataTable dt = new DataTable("LicenseType");
+
+                dt.Columns.Add(new DataColumn("licenseTypeId", typeof(int)));
+                dt.Columns.Add(new DataColumn("name", typeof(string)));
+
+                foreach (string s in licenseTypes)
+                {
+                    dt.Rows.Add(null, s);
+                }
+
+                bc.DestinationTableName = "LicenseType";
+
+                try
+                {
+                    bc.WriteToServer(dt);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
+            }
+        }
+
+
         public void BulkInsertDriver(List<Driver> drivers)
         {
             using (SqlBulkCopy bc = new SqlBulkCopy(connectionString))

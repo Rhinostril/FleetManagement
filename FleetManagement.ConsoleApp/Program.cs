@@ -11,15 +11,120 @@ namespace FleetManagement.ConsoleApp
     {
         static void Main(string[] args)
         {
-            // InitRepository repo = new InitRepository();
+            InitRepository repo = new InitRepository();
 
-            
+            Console.WriteLine("Working...");
+
+            repo.BulkInsertLicenseTypes(licenseTypes);
+
+            Console.WriteLine("Done!");
 
 
 
 
 
         }
+
+        // CREATION OF DRIVERS
+        private static List<string> firstNames = new List<string>
+        {
+            "Liam",
+            "Noah",
+            "Oliver",
+            "Elijah",
+            "William",
+            "James",
+            "Benjamin",
+            "Lucas",
+            "Henry",
+            "Alexander",
+            "Olivia",
+            "Emma",
+            "Ava",
+            "Charlotte",
+            "Sophia",
+            "Amelia",
+            "Isabella",
+            "Mia",
+            "Evelyn",
+            "Harper"
+        };
+        private static List<string> lastNames = new List<string>
+        {
+            "Smith",
+            "Johnson",
+            "Williams",
+            "Brown",
+            "Jones",
+            "Garcia",
+            "Miller",
+            "Davis",
+            "Rodriguez",
+            "Martinez",
+            "Hernandez",
+            "Lopez",
+            "Gonzalez",
+            "Wilson",
+            "Anderson",
+            "Thomas",
+            "Taylor",
+            "Moore",
+            "Jackson",
+            "Martin",
+            "Lee",
+            "Perez",
+            "Thompson",
+            "White",
+            "Harris",
+            "Sanchez",
+            "Clark",
+            "Ramirez",
+            "Lewis",
+            "Robinson",
+            "Walker",
+            "Young",
+            "Allen",
+            "King",
+            "Wright",
+            "Scott",
+            "Torres",
+            "Nguyen",
+            "Hill",
+            "Flores",
+            "Green",
+            "Adams",
+            "Nelson",
+            "Baker",
+            "Hall",
+            "Rivera",
+            "Campbell",
+            "Mitchell",
+            "Carter",
+            "Roberts"
+        };
+        private static DateTime randomDateOfBirth()
+        {
+            Random r = new Random();
+            return new DateTime(r.Next(1965, 2000), r.Next(1, 13), r.Next(1, 28));
+        }
+        private static Address randomAddress()
+        {
+            Random r = new Random();
+            string c = "abcdefghijklmnopqrstuvwxyz";
+            string v = "aeiouy";
+            List<string> cities = new List<string> { "London", ""};
+            List<string> countries = new List<string> { "Wales", "Scotland", "England", "North-America", "Ireland" };
+
+            string street = c[r.Next(1, 27)].ToString().ToUpper() + v[r.Next(1, 7)].ToString() + c[r.Next(1, 27)].ToString() + " Road";
+            string houseNr = r.Next(1, 300).ToString();
+            string postalCode = r.Next(1, 10).ToString() + r.Next(1, 10).ToString() + r.Next(1, 10).ToString() + r.Next(1, 10).ToString();
+
+        }
+
+
+        // LICENSE TYPES
+
+
 
         // CREATION OF VEHICLE FUELTYPES LIST
         private static List<(int, int)> VehicleFuelTypes()
