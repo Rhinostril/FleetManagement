@@ -38,9 +38,9 @@
         <TextBox x:Name="TxtFuelCardID" Grid.Row="1" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <TextBox x:Name="TxtCardNr" Grid.Row="2" Grid.Column="1" Text="Aston Martin" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <DatePicker x:Name="Validityate"  Grid.Row="3" Grid.Column="1" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox x:Name="TwtPin" Grid.Row="4" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox x:Name="TxtPin" Grid.Row="4" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <TextBox x:Name="TxtDriverId" Grid.Row="5" Grid.Column="1" Text="null" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <CheckBox x:Name="TxtAdres"  Grid.Row="6" Grid.Column="1"  Margin="-6,5,5,5" VerticalAlignment="Center" FontSize="16" IsEnabled="False" RenderTransformOrigin="0.5,0.5" Width="246" Padding="0,0,0,0">
+        <CheckBox x:Name="CheckBoxIsEnabled"  Grid.Row="6" Grid.Column="1"  Margin="-6,5,5,5" VerticalAlignment="Center" FontSize="16" IsEnabled="False" RenderTransformOrigin="0.5,0.5" Width="246" Padding="0,0,0,0">
             <CheckBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
@@ -50,7 +50,17 @@
                 </TransformGroup>
             </CheckBox.RenderTransform>
         </CheckBox>
-        <TextBox x:Name="TxtFuelTypes" Grid.Row="7" Grid.Column="1" Text="1001" Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="False" Height="107" TextWrapping="Wrap"/>
+        <ListBox Name="lstFuelTypes" Grid.Row="7" Grid.Column="1"  Grid.RowSpan="4" Margin="5" SelectionMode="Single" Height="115">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Path=FuelName}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+
+        </ListBox>
 
 
     </Grid>
