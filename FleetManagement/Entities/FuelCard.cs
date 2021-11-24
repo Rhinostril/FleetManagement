@@ -79,6 +79,15 @@ namespace FleetManagement.Business.Entities
             }
         }
 
+        public FuelCard(int fuelCardId, string cardNumber, DateTime validityDate, string pin, bool isEnabled)
+        {
+            SetFuelCardId(fuelCardId);
+            SetCardNumber(cardNumber);
+            ValidityDate = validityDate;
+            SetPin(pin);
+            IsEnabled = isEnabled;
+        }
+
         public void SetFuelCardId(int id)
         {
             if(id > 0)
