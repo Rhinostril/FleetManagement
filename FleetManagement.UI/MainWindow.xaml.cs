@@ -32,6 +32,8 @@ namespace FleetManagement.UI
         private AddressManager addressManager = new AddressManager(new AddressRepository());
 
         private ObservableCollection<Vehicle> vehicles = new ObservableCollection<Vehicle>();
+        private ObservableCollection<Driver> drivers = new ObservableCollection<Driver>();
+        private ObservableCollection<FuelCard> fuelCards = new ObservableCollection<FuelCard>();
 
         public MainWindow()
         {
