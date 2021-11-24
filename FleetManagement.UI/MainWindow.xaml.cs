@@ -38,9 +38,9 @@ namespace FleetManagement.UI
         public MainWindow()
         {
             InitializeComponent();
-            vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetAllVehicles());
+            vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetLatestVehicles());
             VehiclesDataGrid.ItemsSource = vehicles;
-            drivers = new ObservableCollection<Driver>();
+            drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
             DriversDataGrid.ItemsSource = drivers;
             fuelCards = new ObservableCollection<FuelCard>();
             FuelCardsDataGrid.ItemsSource = fuelCards;

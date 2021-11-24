@@ -22,7 +22,16 @@ namespace FleetManagement.Business.Managers
             try {
                 FuelCard fuelcard = repo.GetFuelCard(fuelcardId);
                 return fuelcard;
+
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+        public IReadOnlyList<FuelCard> GetLatestFuelcards() {
+            try {
+                return repo.GetTop50FuelCards();
                 
+
             } catch (Exception ex) {
                 throw new Exception(ex.Message);
             }
