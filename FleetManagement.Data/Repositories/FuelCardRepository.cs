@@ -210,7 +210,7 @@ namespace FleetManagement.Data.Repositories
                         DateTime valDate = (DateTime)reader["validityDate"];
                         string pin = (string)reader["pin"];
                         bool isEnabled = (bool)reader["isEnabled"];
-                        fuelCards.Add(new FuelCard(cardNr, valDate, pin, isEnabled));
+                        fuelCards.Add(new FuelCard(cardNumber, valDate, pin, isEnabled));
                     }
                 }
                 catch (Exception ex)
