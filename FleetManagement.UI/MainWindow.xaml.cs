@@ -51,6 +51,21 @@ namespace FleetManagement.UI
             
 
         }
+        
+        private void SearchFuelCardsButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string cardNr = txtFuelCardNumber.Text;
+                DateTime valDate = (DateTime)FuelCardValidityDatePicker.SelectedDate;
+                fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.SearchFuelCards(cardNr, valDate));
+                FuelCardsDataGrid.ItemsSource = fuelCards;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
+        }
 
 
         private void Details_Click(object sender, RoutedEventArgs e)

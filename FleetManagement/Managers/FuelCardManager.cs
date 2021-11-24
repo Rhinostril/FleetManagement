@@ -18,6 +18,19 @@ namespace FleetManagement.Business.Managers
             this.repo = repo;
         }
 
+        public IReadOnlyList<FuelCard> SearchFuelCards(string cardNr, DateTime valDate)
+        {
+            try
+            {
+                return repo.SearchFuelCards(cardNr, valDate);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
         public FuelCard getFuelCardByID(int fuelcardId) {
             try {
                 FuelCard fuelcard = repo.GetFuelCard(fuelcardId);
