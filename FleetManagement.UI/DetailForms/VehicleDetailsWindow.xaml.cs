@@ -24,12 +24,13 @@ namespace FleetManagement.UI
     public partial class VehicleDetailsWindow : Window
     {
 
-       
 
+        private VehicleManager vehicleManager;
         private ObservableCollection<FuelType> fuelTypes = new ObservableCollection<FuelType>();
 
         public VehicleDetailsWindow(int vehicleId)
         {
+            vehicleManager = new VehicleManager(new VehicleRepository());
             InitializeComponent();
             Vehicle vehicle = vehicleManager.GetVehicle(vehicleId);
             fuelTypes = new ObservableCollection<FuelType>(vehicle.FuelTypes);
