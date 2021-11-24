@@ -26,23 +26,32 @@
         </Grid.ColumnDefinitions>
         <Label Content="Fuel Card Details" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="28" Margin="5"/>
         <Label Grid.Row="1" Grid.Column="0" Content="Fuel Card ID" Margin="5" FontSize="16"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="First Name" Margin="5" FontSize="16"/>
-        <Label Grid.Row="3" Grid.Column="0" Content="Last Name" Margin="5" FontSize="16"/>
-        <Label Grid.Row="4" Grid.Column="0" Content="Date of birth" Margin="5" FontSize="16"/>
-        <Label Grid.Row="5" Grid.Column="0" Content="Security Number" Margin="5" FontSize="16"/>
-        <Label Grid.Row="6" Grid.Column="0" Content="Adres" Margin="5" FontSize="16"/>
-        <Label Grid.Row="7" Grid.Column="0" Content="Vehicle" Margin="5" FontSize="16"/>
-        <Label Grid.Row="8" Grid.Column="0" Content="FuelCard" Margin="5" FontSize="16"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Card Number" Margin="5" FontSize="16"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Validity date" Margin="5" FontSize="16"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Pin" Margin="5" FontSize="16"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="Driver ID" Margin="5" FontSize="16"/>
+        <Label Grid.Row="6" Grid.Column="0" Content="Is Enabled" Margin="5" FontSize="16"/>
+        <Label Grid.Row="7" Grid.Column="0" Content="FuelTypes" Margin="5" FontSize="16"/>
 
 
-        <TextBox x:Name="TxtDriverId" Grid.Row="1" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox x:Name="TxtFirstname" Grid.Row="2" Grid.Column="1" Text="Aston Martin" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox x:Name="TxtLastname"  Grid.Row="3" Grid.Column="1" Text="Vanquish" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <DatePicker x:Name="DateOfBirth" Grid.Row="4" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox x:Name="TxtSecurityNumber" Grid.Row="5" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox x:Name="TxtAdres"  Grid.Row="6" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <TextBox x:Name="TxtVehicle" Grid.Row="7" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
 
-        <TextBox x:Name="TxtFuelCard" Grid.Row="8" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox x:Name="TxtFuelCardID" Grid.Row="1" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox x:Name="TxtCardNr" Grid.Row="2" Grid.Column="1" Text="Aston Martin" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <DatePicker x:Name="Validityate"  Grid.Row="3" Grid.Column="1" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox x:Name="TwtPin" Grid.Row="4" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox x:Name="TxtDriverId" Grid.Row="5" Grid.Column="1" Text="null" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <CheckBox x:Name="TxtAdres"  Grid.Row="6" Grid.Column="1"  Margin="-6,5,5,5" VerticalAlignment="Center" FontSize="16" IsEnabled="False" RenderTransformOrigin="0.5,0.5" Width="246" Padding="0,0,0,0">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+        <TextBox x:Name="TxtFuelTypes" Grid.Row="7" Grid.Column="1" Text="1001" Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="False" Height="107" TextWrapping="Wrap"/>
+
+
     </Grid>
 </Window>
