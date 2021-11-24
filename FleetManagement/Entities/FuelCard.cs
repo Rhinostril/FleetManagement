@@ -33,6 +33,17 @@ namespace FleetManagement.Business.Entities
                 throw new Exception(ex.Message);
             }
         }
+
+        public FuelCard(int fuelCardId, string cardNr, DateTime valDate, string pin, Driver driver, bool isEnabled)
+        {
+            SetFuelCardId(fuelCardId);
+            SetCardNumber(cardNr);
+            ValidityDate = valDate;
+            SetPin(pin);
+            Driver = driver;
+            IsEnabled = isEnabled;
+        }
+
         public FuelCard(string cardNumber, DateTime validityDate, string pin,  bool isEnabled)
         {
             try

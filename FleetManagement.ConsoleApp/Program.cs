@@ -15,16 +15,14 @@ namespace FleetManagement.ConsoleApp
 
             Console.WriteLine("Working...");
 
-            List<Driver> drivers = new List<Driver>();
-
-
-            Random r = new Random();
-            for(int i = 1; i <= 1000; i++)
+            List<FuelCard> fuelCards = new List<FuelCard>();
+            for(int i = 0; i < 1000; i++)
             {
-                Driver driver = new Driver(firstNames[r.Next(firstNames.Count())], lastNames[r.Next(lastNames.Count())], randomDateOfBirth(), ThousandSecurityNr[i - 1]);
-                Console.WriteLine(driver);
+                FuelCard fuelCard = RandomFuelCard();
+                fuelCards.Add(fuelCard);
             }
-            
+
+            repo.BulkInsertFuelCard(fuelCards);
 
             Console.WriteLine("Done!");
 
@@ -36,9 +34,6 @@ namespace FleetManagement.ConsoleApp
 
 
         // CREATION OF DRIVERS
-
-        private static List<Driver> drivers = new List<Driver>();
-
         private static List<string> firstNames = new List<string>
         {
             "Liam",
