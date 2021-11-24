@@ -67,8 +67,18 @@ namespace FleetManagement.Business.Managers
                 throw new Exception(ex.Message);
             }
         }
+        public IReadOnlyList<Driver> GetAllDrivers() {
+            try {
 
-            public void DeleteDriver(Driver driver) {
+                return repo.GetAllDrivers();
+
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+        public void DeleteDriver(Driver driver) {
             try
             {
                 if (repo.DriverExists(driver.DriverID))
