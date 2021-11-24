@@ -70,7 +70,7 @@ namespace FleetManagement.Business.Managers
         public IReadOnlyList<Driver> GetAllDrivers() {
             try {
 
-                return repo.GetAllDrivers();
+                return repo.GetDrivers(25);
 
             } catch (Exception ex) {
                 throw new Exception(ex.Message);
