@@ -21,32 +21,33 @@ namespace FleetManagement.UI.DetailForms {
     /// Interaction logic for Window1.xaml
     /// </summary>
     public partial class FuelCardDetailsWindow : Window {
-        private FuelCardManager fuelCardManager = new FuelCardManager(new FuelCardRepository()); 
+        private FuelCardManager fuelCardManager = new FuelCardManager(new FuelCardRepository());
+        private ObservableCollection<FuelType> fuelTypes = new ObservableCollection<FuelType>();
+
         public FuelCardDetailsWindow(int fuelcardID) {
             InitializeComponent();
             FuelCard fuelcard = fuelCardManager.getFuelCardByID(fuelcardID);
-            //public VehicleDetailsWindow(int vehicleId)
-            //{
-            //    InitializeComponent();
-            //    Vehicle vehicle = vehicleManager.GetVehicle(vehicleId);
-            //    fuelTypes = new ObservableCollection<FuelType>(vehicle.FuelTypes);
-            //    txtVehicleId.Text = $"{vehicle.VehicleId}";
-            //    txtBrand.Text = vehicle.Brand;
-            //    txtModel.Text = vehicle.Model;
-            //    txtChassisNumber.Text = vehicle.ChassisNumber;
-            //    txtLicensePlate.Text = vehicle.LicensePlate;
-            //    txtColor.Text = vehicle.Color;
-            //    txtDoors.Text = $"{vehicle.Doors}";
-            //    if(vehicle.Driver != null)
-            //    {
-            //        txtDriver.Text = $"{vehicle.Driver.FirstName} {vehicle.Driver.LastName}";
-            //    }
-            //    else
-            //    {
-            //        txtDriver.Text = "";
-            //    }
-            //    lstFuelTypes.ItemsSource = fuelTypes;
-            //}
+            if (fuelcard != null) {
+                fuelTypes = new ObservableCollection<FuelType>(fuelcard.FuelTypes);
+                lstFuelTypes.ItemsSource = fuelTypes;
+                lstFuelTypes.Items.Refresh();
+                TxtFuelCardID.Text = $"{fuelcard.FuelCardId}";
+                TxtCardNr.Text = $"{fuelcard.CardNumber}";
+                Validityate.SelectedDate = fuelcard.ValidityDate;
+                TxtPin.Text = $"{fuelcard.Pin}";
+               
+                CheckBoxIsEnabled.IsChecked = fuelcard.IsEnabled;
+                if(fuelcard.Driver != null) {
+                    TxtDriverId.Text = $"{fuelcard.Driver.DriverID}";
+                } else {
+                    TxtDriverId.Text = $"none";
+                }
+
+            } else {
+                MessageBox.Show($"Error could not retrieve fuelcard from the id {fuelcardID}");
+            }
+
+         
         }
     }
 }
