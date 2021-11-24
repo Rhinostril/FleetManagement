@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FleetManagement.Data\FleetManagement.Data.csproj" />
     <ProjectReference Include="..\FleetManagement\FleetManagement.Business.csproj" />
   </ItemGroup>
@@ -17,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="images\logo.png">
+    <Resource Include="logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Resource>
   </ItemGroup>
 
 </Project>

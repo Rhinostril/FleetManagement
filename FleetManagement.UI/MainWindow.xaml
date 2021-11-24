@@ -21,7 +21,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="  Welcome back!  " Grid.Row="0" Grid.Column="0" FontSize="32" Margin="10,10,10,10"/>
-                    <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Source="images/logo.png"/>
+                    <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Source="/logo.png"/>
                 </Grid>
             </TabItem>
             <TabItem Header="  Drivers  ">
