@@ -352,7 +352,7 @@ namespace FleetManagement.Data.Repositories
         public bool VehicleExists(Vehicle vehicle)
         {
             SqlConnection cn = GetConnection();
-            string query = "SELECT count(*) FROM vehicle WHERE vehicle=@vehicleId";
+            string query = "SELECT count(*) FROM vehicle WHERE vehicle=@vehicleId OR chassisNumber=@chassisNumber OR licensePlate=@licensePlate";
             using(SqlCommand cmd = cn.CreateCommand())
             {
                 cn.Open();
@@ -360,7 +360,10 @@ namespace FleetManagement.Data.Repositories
                 {
                     cmd.Parameters.Add(new SqlParameter("@vehicleId",SqlDbType.Int));
                     cmd.Parameters["@vehicleId"].Value = vehicle.VehicleId;
-                    cmd.CommandText = query;
+                    cmd.Parameters.Add(new SqlParameter("@chassisNumber", SqlDbType.NVarChar));
+                    cmd.Parameters["@chassisNumber"].Value = vehicle.ChassisNumber;
+                    cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
+                    cmd.Parameters["@licensePlate"].Value = vehicle.LicensePlate;
                     cmd.CommandText = query;
                     int n = (int)cmd.ExecuteScalar();
                     if (n > 0) return true; else return false;
