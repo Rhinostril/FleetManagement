@@ -36,6 +36,8 @@
         <TextBox Grid.Row="3" Grid.Column="1" Name="txtPostalCode" Margin="5"/>
         <Label Grid.Row="3" Grid.Column="2" Content="City" Margin="5"/>
         <TextBox Grid.Row="3" Grid.Column="3" Name="txtCity" Margin="5"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Country" Margin="5"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Name="txtCountry" Margin="5"/>
         <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Name="btnSearchDrivers" Content="Search Drivers" Margin="5" MinHeight="28" Click="btnSearchDrivers_Click"/>
         <ListBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Name="lstDrivers" Margin="5"/>
         <Button Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Name="btnSelectDriver" Content="Select Driver" Margin="5" MinHeight="28" Click="btnSelectDriver_Click"/>

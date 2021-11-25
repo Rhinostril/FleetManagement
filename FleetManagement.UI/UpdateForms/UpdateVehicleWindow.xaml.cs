@@ -28,11 +28,12 @@ namespace FleetManagement.UI
 
         private VehicleManager vehicleManager = new VehicleManager(new VehicleRepository());
         private ObservableCollection<FuelType> fuelTypes = new ObservableCollection<FuelType>();
+        private Vehicle vehicle;
 
         public UpdateVehicleWindow(int vehicleId)
         {
             InitializeComponent();
-            Vehicle vehicle = vehicleManager.GetVehicle(vehicleId);
+            vehicle = vehicleManager.GetVehicle(vehicleId);
             fuelTypes = new ObservableCollection<FuelType>(vehicle.FuelTypes);
             txtVehicleId.Text = $"{vehicle.VehicleId}";
             txtBrand.Text = vehicle.Brand;
@@ -52,10 +53,12 @@ namespace FleetManagement.UI
             lstFuelTypes.ItemsSource = fuelTypes;
         }
 
-        private void btnUpdateDriver_Click(object sender, RoutedEventArgs e)
+        private void btnUpdateVehicle_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+
+                // TODO
 
             }
             catch(Exception ex)
@@ -70,7 +73,7 @@ namespace FleetManagement.UI
             if(objWindow.ShowDialog() == true)
             {
                 txtDriver.Text = objWindow.driver.ToString();
-                
+                vehicle.SetDriver(objWindow.driver);
             }
         }
     }

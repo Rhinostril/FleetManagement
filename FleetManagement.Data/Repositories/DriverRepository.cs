@@ -625,7 +625,7 @@ namespace FleetManagement.Data.Repositories
                     command.Parameters.Add(new SqlParameter("@lastName", SqlDbType.NVarChar));
 
                     command.Parameters["@firstName"].Value = firstName + "%";
-                    command.Parameters["@firstName"].Value = lastName + "%";
+                    command.Parameters["@lastName"].Value = lastName + "%";
 
                     SqlDataReader reader = command.ExecuteReader();
                     List<Driver> drivers = new List<Driver>();

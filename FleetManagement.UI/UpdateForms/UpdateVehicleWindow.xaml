@@ -64,6 +64,6 @@
             <Button Name="btnAddFuelType" Grid.Column="0" Margin="5" Content="Add Fueltype"/>
             <Button Name="btnRemoveFuelType" Grid.Column="1" Margin="5" Content="Remove Fueltype"/>
         </Grid>
-        <Button Name="btnUpdateDriver" Grid.Row="8" Grid.Column="3" Margin="5" Content="  Save Driver  " Click="btnUpdateDriver_Click"/>
+        <Button Name="btnUpdateDriver" Grid.Row="8" Grid.Column="3" Margin="5" Content="  Update Vehicle  " Click="btnUpdateVehicle_Click"/>
     </Grid>
 </Window>
