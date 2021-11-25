@@ -137,7 +137,7 @@
                     <DataGrid x:Name="FuelCardsDataGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single" ColumnWidth="*">
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Details"/>
+                                <MenuItem Header="Details" Click="FuelCardsDetails_Click"/>
                                 <MenuItem Header="Update"/>
                                 <MenuItem Header="Delete"/>
                             </ContextMenu>

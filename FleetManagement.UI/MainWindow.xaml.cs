@@ -17,6 +17,7 @@ using FleetManagement.Business.Entities;
 using FleetManagement.Business.Interfaces;
 using FleetManagement.Business.Managers;
 using FleetManagement.Data.Repositories;
+using FleetManagement.UI.DetailForms;
 
 namespace FleetManagement.UI
 {
@@ -51,7 +52,10 @@ namespace FleetManagement.UI
             
 
         }
+
         
+
+
         private void SearchFuelCardsButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -83,6 +87,12 @@ namespace FleetManagement.UI
         {
             Driver driver = (Driver)DriversDataGrid.SelectedItem;
             DriverDetailWindow objWindow = new DriverDetailWindow(driver.DriverID);
+            objWindow.Show();
+        }
+        private void FuelCardsDetails_Click(object sender, RoutedEventArgs e)
+        {
+            FuelCard fuelCard = (FuelCard)FuelCardsDataGrid.SelectedItem;
+            FuelCardDetailsWindow objWindow = new FuelCardDetailsWindow(fuelCard.FuelCardId);
             objWindow.Show();
         }
 
