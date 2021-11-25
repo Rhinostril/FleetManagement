@@ -50,5 +50,17 @@ namespace FleetManagement.UI
             }
             lstFuelTypes.ItemsSource = fuelTypes;
         }
+
+        private void btnUpdateDriver_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
+        }
     }
 }
