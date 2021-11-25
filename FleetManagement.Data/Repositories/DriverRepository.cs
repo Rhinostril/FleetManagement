@@ -607,7 +607,49 @@ namespace FleetManagement.Data.Repositories
 
         public IReadOnlyList<Driver> SearchDrivers(int? id, string firstName, string lastName, DateTime dateOfBirth, Address address)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = getConnection();
+
+            string query = "SELECT * FROM Driver AS t1 JOIN Address AS t2 ON t1.addressId=t2.addressId " +
+                           "WHERE firstName LIKE @firstName " +
+                           "AND lastName LIKE @lastName ";
+
+            using(SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+
+                    command.CommandText = query;
+
+                    command.Parameters.Add(new SqlParameter("@firstName", SqlDbType.NVarChar));
+                    command.Parameters.Add(new SqlParameter("@lastName", SqlDbType.NVarChar));
+
+                    command.Parameters["@firstName"].Value = firstName + "%";
+                    command.Parameters["@lastName"].Value = lastName + "%";
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    List<Driver> drivers = new List<Driver>();
+                    while (reader.Read())
+                    {
+                        int driverId = (int)reader["driverId"];
+                        string fName = (string)reader["firstName"];
+                        string lName = (string)reader["lastName"];
+                        DateTime dob = (DateTime)reader["dateOfBirth"];
+                        string securityNumber = (string)reader["securityNumber"];
+                        Driver driver = new Driver(driverId, fName, lName, dob, securityNumber);
+                        drivers.Add(driver);
+                    }
+                    return drivers.AsReadOnly();
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception(ex.Message, ex.InnerException);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
 
         public void UpdateDriver(Driver driver)

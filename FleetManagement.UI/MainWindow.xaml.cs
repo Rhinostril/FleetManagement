@@ -17,6 +17,7 @@ using FleetManagement.Business.Entities;
 using FleetManagement.Business.Interfaces;
 using FleetManagement.Business.Managers;
 using FleetManagement.Data.Repositories;
+using FleetManagement.UI.DetailForms;
 
 namespace FleetManagement.UI
 {
@@ -42,16 +43,36 @@ namespace FleetManagement.UI
             VehiclesDataGrid.ItemsSource = vehicles;
             drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
             DriversDataGrid.ItemsSource = drivers;
-            var fuelcardcollection = fuelCardManager.GetAllFuelcards();
-            Console.WriteLine();
-            //fuelCards = new ObservableCollection<FuelCard>();
-            //FuelCardsDataGrid.ItemsSource = fuelCards;
+            fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.GetLatestFuelcards());
+            FuelCardsDataGrid.ItemsSource = fuelCards;
         }
 
         private void SearchVehiclesButton_Click(object sender, RoutedEventArgs e)
         {
             
 
+        }
+
+        
+
+
+        private void SearchFuelCardsButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string cardNr = txtFuelCardNumber.Text;
+                DateTime? valDate = null;
+                if(FuelCardValidityDatePicker.SelectedDate != null)
+                {
+                    valDate = FuelCardValidityDatePicker.SelectedDate;
+                }
+                fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.SearchFuelCards(cardNr, valDate));
+                FuelCardsDataGrid.ItemsSource = fuelCards;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
         }
 
 
@@ -66,6 +87,12 @@ namespace FleetManagement.UI
         {
             Driver driver = (Driver)DriversDataGrid.SelectedItem;
             DriverDetailWindow objWindow = new DriverDetailWindow(driver.DriverID);
+            objWindow.Show();
+        }
+        private void FuelCardsDetails_Click(object sender, RoutedEventArgs e)
+        {
+            FuelCard fuelCard = (FuelCard)FuelCardsDataGrid.SelectedItem;
+            FuelCardDetailsWindow objWindow = new FuelCardDetailsWindow(fuelCard.FuelCardId);
             objWindow.Show();
         }
 
@@ -85,6 +112,17 @@ namespace FleetManagement.UI
         {
             AddNewFuelCard addNewFuelCard = new AddNewFuelCard();
             addNewFuelCard.Show();
+        }
+
+        private void UpdateVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            Vehicle vehicle = (Vehicle)VehiclesDataGrid.SelectedItem;
+            UpdateVehicleWindow objWindow = new UpdateVehicleWindow(vehicle.VehicleId);
+            if(objWindow.ShowDialog() == true)
+            {
+                vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetLatestVehicles());
+                VehiclesDataGrid.ItemsSource = vehicles;
+            }
         }
 
 

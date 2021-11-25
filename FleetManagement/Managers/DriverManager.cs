@@ -96,6 +96,18 @@ namespace FleetManagement.Business.Managers
             }
         }
 
+        public IReadOnlyList<Driver> SearchDrivers(int? driverId, string firstName, string lastName, DateTime dateOfBirth, Address address)
+        {
+            try
+            {
+                return repo.SearchDrivers(driverId, firstName, lastName, dateOfBirth, address);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
     }
 }

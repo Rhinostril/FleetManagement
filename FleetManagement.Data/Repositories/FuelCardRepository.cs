@@ -23,24 +23,20 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = getConnection();
 
-            string query = "SELECT * FROM Fuelcard AS t1 " +
-                           "LEFT OUTER JOIN Driver AS t2 ON t1.driverId = t2.driverId " +
-                           "LEFT OUTER JOIN FuelCardFuelType AS t3 ON t1.fuelCardId = t3.fuelCardId " +
-                           "LEFT OUTER JOIN FuelType AS t4 ON t3.fuelTypeId = t4.fuelTypeId " + 
+            string query = "SELECT * FROM FuelType AS t1 JOIN FuelCardFuelType AS t2 ON t1.fuelTypeId=t2.fuelTypeId " +
+                           "JOIN FuelCard AS t3 ON t2.fuelCardId=t3.fuelCardId LEFT JOIN Driver AS t4 on t3.driverId=t4.driverId " +
                            "WHERE t3.fuelCardId=@fuelCardId";
 
             using (SqlCommand command = connection.CreateCommand())
             {
-                command.CommandText = query;
-                SqlParameter paramId = new SqlParameter();
-                paramId.ParameterName = "@fuelCardId";
-                paramId.DbType = DbType.Int32;
-                paramId.Value = fuelCardId;
-                command.Parameters.Add(paramId);
-                connection.Open();
-                List<FuelType> fuelTypes = new List<FuelType>();
                 try
                 {
+                    connection.Open();
+
+                    command.CommandText = query;
+                    command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
+                    command.Parameters["@fuelCardId"].Value = fuelCardId;
+
                     SqlDataReader reader = command.ExecuteReader();
                     reader.Read();
 
@@ -49,23 +45,27 @@ namespace FleetManagement.Data.Repositories
                     string pin = (string)reader["pin"];
                     bool isEnabled = (bool)reader["isEnabled"];
 
-                    string firstName = (string)reader["firstName"];
-                    string lastName = (string)reader["lastName"];
-                    DateTime dateOfBirth = (DateTime)reader["dateOfBirth"];
-                    string securityNr = (string)reader["securityNumber"];
-
+                    List<FuelType> fuelTypes = new List<FuelType>();
                     string fuelName = (string)reader["name"];
                     fuelTypes.Add(new FuelType(fuelName));
+
+                    FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, fuelTypes, isEnabled);
+
+                    if (!reader.IsDBNull(8))
+                    {
+                        string firstName = (string)reader["firstName"];
+                        string lastName = (string)reader["lastName"];
+                        Driver driver = new Driver(firstName, lastName);
+                        fuelCard.SetDriver(driver);
+                    }
 
                     while (reader.Read())
                     {
                         string fuel = (string)reader["name"];
                         fuelTypes.Add(new FuelType(fuel));
+                        fuelCard.SetFuelTypes(fuelTypes);
                     }
 
-                    Driver driver = new Driver(firstName, lastName, dateOfBirth, securityNr);
-                    FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, fuelTypes, driver, isEnabled);
-                    
                     reader.Close();
                     return fuelCard;
                 }
@@ -82,8 +82,6 @@ namespace FleetManagement.Data.Repositories
         public IReadOnlyList<FuelCard> GetAllFuelCards()
         {
             SqlConnection connection = getConnection();
-            
-            List<FuelCard> fuelCards = new List<FuelCard>();
 
             string query = "SELECT * FROM Fuelcard";
 
@@ -94,16 +92,17 @@ namespace FleetManagement.Data.Repositories
                 try
                 {
                     SqlDataReader reader = command.ExecuteReader();
+                    List<FuelCard> fuelCards = new List<FuelCard>();
                     while (reader.Read())
                     {
                         int fuelCardId = (int)reader["fuelCardId"];
                         string cardNumber = (string)reader["cardNumber"];
                         DateTime validityDate = (DateTime)reader["validityDate"];
                         string pin = (string)reader["pin"];
-                        FuelType fuelType = new FuelType((string)reader["fuelType"]);
                         bool isEnabled = (bool)reader["isEnabled"];
-                        fuelCards.Add(new FuelCard(fuelCardId, cardNumber, validityDate, pin, new List<FuelType>(), isEnabled));
+                        fuelCards.Add(new FuelCard(fuelCardId, cardNumber, validityDate, pin, isEnabled));
                     }
+                    return fuelCards.AsReadOnly();
                 }
                 catch (Exception ex)
                 {
@@ -114,7 +113,6 @@ namespace FleetManagement.Data.Repositories
                     connection.Close();
                 }
             }
-            return fuelCards.AsReadOnly();
         }
 
         public IReadOnlyList<FuelCard> GetTop50FuelCards() {
@@ -132,9 +130,8 @@ namespace FleetManagement.Data.Repositories
                         string cardNumber = (string)reader["cardNumber"];
                         DateTime validityDate = (DateTime)reader["validityDate"];
                         string pin = (string)reader["pin"];
-                        FuelType fuelType = new FuelType((string)reader["fuelType"]);
                         bool isEnabled = (bool)reader["isEnabled"];
-                        fuelCards.Add(new FuelCard(fuelCardId, cardNumber, validityDate, pin, new List<FuelType>(), isEnabled));
+                        fuelCards.Add(new FuelCard(fuelCardId, cardNumber, validityDate, pin, isEnabled));
                     }
                 } catch (Exception ex) {
                     throw new Exception(ex.Message);
@@ -176,35 +173,41 @@ namespace FleetManagement.Data.Repositories
 
        
 
-        public IReadOnlyList<FuelCard> SearchFuelCards(int? fuelCardId, string cardNr, FuelType fuelType)
+        public IReadOnlyList<FuelCard> SearchFuelCards(string cardNr, DateTime? validityDate)
         {
             SqlConnection connection = getConnection();
 
             List<FuelCard> fuelCards = new List<FuelCard>();
 
-            string query = "SELECT * FROM FuelCard WHERE fuelCardId=@fuelCardId AND cardNumber=@cardNumber AND fuelType=@fuelType";
+            string query = "SELECT * FROM FuelCard WHERE cardNumber LIKE @cardNumber";
+
+            if(validityDate != null)
+            {
+                query += " AND validityDate = @validityDate";
+            }
 
             using (SqlCommand command = connection.CreateCommand())
             {
                 connection.Open();
                 try
                 {
-                    command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
                     command.Parameters.Add(new SqlParameter("@cardNumber", SqlDbType.NVarChar));
-                    command.Parameters.Add(new SqlParameter("@fuelType", SqlDbType.NVarChar));
-
-                    command.Parameters["@fuelCardId"].Value = fuelCardId;
-                    command.Parameters["@cardNumber"].Value = cardNr;
-                    command.Parameters["@fuelType"].Value = fuelType;
-                    
+                    command.Parameters["@cardNumber"].Value = cardNr + "%";
+                    if(validityDate != null)
+                    {
+                        command.Parameters.Add(new SqlParameter("@validityDate", SqlDbType.DateTime));
+                        command.Parameters["@validityDate"].Value = validityDate;
+                    }
                     command.CommandText = query;
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        DateTime validityDate = (DateTime)reader["validityDate"];
+                        int fuelCardId = (int)reader["fuelCardId"];
+                        string cardNumber = (string)reader["cardNumber"];
+                        DateTime valDate = (DateTime)reader["validityDate"];
                         string pin = (string)reader["pin"];
                         bool isEnabled = (bool)reader["isEnabled"];
-                        fuelCards.Add(new FuelCard(cardNr, validityDate, pin, new List<FuelType>(), isEnabled));
+                        fuelCards.Add(new FuelCard(fuelCardId, cardNumber, valDate, pin, isEnabled));
                     }
                 }
                 catch (Exception ex)

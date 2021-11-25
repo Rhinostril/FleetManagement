@@ -106,7 +106,7 @@
                         <DataGrid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Details" Click="Details_Click"/>
-                                <MenuItem Header="Update"/>
+                                <MenuItem Header="Update" Click="UpdateVehicle_Click"/>
                                 <MenuItem Header="Delete"/>
                             </ContextMenu>
                         </DataGrid.ContextMenu>
@@ -129,20 +129,15 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="Card Number" Margin="5"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
+                    <TextBox Name="txtFuelCardNumber" Grid.Row="0" Grid.Column="1" Margin="5"/>
                     <Label Grid.Row="0" Grid.Column="2" Content="Validity Date" Margin="5"/>
                     <DatePicker x:Name="FuelCardValidityDatePicker" Grid.Row="0" Grid.Column="3" Margin="5" VerticalAlignment="Center" SelectedDateFormat="Short" IsTodayHighlighted="true"/>
-                    <Button x:Name="SearchFuelCardsButton" Content="  Search Fuelcards  " Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Margin="5" Height="28"/>
+                    <Button x:Name="SearchFuelCardsButton" Content="  Search Fuelcards  " Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Margin="5" Height="28" Click="SearchFuelCardsButton_Click"/>
                     <Button x:Name="NewFuelCardButton" Content="  New Fuelcard  " Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Margin="5" Click="NewFuelCardButton_Click" MinHeight="28"/>
-                    <DataGrid x:Name="FuelCardsDataGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="1*" Header="Card Number"/>
-                            <DataGridTextColumn Width="1*" Header="Validity Date"/>
-                            <DataGridTextColumn Width="1*" Header="Driver"/>
-                        </DataGrid.Columns>
+                    <DataGrid x:Name="FuelCardsDataGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single" ColumnWidth="*">
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Details"/>
+                                <MenuItem Header="Details" Click="FuelCardsDetails_Click"/>
                                 <MenuItem Header="Update"/>
                                 <MenuItem Header="Delete"/>
                             </ContextMenu>
