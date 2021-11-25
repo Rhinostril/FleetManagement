@@ -114,6 +114,17 @@ namespace FleetManagement.UI
             addNewFuelCard.Show();
         }
 
+        private void UpdateVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            Vehicle vehicle = (Vehicle)VehiclesDataGrid.SelectedItem;
+            UpdateVehicleWindow objWindow = new UpdateVehicleWindow(vehicle.VehicleId);
+            if(objWindow.ShowDialog() == true)
+            {
+                vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetLatestVehicles());
+                VehiclesDataGrid.ItemsSource = vehicles;
+            }
+        }
+
 
 
     }

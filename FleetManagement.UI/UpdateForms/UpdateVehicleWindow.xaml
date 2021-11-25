@@ -1,0 +1,69 @@
+﻿<Window x:Class="FleetManagement.UI.UpdateVehicleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FleetManagement.UI"
+        mc:Ignorable="d"
+        Title="Vehicle Details" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Vehicle Details" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="28" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Vehicle ID" Margin="5" FontSize="16"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Brand" Margin="5" FontSize="16"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Model" Margin="5" FontSize="16"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Chassis Number" Margin="5" FontSize="16"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="License Plate" Margin="5" FontSize="16"/>
+        <Label Grid.Row="6" Grid.Column="0" Content="Type" Margin="5" FontSize="16"/>
+        <Label Grid.Row="7" Grid.Column="0" Content="Color" Margin="5" FontSize="16"/>
+        <Label Grid.Row="8" Grid.Column="0" Content="Doors" Margin="5" FontSize="16"/>
+        <Label Grid.Row="1" Grid.Column="2" Content="Driver" Margin="5" FontSize="16"/>
+        <Label Grid.Row="2" Grid.Column="2" Content="Fueltypes" Margin="5" FontSize="16"/>
+        
+        <TextBox Name="txtVehicleId" Grid.Row="1" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <TextBox Name="txtBrand" Grid.Row="2" Grid.Column="1" Text="Aston Martin" Margin="5" VerticalAlignment="Center" FontSize="16"/>
+        <TextBox Name="txtModel" Grid.Row="3" Grid.Column="1" Text="Vanquish" Margin="5" VerticalAlignment="Center" FontSize="16"/>
+        <TextBox Name="txtChassisNumber" Grid.Row="4" Grid.Column="1" Text="dummy data" Margin="5" VerticalAlignment="Center" FontSize="16"/>
+        <TextBox Name="txtLicensePlate" Grid.Row="5" Grid.Column="1" Text="dummy data" Margin="5" VerticalAlignment="Center" FontSize="16"/>
+        <TextBox Name="txtVehicleType" Grid.Row="6" Grid.Column="1" Text="Supercar" Margin="5" VerticalAlignment="Center" FontSize="16"/>
+        <TextBox Name="txtColor" Grid.Row="7" Grid.Column="1" Text="Deep Purple" Margin="5" VerticalAlignment="Center" FontSize="16"/>
+        <TextBox Name="txtDoors" Grid.Row="8" Grid.Column="1" Text="3" Margin="5" VerticalAlignment="Center" FontSize="16"/>
+        <TextBox Name="txtDriver" Grid.Row="1" Grid.Column="3" Text="Lewis Hamilton" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <Button Name="btnSelectDriver" Grid.Row="1" Grid.Column="4" Content="  Select Driver  " Margin="5"/>
+        <ListBox Name="lstFuelTypes" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Margin="5" SelectionMode="Single">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Path=FuelName}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Row="6" Grid.Column="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btnAddFuelType" Grid.Column="0" Margin="5" Content="Add Fueltype"/>
+            <Button Name="btnRemoveFuelType" Grid.Column="1" Margin="5" Content="Remove Fueltype"/>
+        </Grid>
+        <Button Name="btnUpdateDriver" Grid.Row="8" Grid.Column="3" Margin="5" Content="  Save Driver  "/>
+    </Grid>
+</Window>
