@@ -29,13 +29,26 @@ namespace FleetManagement.Business.Managers
         }
         public IReadOnlyList<FuelCard> GetLatestFuelcards() {
             try {
-                return repo.GetTop50FuelCards();
-                
+                var collection = repo.GetTop50FuelCards();
+                Console.WriteLine();
+                return collection;
 
             } catch (Exception ex) {
                 throw new Exception(ex.Message);
             }
         }
+        public IReadOnlyList<FuelCard> GetAllFuelcards() {
+            try {
+                var collection = repo.GetAllFuelCards();
+                Console.WriteLine();
+                return collection;
+
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
         public void AddFuelCard(FuelCard fuelCard)
         {
             try

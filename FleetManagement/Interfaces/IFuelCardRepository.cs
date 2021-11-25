@@ -9,12 +9,12 @@ namespace FleetManagement.Business.Interfaces
 {
     public interface IFuelCardRepository
     {
+        FuelCard GetFuelCard(int fuelCardId);
         IReadOnlyList<FuelCard> GetAllFuelCards();
         IReadOnlyList<FuelCard> GetTop50FuelCards();
         IReadOnlyList<FuelCard> GetFuelCardsByAmount(int amount);
         IReadOnlyList<FuelCard> SearchFuelCards(int? fuelCardId, string cardNr, FuelType fuelType);
-        FuelCard GetFuelCard(int fuelCardId);
-        FuelCard SearchFuelCard(int? fuelCardId, string cardNr, FuelType fuelType);
+
         bool FuelCardExists(FuelCard fuelCard);
         void AddFuelCard(FuelCard fuelCard);
         void UpdateFuelCard(FuelCard fuelCard);

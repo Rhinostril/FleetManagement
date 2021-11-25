@@ -174,10 +174,7 @@ namespace FleetManagement.Data.Repositories
             return fuelCards.AsReadOnly();
         }
 
-        public FuelCard SearchFuelCard(int? fuelCardId, string cardNr, FuelType fuelType)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public IReadOnlyList<FuelCard> SearchFuelCards(int? fuelCardId, string cardNr, FuelType fuelType)
         {

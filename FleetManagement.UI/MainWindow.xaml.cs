@@ -42,8 +42,10 @@ namespace FleetManagement.UI
             VehiclesDataGrid.ItemsSource = vehicles;
             drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
             DriversDataGrid.ItemsSource = drivers;
-            fuelCards = new ObservableCollection<FuelCard>();
-            FuelCardsDataGrid.ItemsSource = fuelCards;
+            var fuelcardcollection = fuelCardManager.GetAllFuelcards();
+            Console.WriteLine();
+            //fuelCards = new ObservableCollection<FuelCard>();
+            //FuelCardsDataGrid.ItemsSource = fuelCards;
         }
 
         private void SearchVehiclesButton_Click(object sender, RoutedEventArgs e)
