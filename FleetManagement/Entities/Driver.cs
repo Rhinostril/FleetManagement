@@ -18,6 +18,17 @@ namespace FleetManagement.Business.Entities
         public Vehicle Vehicle { get; private set; }
         public FuelCard FuelCard { get; private set; }
 
+
+        public Driver(int driverId, string firstName, string lastName, DateTime dateOfBirth, string securityNumber)
+        {
+            SetDriverID(driverId);
+            SetFirstName(firstName);
+            SetLastName(lastName);
+            SetDateOfBirth(dateOfBirth);
+            SetSecurityNumber(securityNumber);
+        }
+
+
         public Driver(string firstName, string lastName, DateTime dateOfBirth, string securityNumber) {
             SetFirstName(firstName);
             SetLastName(lastName);

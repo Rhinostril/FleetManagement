@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using FleetManagement.Business.Entities;
 using FleetManagement.Business.Managers;
 using FleetManagement.Data.Repositories;
+using FleetManagement.UI.SelectForms;
 
 namespace FleetManagement.UI
 {
@@ -60,6 +61,16 @@ namespace FleetManagement.UI
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Foutmelding!");
+            }
+        }
+
+        private void btnSelectDriver_Click(object sender, RoutedEventArgs e)
+        {
+            SelectDriverWindow objWindow = new SelectDriverWindow();
+            if(objWindow.ShowDialog() == true)
+            {
+                txtDriver.Text = objWindow.driver.ToString();
+                
             }
         }
     }
