@@ -358,7 +358,11 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
-       
+        public FuelCard SearchFuelCard(int? fuelCardId, string cardNr, FuelType fuelType) {
+            throw new NotImplementedException();
+        }
+
+
 
 
 

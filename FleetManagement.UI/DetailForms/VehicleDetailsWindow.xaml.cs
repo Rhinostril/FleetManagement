@@ -46,7 +46,7 @@ namespace FleetManagement.UI
             }
             else
             {
-                txtDriver.Text = "";
+                txtDriver.Text = "none";
             }
             lstFuelTypes.ItemsSource = fuelTypes;
         }

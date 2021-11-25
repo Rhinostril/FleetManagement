@@ -38,7 +38,7 @@
         <TextBox x:Name="TxtDriverId" Grid.Row="1" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <TextBox x:Name="TxtFirstname" Grid.Row="2" Grid.Column="1" Text="Aston Martin" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <TextBox x:Name="TxtLastname"  Grid.Row="3" Grid.Column="1" Text="Vanquish" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <DatePicker x:Name="DateOfBirth" Grid.Row="4" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <DatePicker x:Name="DateOfBirth" Grid.Row="4" Grid.Column="1" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <TextBox x:Name="TxtSecurityNumber" Grid.Row="5" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <TextBox x:Name="TxtAdres"  Grid.Row="6" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <TextBox x:Name="TxtVehicle" Grid.Row="7" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>

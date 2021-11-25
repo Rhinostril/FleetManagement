@@ -37,14 +37,20 @@ namespace FleetManagement.UI {
             if (driver.Address != null)
             {
                 TxtAdres.Text = $"{driver.Address.Street} {driver.Address.HouseNr}, {driver.Address.PostalCode} {driver.Address.City}";
+            } else {
+                TxtAdres.Text = "none";
             }
             if(driver.Vehicle != null)
             {
                 TxtVehicle.Text = $"{driver.Vehicle.Brand} {driver.Vehicle.Model}, {driver.Vehicle.LicensePlate}";
+            } else {
+                TxtVehicle.Text = "none";
             }
             if (driver.FuelCard != null)
             { 
                 TxtFuelCard.Text = $"{driver.FuelCard.CardNumber}, PIN:{driver.FuelCard.Pin}";
+            } else {
+                TxtFuelCard.Text = "none";
             }
         }
     }
