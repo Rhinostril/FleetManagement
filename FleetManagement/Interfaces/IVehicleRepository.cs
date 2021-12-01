@@ -14,7 +14,7 @@ namespace FleetManagement.Business.Interfaces
         IReadOnlyList<Vehicle> GetVehiclesByAmount(int amount);
         IReadOnlyList<Vehicle> SearchVehicles(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver);
         Vehicle GetVehicle(int vehicleId);
-        Vehicle SearchVehicle(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver);
+        Vehicle SearchVehicle(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, string vehicleType, string color, int? doors);
         bool VehicleExists(Vehicle vehicle);
         bool VehicleHasDriver(Vehicle vehicle);
         void AddVehicle(Vehicle vehicle);
