@@ -619,5 +619,23 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
+        public bool VehicleHasDriver(Vehicle vehicle) {
+            SqlConnection cn = GetConnection();
+            string query = "SELECT count(*) FROM vehicle WHERE vehicle=@vehicleId AND driverId IS NOT NULL";
+            using (SqlCommand cmd = cn.CreateCommand()) {
+                cn.Open();
+                try {
+                    cmd.Parameters.Add(new SqlParameter("@vehicleId", SqlDbType.Int));
+                    cmd.Parameters["@vehicleId"].Value = vehicle.VehicleId;
+                    cmd.CommandText = query;
+                    int n = (int)cmd.ExecuteScalar();
+                    if (n > 0) return true; else return false;
+                } catch (Exception ex) {
+                    throw new Exception(ex.Message);
+                } finally {
+                    cn.Close();
+                }
+            }
+        }
     }
 }
