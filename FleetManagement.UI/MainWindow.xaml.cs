@@ -99,19 +99,31 @@ namespace FleetManagement.UI
         private void NewDriverButton_Click(object sender, RoutedEventArgs e)
         {
             AddNewDriver addNewDriver = new AddNewDriver();
-            addNewDriver.Show();
+            if(addNewDriver.ShowDialog() == true)
+            {
+                drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
+                DriversDataGrid.ItemsSource = drivers;
+            }
         }
 
         private void NewVehicleButton_Click(object sender, RoutedEventArgs e)
         {
             AddNewVehicle addNewVehicle = new AddNewVehicle();
-            addNewVehicle.Show();
+            if(addNewVehicle.ShowDialog() == true)
+            {
+                vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetLatestVehicles());
+                VehiclesDataGrid.ItemsSource = vehicles;
+            }
         }
 
         private void NewFuelCardButton_Click(object sender, RoutedEventArgs e)
         {
             AddNewFuelCard addNewFuelCard = new AddNewFuelCard();
-            addNewFuelCard.Show();
+            if(addNewFuelCard.ShowDialog() == true)
+            {
+                fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.GetLatestFuelcards());
+                FuelCardsDataGrid.ItemsSource = fuelCards;
+            }
         }
 
         private void UpdateVehicle_Click(object sender, RoutedEventArgs e)
