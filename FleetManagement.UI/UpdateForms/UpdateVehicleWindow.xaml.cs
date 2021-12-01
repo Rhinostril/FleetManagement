@@ -76,5 +76,23 @@ namespace FleetManagement.UI
                 vehicle.SetDriver(objWindow.driver);
             }
         }
+
+        private void btnAddFuelType_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRemoveFuelType_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FuelType fuelType = (FuelType)lstFuelTypes.SelectedItem;
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
+        }
     }
 }
