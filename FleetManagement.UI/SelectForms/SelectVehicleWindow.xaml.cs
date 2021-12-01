@@ -11,6 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FleetManagement.Business.Entities;
+using FleetManagement.Business.Managers;
+using FleetManagement.Business.Interfaces;
+using FleetManagement.Data.Repositories;
+using FleetManagement.UI.SelectForms;
 
 namespace FleetManagement.UI.SelectForms
 {

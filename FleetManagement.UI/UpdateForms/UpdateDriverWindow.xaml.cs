@@ -65,7 +65,7 @@ namespace FleetManagement.UI.UpdateForms
 
         private void btnSelectFuelCard_Click(object sender, RoutedEventArgs e)
         {
-            SelectFuelCardWindow objWindow = new SelectFuelCardWindow()
+            SelectFuelCardWindow objWindow = new SelectFuelCardWindow();
             if(objWindow.ShowDialog() == true)
             {
 
