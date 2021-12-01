@@ -59,7 +59,8 @@ namespace FleetManagement.UI.UpdateForms
             SelectVehicleWindow objWindow = new SelectVehicleWindow();
             if(objWindow.ShowDialog() == true)
             {
-
+                driver.SetVehicle(objWindow.vehicle);
+                txtVehicle.Text = objWindow.vehicle.ToString();
             }
         }
 
@@ -68,7 +69,8 @@ namespace FleetManagement.UI.UpdateForms
             SelectFuelCardWindow objWindow = new SelectFuelCardWindow();
             if(objWindow.ShowDialog() == true)
             {
-
+                driver.SetFuelCard(objWindow.fuelCard);
+                txtFuelCard.Text = objWindow.fuelCard.ToString();
             }
         }
     }

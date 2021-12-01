@@ -24,6 +24,10 @@ namespace FleetManagement.UI.SelectForms
     /// </summary>
     public partial class SelectVehicleWindow : Window
     {
+
+        public Vehicle vehicle { get; private set; }
+
+
         public SelectVehicleWindow()
         {
             InitializeComponent();

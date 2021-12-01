@@ -25,6 +25,7 @@ namespace FleetManagement.UI.SelectForms
     public partial class SelectFuelCardWindow : Window
     {
 
+        public FuelCard fuelCard { get; private set; }
         
 
         public SelectFuelCardWindow()
