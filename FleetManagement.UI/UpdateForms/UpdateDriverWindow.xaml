@@ -1,0 +1,62 @@
+﻿<Window x:Class="FleetManagement.UI.UpdateForms.UpdateDriverWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FleetManagement.UI.UpdateForms"
+        mc:Ignorable="d"
+        Title="UpdateDriverWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Update Driver" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="28" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Driver ID" Margin="5" FontSize="16"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="First Name" Margin="5" FontSize="16"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Last Name" Margin="5" FontSize="16"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Date Of Birth" Margin="5" FontSize="16"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="Security Number" Margin="5" FontSize="16"/>
+        <Label Grid.Row="6" Grid.Column="0" Content="Vehicle" Margin="5" FontSize="16"/>
+        <Label Grid.Row="7" Grid.Column="0" Content="FuelCard" Margin="5" FontSize="16"/>
+
+        <Label Grid.Row="1" Grid.Column="2" Content="Street" Margin="5" FontSize="16"/>
+        <Label Grid.Row="2" Grid.Column="2" Content="House Number" Margin="5" FontSize="16"/>
+        <Label Grid.Row="3" Grid.Column="2" Content="Postal Code" Margin="5" FontSize="16"/>
+        <Label Grid.Row="4" Grid.Column="2" Content="City" Margin="5" FontSize="16"/>
+        <Label Grid.Row="5" Grid.Column="2" Content="Country" Margin="5" FontSize="16"/>
+        
+        <TextBox x:Name="txtDriverId" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="False"/>
+        <TextBox x:Name="txtFirstName" Grid.Row="2" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="txtLastName" Grid.Row="3" Grid.Column="1" Margin="5"/>
+        <DatePicker x:Name="dtpDateOfBirth" Grid.Row="4" Grid.Column="1" Margin="5" SelectedDateFormat="Short"/>
+        <TextBox x:Name="txtSecurityNumber" Grid.Row="5" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="txtVehicle" Grid.Row="6" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="txtFuelCard" Grid.Row="7" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="txtStreet" Grid.Row="1" Grid.Column="3" Margin="5"/>
+        <TextBox x:Name="txtHouseNumber" Grid.Row="2" Grid.Column="3" Margin="5"/>
+        <TextBox x:Name="txtPostalCode" Grid.Row="3" Grid.Column="3" Margin="5"/>
+        <TextBox x:Name="txtCity" Grid.Row="4" Grid.Column="3" Margin="5"/>
+        <TextBox x:Name="txtCountry" Grid.Row="5" Grid.Column="3" Margin="5"/>
+
+        <Button x:Name="btnSelectVehicle" Grid.Row="6" Grid.Column="2" Margin="5" Content="Select Vehicle" Click="btnSelectVehicle_Click"/>
+        <Button x:Name="btnSelectFuelCard" Grid.Row="7" Grid.Column="2" Margin="5" Content="Select Fuelcard" Click="btnSelectFuelCard_Click"/>
+
+        <Button x:Name="btnUpdateDriver" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Content="  Update Driver  " MinHeight="28" Click="btnUpdateDriver_Click"/>
+
+    </Grid>
+</Window>

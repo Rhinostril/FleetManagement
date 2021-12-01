@@ -61,8 +61,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="btnAddFuelType" Grid.Column="0" Margin="5" Content="Add Fueltype"/>
-            <Button Name="btnRemoveFuelType" Grid.Column="1" Margin="5" Content="Remove Fueltype"/>
+            <Button Name="btnAddFuelType" Grid.Column="0" Margin="5" Content="Add Fueltype" Click="btnAddFuelType_Click"/>
+            <Button Name="btnRemoveFuelType" Grid.Column="1" Margin="5" Content="Remove Fueltype" Click="btnRemoveFuelType_Click"/>
         </Grid>
         <Button Name="btnUpdateDriver" Grid.Row="8" Grid.Column="3" Margin="5" Content="  Update Vehicle  " Click="btnUpdateVehicle_Click"/>
     </Grid>
