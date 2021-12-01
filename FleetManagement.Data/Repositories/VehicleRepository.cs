@@ -253,11 +253,16 @@ namespace FleetManagement.Data.Repositories
 
         public Vehicle SearchVehicle(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
         {
-            throw new NotImplementedException();
+            
+
+
+
+
         }
 
         public IReadOnlyList<Vehicle> SearchVehicles(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
         {
+            //this only works if all params are filled out which often isnt the case
             SqlConnection cn = GetConnection();
             List<Vehicle> vehicles = new List<Vehicle>();
             string query = "SELECT * FROM vehicle WHERE brand=@brand,model=@model,chasisNumber=@chasisNumber,licensePlate=@licensePlate,vehicleType=@vehicleType,color=@color,doors=@doors";
