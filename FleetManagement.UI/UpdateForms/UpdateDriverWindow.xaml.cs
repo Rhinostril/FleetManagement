@@ -15,6 +15,7 @@ using FleetManagement.Business.Entities;
 using FleetManagement.Business.Managers;
 using FleetManagement.Business.Interfaces;
 using FleetManagement.Data.Repositories;
+using FleetManagement.UI.SelectForms;
 
 namespace FleetManagement.UI.UpdateForms
 {
@@ -55,12 +56,20 @@ namespace FleetManagement.UI.UpdateForms
 
         private void btnSelectVehicle_Click(object sender, RoutedEventArgs e)
         {
+            SelectVehicleWindow objWindow = new SelectVehicleWindow();
+            if(objWindow.ShowDialog() == true)
+            {
 
+            }
         }
 
         private void btnSelectFuelCard_Click(object sender, RoutedEventArgs e)
         {
+            SelectFuelCardWindow objWindow = new SelectFuelCardWindow()
+            if(objWindow.ShowDialog() == true)
+            {
 
+            }
         }
     }
 }
