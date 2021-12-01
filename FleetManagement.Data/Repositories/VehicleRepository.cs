@@ -251,40 +251,79 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
-        public Vehicle SearchVehicle(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
-        {
+        public Vehicle SearchVehicle(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, string vehicleType, string color, int? doors) {
             List<Vehicle> vehicles = new List<Vehicle>();
-            string vehicleidquery = null;
-            if(vehicleId != null) {
-                vehicleidquery = "vehicleid=@vehicleid";
-            }
-            string brandquery = null;
-            if (brand != null) {
-                brandquery = "brand=@brand";
-            }
-            string modelquery = null;
-            if (model != null) {
-                modelquery = "model=@model";
-            }
-            string chassisNumberquery = null;
-            if (chassisNumber != null) {
-                chassisNumberquery = "chasisNumber=@chasisNumber";
-            }
-            string licensePlatequery = null;
-            if (licensePlate != null) {
-                licensePlatequery = "licensePlate=@licensePlate";
-            }
-            string vehicleTypequery = null;
-            if (vehicleType != null) {
-                vehicleTypequery = "vehicleType=@vehicleType";
-            }
-            string colorquery = null;
-            if (color != null) {
-                colorquery = "color=@color";
-            }
-           //TODO what to do with fueltype, driver and doors = > which is not nullable
-
+            List<string> subquerylist = new List<string>();
+            int numberofparams = 0;
             
+            if (vehicleId != null) {
+                numberofparams++;
+                subquerylist.Add("vehicleid=@vehicleid");
+            }
+            if (brand != null) {
+                if (numberofparams > 0) {
+                    subquerylist.Add(",");
+                }
+                numberofparams++;
+                subquerylist.Add("brand=@brand");
+            }
+                if (model != null) {
+               if (numberofparams > 0) {
+                        subquerylist.Add(",");
+               }
+               numberofparams++;
+                    subquerylist.Add("model=@model");
+            }
+          
+            if (chassisNumber != null) {
+                if (numberofparams > 0) {
+                        subquerylist.Add(",");
+                 }
+                    numberofparams++;
+                    subquerylist.Add("chasisNumber=@chasisNumber");
+            }
+   
+            if (licensePlate != null) {
+                    if (numberofparams > 0) {
+                        subquerylist.Add(",");
+                    }
+                    numberofparams++;
+                    subquerylist.Add("licensePlate=@licensePlate");
+                    
+            }
+           
+            if (vehicleType != null) {
+                    if (numberofparams > 0) {
+                        subquerylist.Add(",");
+                    }
+                    numberofparams++;
+                    subquerylist.Add("vehicleType=@vehicleType");
+            }
+         
+            if (color != null) {
+                    if (numberofparams > 0) {
+                        subquerylist.Add(",");
+                    }
+                    numberofparams++;
+                    subquerylist.Add("color=@color");
+            }
+           
+            if (doors != null) {
+                    if (numberofparams > 0) {
+                        subquerylist.Add(",");
+                    }
+                    numberofparams++;
+                    subquerylist.Add("doors=@doors");
+            }
+            // if number of params is >1 you need comma separation
+
+            string query = "";
+            if (numberofparams <= 0) {
+                //dont even query anything
+            }else{
+                query= $"SELECT * FROM vehicle WHERE {String.Join("",subquerylist)}";
+            }
+
 
         }
 
