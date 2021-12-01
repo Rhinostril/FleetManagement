@@ -253,10 +253,38 @@ namespace FleetManagement.Data.Repositories
 
         public Vehicle SearchVehicle(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
         {
+            List<Vehicle> vehicles = new List<Vehicle>();
+            string vehicleidquery = null;
+            if(vehicleId != null) {
+                vehicleidquery = "vehicleid=@vehicleid";
+            }
+            string brandquery = null;
+            if (brand != null) {
+                brandquery = "brand=@brand";
+            }
+            string modelquery = null;
+            if (model != null) {
+                modelquery = "model=@model";
+            }
+            string chassisNumberquery = null;
+            if (chassisNumber != null) {
+                chassisNumberquery = "chasisNumber=@chasisNumber";
+            }
+            string licensePlatequery = null;
+            if (licensePlate != null) {
+                licensePlatequery = "licensePlate=@licensePlate";
+            }
+            string vehicleTypequery = null;
+            if (vehicleType != null) {
+                vehicleTypequery = "vehicleType=@vehicleType";
+            }
+            string colorquery = null;
+            if (color != null) {
+                colorquery = "color=@color";
+            }
+           //TODO what to do with fueltype, driver and doors = > which is not nullable
+
             
-
-
-
 
         }
 
