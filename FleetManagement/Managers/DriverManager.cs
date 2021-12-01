@@ -83,7 +83,21 @@ namespace FleetManagement.Business.Managers
             {
                 if (repo.DriverExists(driver.DriverID))
                 {
-                    repo.DeleteDriver(driver);
+                    if (!repo.DriverHasFuelCard(driver.DriverID))
+                    {
+                        if (!repo.DriverHasVehicle(driver.DriverID))
+                        {
+                            repo.DeleteDriver(driver);
+                        }
+                        else
+                        {
+                            throw new ManagerException("DriverManager - DeleteDriver - Driver still has a vehicle");
+                        }
+                    }
+                    else
+                    {
+                        throw new ManagerException("DriverManager - DeleteDriver - Driver still has a fuelcard");
+                    }
                 }
                 else
                 {

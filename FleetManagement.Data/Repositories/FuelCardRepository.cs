@@ -358,6 +358,32 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
+        public bool FuelCardHasDriver(FuelCard fuelCard)
+        {
+            SqlConnection connection = getConnection();
+            string query = "SELECT count(*) FROM [FuelCard] WHERE fuelCardId=@fuelCardId AND driverId IS NOT NULL";
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                connection.Open();
+                try
+                {
+                    command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
+                    command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;
+                    command.CommandText = query;
+                    int n = (int)command.ExecuteScalar();
+                    if (n > 0) return true; else return false;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
         public FuelCard SearchFuelCard(int? fuelCardId, string cardNr, FuelType fuelType) {
             throw new NotImplementedException();
         }

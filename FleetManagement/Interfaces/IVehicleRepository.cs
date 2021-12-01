@@ -16,6 +16,7 @@ namespace FleetManagement.Business.Interfaces
         Vehicle GetVehicle(int vehicleId);
         Vehicle SearchVehicle(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, string vehicleType, string color, int? doors);
         bool VehicleExists(Vehicle vehicle);
+        bool VehicleHasDriver(Vehicle vehicle);
         void AddVehicle(Vehicle vehicle);
         void UpdateVehicle(Vehicle vehicle);
         void DeleteVehicle(Vehicle vehicle);

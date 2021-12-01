@@ -61,8 +61,8 @@
                         <DataGrid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Details" Click="DriverDetails_Click"/>
-                                <MenuItem Header="Update"/>
-                                <MenuItem Header="Delete"/>
+                                <MenuItem Header="Update" Click="DriverUpdate_Click"/>
+                                <MenuItem Header="Delete" Click="DriverDelete_Click"/>
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                     </DataGrid>
@@ -107,7 +107,7 @@
                             <ContextMenu>
                                 <MenuItem Header="Details" Click="Details_Click"/>
                                 <MenuItem Header="Update" Click="UpdateVehicle_Click"/>
-                                <MenuItem Header="Delete"/>
+                                <MenuItem Header="Delete" Click="DeleteVehicle_Click"/>
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                     </DataGrid>
@@ -138,8 +138,8 @@
                         <DataGrid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Details" Click="FuelCardsDetails_Click"/>
-                                <MenuItem Header="Update"/>
-                                <MenuItem Header="Delete"/>
+                                <MenuItem Header="Update" Click="FuelCardUpdate_Click"/>
+                                <MenuItem Header="Delete" Click="FuelCardDelete_Click"/>
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                     </DataGrid>

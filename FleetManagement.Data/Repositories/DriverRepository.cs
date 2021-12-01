@@ -814,6 +814,59 @@ namespace FleetManagement.Data.Repositories
 
         }
 
-       
+        public bool DriverHasVehicle(int id)
+        {
+            SqlConnection connection = getConnection();
+            string query = "SELECT count(*) FROM [Driver] WHERE driverId=@driverId AND vehicleId IS NOT NULL";
+            using(SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.CommandText = query;
+                    command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                    command.Parameters["@driverId"].Value = id;
+                    int n = (int)command.ExecuteScalar();
+                    if (n > 0) return true; else return false;
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public bool DriverHasFuelCard(int id)
+        {
+            SqlConnection connection = getConnection();
+            string query = "SELECT count(*) FROM [Driver] WHERE driverId=@driverId AND fuelcardId IS NOT NULL";
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.CommandText = query;
+                    command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                    command.Parameters["@driverId"].Value = id;
+                    int n = (int)command.ExecuteScalar();
+                    if (n > 0) return true; else return false;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+
+
     }
 }

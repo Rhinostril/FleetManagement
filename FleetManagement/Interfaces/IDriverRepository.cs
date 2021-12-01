@@ -14,6 +14,8 @@ namespace FleetManagement.Business.Interfaces
         Driver GetDriverById(int id);
         Driver SearchDriver(int? id, string firstName, string lastName, DateTime dateOfBirth, Address address);
         bool DriverExists(int id);
+        bool DriverHasVehicle(int id);
+        bool DriverHasFuelCard(int id);
         void AddDriver(Driver driver);
         void UpdateDriver(Driver driver);
         void DeleteDriver(Driver driver);
