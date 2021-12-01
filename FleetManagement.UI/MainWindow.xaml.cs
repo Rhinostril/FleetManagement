@@ -126,6 +126,23 @@ namespace FleetManagement.UI
             }
         }
 
+        private void FuelCardUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void FuelCardDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FuelCard fuelCard = (FuelCard)FuelCardsDataGrid.SelectedItem;
+                fuelCardManager.DeleteFuelCard(fuelCard);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
+        }
+
         private void UpdateVehicle_Click(object sender, RoutedEventArgs e)
         {
             Vehicle vehicle = (Vehicle)VehiclesDataGrid.SelectedItem;
@@ -134,6 +151,37 @@ namespace FleetManagement.UI
             {
                 vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetLatestVehicles());
                 VehiclesDataGrid.ItemsSource = vehicles;
+            }
+        }
+
+        private void DeleteVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Vehicle vehicle = (Vehicle)VehiclesDataGrid.SelectedItem;
+                vehicleManager.DeleteVehicle(vehicle);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
+        }
+
+        private void DriverUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DriverDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Driver driver = (Driver)DriversDataGrid.SelectedItem;
+                driverManager.DeleteDriver(driver);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
             }
         }
 
