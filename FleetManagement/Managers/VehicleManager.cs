@@ -38,14 +38,27 @@ namespace FleetManagement.Business.Managers
             }
         }
 
-        public void DeleteVehicle(Vehicle vehicle) {
+        public void DeleteVehicle(Vehicle vehicle)
+        {
             try {
-                if (repo.VehicleExists(vehicle)) {
-                    repo.DeleteVehicle(vehicle);
-                } else {
+                if (repo.VehicleExists(vehicle))
+                {
+                    if (!repo.VehicleHasDriver(vehicle))
+                    {
+                        repo.DeleteVehicle(vehicle);
+                    }
+                    else
+                    {
+                        throw new VehicleManagerException("VehicleManager - DeleteVehicle - Vehicle still has a driver");
+                    }
+                }
+                else
+                {
                     throw new VehicleManagerException("VehicleManager - DeleteVehicle - Vehicle already deleted");
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new Exception(ex.Message);
             }
         }
