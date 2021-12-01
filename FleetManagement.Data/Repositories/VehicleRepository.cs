@@ -4,7 +4,7 @@ using FleetManagement.Business.Entities;
 using FleetManagement.Business.Interfaces;
 using System.Data.SqlClient;
 using System.Data;
-
+using System.Linq;
 namespace FleetManagement.Data.Repositories
 {
     public class VehicleRepository : IVehicleRepository
@@ -255,35 +255,42 @@ namespace FleetManagement.Data.Repositories
             List<Vehicle> vehicles = new List<Vehicle>();
             List<string> subquerylist = new List<string>();
             int numberofparams = 0;
-            
+            bool vehicleisNull = true;
             if (vehicleId != null) {
+                vehicleisNull = false;
                 numberofparams++;
-                subquerylist.Add("vehicleid=@vehicleid");
+                subquerylist.Add("vehicleId=@vehicleid");
             }
+            bool brandisNull = true;
             if (brand != null) {
+                brandisNull = false;
                 if (numberofparams > 0) {
                     subquerylist.Add(",");
                 }
                 numberofparams++;
                 subquerylist.Add("brand=@brand");
             }
-                if (model != null) {
+            bool modelisNull = true;
+            if (model != null) {
+                modelisNull = false;
                if (numberofparams > 0) {
                         subquerylist.Add(",");
                }
                numberofparams++;
                     subquerylist.Add("model=@model");
             }
-          
+            bool chasisNumberisNull = true;
             if (chassisNumber != null) {
+                chasisNumberisNull = false;
                 if (numberofparams > 0) {
                         subquerylist.Add(",");
                  }
                     numberofparams++;
                     subquerylist.Add("chasisNumber=@chasisNumber");
             }
-   
+            bool licensePlateisNull = true;
             if (licensePlate != null) {
+                licensePlateisNull = false;
                     if (numberofparams > 0) {
                         subquerylist.Add(",");
                     }
@@ -291,24 +298,27 @@ namespace FleetManagement.Data.Repositories
                     subquerylist.Add("licensePlate=@licensePlate");
                     
             }
-           
+            bool vehicleTypeisNull = true;
             if (vehicleType != null) {
+                vehicleTypeisNull = false;
                     if (numberofparams > 0) {
                         subquerylist.Add(",");
                     }
                     numberofparams++;
                     subquerylist.Add("vehicleType=@vehicleType");
             }
-         
+            bool colorisNull = true;
             if (color != null) {
+                colorisNull = false;
                     if (numberofparams > 0) {
                         subquerylist.Add(",");
                     }
                     numberofparams++;
                     subquerylist.Add("color=@color");
             }
-           
+            bool doorsisNull = true;
             if (doors != null) {
+                doorsisNull = false;
                     if (numberofparams > 0) {
                         subquerylist.Add(",");
                     }
@@ -320,61 +330,219 @@ namespace FleetManagement.Data.Repositories
             string query = "";
             if (numberofparams <= 0) {
                 //dont even query anything
+                //maybe break here
             }else{
                 query= $"SELECT * FROM vehicle WHERE {String.Join("",subquerylist)}";
             }
-
-
-        }
-
-        public IReadOnlyList<Vehicle> SearchVehicles(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, FuelType fuelType, string vehicleType, string color, int doors, Driver driver)
-        {
-            //this only works if all params are filled out which often isnt the case
             SqlConnection cn = GetConnection();
-            List<Vehicle> vehicles = new List<Vehicle>();
-            string query = "SELECT * FROM vehicle WHERE brand=@brand,model=@model,chasisNumber=@chasisNumber,licensePlate=@licensePlate,vehicleType=@vehicleType,color=@color,doors=@doors";
-             using (SqlCommand cmd = cn.CreateCommand())
-            {
+            using (SqlCommand cmd = cn.CreateCommand()) {
                 cn.Open();
-                try
-                {
-                    cmd.Parameters.Add(new SqlParameter("@brand", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@chasisNumber", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@vehicleType", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@color", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@doors", SqlDbType.NVarChar));
-
-                    cmd.Parameters["@brand"].Value = brand;
-                    cmd.Parameters["@model"].Value = model;
-                    cmd.Parameters["@chasisNumber"].Value = chassisNumber;
-                    cmd.Parameters["@licensePlate"].Value = licensePlate;
-                    cmd.Parameters["@vehicleType"].Value = vehicleType;
-                    cmd.Parameters["@color"].Value = color;
-                    cmd.Parameters["@doors"].Value = doors;
-
+                try {
+                    if (!vehicleisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@vehicleid", SqlDbType.Int));
+                        cmd.Parameters["@vehicleid"].Value = vehicleId;
+                    }
+                    if (!brandisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@brand", SqlDbType.NVarChar));
+                        cmd.Parameters["@brand"].Value = brand;
+                    }
+                    if (!modelisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar));
+                        cmd.Parameters["@model"].Value = model;
+                    }
+                    if (!chasisNumberisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@chasisNumber", SqlDbType.NVarChar));
+                        cmd.Parameters["@chasisNumber"].Value = chassisNumber;
+                    }
+                    if (!licensePlateisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
+                        cmd.Parameters["@licensePlate"].Value = licensePlate;
+                    }
+                    if (!vehicleTypeisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@vehicleType", SqlDbType.NVarChar));
+                        cmd.Parameters["@vehicleType"].Value = vehicleType;
+                    }
+                    if (!colorisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@color", SqlDbType.NVarChar));
+                        cmd.Parameters["@color"].Value = color;
+                    }
+                    if (!doorsisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@doors", SqlDbType.NVarChar));
+                        cmd.Parameters["@doors"].Value = doors;
+                    }
 
                     cmd.CommandText = query;
                     SqlDataReader reader = cmd.ExecuteReader();
-                    //while (reader.Read())
-                    //{
-                    //    string brand = (string)["brand"];
-                    //    string model = (string)reader["model"];
-                    //    vehicles.Add(new Vehicle(brand,model,chassisNumber,licensePlate,new List<FuelType>(),vehicleType,color,doors));
-                    //}
-                }
-                catch (Exception ex)
-                {
+                    reader.Read();
+                
+                    int vehicleIdread = (int)reader["vehicleId"];
+                    string branddread = (string)reader["brand"];
+                    string modeldread = (string)reader["model"];
+                    string chassisNumberdread = (string)reader["chassisNumber"];
+                    string licensePlatedread = (string)reader["licensePlate"];
+                    string vehicleTypedread = (string)reader["vehicleType"];
+                    string colordread = (string)reader["color"];
+                    int doorsdread = (int)reader["doors"];
+                    Vehicle vehicle = new Vehicle(vehicleIdread, branddread, modeldread, chassisNumberdread, licensePlatedread, new List<FuelType> { new FuelType("#") }, vehicleTypedread, colordread, doorsdread);
+                    vehicles.Add(vehicle);
+                } catch (Exception ex) {
 
                     throw new Exception(ex.Message);
-                }
-                finally
-                {
+                } finally {
                     cn.Close();
                 }
             }
-            return vehicles.AsReadOnly();
+            return vehicles.FirstOrDefault();
+        }
+
+    
+
+        public IReadOnlyList<Vehicle> SearchVehicles(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, string vehicleType, string color, int? doors)
+        {
+        //this only works if all params are filled out which often isnt the case
+        List<Vehicle> vehicles = new List<Vehicle>();
+        List<string> subquerylist = new List<string>();
+        int numberofparams = 0;
+        bool vehicleisNull = true;
+        if (vehicleId != null) {
+            vehicleisNull = false;
+            numberofparams++;
+            subquerylist.Add("vehicleId=@vehicleid");
+        }
+        bool brandisNull = true;
+        if (brand != null) {
+            brandisNull = false;
+            if (numberofparams > 0) {
+                subquerylist.Add(",");
+            }
+            numberofparams++;
+            subquerylist.Add("brand=@brand");
+        }
+        bool modelisNull = true;
+        if (model != null) {
+            modelisNull = false;
+            if (numberofparams > 0) {
+                subquerylist.Add(",");
+            }
+            numberofparams++;
+            subquerylist.Add("model=@model");
+        }
+        bool chasisNumberisNull = true;
+        if (chassisNumber != null) {
+            chasisNumberisNull = false;
+            if (numberofparams > 0) {
+                subquerylist.Add(",");
+            }
+            numberofparams++;
+            subquerylist.Add("chasisNumber=@chasisNumber");
+        }
+        bool licensePlateisNull = true;
+        if (licensePlate != null) {
+            licensePlateisNull = false;
+            if (numberofparams > 0) {
+                subquerylist.Add(",");
+            }
+            numberofparams++;
+            subquerylist.Add("licensePlate=@licensePlate");
+
+        }
+        bool vehicleTypeisNull = true;
+        if (vehicleType != null) {
+            vehicleTypeisNull = false;
+            if (numberofparams > 0) {
+                subquerylist.Add(",");
+            }
+            numberofparams++;
+            subquerylist.Add("vehicleType=@vehicleType");
+        }
+        bool colorisNull = true;
+        if (color != null) {
+            colorisNull = false;
+            if (numberofparams > 0) {
+                subquerylist.Add(",");
+            }
+            numberofparams++;
+            subquerylist.Add("color=@color");
+        }
+        bool doorsisNull = true;
+        if (doors != null) {
+            doorsisNull = false;
+            if (numberofparams > 0) {
+                subquerylist.Add(",");
+            }
+            numberofparams++;
+            subquerylist.Add("doors=@doors");
+        }
+        // if number of params is >1 you need comma separation
+
+        string query = "";
+        if (numberofparams <= 0) {
+            //dont even query anything
+            //maybe break here
+        } else {
+            query = $"SELECT * FROM vehicle WHERE {String.Join("", subquerylist)}";
+        }
+        SqlConnection cn = GetConnection();
+        using (SqlCommand cmd = cn.CreateCommand()) {
+            cn.Open();
+            try {
+                if (!vehicleisNull) {
+                    cmd.Parameters.Add(new SqlParameter("@vehicleid", SqlDbType.Int));
+                    cmd.Parameters["@vehicleid"].Value = vehicleId;
+                }
+                if (!brandisNull) {
+                    cmd.Parameters.Add(new SqlParameter("@brand", SqlDbType.NVarChar));
+                    cmd.Parameters["@brand"].Value = brand;
+                }
+                if (!modelisNull) {
+                    cmd.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar));
+                    cmd.Parameters["@model"].Value = model;
+                }
+                if (!chasisNumberisNull) {
+                    cmd.Parameters.Add(new SqlParameter("@chasisNumber", SqlDbType.NVarChar));
+                    cmd.Parameters["@chasisNumber"].Value = chassisNumber;
+                }
+                if (!licensePlateisNull) {
+                    cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
+                    cmd.Parameters["@licensePlate"].Value = licensePlate;
+                }
+                if (!vehicleTypeisNull) {
+                    cmd.Parameters.Add(new SqlParameter("@vehicleType", SqlDbType.NVarChar));
+                    cmd.Parameters["@vehicleType"].Value = vehicleType;
+                }
+                if (!colorisNull) {
+                    cmd.Parameters.Add(new SqlParameter("@color", SqlDbType.NVarChar));
+                    cmd.Parameters["@color"].Value = color;
+                }
+                if (!doorsisNull) {
+                    cmd.Parameters.Add(new SqlParameter("@doors", SqlDbType.NVarChar));
+                    cmd.Parameters["@doors"].Value = doors;
+                }
+
+                cmd.CommandText = query;
+                SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        int vehicleIdread = (int)reader["vehicleId"];
+                        string branddread = (string)reader["brand"];
+                        string modeldread = (string)reader["model"];
+                        string chassisNumberdread = (string)reader["chassisNumber"];
+                        string licensePlatedread = (string)reader["licensePlate"];
+                        string vehicleTypedread = (string)reader["vehicleType"];
+                        string colordread = (string)reader["color"];
+                        int doorsdread = (int)reader["doors"];
+                        Vehicle vehicle = new Vehicle(vehicleIdread, branddread, modeldread, chassisNumberdread, licensePlatedread, new List<FuelType> { new FuelType("#") }, vehicleTypedread, colordread, doorsdread);
+                        vehicles.Add(vehicle);
+                    }
+
+              
+            } catch (Exception ex) {
+
+                throw new Exception(ex.Message);
+            } finally {
+                cn.Close();
+            }
+        }
+        return vehicles.AsReadOnly();
         }
 
         public void UpdateVehicle(Vehicle vehicle)
