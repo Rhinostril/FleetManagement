@@ -33,24 +33,27 @@ namespace FleetManagement.UI
             {
                 FuelCardRepository fuelCardRepository = new FuelCardRepository();
 
-                string cardnumber = "98745";
+                string cardnumber = txtCardnr.Text;
                 DateTime validatyDate = new DateTime(1968, 12, 5);
-                string pin = "1234";
+                string pin = txtPin.Text;
+                if (pin.Length < 4)
+                {
+                    exceptionPinlbl.Content = "Pin requires 4 characters!";
+                }
                 bool isEnabled = true;
 
                 fuelCardRepository.AddFuelCard(new FuelCard(cardnumber, validatyDate, pin, isEnabled));
-
+                MessageBox.Show("FuelCard succesfully added !", "Add new fuelcard", MessageBoxButton.OK, MessageBoxImage.Information);
+                Close();
             }
             catch (Exception ex)
             {
 
-                throw new Exception(ex.Message);
+                 MessageBox.Show(ex.Message, "Add new fuelcard", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            finally
-            {
-                MessageBox.Show("FuelCard succesfully added !","Add new fuelcard",MessageBoxButton.OK,MessageBoxImage.Information);
-                Close();
-            }
+            
+               
+           
         }
     }
 }
