@@ -262,68 +262,68 @@ namespace FleetManagement.Data.Repositories
                 subquerylist.Add("vehicleId=@vehicleid");
             }
             bool brandisNull = true;
-            if (brand != null) {
+            if (!String.IsNullOrWhiteSpace(brand)) {
                 brandisNull = false;
                 if (numberofparams > 0) {
-                    subquerylist.Add(",");
+                    subquerylist.Add(" AND ");
                 }
                 numberofparams++;
                 subquerylist.Add("brand=@brand");
             }
             bool modelisNull = true;
-            if (model != null) {
+            if (!String.IsNullOrWhiteSpace(model)) {
                 modelisNull = false;
-               if (numberofparams > 0) {
-                        subquerylist.Add(",");
-               }
-               numberofparams++;
-                    subquerylist.Add("model=@model");
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("model=@model");
             }
             bool chasisNumberisNull = true;
-            if (chassisNumber != null) {
+            if (!String.IsNullOrWhiteSpace(chassisNumber)) {
                 chasisNumberisNull = false;
                 if (numberofparams > 0) {
-                        subquerylist.Add(",");
-                 }
-                    numberofparams++;
-                    subquerylist.Add("chasisNumber=@chasisNumber");
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("chasisNumber=@chasisNumber");
             }
             bool licensePlateisNull = true;
-            if (licensePlate != null) {
+            if (!String.IsNullOrWhiteSpace(licensePlate)) {
                 licensePlateisNull = false;
-                    if (numberofparams > 0) {
-                        subquerylist.Add(",");
-                    }
-                    numberofparams++;
-                    subquerylist.Add("licensePlate=@licensePlate");
-                    
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("licensePlate=@licensePlate");
+
             }
             bool vehicleTypeisNull = true;
-            if (vehicleType != null) {
+            if (!String.IsNullOrWhiteSpace(vehicleType)) {
                 vehicleTypeisNull = false;
-                    if (numberofparams > 0) {
-                        subquerylist.Add(",");
-                    }
-                    numberofparams++;
-                    subquerylist.Add("vehicleType=@vehicleType");
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("vehicleType=@vehicleType");
             }
             bool colorisNull = true;
-            if (color != null) {
+            if (!String.IsNullOrWhiteSpace(color)) {
                 colorisNull = false;
-                    if (numberofparams > 0) {
-                        subquerylist.Add(",");
-                    }
-                    numberofparams++;
-                    subquerylist.Add("color=@color");
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("color=@color");
             }
             bool doorsisNull = true;
             if (doors != null) {
                 doorsisNull = false;
-                    if (numberofparams > 0) {
-                        subquerylist.Add(",");
-                    }
-                    numberofparams++;
-                    subquerylist.Add("doors=@doors");
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("doors=@doors");
             }
             // if number of params is >1 you need comma separation
 
@@ -413,7 +413,7 @@ namespace FleetManagement.Data.Repositories
         if (!String.IsNullOrWhiteSpace(brand)) {
             brandisNull = false;
             if (numberofparams > 0) {
-                subquerylist.Add(",");
+                subquerylist.Add(" AND ");
             }
             numberofparams++;
             subquerylist.Add("brand=@brand");
@@ -422,7 +422,7 @@ namespace FleetManagement.Data.Repositories
         if (!String.IsNullOrWhiteSpace(model)) {
             modelisNull = false;
             if (numberofparams > 0) {
-                subquerylist.Add(",");
+                subquerylist.Add(" AND ");
             }
             numberofparams++;
             subquerylist.Add("model=@model");
@@ -431,7 +431,7 @@ namespace FleetManagement.Data.Repositories
         if (!String.IsNullOrWhiteSpace(chassisNumber)) {
             chasisNumberisNull = false;
             if (numberofparams > 0) {
-                subquerylist.Add(",");
+                subquerylist.Add(" AND ");
             }
             numberofparams++;
             subquerylist.Add("chasisNumber=@chasisNumber");
@@ -440,7 +440,7 @@ namespace FleetManagement.Data.Repositories
         if (!String.IsNullOrWhiteSpace(licensePlate)) {
             licensePlateisNull = false;
             if (numberofparams > 0) {
-                subquerylist.Add(",");
+                subquerylist.Add(" AND ");
             }
             numberofparams++;
             subquerylist.Add("licensePlate=@licensePlate");
@@ -450,7 +450,7 @@ namespace FleetManagement.Data.Repositories
         if (!String.IsNullOrWhiteSpace(vehicleType)) {
             vehicleTypeisNull = false;
             if (numberofparams > 0) {
-                subquerylist.Add(",");
+                subquerylist.Add(" AND ");
             }
             numberofparams++;
             subquerylist.Add("vehicleType=@vehicleType");
@@ -459,7 +459,7 @@ namespace FleetManagement.Data.Repositories
         if (!String.IsNullOrWhiteSpace(color)) {
             colorisNull = false;
             if (numberofparams > 0) {
-                subquerylist.Add(",");
+                subquerylist.Add(" AND ");
             }
             numberofparams++;
             subquerylist.Add("color=@color");
@@ -468,7 +468,7 @@ namespace FleetManagement.Data.Repositories
         if (doors != null) {
             doorsisNull = false;
             if (numberofparams > 0) {
-                subquerylist.Add(",");
+                subquerylist.Add(" AND ");
             }
             numberofparams++;
             subquerylist.Add("doors=@doors");

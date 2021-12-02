@@ -59,7 +59,9 @@ namespace FleetManagement.UI
             var returnlist =  vehicleManager.Searchvehicles(null,brandtxtbox.Text, modeltxtbox.Text, ChassisNrtxtbox.Text, LicensePlatetxtbox.Text, typetxtbox.Text, colortxtbox.Text, doors);
             Console.WriteLine();
             if (returnlist.Any()) {
+
                 vehicles.Clear();
+                VehiclesDataGrid.ItemsSource = vehicles;
                 VehiclesDataGrid.Items.Refresh();
                 foreach (Vehicle result in returnlist) {
                     vehicles.Add(result);
@@ -70,6 +72,7 @@ namespace FleetManagement.UI
                     vehicles.Add(v);
                 }
             }
+            
             Console.WriteLine();
             VehiclesDataGrid.Items.Refresh();
         }
