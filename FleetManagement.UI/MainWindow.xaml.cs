@@ -33,6 +33,7 @@ namespace FleetManagement.UI
         private AddressManager addressManager = new AddressManager(new AddressRepository());
 
         private ObservableCollection<Vehicle> vehicles = new ObservableCollection<Vehicle>();
+        private List<Vehicle> vehicleCache = new List<Vehicle>();
         private ObservableCollection<Driver> drivers = new ObservableCollection<Driver>();
         private ObservableCollection<FuelCard> fuelCards = new ObservableCollection<FuelCard>();
 
@@ -41,6 +42,8 @@ namespace FleetManagement.UI
             InitializeComponent();
             vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetLatestVehicles());
             VehiclesDataGrid.ItemsSource = vehicles;
+            vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetLatestVehicles());
+            vehicleCache = vehicles.ToList();
             drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
             DriversDataGrid.ItemsSource = drivers;
             fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.GetLatestFuelcards());
@@ -49,8 +52,26 @@ namespace FleetManagement.UI
 
         private void SearchVehiclesButton_Click(object sender, RoutedEventArgs e)
         {
-            
-
+            int? doors = null;
+            if (!String.IsNullOrWhiteSpace(Doortxtbox.Text)) {
+                doors = Int32.Parse(Doortxtbox.Text);
+            }
+            var returnlist =  vehicleManager.Searchvehicles(null,brandtxtbox.Text, modeltxtbox.Text, ChassisNrtxtbox.Text, LicensePlatetxtbox.Text, typetxtbox.Text, colortxtbox.Text, doors);
+            Console.WriteLine();
+            if (returnlist.Any()) {
+                vehicles.Clear();
+                VehiclesDataGrid.Items.Refresh();
+                foreach (Vehicle result in returnlist) {
+                    vehicles.Add(result);
+                }
+            } else {
+                vehicles.Clear();
+                foreach(Vehicle v in vehicleCache) {
+                    vehicles.Add(v);
+                }
+            }
+            Console.WriteLine();
+            VehiclesDataGrid.Items.Refresh();
         }
 
         

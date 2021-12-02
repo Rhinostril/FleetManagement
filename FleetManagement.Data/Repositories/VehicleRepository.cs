@@ -410,7 +410,7 @@ namespace FleetManagement.Data.Repositories
             subquerylist.Add("vehicleId=@vehicleid");
         }
         bool brandisNull = true;
-        if (brand != null) {
+        if (!String.IsNullOrWhiteSpace(brand)) {
             brandisNull = false;
             if (numberofparams > 0) {
                 subquerylist.Add(",");
@@ -419,7 +419,7 @@ namespace FleetManagement.Data.Repositories
             subquerylist.Add("brand=@brand");
         }
         bool modelisNull = true;
-        if (model != null) {
+        if (!String.IsNullOrWhiteSpace(model)) {
             modelisNull = false;
             if (numberofparams > 0) {
                 subquerylist.Add(",");
@@ -428,7 +428,7 @@ namespace FleetManagement.Data.Repositories
             subquerylist.Add("model=@model");
         }
         bool chasisNumberisNull = true;
-        if (chassisNumber != null) {
+        if (!String.IsNullOrWhiteSpace(chassisNumber)) {
             chasisNumberisNull = false;
             if (numberofparams > 0) {
                 subquerylist.Add(",");
@@ -437,7 +437,7 @@ namespace FleetManagement.Data.Repositories
             subquerylist.Add("chasisNumber=@chasisNumber");
         }
         bool licensePlateisNull = true;
-        if (licensePlate != null) {
+        if (!String.IsNullOrWhiteSpace(licensePlate)) {
             licensePlateisNull = false;
             if (numberofparams > 0) {
                 subquerylist.Add(",");
@@ -447,7 +447,7 @@ namespace FleetManagement.Data.Repositories
 
         }
         bool vehicleTypeisNull = true;
-        if (vehicleType != null) {
+        if (!String.IsNullOrWhiteSpace(vehicleType)) {
             vehicleTypeisNull = false;
             if (numberofparams > 0) {
                 subquerylist.Add(",");
@@ -456,7 +456,7 @@ namespace FleetManagement.Data.Repositories
             subquerylist.Add("vehicleType=@vehicleType");
         }
         bool colorisNull = true;
-        if (color != null) {
+        if (!String.IsNullOrWhiteSpace(color)) {
             colorisNull = false;
             if (numberofparams > 0) {
                 subquerylist.Add(",");

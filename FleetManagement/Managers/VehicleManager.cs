@@ -78,6 +78,14 @@ namespace FleetManagement.Business.Managers
             }
         }
 
+        public IReadOnlyList<Vehicle> Searchvehicles(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, string vehicleType, string color, int? doors) {
+            try {
+                return repo.SearchVehicles(vehicleId, brand, model, chassisNumber, licensePlate, vehicleType, color, doors);
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public Vehicle GetVehicle(int vehicleId)
         {
             try
