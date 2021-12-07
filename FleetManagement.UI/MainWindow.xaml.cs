@@ -18,6 +18,7 @@ using FleetManagement.Business.Interfaces;
 using FleetManagement.Business.Managers;
 using FleetManagement.Data.Repositories;
 using FleetManagement.UI.DetailForms;
+using FleetManagement.UI.UpdateForms;
 
 namespace FleetManagement.UI
 {
@@ -199,7 +200,13 @@ namespace FleetManagement.UI
 
         private void DriverUpdate_Click(object sender, RoutedEventArgs e)
         {
-
+            Driver driver = (Driver)DriversDataGrid.SelectedItem;
+            UpdateDriverWindow objWindow = new UpdateDriverWindow(driver);
+            if(objWindow.ShowDialog() == true)
+            {
+                drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
+                DriversDataGrid.ItemsSource = drivers;
+            }
         }
 
         private void DriverDelete_Click(object sender, RoutedEventArgs e)
