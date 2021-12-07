@@ -306,7 +306,35 @@ namespace FleetManagement.Data.Repositories
 
             }
 
-        }
+        } // DONE
+
+        public void BulkInsertDriverLicenseType(List<(int, int)> driverLicenseTypes)
+        {
+            using (SqlBulkCopy bc = new SqlBulkCopy(connectionString))
+            {
+                DataTable dt = new DataTable("DriverLicenseType");
+
+                dt.Columns.Add(new DataColumn("driverId", typeof(int)));
+                dt.Columns.Add(new DataColumn("licenseTypeId", typeof(int)));
+
+                foreach (var pair in driverLicenseTypes)
+                {
+                    dt.Rows.Add(pair.Item1, pair.Item2);
+                }
+
+                bc.DestinationTableName = "FuelCardFuelType";
+
+                try
+                {
+                    bc.WriteToServer(dt);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
+            }
+        } // DONE
 
 
     }
