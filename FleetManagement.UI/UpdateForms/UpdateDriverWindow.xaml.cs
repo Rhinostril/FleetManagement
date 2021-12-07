@@ -25,6 +25,7 @@ namespace FleetManagement.UI.UpdateForms
     public partial class UpdateDriverWindow : Window
     {
 
+        private DriverManager driverManager = new DriverManager(new DriverRepository());
         private Driver driver;
 
         public UpdateDriverWindow(Driver driver)
@@ -49,17 +50,17 @@ namespace FleetManagement.UI.UpdateForms
         {
             try
             {
-                string firstName = txtFirstName.Text;
-                string lastName = txtLastName.Text;
-                DateTime dateOfBirth = (DateTime)dtpDateOfBirth.SelectedDate;
-                string securityNumber = txtSecurityNumber.Text;
-                string street = txtStreet.Text;
-                string houseNr = txtHouseNumber.Text;
-                string postalCode = txtPostalCode.Text;
-                string city = txtCity.Text;
-                string country = txtCountry.Text;
-                driver.FirstName = txtFirstName.Text;
-                
+                driver.SetFirstName(txtFirstName.Text);
+                driver.SetLastName(txtLastName.Text);
+                driver.SetDateOfBirth((DateTime)dtpDateOfBirth.SelectedDate);
+                driver.SetSecurityNumber(txtSecurityNumber.Text);
+                driver.Address.SetHouseNr(txtHouseNumber.Text);
+                driver.Address.SetPostalCode(txtPostalCode.Text);
+                driver.Address.SetCity(txtCity.Text);
+                driver.Address.SetCountry(txtCountry.Text);
+
+                driverManager.UpdateDriver(driver);
+
             }
             catch(Exception ex)
             {
