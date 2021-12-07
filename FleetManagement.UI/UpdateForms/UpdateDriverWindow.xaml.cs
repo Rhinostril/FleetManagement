@@ -31,6 +31,18 @@ namespace FleetManagement.UI.UpdateForms
         {
             InitializeComponent();
             this.driver = driver;
+            txtDriverId.Text = driver.DriverID.ToString();
+            txtFirstName.Text = driver.FirstName;
+            txtLastName.Text = driver.LastName;
+            dtpDateOfBirth.SelectedDate = driver.DateOfBirth;
+            txtSecurityNumber.Text = driver.SecurityNumber;
+            if (driver.Vehicle != null) txtVehicle.Text = driver.Vehicle.ToString();
+            if (driver.FuelCard != null) txtFuelCard.Text = driver.FuelCard.ToString();
+            txtStreet.Text = driver.Address.Street;
+            txtHouseNumber.Text = driver.Address.HouseNr;
+            txtPostalCode.Text = driver.Address.PostalCode;
+            txtCity.Text = driver.Address.City;
+            txtCountry.Text = driver.Address.Country;
         }
 
         private void btnUpdateDriver_Click(object sender, RoutedEventArgs e)
@@ -46,6 +58,7 @@ namespace FleetManagement.UI.UpdateForms
                 string postalCode = txtPostalCode.Text;
                 string city = txtCity.Text;
                 string country = txtCountry.Text;
+                driver.FirstName = txtFirstName.Text;
                 
             }
             catch(Exception ex)

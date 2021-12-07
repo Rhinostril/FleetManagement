@@ -79,7 +79,7 @@ namespace FleetManagement.Business.Entities
         }
 
 
-        private void SetFirstName(string firstname) {
+        public void SetFirstName(string firstname) {
             
             if(String.IsNullOrWhiteSpace(firstname)) {
                 throw new DriverException("Driver -Setfirstname: Cannot set an empty first name");
@@ -89,7 +89,7 @@ namespace FleetManagement.Business.Entities
             }
            
         }
-        private void SetLastName(string lastname) {
+        public void SetLastName(string lastname) {
             if(String.IsNullOrWhiteSpace(lastname)) {
                 throw new DriverException("Driver - SetLastName: Cannot set an empty last name");
             }
@@ -98,7 +98,7 @@ namespace FleetManagement.Business.Entities
             }
             
         }
-        private void SetDateOfBirth(DateTime dateofbirth) {
+        public void SetDateOfBirth(DateTime dateofbirth) {
             TimeSpan offset = DateTime.Now - dateofbirth;
             if(offset.TotalDays <= 0) {
                 throw new DriverException("Driver - SetDateOfBirth: Date of birth cannot be in the future");
