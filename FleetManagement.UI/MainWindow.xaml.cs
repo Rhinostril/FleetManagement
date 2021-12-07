@@ -158,8 +158,11 @@ namespace FleetManagement.UI
         {
             try
             {
-                FuelCard fuelCard = (FuelCard)FuelCardsDataGrid.SelectedItem;
-                fuelCardManager.DeleteFuelCard(fuelCard);
+                if(MessageBox.Show("Are you sure?", "Delete Fuelcard", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    FuelCard fuelCard = (FuelCard)FuelCardsDataGrid.SelectedItem;
+                    fuelCardManager.DeleteFuelCard(fuelCard);
+                }
             }
             catch(Exception ex)
             {
@@ -182,8 +185,11 @@ namespace FleetManagement.UI
         {
             try
             {
-                Vehicle vehicle = (Vehicle)VehiclesDataGrid.SelectedItem;
-                vehicleManager.DeleteVehicle(vehicle);
+                if(MessageBox.Show("Are you sure?", "Delete Vehicle", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Vehicle vehicle = (Vehicle)VehiclesDataGrid.SelectedItem;
+                    vehicleManager.DeleteVehicle(vehicle);
+                }
             }
             catch (Exception ex)
             {
@@ -200,8 +206,11 @@ namespace FleetManagement.UI
         {
             try
             {
-                Driver driver = (Driver)DriversDataGrid.SelectedItem;
-                driverManager.DeleteDriver(driver);
+                if(MessageBox.Show("Are you sure?", "Delete Driver", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Driver driver = (Driver)DriversDataGrid.SelectedItem;
+                    driverManager.DeleteDriver(driver);
+                }
             }
             catch (Exception ex)
             {

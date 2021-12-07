@@ -57,7 +57,16 @@
                     <TextBox Grid.Row="2" Grid.Column="1" Margin="5"/>
                     <Button x:Name="SearchDriversButton" Content="  Search Drivers  " Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="5"/>
                     <Button x:Name="NewDriverButton" Content="  New Driver  " Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Margin="5" Click="NewDriverButton_Click" MinHeight="28"/>
-                    <DataGrid x:Name="DriversDataGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single" ColumnWidth="*">
+                    <DataGrid x:Name="DriversDataGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single" ColumnWidth="*" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Driver ID" Binding="{Binding Path=DriverID}" Width="0.65*"/>
+                            <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"/>
+                            <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}"/>
+                            <DataGridTextColumn Header="Date Of Birth" Binding="{Binding Path=DateOfBirth}"/>
+                            <DataGridTextColumn Header="Social Security Number" Binding="{Binding Path=SecurityNumber}" Width="1.5*"/>
+                            <DataGridTextColumn Header="Fuelcard" Binding="{Binding Path=FuelCard}"/>
+                            <DataGridTextColumn Header="Vehicle" Binding="{Binding Path=Vehicle}"/>
+                        </DataGrid.Columns>
                         <DataGrid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Details" Click="DriverDetails_Click"/>
@@ -101,8 +110,17 @@
                     <TextBox x:Name="Doortxtbox" Grid.Row="2" Grid.Column="1" Margin="5"/>
                     <Button x:Name="SearchVehiclesButton" Content="  Search Vehicles  " Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="5" Click="SearchVehiclesButton_Click"/>
                     <Button x:Name="NewVehicleButton" Content="  New Vehicle  " Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Margin="5" Click="NewVehicleButton_Click" MinHeight="28"/>
-                    <DataGrid x:Name="VehiclesDataGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single" ColumnWidth="*">
-
+                    <DataGrid x:Name="VehiclesDataGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single" ColumnWidth="*" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Vehicle ID" Binding="{Binding Path=VehicleId}" Width="auto"/>
+                            <DataGridTextColumn Header="Brand" Binding="{Binding Path=Brand}" Width="1*"/>
+                            <DataGridTextColumn Header="Model" Binding="{Binding Path=Model}" Width="1*"/>
+                            <DataGridTextColumn Header="Chassis Number" Binding="{Binding Path=ChassisNumber}" Width="1.5*"/>
+                            <DataGridTextColumn Header="License Plate" Binding="{Binding Path=LicensePlate}" Width="1.5*"/>
+                            <DataGridTextColumn Header="Type" Binding="{Binding Path=VehicleType}" Width="auto"/>
+                            <DataGridTextColumn Header="Color" Binding="{Binding Path=Color}" Width="auto"/>
+                            <DataGridTextColumn Header="Doors" Binding="{Binding Path=Doors}" Width="auto"/>
+                        </DataGrid.Columns>
                         <DataGrid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Details" Click="Details_Click"/>
@@ -134,7 +152,14 @@
                     <DatePicker x:Name="FuelCardValidityDatePicker" Grid.Row="0" Grid.Column="3" Margin="5" VerticalAlignment="Center" SelectedDateFormat="Short" IsTodayHighlighted="true"/>
                     <Button x:Name="SearchFuelCardsButton" Content="  Search Fuelcards  " Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Margin="5" Height="28" Click="SearchFuelCardsButton_Click"/>
                     <Button x:Name="NewFuelCardButton" Content="  New Fuelcard  " Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Margin="5" Click="NewFuelCardButton_Click" MinHeight="28"/>
-                    <DataGrid x:Name="FuelCardsDataGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single" ColumnWidth="*">
+                    <DataGrid x:Name="FuelCardsDataGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single" ColumnWidth="*" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Fuelcard ID" Binding="{Binding Path=FuelCardId}"/>
+                            <DataGridTextColumn Header="Card Number" Binding="{Binding Path=CardNumber}"/>
+                            <DataGridTextColumn Header="Validity Date" Binding="{Binding Path=ValidityDate}"/>
+                            <DataGridTextColumn Header="Driver" Binding="{Binding Path=Driver}"/>
+                            <DataGridTextColumn Header="Enabled" Binding="{Binding Path=IsEnabled}"/>
+                        </DataGrid.Columns>
                         <DataGrid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Details" Click="FuelCardsDetails_Click"/>
