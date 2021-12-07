@@ -322,7 +322,7 @@ namespace FleetManagement.Data.Repositories
                     dt.Rows.Add(pair.Item1, pair.Item2);
                 }
 
-                bc.DestinationTableName = "FuelCardFuelType";
+                bc.DestinationTableName = "DriverLicenseType";
 
                 try
                 {

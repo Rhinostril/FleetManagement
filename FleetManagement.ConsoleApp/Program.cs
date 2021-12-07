@@ -15,7 +15,6 @@ namespace FleetManagement.ConsoleApp
 
             Console.WriteLine("Working...");
 
-            repo.BulkInsertDriverLicenseType(randomDriverLicenseTypes());
 
             Console.WriteLine("Done!");
 
