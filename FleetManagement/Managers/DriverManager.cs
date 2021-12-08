@@ -41,7 +41,7 @@ namespace FleetManagement.Business.Managers
         {
             try
             {
-                // Bestaat driver met zelfde properties al?
+                repo.UpdateDriverWithAddress(driver);
 
             }
             catch (Exception ex)
