@@ -57,6 +57,7 @@ namespace FleetManagement.UI.SelectForms
                 {
                     vehicles = new ObservableCollection<Vehicle>(vehicleManager.Searchvehicles(null, brand, model, chassisNr, licensePlate, type, color, null));
                 }
+                lstVehicles.ItemsSource = vehicles;
             }
             catch (Exception ex)
             {
