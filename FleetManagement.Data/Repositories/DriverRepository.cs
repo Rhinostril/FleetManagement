@@ -1092,7 +1092,7 @@ namespace FleetManagement.Data.Repositories
         }
 
         // *******************************************************************************************************
-        // ********************************* UPDATE DRIVER WITH ADDRESS ******************************************
+        // ********************************* UPDATE DRIVER WITH TRANSACTION **************************************
         // *******************************************************************************************************
         public void UpdateDriverWithAddress(Driver driver)
         {
@@ -1103,6 +1103,14 @@ namespace FleetManagement.Data.Repositories
             {
                 UpdateAddress(driver.Address);
                 UpdateDriver(driver);
+                if(driver.Vehicle != null)
+                {
+                    ConnectVehicleToDriver(driver);
+                }
+                if(driver.FuelCard != null)
+                {
+                    ConnectFuelCardToDriver(driver);
+                }
                 transaction.Commit();
             }
             catch(Exception ex)
@@ -1200,6 +1208,62 @@ namespace FleetManagement.Data.Repositories
                 }
             }
 
+        }
+        private void ConnectVehicleToDriver(Driver driver)
+        {
+            SqlConnection connection = getConnection();
+            string query = $"UPDATE [Vehicle] SET driverId=@driverId WHERE vehicleId=@vehicleId";
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                    command.Parameters.Add(new SqlParameter("@vehicleId", SqlDbType.Int));
+
+                    command.Parameters["@driverId"].Value = driver.DriverID;
+                    command.Parameters["@vehicleId"].Value = driver.Vehicle.VehicleId;
+
+                    command.CommandText = query;
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+        private void ConnectFuelCardToDriver(Driver driver)
+        {
+            SqlConnection connection = getConnection();
+            string query = $"UPDATE [Fuelcard] SET driverId=@driverId WHERE fuelCardId=@fuelCardId";
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                    command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
+
+                    command.Parameters["@driverId"].Value = driver.DriverID;
+                    command.Parameters["@fuelCardId"].Value = driver.FuelCard.FuelCardId;
+
+                    command.CommandText = query;
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
 
         // *******************************************************************************************************
