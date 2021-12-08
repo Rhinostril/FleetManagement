@@ -5,8 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FleetManagement.UI.SelectForms"
         mc:Ignorable="d"
-        Title="SelectVehicleWindow" Height="450" Width="800">
+        Title="SelectVehicleWindow" Height="450" Width="512">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Brand" Margin="5"/>
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtBrand" Margin="5"/>
+        <Label Grid.Row="0" Grid.Column="2" Content="Model" Margin="5"/>
+        <TextBox Grid.Row="0" Grid.Column="3" x:Name="txtModel" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Type" Margin="5"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtType" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="2" Content="Chassis Number" Margin="5"/>
+        <TextBox Grid.Row="1" Grid.Column="3" x:Name="txtChassisNumber" Margin="5"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="License Plate" Margin="5"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtLicensePlate" Margin="5"/>
+        <Label Grid.Row="2" Grid.Column="2" Content="Color" Margin="5"/>
+        <TextBox Grid.Row="2" Grid.Column="3" x:Name="txtColor" Margin="5"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Doors" Margin="5"/>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtDoors" Margin="5"/>
+        <Button Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" x:Name="btnSearchVehicles" Margin="5" MinHeight="26" Content="Search Vehicles" Click="btnSearchVehicles_Click"/>
+        <ListBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" x:Name="lstVehicles" Margin="5"/>
+        <Button Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" x:Name="btnSelectVehicle" Margin="5" MinHeight="26" Content="Select Vehicle" Click="btnSelectVehicle_Click"/>
     </Grid>
 </Window>
