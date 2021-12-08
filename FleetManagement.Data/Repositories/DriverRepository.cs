@@ -607,7 +607,7 @@ namespace FleetManagement.Data.Repositories
 
     public IReadOnlyList<Driver> SearchDrivers(int? id, string lastName, string firstName, DateTime? dateOfBirth, string securtiyNumber, string street, string houseNR, string postalcode )
         {
-            List<Vehicle> vehicles = new List<Vehicle>();
+            List<Driver> driverlist = new List<Driver>();
             List<string> subquerylist = new List<string>();
             int numberofparams = 0;
             bool DriverIDisNull = true;
@@ -737,7 +737,7 @@ namespace FleetManagement.Data.Repositories
                     
 
                     SqlDataReader reader = cmd.ExecuteReader();
-                    List<Driver> drivers = new List<Driver>();
+                   
                     while (reader.Read())
                     {
                         int driverid = (int)reader.GetValue("driverId");
@@ -796,7 +796,7 @@ namespace FleetManagement.Data.Repositories
                         }
                         driverlist.Add(D);
                     }
-                    return drivers.AsReadOnly();
+                   
                 }
                 catch (Exception ex)
                 {
@@ -806,7 +806,9 @@ namespace FleetManagement.Data.Repositories
                 {
                     connection.Close();
                 }
+                return driverlist.AsReadOnly();
             }
+            
         }
 
         public Driver GetDriverById(int id) {

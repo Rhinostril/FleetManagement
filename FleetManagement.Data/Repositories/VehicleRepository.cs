@@ -624,7 +624,7 @@ namespace FleetManagement.Data.Repositories
                 connection.Close();
             }
         }
-        private void UpdateVehicle(Vehicle vehicle)
+        public void UpdateVehicle(Vehicle vehicle)
         {
             SqlConnection cn = GetConnection();
             string query = "UPDATE vehicle" +

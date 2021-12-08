@@ -47,14 +47,14 @@ namespace FleetManagement.UI.SelectForms
             {
                 string firstName = txtFirstName.Text;
                 string lastName = txtLastName.Text;
-                DateTime dateOfBirth = (DateTime)dtpDateOfBirth.SelectedDate;
+                DateTime? dateOfBirth = dtpDateOfBirth.SelectedDate;
                 string street = txtStreet.Text;
                 string number = txtNumber.Text;
                 string postalCode = txtPostalCode.Text;
                 string city = txtCity.Text;
                 string country = txtCountry.Text;
                 Address address = new Address(street, number, postalCode, city, country);
-                drivers = new ObservableCollection<Driver>(driverManager.SearchDrivers(null, firstName, lastName, dateOfBirth, address));
+                drivers = new ObservableCollection<Driver>(driverManager.SearchDrivers(null, lastName, firstName, dateOfBirth, null, street, number, postalCode));
                 lstDrivers.ItemsSource = drivers;
             }
             catch(Exception ex)
