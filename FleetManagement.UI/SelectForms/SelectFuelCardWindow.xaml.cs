@@ -16,6 +16,7 @@ using FleetManagement.Business.Managers;
 using FleetManagement.Business.Interfaces;
 using FleetManagement.Data.Repositories;
 using FleetManagement.UI.SelectForms;
+using System.Collections.ObjectModel;
 
 namespace FleetManagement.UI.SelectForms
 {
@@ -25,12 +26,43 @@ namespace FleetManagement.UI.SelectForms
     public partial class SelectFuelCardWindow : Window
     {
 
+        private FuelCardManager fuelCardManager = new FuelCardManager(new FuelCardRepository());
+        private ObservableCollection<FuelCard> fuelCards = new ObservableCollection<FuelCard>();
         public FuelCard fuelCard { get; private set; }
         
 
         public SelectFuelCardWindow()
         {
             InitializeComponent();
+            fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.GetLatestFuelcards());
+            lstFuelCards.ItemsSource = fuelCards;
+        }
+
+        private void btnSearchFuelCard_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string cardNumber = txtCardNumber.Text;
+                DateTime? valDate = (DateTime)dtpValidityDate.SelectedDate;
+                fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.SearchFuelCards(cardNumber, valDate));
+                lstFuelCards.ItemsSource = fuelCards;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!");
+            }
+        }
+
+        private void btnSelectFuelCard_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                fuelCard = (FuelCard)lstFuelCards.SelectedItem;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!");
+            }
         }
     }
 }
