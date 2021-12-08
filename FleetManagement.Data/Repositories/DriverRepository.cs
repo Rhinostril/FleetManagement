@@ -905,8 +905,22 @@ namespace FleetManagement.Data.Repositories
                     command.Parameters["@lastName"].Value = driver.LastName;
                     command.Parameters["@dateOfBirth"].Value = driver.DateOfBirth;
                     command.Parameters["@securityNumber"].Value = driver.SecurityNumber;
-                    command.Parameters["@vehicleId"].Value = driver.Vehicle.VehicleId;
-                    command.Parameters["@fuelcardId"].Value = driver.FuelCard.FuelCardId;
+                    if (driver.Vehicle != null)
+                    {
+                        command.Parameters["@vehicleId"].Value = driver.Vehicle.VehicleId;
+                    }
+                    else
+                    {
+                        command.Parameters["@vehicleId"].Value = DBNull.Value;
+                    }
+                    if(driver.FuelCard != null)
+                    {
+                        command.Parameters["@fuelcardId"].Value = driver.FuelCard.FuelCardId;
+                    }
+                    else
+                    {
+                        command.Parameters["@fuelcardId"].Value = DBNull.Value;
+                    }
                     command.CommandText = query;
                     command.ExecuteNonQuery();
                 }

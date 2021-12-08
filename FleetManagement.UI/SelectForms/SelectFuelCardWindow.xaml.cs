@@ -58,6 +58,8 @@ namespace FleetManagement.UI.SelectForms
             try
             {
                 fuelCard = (FuelCard)lstFuelCards.SelectedItem;
+                DialogResult = true;
+                Close();
             }
             catch(Exception ex)
             {

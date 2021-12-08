@@ -45,8 +45,8 @@
         <TextBox x:Name="txtLastName" Grid.Row="3" Grid.Column="1" Margin="5"/>
         <DatePicker x:Name="dtpDateOfBirth" Grid.Row="4" Grid.Column="1" Margin="5" SelectedDateFormat="Short"/>
         <TextBox x:Name="txtSecurityNumber" Grid.Row="5" Grid.Column="1" Margin="5"/>
-        <TextBox x:Name="txtVehicle" Grid.Row="6" Grid.Column="1" Margin="5"/>
-        <TextBox x:Name="txtFuelCard" Grid.Row="7" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="txtVehicle" Grid.Row="6" Grid.Column="1" Margin="5" IsEnabled="False"/>
+        <TextBox x:Name="txtFuelCard" Grid.Row="7" Grid.Column="1" Margin="5" IsEnabled="False"/>
         <TextBox x:Name="txtStreet" Grid.Row="1" Grid.Column="3" Margin="5"/>
         <TextBox x:Name="txtHouseNumber" Grid.Row="2" Grid.Column="3" Margin="5"/>
         <TextBox x:Name="txtPostalCode" Grid.Row="3" Grid.Column="3" Margin="5"/>

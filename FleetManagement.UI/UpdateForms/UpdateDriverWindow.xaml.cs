@@ -60,7 +60,8 @@ namespace FleetManagement.UI.UpdateForms
                 driver.Address.SetCountry(txtCountry.Text);
 
                 driverManager.UpdateDriver(driver);
-
+                DialogResult = true;
+                Close();
             }
             catch(Exception ex)
             {
