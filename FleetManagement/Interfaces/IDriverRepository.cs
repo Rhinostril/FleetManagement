@@ -10,7 +10,7 @@ namespace FleetManagement.Business.Interfaces
         IReadOnlyList<Driver> GetTop50Drivers();
         IReadOnlyList<Driver> GetDrivers(int? amount);
         IReadOnlyList<Driver> GetDriversByAmount(int amount);
-        IReadOnlyList<Driver> SearchDrivers(int? id, string firstName, string lastName, DateTime dateOfBirth, Address address);
+        IReadOnlyList<Driver> SearchDrivers(int? id, string lastName, string firstName, DateTime? dateOfBirth, string securtiyNumber, string street, string houseNR, string postalcode);
         Driver GetDriverById(int id);
         Driver SearchDriver(int? id, string firstName, string lastName, DateTime dateOfBirth, Address address);
         bool DriverExists(int id);

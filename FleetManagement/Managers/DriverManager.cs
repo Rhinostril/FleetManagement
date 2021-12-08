@@ -110,11 +110,11 @@ namespace FleetManagement.Business.Managers
             }
         }
 
-        public IReadOnlyList<Driver> SearchDrivers(int? driverId, string firstName, string lastName, DateTime dateOfBirth, Address address)
+        public IReadOnlyList<Driver> SearchDrivers(int? id, string lastName, string firstName, DateTime? dateOfBirth, string securtiyNumber, string street, string houseNR, string postalcode)
         {
             try
             {
-                return repo.SearchDrivers(driverId, firstName, lastName, dateOfBirth, address);
+                return repo.SearchDrivers(id, lastName, firstName, dateOfBirth, securtiyNumber, street, houseNR, postalcode);
             }
             catch(Exception ex)
             {

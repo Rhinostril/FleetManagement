@@ -604,9 +604,241 @@ namespace FleetManagement.Data.Repositories
         {
             throw new NotImplementedException();
         }
+        //public IReadOnlyList<Vehicle> SearchVehicles(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, string vehicleType, string color, int? doors) {
 
-        public IReadOnlyList<Driver> SearchDrivers(int? id, string firstName, string lastName, DateTime dateOfBirth, Address address)
+        //    List<Vehicle> vehicles = new List<Vehicle>();
+        //    List<string> subquerylist = new List<string>();
+        //    int numberofparams = 0;
+        //    bool vehicleisNull = true;
+        //    if (vehicleId != null) {
+        //        vehicleisNull = false;
+        //        numberofparams++;
+        //        subquerylist.Add("vehicleId=@vehicleid");
+        //    }
+        //    bool brandisNull = true;
+        //    if (!String.IsNullOrWhiteSpace(brand)) {
+        //        brandisNull = false;
+        //        if (numberofparams > 0) {
+        //            subquerylist.Add(" AND ");
+        //        }
+        //        numberofparams++;
+        //        subquerylist.Add("brand=@brand");
+        //    }
+        //    bool modelisNull = true;
+        //    if (!String.IsNullOrWhiteSpace(model)) {
+        //        modelisNull = false;
+        //        if (numberofparams > 0) {
+        //            subquerylist.Add(" AND ");
+        //        }
+        //        numberofparams++;
+        //        subquerylist.Add("model=@model");
+        //    }
+        //    bool chasisNumberisNull = true;
+        //    if (!String.IsNullOrWhiteSpace(chassisNumber)) {
+        //        chasisNumberisNull = false;
+        //        if (numberofparams > 0) {
+        //            subquerylist.Add(" AND ");
+        //        }
+        //        numberofparams++;
+        //        subquerylist.Add("chasisNumber=@chasisNumber");
+        //    }
+        //    bool licensePlateisNull = true;
+        //    if (!String.IsNullOrWhiteSpace(licensePlate)) {
+        //        licensePlateisNull = false;
+        //        if (numberofparams > 0) {
+        //            subquerylist.Add(" AND ");
+        //        }
+        //        numberofparams++;
+        //        subquerylist.Add("licensePlate=@licensePlate");
+
+        //    }
+        //    bool vehicleTypeisNull = true;
+        //    if (!String.IsNullOrWhiteSpace(vehicleType)) {
+        //        vehicleTypeisNull = false;
+        //        if (numberofparams > 0) {
+        //            subquerylist.Add(" AND ");
+        //        }
+        //        numberofparams++;
+        //        subquerylist.Add("vehicleType=@vehicleType");
+        //    }
+        //    bool colorisNull = true;
+        //    if (!String.IsNullOrWhiteSpace(color)) {
+        //        colorisNull = false;
+        //        if (numberofparams > 0) {
+        //            subquerylist.Add(" AND ");
+        //        }
+        //        numberofparams++;
+        //        subquerylist.Add("color=@color");
+        //    }
+        //    bool doorsisNull = true;
+        //    if (doors != null) {
+        //        doorsisNull = false;
+        //        if (numberofparams > 0) {
+        //            subquerylist.Add(" AND ");
+        //        }
+        //        numberofparams++;
+        //        subquerylist.Add("doors=@doors");
+        //    }
+        //    // if number of params is >1 you need comma separation
+
+        //    string query = "";
+        //    if (numberofparams <= 0) {
+        //        //dont even query anything
+        //        //maybe break here
+        //    } else {
+        //        query = $"SELECT * FROM vehicle WHERE {String.Join("", subquerylist)}";
+        //    }
+        //    SqlConnection cn = GetConnection();
+        //    using (SqlCommand cmd = cn.CreateCommand()) {
+        //        cn.Open();
+        //        try {
+        //            if (!vehicleisNull) {
+        //                cmd.Parameters.Add(new SqlParameter("@vehicleid", SqlDbType.Int));
+        //                cmd.Parameters["@vehicleid"].Value = vehicleId;
+        //            }
+        //            if (!brandisNull) {
+        //                cmd.Parameters.Add(new SqlParameter("@brand", SqlDbType.NVarChar));
+        //                cmd.Parameters["@brand"].Value = brand;
+        //            }
+        //            if (!modelisNull) {
+        //                cmd.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar));
+        //                cmd.Parameters["@model"].Value = model;
+        //            }
+        //            if (!chasisNumberisNull) {
+        //                cmd.Parameters.Add(new SqlParameter("@chasisNumber", SqlDbType.NVarChar));
+        //                cmd.Parameters["@chasisNumber"].Value = chassisNumber;
+        //            }
+        //            if (!licensePlateisNull) {
+        //                cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
+        //                cmd.Parameters["@licensePlate"].Value = licensePlate;
+        //            }
+        //            if (!vehicleTypeisNull) {
+        //                cmd.Parameters.Add(new SqlParameter("@vehicleType", SqlDbType.NVarChar));
+        //                cmd.Parameters["@vehicleType"].Value = vehicleType;
+        //            }
+        //            if (!colorisNull) {
+        //                cmd.Parameters.Add(new SqlParameter("@color", SqlDbType.NVarChar));
+        //                cmd.Parameters["@color"].Value = color;
+        //            }
+        //            if (!doorsisNull) {
+        //                cmd.Parameters.Add(new SqlParameter("@doors", SqlDbType.NVarChar));
+        //                cmd.Parameters["@doors"].Value = doors;
+        //            }
+
+        //            cmd.CommandText = query;
+        //            SqlDataReader reader = cmd.ExecuteReader();
+        //            while (reader.Read()) {
+        //                int vehicleIdread = (int)reader["vehicleId"];
+        //                string branddread = (string)reader["brand"];
+        //                string modeldread = (string)reader["model"];
+        //                string chassisNumberdread = (string)reader["chassisNumber"];
+        //                string licensePlatedread = (string)reader["licensePlate"];
+        //                string vehicleTypedread = (string)reader["vehicleType"];
+        //                string colordread = (string)reader["color"];
+        //                int doorsdread = (int)reader["doors"];
+        //                Vehicle vehicle = new Vehicle(vehicleIdread, branddread, modeldread, chassisNumberdread, licensePlatedread, new List<FuelType> { new FuelType("#") }, vehicleTypedread, colordread, doorsdread);
+        //                vehicles.Add(vehicle);
+        //            }
+
+
+        //        } catch (Exception ex) {
+
+        //            throw new Exception(ex.Message);
+        //        } finally {
+        //            cn.Close();
+        //        }
+        //    }
+        //    return vehicles.AsReadOnly();
+        //}
+
+
+        public IReadOnlyList<Driver> SearchDrivers(int? id, string lastName, string firstName, DateTime? dateOfBirth, string securtiyNumber, string street, string houseNR, string postalcode )
         {
+            List<Vehicle> vehicles = new List<Vehicle>();
+            List<string> subquerylist = new List<string>();
+            int numberofparams = 0;
+            bool DriverIDisNull = true;
+            if (id != null) {
+                DriverIDisNull = false;
+                numberofparams++;
+                subquerylist.Add("driverid=@driverid");
+            }
+            bool lastNameisNull = true;
+            if (!String.IsNullOrWhiteSpace(lastName)) {
+                lastNameisNull = false;
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("lastName=@lastName");
+            }
+            bool firstNameisNull = true;
+            if (!String.IsNullOrWhiteSpace(firstName)) {
+                firstNameisNull = false;
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("firstName=@firstName");
+            }
+          
+            bool dateOfBirthisNull = true;
+            if (dateOfBirth != null) {
+                dateOfBirthisNull = false;
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("dateOfBirth=@dateOfBirth");
+
+            }
+            bool securtiyNumberisNull = true;
+            if (!String.IsNullOrWhiteSpace(securtiyNumber)) {
+                securtiyNumberisNull = false;
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("securtiyNumber=@securtiyNumber");
+            }
+            bool streetisNull = true;
+            if (!String.IsNullOrWhiteSpace(street)) {
+                streetisNull = false;
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("street=@street");
+            }
+          
+            bool houseNRisNull = true;
+            if (!String.IsNullOrWhiteSpace(houseNR)) {
+                houseNRisNull = false;
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("houseNR=@houseNR");
+            }
+            bool postalcodeisNull = true;
+            if (!String.IsNullOrWhiteSpace(postalcode)) {
+                postalcodeisNull = false;
+                if (numberofparams > 0) {
+                    subquerylist.Add(" AND ");
+                }
+                numberofparams++;
+                subquerylist.Add("postalCode=@postalCode");
+            }
+            // if all adres fields are not empty, search for that
+
+            string query = "";
+            if (numberofparams <= 0) {
+                //dont even query anything
+                //maybe break here
+            } else {
+                query = $"SELECT * FROM Driver WHERE {String.Join("", subquerylist)}";
+            }
+
             SqlConnection connection = getConnection();
 
             string query = "SELECT * FROM Driver AS t1 JOIN Address AS t2 ON t1.addressId=t2.addressId " +

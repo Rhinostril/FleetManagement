@@ -399,7 +399,7 @@ namespace FleetManagement.Data.Repositories
 
         public IReadOnlyList<Vehicle> SearchVehicles(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, string vehicleType, string color, int? doors)
         {
-        //this only works if all params are filled out which often isnt the case
+        
         List<Vehicle> vehicles = new List<Vehicle>();
         List<string> subquerylist = new List<string>();
         int numberofparams = 0;
