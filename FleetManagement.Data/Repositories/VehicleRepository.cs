@@ -545,49 +545,7 @@ namespace FleetManagement.Data.Repositories
         return vehicles.AsReadOnly();
         }
 
-        public void UpdateVehicle(Vehicle vehicle)
-        {
-            SqlConnection cn = GetConnection();
-            string query = "UPDATE vehicle" +
-                "SET brand=@brand,model=@model,chasisNumber=@chasisNumber,licensePlate=@licensePlate,vehicleType=@vehicleType,color=@color,doors=@doors"
-                + "WHERE vehicleId=@vehicleId";
-
-            using (SqlCommand cmd = cn.CreateCommand())
-            {
-                cn.Open();
-                try
-                {
-                    cmd.Parameters.Add(new SqlParameter("@brand", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@chasisNumber", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@vehicleType", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@color", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@doors", SqlDbType.NVarChar));
-
-                    cmd.Parameters["@brand"].Value = vehicle.Brand;
-                    cmd.Parameters["@model"].Value = vehicle.Model;
-                    cmd.Parameters["@chasisNumber"].Value = vehicle.ChassisNumber;
-                    cmd.Parameters["@licensePlate"].Value = vehicle.LicensePlate;
-                    cmd.Parameters["@vehicleType"].Value = vehicle.VehicleType;
-                    cmd.Parameters["@color"].Value = vehicle.Color;
-                    cmd.Parameters["@doors"].Value = vehicle.Doors;
-
-                    cmd.CommandText = query;
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    cn.Close();
-                }
-            }
-
-        }
+        
 
         public bool VehicleExists(Vehicle vehicle)
         {
@@ -637,5 +595,116 @@ namespace FleetManagement.Data.Repositories
                 }
             }
         }
+
+        // ********************************************************************
+        // **************** UPDATE VEHICLE WITH TRANSACTION *******************
+        // ********************************************************************
+
+        public void UpdateVehicleWithDriver(Vehicle vehicle)
+        {
+            SqlConnection connection = GetConnection();
+            connection.Open();
+            SqlTransaction transaction = connection.BeginTransaction();
+            try
+            {
+                UpdateVehicle(vehicle);
+                if (vehicle.Driver != null)
+                {
+                    ConnectVehicleToDriver(vehicle);
+                }
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        private void UpdateVehicle(Vehicle vehicle)
+        {
+            SqlConnection cn = GetConnection();
+            string query = "UPDATE vehicle" +
+                "SET brand=@brand,model=@model,chasisNumber=@chasisNumber,licensePlate=@licensePlate,vehicleType=@vehicleType,color=@color,doors=@doors"
+                + "WHERE vehicleId=@vehicleId";
+
+            using (SqlCommand cmd = cn.CreateCommand())
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@brand", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@chasisNumber", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@vehicleType", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@color", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@doors", SqlDbType.NVarChar));
+
+                    cmd.Parameters["@brand"].Value = vehicle.Brand;
+                    cmd.Parameters["@model"].Value = vehicle.Model;
+                    cmd.Parameters["@chasisNumber"].Value = vehicle.ChassisNumber;
+                    cmd.Parameters["@licensePlate"].Value = vehicle.LicensePlate;
+                    cmd.Parameters["@vehicleType"].Value = vehicle.VehicleType;
+                    cmd.Parameters["@color"].Value = vehicle.Color;
+                    cmd.Parameters["@doors"].Value = vehicle.Doors;
+
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    cn.Close();
+                }
+            }
+
+        }
+        private void ConnectVehicleToDriver(Vehicle vehicle)
+        {
+            SqlConnection connection = GetConnection();
+            string query = $"UPDATE [Driver] SET vehicleId=@vehicleId WHERE driverId=@driverId";
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                    command.Parameters.Add(new SqlParameter("@vehicleId", SqlDbType.Int));
+
+                    command.Parameters["@driverId"].Value = vehicle.Driver.DriverID;
+                    command.Parameters["@vehicleId"].Value = vehicle.VehicleId;
+
+                    command.CommandText = query;
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+
+        // ********************************************************************
+        // ********************************************************************
+        // ********************************************************************
+
+
+
+
+
+
     }
 }
