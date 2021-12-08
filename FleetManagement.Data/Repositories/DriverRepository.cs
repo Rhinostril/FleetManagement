@@ -604,155 +604,8 @@ namespace FleetManagement.Data.Repositories
         {
             throw new NotImplementedException();
         }
-        //public IReadOnlyList<Vehicle> SearchVehicles(int? vehicleId, string brand, string model, string chassisNumber, string licensePlate, string vehicleType, string color, int? doors) {
 
-        //    List<Vehicle> vehicles = new List<Vehicle>();
-        //    List<string> subquerylist = new List<string>();
-        //    int numberofparams = 0;
-        //    bool vehicleisNull = true;
-        //    if (vehicleId != null) {
-        //        vehicleisNull = false;
-        //        numberofparams++;
-        //        subquerylist.Add("vehicleId=@vehicleid");
-        //    }
-        //    bool brandisNull = true;
-        //    if (!String.IsNullOrWhiteSpace(brand)) {
-        //        brandisNull = false;
-        //        if (numberofparams > 0) {
-        //            subquerylist.Add(" AND ");
-        //        }
-        //        numberofparams++;
-        //        subquerylist.Add("brand=@brand");
-        //    }
-        //    bool modelisNull = true;
-        //    if (!String.IsNullOrWhiteSpace(model)) {
-        //        modelisNull = false;
-        //        if (numberofparams > 0) {
-        //            subquerylist.Add(" AND ");
-        //        }
-        //        numberofparams++;
-        //        subquerylist.Add("model=@model");
-        //    }
-        //    bool chasisNumberisNull = true;
-        //    if (!String.IsNullOrWhiteSpace(chassisNumber)) {
-        //        chasisNumberisNull = false;
-        //        if (numberofparams > 0) {
-        //            subquerylist.Add(" AND ");
-        //        }
-        //        numberofparams++;
-        //        subquerylist.Add("chasisNumber=@chasisNumber");
-        //    }
-        //    bool licensePlateisNull = true;
-        //    if (!String.IsNullOrWhiteSpace(licensePlate)) {
-        //        licensePlateisNull = false;
-        //        if (numberofparams > 0) {
-        //            subquerylist.Add(" AND ");
-        //        }
-        //        numberofparams++;
-        //        subquerylist.Add("licensePlate=@licensePlate");
-
-        //    }
-        //    bool vehicleTypeisNull = true;
-        //    if (!String.IsNullOrWhiteSpace(vehicleType)) {
-        //        vehicleTypeisNull = false;
-        //        if (numberofparams > 0) {
-        //            subquerylist.Add(" AND ");
-        //        }
-        //        numberofparams++;
-        //        subquerylist.Add("vehicleType=@vehicleType");
-        //    }
-        //    bool colorisNull = true;
-        //    if (!String.IsNullOrWhiteSpace(color)) {
-        //        colorisNull = false;
-        //        if (numberofparams > 0) {
-        //            subquerylist.Add(" AND ");
-        //        }
-        //        numberofparams++;
-        //        subquerylist.Add("color=@color");
-        //    }
-        //    bool doorsisNull = true;
-        //    if (doors != null) {
-        //        doorsisNull = false;
-        //        if (numberofparams > 0) {
-        //            subquerylist.Add(" AND ");
-        //        }
-        //        numberofparams++;
-        //        subquerylist.Add("doors=@doors");
-        //    }
-        //    // if number of params is >1 you need comma separation
-
-        //    string query = "";
-        //    if (numberofparams <= 0) {
-        //        //dont even query anything
-        //        //maybe break here
-        //    } else {
-        //        query = $"SELECT * FROM vehicle WHERE {String.Join("", subquerylist)}";
-        //    }
-        //    SqlConnection cn = GetConnection();
-        //    using (SqlCommand cmd = cn.CreateCommand()) {
-        //        cn.Open();
-        //        try {
-        //            if (!vehicleisNull) {
-        //                cmd.Parameters.Add(new SqlParameter("@vehicleid", SqlDbType.Int));
-        //                cmd.Parameters["@vehicleid"].Value = vehicleId;
-        //            }
-        //            if (!brandisNull) {
-        //                cmd.Parameters.Add(new SqlParameter("@brand", SqlDbType.NVarChar));
-        //                cmd.Parameters["@brand"].Value = brand;
-        //            }
-        //            if (!modelisNull) {
-        //                cmd.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar));
-        //                cmd.Parameters["@model"].Value = model;
-        //            }
-        //            if (!chasisNumberisNull) {
-        //                cmd.Parameters.Add(new SqlParameter("@chasisNumber", SqlDbType.NVarChar));
-        //                cmd.Parameters["@chasisNumber"].Value = chassisNumber;
-        //            }
-        //            if (!licensePlateisNull) {
-        //                cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
-        //                cmd.Parameters["@licensePlate"].Value = licensePlate;
-        //            }
-        //            if (!vehicleTypeisNull) {
-        //                cmd.Parameters.Add(new SqlParameter("@vehicleType", SqlDbType.NVarChar));
-        //                cmd.Parameters["@vehicleType"].Value = vehicleType;
-        //            }
-        //            if (!colorisNull) {
-        //                cmd.Parameters.Add(new SqlParameter("@color", SqlDbType.NVarChar));
-        //                cmd.Parameters["@color"].Value = color;
-        //            }
-        //            if (!doorsisNull) {
-        //                cmd.Parameters.Add(new SqlParameter("@doors", SqlDbType.NVarChar));
-        //                cmd.Parameters["@doors"].Value = doors;
-        //            }
-
-        //            cmd.CommandText = query;
-        //            SqlDataReader reader = cmd.ExecuteReader();
-        //            while (reader.Read()) {
-        //                int vehicleIdread = (int)reader["vehicleId"];
-        //                string branddread = (string)reader["brand"];
-        //                string modeldread = (string)reader["model"];
-        //                string chassisNumberdread = (string)reader["chassisNumber"];
-        //                string licensePlatedread = (string)reader["licensePlate"];
-        //                string vehicleTypedread = (string)reader["vehicleType"];
-        //                string colordread = (string)reader["color"];
-        //                int doorsdread = (int)reader["doors"];
-        //                Vehicle vehicle = new Vehicle(vehicleIdread, branddread, modeldread, chassisNumberdread, licensePlatedread, new List<FuelType> { new FuelType("#") }, vehicleTypedread, colordread, doorsdread);
-        //                vehicles.Add(vehicle);
-        //            }
-
-
-        //        } catch (Exception ex) {
-
-        //            throw new Exception(ex.Message);
-        //        } finally {
-        //            cn.Close();
-        //        }
-        //    }
-        //    return vehicles.AsReadOnly();
-        //}
-
-
-        public IReadOnlyList<Driver> SearchDrivers(int? id, string lastName, string firstName, DateTime? dateOfBirth, string securtiyNumber, string street, string houseNR, string postalcode )
+    public IReadOnlyList<Driver> SearchDrivers(int? id, string lastName, string firstName, DateTime? dateOfBirth, string securtiyNumber, string street, string houseNR, string postalcode )
         {
             List<Vehicle> vehicles = new List<Vehicle>();
             List<string> subquerylist = new List<string>();
@@ -836,40 +689,112 @@ namespace FleetManagement.Data.Repositories
                 //dont even query anything
                 //maybe break here
             } else {
-                query = $"SELECT * FROM Driver WHERE {String.Join("", subquerylist)}";
+                query = $"SELECT * FROM Driver LEFT JOIN [Address] ON Address.addressId = Driver.addressId  WHERE {String.Join("", subquerylist)}";
             }
 
             SqlConnection connection = getConnection();
 
-            string query = "SELECT * FROM Driver AS t1 JOIN Address AS t2 ON t1.addressId=t2.addressId " +
-                           "WHERE firstName LIKE @firstName " +
-                           "AND lastName LIKE @lastName ";
-
-            using (SqlCommand command = connection.CreateCommand())
+            using (SqlCommand cmd = connection.CreateCommand())
             {
                 try
                 {
+                    if (!DriverIDisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@driverid", SqlDbType.Int));
+                        cmd.Parameters["@driverid"].Value = id;
+                    }
+                    if (!lastNameisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@lastName", SqlDbType.NVarChar));
+                        cmd.Parameters["@lastName"].Value = lastName;
+                    }
+                    if (!firstNameisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@firstName", SqlDbType.NVarChar));
+                        cmd.Parameters["@firstName"].Value = firstName;
+                    }
+                    if (!dateOfBirthisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@dateOfBirth", SqlDbType.DateTime));
+                        cmd.Parameters["@dateOfBirth"].Value = dateOfBirth;
+                    }
+                    if (!securtiyNumberisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@securtiyNumber", SqlDbType.NVarChar));
+                        cmd.Parameters["@securtiyNumber"].Value = securtiyNumber;
+                    }
+                    if (!streetisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@street", SqlDbType.NVarChar));
+                        cmd.Parameters["@street"].Value = street;
+                    }
+                    if (!houseNRisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@houseNR", SqlDbType.NVarChar));
+                        cmd.Parameters["@houseNR"].Value = houseNR;
+                    }
+                    if (!postalcodeisNull) {
+                        cmd.Parameters.Add(new SqlParameter("@postalCode", SqlDbType.NVarChar));
+                        cmd.Parameters["@postalCode"].Value = postalcode;
+                    }
                     connection.Open();
 
-                    command.CommandText = query;
+                    cmd.CommandText = query;
 
-                    command.Parameters.Add(new SqlParameter("@firstName", SqlDbType.NVarChar));
-                    command.Parameters.Add(new SqlParameter("@lastName", SqlDbType.NVarChar));
+                    
 
-                    command.Parameters["@firstName"].Value = firstName + "%";
-                    command.Parameters["@lastName"].Value = lastName + "%";
-
-                    SqlDataReader reader = command.ExecuteReader();
+                    SqlDataReader reader = cmd.ExecuteReader();
                     List<Driver> drivers = new List<Driver>();
                     while (reader.Read())
                     {
-                        int driverId = (int)reader["driverId"];
-                        string fName = (string)reader["firstName"];
-                        string lName = (string)reader["lastName"];
-                        DateTime dob = (DateTime)reader["dateOfBirth"];
-                        string securityNumber = (string)reader["securityNumber"];
-                        Driver driver = new Driver(driverId, fName, lName, dob, securityNumber);
-                        drivers.Add(driver);
+                        int driverid = (int)reader.GetValue("driverId");
+                        string firstname = reader.GetString("firstName");
+                        string lastname = reader.GetString("lastName");
+                        DateTime dateofbirth = (DateTime)reader.GetValue("dateOfBirth");
+                        int? addressId = null;
+                        if (!reader.IsDBNull("addressId")) {
+                            addressId = (int?)reader.GetValue("addressId");
+                        }
+                        string securityNumber = reader.GetString("securityNumber");
+                        int? vehicleid = null;
+                        if (!reader.IsDBNull("vehicleId")) {
+                            vehicleid = (int?)reader.GetValue("vehicleId");
+                        }
+                        int? fuelcardid = null;
+                        if (!reader.IsDBNull("fuelcardId")) {
+                            fuelcardid = (int?)reader.GetValue("fuelcardId");
+                        }
+                        List<string> LicenseTypes = GetLicensesByDriverID(driverid);
+
+                        Driver D = new Driver(firstname, lastname, dateofbirth, securityNumber);
+                        D.SetDriverID(driverid);
+                        if (addressId != null) {
+                            string streetValue = (string)reader.GetValue("street");
+                            string houseNr = (string)reader.GetValue("houseNr");
+                            string postalCode = (string)reader.GetValue("postalCode");
+                            string city = (string)reader.GetValue("city");
+                            string country = (string)reader.GetValue("country");
+                            Address a = new Address((int)addressId, streetValue, houseNr, postalCode, city, country);
+                            D.SetAddress(a);
+                        }
+                        if (vehicleid != null) {
+                            string brand = (string)reader.GetValue("brand");
+                            string model = (string)reader.GetValue("model");
+                            string chassisNr = (string)reader.GetValue("chassisNumber");
+                            string licensePlate = (string)reader.GetValue("licensePlate");
+                            string vehicleType = (string)reader.GetValue("vehicleType");
+                            string color = (string)reader.GetValue("color");
+                            int doors = (int)reader.GetValue("doors");
+                            List<FuelType> vehiclefueltypes = GetvehcileFueltypes((int)vehicleid);
+                            Vehicle v = new Vehicle(brand, model, chassisNr, licensePlate, vehiclefueltypes, vehicleType, color, doors);
+                            D.SetVehicle(v);
+                        }
+                        if (fuelcardid != null) {
+                            string cardNumber = (string)reader.GetValue("cardNumber");
+                            DateTime validityDate = (DateTime)reader.GetValue("validityDate");
+                            string pin = (string)reader.GetValue("pin");
+                            List<FuelType> fuelcardFueltypes = GetfuelcardFueltypes((int)fuelcardid);
+                            bool isEnabled = (bool)reader.GetValue("isEnabled");
+                            FuelCard fc = new FuelCard(cardNumber, validityDate, pin, fuelcardFueltypes, isEnabled);
+                            D.SetFuelCard(fc);
+                        }
+                        if (LicenseTypes.Any()) {
+                            D.SetDriversLicensetypes(LicenseTypes);
+                        }
+                        driverlist.Add(D);
                     }
                     return drivers.AsReadOnly();
                 }
