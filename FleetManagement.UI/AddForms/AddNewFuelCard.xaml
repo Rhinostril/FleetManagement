@@ -30,7 +30,7 @@
 
         <TextBox Name="txtCardnr" Grid.Row="1" Grid.Column="1" MaxLength="6"  Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
         <TextBox Name="txtPin" Grid.Row="3" Grid.Column="1"  MaxLength="4" Margin="5,10,10,0" VerticalAlignment="Top" FontSize="16" IsEnabled="True"/>
-        <DatePicker Grid.Row="2" Grid.Column="1" Name="DriverDateOfBirthPicker" SelectedDateFormat="Short" IsTodayHighlighted="true" Margin="5"/>
+        <DatePicker Name="datePicker" Grid.Row="2" Grid.Column="1"  SelectedDateFormat="Short" IsTodayHighlighted="true" Margin="5"/>
         <Button  Name="buttonAddFuelCard" Content="Add FuelCard" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
         <CheckBox Name="chkbxIsEnabled" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" VerticalAlignment="Top"/>
         <Label Name="exceptionPinlbl" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="10,36,0,0" Grid.Row="3" VerticalAlignment="Top"/>
