@@ -87,7 +87,7 @@ namespace FleetManagement.Business.Managers
                     {
                         if (!repo.DriverHasVehicle(driver.DriverID))
                         {
-                            repo.DeleteDriver(driver);
+                            repo.DeleteDriverWithAddress(driver);
                         }
                         else
                         {
