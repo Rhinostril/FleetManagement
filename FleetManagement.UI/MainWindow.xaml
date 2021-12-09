@@ -42,22 +42,22 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="Last Name" Margin="5"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
+                    <TextBox x:Name="LastnameTxtBox" Grid.Row="0" Grid.Column="1" Margin="5"/>
                     <Label Grid.Row="0" Grid.Column="2" Content="First Name" Margin="5"/>
-                    <TextBox Grid.Row="0" Grid.Column="3" Margin="5"/>
+                    <TextBox x:Name="FirstnameTxtBox"  Grid.Row="0" Grid.Column="3" Margin="5"/>
                     <Label Grid.Row="0" Grid.Column="4" Content="Date Of Birth" Margin="5"/>
                     <DatePicker Grid.Row="0" Grid.Column="5" Name="DriverDateOfBirthPicker" SelectedDateFormat="Short" IsTodayHighlighted="true" Margin="5"/>
                     <Label Grid.Row="1" Grid.Column="0" Content="Social Security Number" Margin="5"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5"/>
+                    <TextBox x:Name="SecurityNrTxtBox"  Grid.Row="1" Grid.Column="1" Margin="5"/>
                     <Label Grid.Row="1" Grid.Column="2" Content="Street" Margin="5"/>
-                    <TextBox Grid.Row="1" Grid.Column="3" Margin="5"/>
+                    <TextBox  x:Name="streetTxtBox"  Grid.Row="1" Grid.Column="3" Margin="5"/>
                     <Label Grid.Row="1" Grid.Column="4" Content="Number" Margin="5"/>
-                    <TextBox Grid.Row="1" Grid.Column="5" Margin="5"/>
+                    <TextBox x:Name="HouseNrTxtBox" Grid.Row="1" Grid.Column="5" Margin="5"/>
                     <Label Grid.Row="2" Grid.Column="0" Content="Postal Code" Margin="5"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5"/>
-                    <Button x:Name="SearchDriversButton" Content="  Search Drivers  " Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="5"/>
+                    <TextBox x:Name="PostalCodeTxtBox" Grid.Row="2" Grid.Column="1" Margin="5"/>
+                    <Button x:Name="SearchDriversButton" Content="  Search Drivers  " Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="5" Click="SearchDriversButton_Click"/>
                     <Button x:Name="NewDriverButton" Content="  New Driver  " Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Margin="5" Click="NewDriverButton_Click" MinHeight="28"/>
-                    <DataGrid x:Name="DriversDataGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" SelectionMode="Single" ColumnWidth="*" AutoGenerateColumns="False">
+                    <DataGrid x:Name="DriversDataGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="5" SelectionUnit="FullRow" IsReadOnly="true" SelectionMode="Single" ColumnWidth="*" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Driver ID" Binding="{Binding Path=DriverID}" Width="0.65*"/>
                             <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"/>

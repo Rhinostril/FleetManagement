@@ -36,6 +36,7 @@ namespace FleetManagement.UI
         private ObservableCollection<Vehicle> vehicles = new ObservableCollection<Vehicle>();
         private List<Vehicle> vehicleCache = new List<Vehicle>();
         private ObservableCollection<Driver> drivers = new ObservableCollection<Driver>();
+        private List<Driver> driversCache = new List<Driver>();
         private ObservableCollection<FuelCard> fuelCards = new ObservableCollection<FuelCard>();
 
         public MainWindow()
@@ -47,6 +48,7 @@ namespace FleetManagement.UI
             vehicleCache = vehicles.ToList();
             drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
             DriversDataGrid.ItemsSource = drivers;
+            driversCache = drivers.ToList();
             fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.GetLatestFuelcards());
             FuelCardsDataGrid.ItemsSource = fuelCards;
         }
@@ -225,7 +227,28 @@ namespace FleetManagement.UI
             }
         }
 
+        private void SearchDriversButton_Click(object sender, RoutedEventArgs e) {
+          
+            var returnlist = driverManager.SearchDrivers(null, LastnameTxtBox.Text, FirstnameTxtBox.Text, DriverDateOfBirthPicker.SelectedDate, SecurityNrTxtBox.Text, streetTxtBox.Text, HouseNrTxtBox.Text, PostalCodeTxtBox.Text);
+            Console.WriteLine();
+            if (returnlist.Any()) {
 
+                drivers.Clear();
+                DriversDataGrid.ItemsSource = drivers;
+                DriversDataGrid.Items.Refresh();
+                foreach (Driver result in returnlist) {
+                    drivers.Add(result);
+                }
+            } else {
+                drivers.Clear();
+                foreach (Driver v in driversCache) {
+                    drivers.Add(v);
+                }
+                DriversDataGrid.ItemsSource = drivers;
+            }
 
+            Console.WriteLine();
+            VehiclesDataGrid.Items.Refresh();
+        }
     }
 }
