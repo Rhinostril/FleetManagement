@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FleetManagement.UI"
         mc:Ignorable="d"
-        Title="AddNewVehicle" Height="450" Width="800">
+        Title="AddNewVehicle" Height="400" Width="300">
     <Grid>
-        
+        <TextBox Name="txtBrand" HorizontalAlignment="Left" Margin="124,75,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtModel" HorizontalAlignment="Left" Margin="124,108,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtChasis" HorizontalAlignment="Left" Margin="124,144,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtPlate" HorizontalAlignment="Left" Margin="124,177,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtType" HorizontalAlignment="Left" Margin="124,213,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtColor" HorizontalAlignment="Left" Margin="124,246,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtDoors" HorizontalAlignment="Left" Margin="124,283,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Name="btnAdd" Content="Add Vehicle" HorizontalAlignment="Left" Margin="124,317,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Brand" HorizontalAlignment="Left" Margin="24,73,0,0" VerticalAlignment="Top"/>
+        <Label Content="Model" HorizontalAlignment="Left" Margin="24,106,0,0" VerticalAlignment="Top"/>
+        <Label Content="Chasis number" HorizontalAlignment="Left" Margin="24,142,0,0" VerticalAlignment="Top"/>
+        <Label Content="License plate" HorizontalAlignment="Left" Margin="24,175,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vehicle type" HorizontalAlignment="Left" Margin="24,211,0,0" VerticalAlignment="Top"/>
+        <Label Content="Color" HorizontalAlignment="Left" Margin="24,244,0,0" VerticalAlignment="Top"/>
+        <Label Content="Doors" HorizontalAlignment="Left" Margin="24,281,0,0" VerticalAlignment="Top"/>
+        <Label Content="Add new vehicle" HorizontalAlignment="Left" Margin="24,23,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+
     </Grid>
 </Window>
