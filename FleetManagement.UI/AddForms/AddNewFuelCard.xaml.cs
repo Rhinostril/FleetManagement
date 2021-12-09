@@ -34,13 +34,17 @@ namespace FleetManagement.UI
                 FuelCardRepository fuelCardRepository = new FuelCardRepository();
 
                 string cardnumber = txtCardnr.Text;
-                DateTime validatyDate = new DateTime(1968, 12, 5);
+                DateTime validatyDate =datePicker.DisplayDate;
                 string pin = txtPin.Text;
                 if (pin.Length < 4)
                 {
                     exceptionPinlbl.Content = "Pin requires 4 characters!";
                 }
-                bool isEnabled = true;
+                bool isEnabled = false;
+                if (chkbxIsEnabled.IsChecked == true)
+                {
+                    isEnabled = true;
+                }
 
                 fuelCardRepository.AddFuelCard(new FuelCard(cardnumber, validatyDate, pin, isEnabled));
                 MessageBox.Show("FuelCard succesfully added !", "Add new fuelcard", MessageBoxButton.OK, MessageBoxImage.Information);

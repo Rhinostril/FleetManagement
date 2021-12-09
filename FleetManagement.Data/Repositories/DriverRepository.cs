@@ -227,38 +227,7 @@ namespace FleetManagement.Data.Repositories
 
         }
 
-        public void DeleteDriver(Driver driver)
-        {
-            SqlConnection connection = getConnection();
-
-            string query = $"DELETE FROM [Driver] WHERE driverId=@ID;";
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                connection.Open();
-                SqlTransaction transaction = connection.BeginTransaction();
-                command.Transaction = transaction;
-                try
-                {
-                    SqlParameter pardriverid = new SqlParameter();
-                    pardriverid.ParameterName = "@ID";
-                    pardriverid.SqlDbType = System.Data.SqlDbType.Int;
-                    command.Parameters.Add(pardriverid);
-                    command.Parameters["@ID"].Value = driver.DriverID;
-
-                    command.ExecuteNonQuery();
-                    transaction.Commit();
-                }
-                catch (Exception e)
-                {
-                    transaction.Rollback();
-
-                }
-                finally
-                {
-                    connection.Close();
-                }
-            }
-        }
+        
 
         public bool DriverExists(int id)
         {
@@ -605,7 +574,7 @@ namespace FleetManagement.Data.Repositories
             throw new NotImplementedException();
         }
 
-    public IReadOnlyList<Driver> SearchDrivers(int? id, string lastName, string firstName, DateTime? dateOfBirth, string securtiyNumber, string street, string houseNR, string postalcode )
+        public IReadOnlyList<Driver> SearchDrivers(int? id, string lastName, string firstName, DateTime? dateOfBirth, string securtiyNumber, string street, string houseNR, string postalcode )
         {
             List<Driver> driverlist = new List<Driver>();
             List<string> subquerylist = new List<string>();
@@ -1198,7 +1167,83 @@ namespace FleetManagement.Data.Repositories
         // *******************************************************************************************************
 
 
+        // *******************************************************************************************************
+        // ***************************** DELETE DRIVER & ADDRESS WITH TRANSACTION ********************************
+        // *******************************************************************************************************
 
+        public void DeleteDriverWithAddress(Driver driver)
+        {
+            SqlConnection connection = getConnection();
+            connection.Open();
+            SqlTransaction transaction = connection.BeginTransaction();
+            try
+            {
+                DeleteDriver(driver);
+                DeleteAddress(driver.Address);
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        private void DeleteAddress(Address address)
+        {
+            SqlConnection connection = getConnection();
+            string query = $"DELETE FROM [Address] WHERE addressId=@addressId";
+            using(SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.CommandText = query;
+                    command.Parameters.Add(new SqlParameter("@addressId", SqlDbType.Int));
+                    command.Parameters["@addressId"].Value = address.AddressID;
+                    command.ExecuteNonQuery();
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+        private void DeleteDriver(Driver driver)
+        {
+            SqlConnection connection = getConnection();
+            string query = $"DELETE FROM [Driver] WHERE driverId=@driverId";
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.CommandText = query;
+                    command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                    command.Parameters["@driverId"].Value = driver.DriverID;
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        // *******************************************************************************************************
+        // *******************************************************************************************************
+        // *******************************************************************************************************
 
 
 
