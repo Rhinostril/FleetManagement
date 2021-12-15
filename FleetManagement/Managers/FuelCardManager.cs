@@ -32,12 +32,13 @@ namespace FleetManagement.Business.Managers
 
 
         public FuelCard getFuelCardByID(int fuelcardId) { // NEEDS FIXING
-            try {
-                FuelCard fuelcard = repo.GetFuelCard(fuelcardId);
-                return fuelcard;
-
-            } catch (Exception ex) {
-                throw new Exception(ex.Message, ex.InnerException);
+            try
+            {
+                return repo.GetFuelCard(fuelcardId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
         public IReadOnlyList<FuelCard> GetLatestFuelcards() {

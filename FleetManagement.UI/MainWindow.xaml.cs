@@ -119,7 +119,7 @@ namespace FleetManagement.UI
         private void FuelCardsDetails_Click(object sender, RoutedEventArgs e)
         {
             FuelCard fuelCard = (FuelCard)FuelCardsDataGrid.SelectedItem;
-            FuelCardDetailsWindow objWindow = new FuelCardDetailsWindow(fuelCard.FuelCardId);
+            FuelCardDetailsWindow objWindow = new FuelCardDetailsWindow(fuelCard);
             objWindow.Show();
         }
 

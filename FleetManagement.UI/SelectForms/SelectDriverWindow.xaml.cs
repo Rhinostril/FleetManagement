@@ -37,8 +37,11 @@ namespace FleetManagement.UI.SelectForms
         private void btnSelectDriver_Click(object sender, RoutedEventArgs e)
         {
             driver = (Driver)lstDrivers.SelectedItem;
-            DialogResult = true;
-            Close();
+            if(driver != null)
+            {
+                DialogResult = true;
+                Close();
+            }
         }
 
         private void btnSearchDrivers_Click(object sender, RoutedEventArgs e)

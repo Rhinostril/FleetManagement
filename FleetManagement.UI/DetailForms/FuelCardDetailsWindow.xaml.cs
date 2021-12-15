@@ -21,13 +21,16 @@ namespace FleetManagement.UI.DetailForms {
     /// Interaction logic for Window1.xaml
     /// </summary>
     public partial class FuelCardDetailsWindow : Window {
+
         private FuelCardManager fuelCardManager = new FuelCardManager(new FuelCardRepository());
         private ObservableCollection<FuelType> fuelTypes = new ObservableCollection<FuelType>();
 
-        public FuelCardDetailsWindow(int fuelcardID) {
+        public FuelCardDetailsWindow(FuelCard fuelCard) {
             InitializeComponent();
-            FuelCard fuelcard = fuelCardManager.getFuelCardByID(fuelcardID);
-            if (fuelcard != null) {
+            if (fuelCard != null)
+            {
+                FuelCard fuelcard = fuelCardManager.getFuelCardByID(fuelCard.FuelCardId);
+
                 fuelTypes = new ObservableCollection<FuelType>(fuelcard.FuelTypes);
                 lstFuelTypes.ItemsSource = fuelTypes;
                 lstFuelTypes.Items.Refresh();
@@ -35,19 +38,21 @@ namespace FleetManagement.UI.DetailForms {
                 TxtCardNr.Text = $"{fuelcard.CardNumber}";
                 Validityate.SelectedDate = fuelcard.ValidityDate;
                 TxtPin.Text = $"{fuelcard.Pin}";
-               
                 CheckBoxIsEnabled.IsChecked = fuelcard.IsEnabled;
-                if(fuelcard.Driver != null) {
+
+                if(fuelcard.Driver != null)
+                {
                     TxtDriverId.Text = $"{fuelcard.Driver.DriverID}";
-                } else {
-                    TxtDriverId.Text = $"none";
                 }
-
-            } else {
-                MessageBox.Show($"Error could not retrieve fuelcard from the id {fuelcardID}");
+                else
+                {
+                    TxtDriverId.Text = $"None";
+                }
             }
-
-         
+            else
+            {
+                MessageBox.Show($"Error could not retrieve fuelcard");
+            }
         }
     }
 }
