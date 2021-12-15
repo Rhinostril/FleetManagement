@@ -74,6 +74,7 @@ namespace FleetManagement.UI
             {
                 txtDriver.Text = objWindow.driver.ToString();
                 vehicle.SetDriver(objWindow.driver);
+                btnRemoveDriver.IsEnabled = true;
             }
         }
 
@@ -93,6 +94,13 @@ namespace FleetManagement.UI
             {
                 MessageBox.Show(ex.Message, "Foutmelding!");
             }
+        }
+
+        private void btnRemoveDriver_Click(object sender, RoutedEventArgs e)
+        {
+            vehicle.RemoveDriver();
+            txtDriver.Text = "None";
+            btnRemoveDriver.IsEnabled = false;
         }
     }
 }

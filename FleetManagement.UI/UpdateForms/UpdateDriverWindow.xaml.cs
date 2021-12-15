@@ -76,6 +76,7 @@ namespace FleetManagement.UI.UpdateForms
             {
                 driver.SetVehicle(objWindow.vehicle);
                 txtVehicle.Text = objWindow.vehicle.ToString();
+                btnRemoveVehicle.IsEnabled = true;
             }
         }
 
@@ -86,7 +87,22 @@ namespace FleetManagement.UI.UpdateForms
             {
                 driver.SetFuelCard(objWindow.fuelCard);
                 txtFuelCard.Text = objWindow.fuelCard.ToString();
+                btnRemoveFuelCard.IsEnabled = true;
             }
+        }
+
+        private void btnRemoveVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            driver.RemoveVehicle();
+            txtVehicle.Text = "None";
+            btnRemoveVehicle.IsEnabled = false;
+        }
+
+        private void btnRemoveFuelCard_Click(object sender, RoutedEventArgs e)
+        {
+            driver.RemoveFuelCard();
+            txtFuelCard.Text = "None";
+            btnRemoveFuelCard.IsEnabled = false;
         }
     }
 }

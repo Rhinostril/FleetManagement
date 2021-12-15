@@ -7,6 +7,59 @@
         mc:Ignorable="d"
         Title="UpdateFuelCardWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Fuelcard ID" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Card Number" Margin="5"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Validity Date" Margin="5"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Pin" Margin="5"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Driver" Margin="5"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="Enabled" Margin="5"/>
+        <Label Grid.Row="6" Grid.Column="0" Content="Fueltypes" Margin="5"/>
+        
+        <TextBox x:Name="txtFuelCardId" Grid.Row="0" Grid.Column="1" Margin="5" IsEnabled="False"/>
+        <TextBox x:Name="txtCardNumber" Grid.Row="1" Grid.Column="1" Margin="5"/>
+        <DatePicker x:Name="dtpValidityDate" Grid.Row="2" Grid.Column="1" Margin="5" SelectedDateFormat="Short"/>
+        <TextBox x:Name="txtPin" Grid.Row="3" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="txtDriver" Grid.Row="4" Grid.Column="1" Margin="5"/>
+        <CheckBox x:Name="cbxEnabled" Grid.Row="5" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
+        <ListBox x:Name="lstFuelTypes" Grid.Row="6" Grid.Column="1" Margin="5"/>
+
+        <Grid Grid.Row="4" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnSelectDriver" Grid.Column="0" Content="  Select Driver  " Margin="5"/>
+            <Button x:Name="btnRemoveDriver" Grid.Column="1" Content="  Remove Driver  " Margin="5" IsEnabled="False"/>
+        </Grid>
+
+        <Grid Grid.Row="6" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="btnAddFuelType" Grid.Column="0" Content="  Add Fueltype  " Margin="5" MinHeight="26"/>
+            <Button x:Name="btnRemoveFuelType" Grid.Column="1" Content="  Remove Fueltype  " Margin="5" MinHeight="26"/>
+        </Grid>
+
+        <Button x:Name="btnUpdateFuelCard" Grid.Row="7" Grid.Column="1" Margin="5" Content="  Update Fuelcard  " MinHeight="26" Click="btnUpdateFuelCard_Click"/>
         
     </Grid>
 </Window>

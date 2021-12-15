@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FleetManagement.Business.Entities;
+using FleetManagement.Business.Managers;
+using FleetManagement.Data.Repositories;
 
 namespace FleetManagement.UI.UpdateForms
 {
@@ -19,9 +22,34 @@ namespace FleetManagement.UI.UpdateForms
     /// </summary>
     public partial class UpdateFuelCardWindow : Window
     {
-        public UpdateFuelCardWindow()
+
+        private FuelCardManager fuelCardManager = new FuelCardManager(new FuelCardRepository());
+        private FuelCard fuelCard;
+
+        public UpdateFuelCardWindow(FuelCard fuelCard)
         {
             InitializeComponent();
+            this.fuelCard = fuelCard;
+            txtFuelCardId.Text = fuelCard.FuelCardId.ToString();
+            txtCardNumber.Text = fuelCard.CardNumber;
+            dtpValidityDate.SelectedDate = fuelCard.ValidityDate;
+            txtPin.Text = fuelCard.Pin;
+            cbxEnabled.IsChecked = fuelCard.IsEnabled;
+        }
+
+        private void btnUpdateFuelCard_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                fuelCard.SetCardNumber(txtCardNumber.Text);
+                fuelCard.ValidityDate = (DateTime)dtpValidityDate.SelectedDate;
+                fuelCard.SetPin(txtPin.Text);
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
         }
     }
 }
