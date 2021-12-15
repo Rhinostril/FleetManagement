@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using FleetManagement.Business.Entities;
 using FleetManagement.Business.Managers;
 using FleetManagement.Data.Repositories;
+using FleetManagement.UI.SelectForms;
 
 namespace FleetManagement.UI.UpdateForms
 {
@@ -44,12 +45,31 @@ namespace FleetManagement.UI.UpdateForms
                 fuelCard.SetCardNumber(txtCardNumber.Text);
                 fuelCard.ValidityDate = (DateTime)dtpValidityDate.SelectedDate;
                 fuelCard.SetPin(txtPin.Text);
-                
+                fuelCard.IsEnabled = (bool)cbxEnabled.IsChecked;
+                fuelCardManager.UpdateFuelCard(fuelCard);
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Foutmelding!");
             }
+        }
+
+        private void btnSelectDriver_Click(object sender, RoutedEventArgs e)
+        {
+            SelectDriverWindow objWindow = new SelectDriverWindow();
+            if (objWindow.ShowDialog() == true)
+            {
+                txtDriver.Text = objWindow.driver.ToString();
+                fuelCard.SetDriver(objWindow.driver);
+                btnRemoveDriver.IsEnabled = true;
+            }
+        }
+
+        private void btnRemoveDriver_Click(object sender, RoutedEventArgs e)
+        {
+            fuelCard.RemoveDriver();
+            txtDriver.Text = "None";
+            btnRemoveDriver.IsEnabled = false;
         }
     }
 }

@@ -48,7 +48,7 @@
         <TextBox Name="txtDoors" Grid.Row="8" Grid.Column="1" Text="3" Margin="5" VerticalAlignment="Center" FontSize="16"/>
         <TextBox Name="txtDriver" Grid.Row="1" Grid.Column="3" Text="Lewis Hamilton" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <Button Name="btnSelectDriver" Grid.Row="1" Grid.Column="4" Content="  Select Driver  " Margin="5" Click="btnSelectDriver_Click"/>
-        <Button x:Name="btnRemoveDriver" Grid.Row="1" Grid.Column="5" Content="  Remove Driver  " Margin="5"
+        <Button x:Name="btnRemoveDriver" Grid.Row="1" Grid.Column="5" Content="  Remove Driver  " Margin="5" IsEnabled="False"/>
         <ListBox Name="lstFuelTypes" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Margin="5" SelectionMode="Single">
             <ListBox.ItemTemplate>
                 <DataTemplate>

@@ -43,8 +43,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnSelectDriver" Grid.Column="0" Content="  Select Driver  " Margin="5"/>
-            <Button x:Name="btnRemoveDriver" Grid.Column="1" Content="  Remove Driver  " Margin="5" IsEnabled="False"/>
+            <Button x:Name="btnSelectDriver" Grid.Column="0" Content="  Select Driver  " Margin="5" Click="btnSelectDriver_Click"/>
+            <Button x:Name="btnRemoveDriver" Grid.Column="1" Content="  Remove Driver  " Margin="5" IsEnabled="False" Click="btnRemoveDriver_Click"/>
         </Grid>
 
         <Grid Grid.Row="6" Grid.Column="2">
