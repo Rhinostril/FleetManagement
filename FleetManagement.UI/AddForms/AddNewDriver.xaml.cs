@@ -23,6 +23,9 @@ namespace FleetManagement.UI
     /// </summary>
     public partial class AddNewDriver : Window
     {
+
+        private DriverManager driverManager = new DriverManager(new DriverRepository());
+
         public AddNewDriver()
         {
             InitializeComponent();
@@ -30,18 +33,40 @@ namespace FleetManagement.UI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            IDriverRepository driverRepository = new DriverRepository();
+            try
+            {
+                string firstName = txtFirstName.Text;
+                string lastName = txtLastName.Text;
+                DateTime dateOfBirth = (DateTime)DriverDateOfBirthPicker.SelectedDate;
+                string securityNr = txtSecurityNumber.Text;
+                string street = txtStreet.Text;
+                string houseNr = txtHouseNr.Text;
+                string postalCode = txtPostalCode.Text;
+                string city = txtCity.Text;
+                string country = txtCountry.Text;
+                Driver driver = new Driver(firstName, lastName, dateOfBirth, securityNr);
+                Address address = new Address(street, houseNr, postalCode, city, country);
+                driver.SetAddress(address);
+                driverManager.AddDriver(driver);
+                DialogResult = true;
+                Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
+        }
 
-           //try catch zetten en melding van toevoeging
-            
-            string firstname = txtFirstName.Text;
-            string lastname = txtLastName.Text;
-            DateTime birthDate = new DateTime(1997, 05, 20);
-            string securityNumber = txtSecurityNumber.Text;
-
-            driverRepository.AddDriver(new Driver(firstname,lastname,birthDate,securityNumber));
-
-
+        private void DriverDateOfBirthPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DateTime dob = (DateTime)DriverDateOfBirthPicker.SelectedDate;
+            string years = dob.Year.ToString().Substring(2, 2);
+            string months = dob.Month.ToString();
+            if (months.Length < 2) months = "0" + months;
+            string days = dob.Day.ToString();
+            if (days.Length < 2) days = "0" + days;
+            string securityNumberTemp = $"{years}.{months}.{days}-XXX.XX";
+            txtSecurityNumber.Text = securityNumberTemp;
         }
     }
 }

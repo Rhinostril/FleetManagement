@@ -56,7 +56,7 @@ namespace FleetManagement.UI.SelectForms
                 string postalCode = txtPostalCode.Text;
                 string city = txtCity.Text;
                 string country = txtCountry.Text;
-                Address address = new Address(street, number, postalCode, city, country);
+                //Address address = new Address(street, number, postalCode, city, country);
                 drivers = new ObservableCollection<Driver>(driverManager.SearchDrivers(null, lastName, firstName, dateOfBirth, null, street, number, postalCode));
                 lstDrivers.ItemsSource = drivers;
             }

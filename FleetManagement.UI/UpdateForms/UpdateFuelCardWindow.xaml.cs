@@ -47,6 +47,8 @@ namespace FleetManagement.UI.UpdateForms
                 fuelCard.SetPin(txtPin.Text);
                 fuelCard.IsEnabled = (bool)cbxEnabled.IsChecked;
                 fuelCardManager.UpdateFuelCard(fuelCard);
+                DialogResult = true;
+                Close();
             }
             catch(Exception ex)
             {
@@ -71,5 +73,8 @@ namespace FleetManagement.UI.UpdateForms
             txtDriver.Text = "None";
             btnRemoveDriver.IsEnabled = false;
         }
+
+
+
     }
 }

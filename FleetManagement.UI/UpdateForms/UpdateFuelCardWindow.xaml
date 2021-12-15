@@ -55,8 +55,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Button x:Name="btnAddFuelType" Grid.Column="0" Content="  Add Fueltype  " Margin="5" MinHeight="26"/>
-            <Button x:Name="btnRemoveFuelType" Grid.Column="1" Content="  Remove Fueltype  " Margin="5" MinHeight="26"/>
         </Grid>
 
         <Button x:Name="btnUpdateFuelCard" Grid.Row="7" Grid.Column="1" Margin="5" Content="  Update Fuelcard  " MinHeight="26" Click="btnUpdateFuelCard_Click"/>
