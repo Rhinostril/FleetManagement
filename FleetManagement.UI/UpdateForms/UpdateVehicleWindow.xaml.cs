@@ -57,9 +57,16 @@ namespace FleetManagement.UI
         {
             try
             {
-
-                // TODO
-
+                vehicle.SetBrand(txtBrand.Text);
+                vehicle.SetModel(txtModel.Text);
+                vehicle.SetChassisNumber(txtChassisNumber.Text);
+                vehicle.SetLicensePlate(txtLicensePlate.Text);
+                vehicle.SetVehicleType(txtVehicleType.Text);
+                vehicle.SetVehicleColor(txtColor.Text);
+                vehicle.SetVehicleDoors(int.Parse(txtDoors.Text));
+                vehicleManager.UpdateVehicle(vehicle);
+                DialogResult = true;
+                Close();
             }
             catch(Exception ex)
             {
