@@ -233,6 +233,8 @@ namespace FleetManagement.UI
                 {
                     Driver driver = (Driver)DriversDataGrid.SelectedItem;
                     driverManager.DeleteDriver(driver);
+                    drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
+                    DriversDataGrid.ItemsSource = drivers;
                 }
             }
             catch (Exception ex)

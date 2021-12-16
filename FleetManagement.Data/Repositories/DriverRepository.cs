@@ -865,7 +865,7 @@ namespace FleetManagement.Data.Repositories
         private int AddAddress(Address address)
         {
             SqlConnection connection = GetConnection();
-            string query = $"INSERT INTO [Address] (street, houseNr, postalCode, city, country) VALUES (@street, @houseNr, @postalCode, @city, @country) OUTPUT inserted.Id";
+            string query = $"INSERT INTO [Address] (street, houseNr, postalCode, city, country) OUTPUT INSERTED.addressId VALUES (@street, @houseNr, @postalCode, @city, @country)";
             using (SqlCommand command = connection.CreateCommand())
             {
                 try
@@ -882,7 +882,7 @@ namespace FleetManagement.Data.Repositories
                     command.Parameters["@city"].Value = address.City;
                     command.Parameters.Add(new SqlParameter("@country", SqlDbType.NVarChar));
                     command.Parameters["@country"].Value = address.Country;
-                    int addressId = command.ExecuteNonQuery();
+                    int addressId = (int)command.ExecuteScalar();
                     return addressId;
                 }
                 catch (Exception ex)
