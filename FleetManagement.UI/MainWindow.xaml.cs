@@ -179,6 +179,8 @@ namespace FleetManagement.UI
                 {
                     FuelCard fuelCard = (FuelCard)FuelCardsDataGrid.SelectedItem;
                     fuelCardManager.DeleteFuelCard(fuelCard);
+                    fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.GetLatestFuelcards());
+                    FuelCardsDataGrid.Items.Refresh();
                 }
             }
             catch(Exception ex)
@@ -206,6 +208,8 @@ namespace FleetManagement.UI
                 {
                     Vehicle vehicle = (Vehicle)VehiclesDataGrid.SelectedItem;
                     vehicleManager.DeleteVehicle(vehicle);
+                    vehicles = new ObservableCollection<Vehicle>(vehicleManager.GetLatestVehicles());
+                    VehiclesDataGrid.Items.Refresh();
                 }
             }
             catch (Exception ex)
@@ -234,7 +238,7 @@ namespace FleetManagement.UI
                     Driver driver = (Driver)DriversDataGrid.SelectedItem;
                     driverManager.DeleteDriver(driver);
                     drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
-                    DriversDataGrid.ItemsSource = drivers;
+                    DriversDataGrid.Items.Refresh();
                 }
             }
             catch (Exception ex)
