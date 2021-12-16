@@ -190,7 +190,6 @@ namespace FleetManagement.Data.Repositories
                             fuelcardid = (int?)reader.GetValue("fuelcardId");
                         }
                         List<string> LicenseTypes = GetLicensesByDriverID(driverid);
-
                         Driver D = new Driver(firstname, lastname, dateofbirth, securityNumber);
                         D.SetDriverID(driverid);
                         if (addressId != null) {
@@ -259,6 +258,7 @@ namespace FleetManagement.Data.Repositories
                         int? vehicleid = (int?)reader.GetValue("Driver.vehicleId");
                         int? fuelcardid = (int?)reader.GetValue("Driver.fuelcardId");
                         List<string> LicenseTypes = GetLicensesByDriverID(driverid);
+
 
                         Driver D = new Driver(firstname, lastname, dateofbirth, securityNumber);
                         if (addressId != null) {

@@ -44,8 +44,10 @@
         <TextBox x:Name="TxtVehicle" Grid.Row="7" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
 
         <TextBox x:Name="TxtFuelCard" Grid.Row="8" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
-        <ListBox x:Name="lstLicenseTypes" Grid.Row="1"  Grid.RowSpan="4" Grid.Column="3" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="2" Content="Licenses" Margin="5" FontSize="16"/>
 
+        <ListBox Name="lstLicenseTypes" Grid.Row="1" Grid.Column="3" Grid.RowSpan="4" Margin="5" SelectionMode="Single">
+        </ListBox>
     </Grid>
     
 </Window>

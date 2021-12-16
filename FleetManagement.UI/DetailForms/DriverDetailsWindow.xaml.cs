@@ -25,14 +25,17 @@ namespace FleetManagement.UI {
     public partial class DriverDetailWindow : Window {
         private DriverManager drivermanager = new DriverManager(new DriverRepository());
         public DriverDetailWindow(int driverID) {
-            InitializeComponent();
             Driver driver = drivermanager.GetDriverByID(driverID);
+            InitializeComponent();
+            lstLicenseTypes.ItemsSource = driver.DriversLicenceType;
+            lstLicenseTypes.Items.Refresh();
             TxtDriverId.Text = driver.DriverID.ToString();
             TxtFirstname.Text = driver.FirstName;
             TxtLastname.Text = driver.LastName;
             DateOfBirth.SelectedDate = driver.DateOfBirth;
             TxtSecurityNumber.Text = driver.SecurityNumber;
-          
+
+
 
             if (driver.Address != null)
             {
