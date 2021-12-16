@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FleetManagement.UI.UpdateForms"
         mc:Ignorable="d"
-        Title="UpdateFuelCardWindow" Height="450" Width="800">
+        Title="UpdateFuelCardWindow" Height="450" Width="512">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -22,23 +23,26 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Fuelcard ID" Margin="5"/>
-        <Label Grid.Row="1" Grid.Column="0" Content="Card Number" Margin="5"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Validity Date" Margin="5"/>
-        <Label Grid.Row="3" Grid.Column="0" Content="Pin" Margin="5"/>
-        <Label Grid.Row="4" Grid.Column="0" Content="Driver" Margin="5"/>
-        <Label Grid.Row="5" Grid.Column="0" Content="Enabled" Margin="5"/>
-        <Label Grid.Row="6" Grid.Column="0" Content="Fueltypes" Margin="5"/>
-        
-        <TextBox x:Name="txtFuelCardId" Grid.Row="0" Grid.Column="1" Margin="5" IsEnabled="False"/>
-        <TextBox x:Name="txtCardNumber" Grid.Row="1" Grid.Column="1" Margin="5"/>
-        <DatePicker x:Name="dtpValidityDate" Grid.Row="2" Grid.Column="1" Margin="5" SelectedDateFormat="Short"/>
-        <TextBox x:Name="txtPin" Grid.Row="3" Grid.Column="1" Margin="5"/>
-        <TextBox x:Name="txtDriver" Grid.Row="4" Grid.Column="1" Margin="5"/>
-        <CheckBox x:Name="cbxEnabled" Grid.Row="5" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
-        <ListBox x:Name="lstFuelTypes" Grid.Row="6" Grid.Column="1" Margin="5"/>
 
-        <Grid Grid.Row="4" Grid.Column="2">
+        <Label Content="Update Fuelcard" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="28" Margin="5"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Fuelcard ID" Margin="5"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Card Number" Margin="5"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Validity Date" Margin="5"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Pin" Margin="5"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="Driver" Margin="5"/>
+        <Label Grid.Row="6" Grid.Column="0" Content="Enabled" Margin="5"/>
+        <Label Grid.Row="7" Grid.Column="0" Content="Fueltypes" Margin="5"/>
+        
+        <TextBox x:Name="txtFuelCardId" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="False"/>
+        <TextBox x:Name="txtCardNumber" Grid.Row="2" Grid.Column="1" Margin="5"/>
+        <DatePicker x:Name="dtpValidityDate" Grid.Row="3" Grid.Column="1" Margin="5" SelectedDateFormat="Short"/>
+        <TextBox x:Name="txtPin" Grid.Row="4" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="txtDriver" Grid.Row="5" Grid.Column="1" Margin="5"/>
+        <CheckBox x:Name="cbxEnabled" Grid.Row="6" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
+        <ListBox x:Name="lstFuelTypes" Grid.Row="7" Grid.Column="1" Margin="5"/>
+
+        <Grid Grid.Row="5" Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -47,7 +51,7 @@
             <Button x:Name="btnRemoveDriver" Grid.Column="1" Content="  Remove Driver  " Margin="5" IsEnabled="False" Click="btnRemoveDriver_Click"/>
         </Grid>
 
-        <Grid Grid.Row="6" Grid.Column="2">
+        <Grid Grid.Row="7" Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -57,7 +61,7 @@
             </Grid.RowDefinitions>
         </Grid>
 
-        <Button x:Name="btnUpdateFuelCard" Grid.Row="7" Grid.Column="1" Margin="5" Content="  Update Fuelcard  " MinHeight="26" Click="btnUpdateFuelCard_Click"/>
+        <Button x:Name="btnUpdateFuelCard" Grid.Row="8" Grid.Column="1" Margin="5" Content="  Update Fuelcard  " MinHeight="26" Click="btnUpdateFuelCard_Click"/>
         
     </Grid>
 </Window>

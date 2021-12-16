@@ -103,7 +103,7 @@ namespace FleetManagement.UI
             }
         }
 
-        private void btnRemoveDriver_Click(object sender, RoutedEventArgs e)
+        private void btnRemoveDriver_Click(object sender, RoutedEventArgs e) // geen reference?
         {
             vehicle.RemoveDriver();
             txtDriver.Text = "None";
