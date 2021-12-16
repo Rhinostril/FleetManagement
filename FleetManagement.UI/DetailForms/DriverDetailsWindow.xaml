@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="1.3*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -33,7 +33,7 @@
         <Label Grid.Row="6" Grid.Column="0" Content="Adres" Margin="5" FontSize="16"/>
         <Label Grid.Row="7" Grid.Column="0" Content="Vehicle" Margin="5" FontSize="16"/>
         <Label Grid.Row="8" Grid.Column="0" Content="FuelCard" Margin="5" FontSize="16"/>
-        
+        <Label Grid.Row="1" Grid.Column="2" Content="Licenses" Margin="5" FontSize="16"/>
 
         <TextBox x:Name="TxtDriverId" Grid.Row="1" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <TextBox x:Name="TxtFirstname" Grid.Row="2" Grid.Column="1" Text="Aston Martin" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
@@ -44,6 +44,8 @@
         <TextBox x:Name="TxtVehicle" Grid.Row="7" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
 
         <TextBox x:Name="TxtFuelCard" Grid.Row="8" Grid.Column="1" Text="1001" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
+        <ListBox x:Name="lstLicenseTypes" Grid.Row="1"  Grid.RowSpan="4" Grid.Column="3" Margin="5"/>
+
     </Grid>
     
 </Window>

@@ -16,7 +16,7 @@ namespace FleetManagement.Business.Interfaces
         bool DriverExists(int id);
         bool DriverHasVehicle(int id);
         bool DriverHasFuelCard(int id);
-        void AddDriver(Driver driver);
+        void AddDriverWithAddress(Driver driver);
         void UpdateDriverWithAddress(Driver driver);
         void DeleteDriverWithAddress(Driver driver);
         bool DoesSecurityNumberExist(string securityNumber);
