@@ -119,7 +119,7 @@ namespace FleetManagement.UI
         private void FuelCardsDetails_Click(object sender, RoutedEventArgs e)
         {
             FuelCard fuelCard = (FuelCard)FuelCardsDataGrid.SelectedItem;
-            FuelCardDetailsWindow objWindow = new FuelCardDetailsWindow(fuelCard.FuelCardId);
+            FuelCardDetailsWindow objWindow = new FuelCardDetailsWindow(fuelCard);
             objWindow.Show();
         }
 
@@ -155,8 +155,22 @@ namespace FleetManagement.UI
 
         private void FuelCardUpdate_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                FuelCard fuelCard = (FuelCard)FuelCardsDataGrid.SelectedItem;
+                UpdateFuelCardWindow objWindow = new UpdateFuelCardWindow(fuelCard);
+                if(objWindow.ShowDialog() == true)
+                {
+                    fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.GetLatestFuelcards());
+                    FuelCardsDataGrid.ItemsSource = fuelCards;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
         }
+
         private void FuelCardDelete_Click(object sender, RoutedEventArgs e)
         {
             try

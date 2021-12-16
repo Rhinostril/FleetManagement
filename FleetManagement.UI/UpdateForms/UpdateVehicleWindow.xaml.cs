@@ -57,9 +57,16 @@ namespace FleetManagement.UI
         {
             try
             {
-
-                // TODO
-
+                vehicle.SetBrand(txtBrand.Text);
+                vehicle.SetModel(txtModel.Text);
+                vehicle.SetChassisNumber(txtChassisNumber.Text);
+                vehicle.SetLicensePlate(txtLicensePlate.Text);
+                vehicle.SetVehicleType(txtVehicleType.Text);
+                vehicle.SetVehicleColor(txtColor.Text);
+                vehicle.SetVehicleDoors(int.Parse(txtDoors.Text));
+                vehicleManager.UpdateVehicle(vehicle);
+                DialogResult = true;
+                Close();
             }
             catch(Exception ex)
             {
@@ -74,6 +81,7 @@ namespace FleetManagement.UI
             {
                 txtDriver.Text = objWindow.driver.ToString();
                 vehicle.SetDriver(objWindow.driver);
+                btnRemoveDriver.IsEnabled = true;
             }
         }
 
@@ -93,6 +101,13 @@ namespace FleetManagement.UI
             {
                 MessageBox.Show(ex.Message, "Foutmelding!");
             }
+        }
+
+        private void btnRemoveDriver_Click(object sender, RoutedEventArgs e) // geen reference?
+        {
+            vehicle.RemoveDriver();
+            txtDriver.Text = "None";
+            btnRemoveDriver.IsEnabled = false;
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FleetManagement.UI"
         mc:Ignorable="d"
-        Title="AddNewDriver" Height="320" Width="350">
+        Title="AddNewDriver" Height="320" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -19,19 +19,30 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Add New Driver" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="28" Margin="5"/>
         <Label Grid.Row="1" Grid.Column="0" Content="First name" Margin="5" FontSize="16"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Last name" Margin="5" FontSize="16"/>
-        <Label Grid.Row="3" Grid.Column="0" Content="Date of birth" Margin="5" FontSize="16"/>
-        <Label Grid.Row="4" Grid.Column="0" Content="Security Number" Margin="5" FontSize="16"/>
+        <Label Grid.Row="1" Grid.Column="2" Content="Last name" Margin="5" FontSize="16"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Date of birth" Margin="5" FontSize="16"/>
+        <Label Grid.Row="2" Grid.Column="2" Content="Security Number" Margin="5" FontSize="16"/>
 
+        <Label Grid.Row="3" Grid.Column="0" Content="Street" Margin="5" FontSize="16"/>
+        <Label Grid.Row="3" Grid.Column="2" Content="House Number" Margin="5" FontSize="16"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Postal Code" Margin="5" FontSize="16"/>
+        <Label Grid.Row="4" Grid.Column="2" Content="City" Margin="5" FontSize="16"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="Country" Margin="5" FontSize="16"/>
 
         <TextBox Name="txtFirstName" Grid.Row="1" Grid.Column="1"  Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
-        <TextBox Name="txtLastName" Grid.Row="2" Grid.Column="1"  Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
-        <DatePicker Grid.Row="3" Grid.Column="1" Name="DriverDateOfBirthPicker" SelectedDateFormat="Short" IsTodayHighlighted="true" Margin="5"/>
-        <TextBox Name="txtSecurityNumber" Grid.Row="4" Grid.Column="1"  Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
-        <Button  Name="buttonAddDriver" Content="Add Driver" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
+        <TextBox Name="txtLastName" Grid.Row="1" Grid.Column="4"  Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
+        <DatePicker Grid.Row="2" Grid.Column="1" Name="DriverDateOfBirthPicker" SelectedDateFormat="Short" IsTodayHighlighted="true" Margin="5" SelectedDateChanged="DriverDateOfBirthPicker_SelectedDateChanged"/>
+        <TextBox Name="txtSecurityNumber" Grid.Row="2" Grid.Column="3"  Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="True" Text="XX.XX.XX-XXX.XX"/>
+        <TextBox Name="txtStreet" Grid.Row="3" Grid.Column="1"  Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
+        <TextBox Name="txtHouseNr" Grid.Row="3" Grid.Column="3"  Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
+        <TextBox Name="txtPostalCode" Grid.Row="4" Grid.Column="1"  Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
+        <TextBox Name="txtCity" Grid.Row="4" Grid.Column="3"  Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
+        <TextBox Name="txtCountry" Grid.Row="5" Grid.Column="1"  Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
+        
+        <Button  Name="buttonAddDriver" Content="Add Driver" Grid.Column="2" Grid.ColumnSpan="2" MinHeight="26" Margin="5" Grid.Row="5" VerticalAlignment="Center" Click="Button_Click"/>
     </Grid>
 </Window>

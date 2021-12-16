@@ -32,13 +32,18 @@ namespace FleetManagement.UI.SelectForms
         public SelectDriverWindow()
         {
             InitializeComponent();
+            drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
+            lstDrivers.ItemsSource = drivers;
         }
 
         private void btnSelectDriver_Click(object sender, RoutedEventArgs e)
         {
             driver = (Driver)lstDrivers.SelectedItem;
-            DialogResult = true;
-            Close();
+            if(driver != null)
+            {
+                DialogResult = true;
+                Close();
+            }
         }
 
         private void btnSearchDrivers_Click(object sender, RoutedEventArgs e)
@@ -53,7 +58,7 @@ namespace FleetManagement.UI.SelectForms
                 string postalCode = txtPostalCode.Text;
                 string city = txtCity.Text;
                 string country = txtCountry.Text;
-                Address address = new Address(street, number, postalCode, city, country);
+                //Address address = new Address(street, number, postalCode, city, country);
                 drivers = new ObservableCollection<Driver>(driverManager.SearchDrivers(null, lastName, firstName, dateOfBirth, null, street, number, postalCode));
                 lstDrivers.ItemsSource = drivers;
             }

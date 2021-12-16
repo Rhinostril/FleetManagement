@@ -55,7 +55,9 @@
 
         <Button x:Name="btnSelectVehicle" Grid.Row="6" Grid.Column="2" Margin="5" Content="Select Vehicle" Click="btnSelectVehicle_Click"/>
         <Button x:Name="btnSelectFuelCard" Grid.Row="7" Grid.Column="2" Margin="5" Content="Select Fuelcard" Click="btnSelectFuelCard_Click"/>
-
+        <Button x:Name="btnRemoveVehicle" Grid.Row="6" Grid.Column="3" Margin="5" Content="Remove Vehicle" IsEnabled="False" Click="btnRemoveVehicle_Click"/>
+        <Button x:Name="btnRemoveFuelCard" Grid.Row="7" Grid.Column="3" Margin="5" Content="Remove Fuelcard" IsEnabled="False" Click="btnRemoveFuelCard_Click"/>
+        
         <Button x:Name="btnUpdateDriver" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Content="  Update Driver  " MinHeight="28" Click="btnUpdateDriver_Click"/>
 
     </Grid>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FleetManagement.UI"
         mc:Ignorable="d"
-        Title="Vehicle Details" Height="450" Width="800">
+        Title="Update Vehicle" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -24,8 +24,9 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Vehicle Details" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="28" Margin="5"/>
+        <Label Content="Update Vehicle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="28" Margin="5"/>
         <Label Grid.Row="1" Grid.Column="0" Content="Vehicle ID" Margin="5" FontSize="16"/>
         <Label Grid.Row="2" Grid.Column="0" Content="Brand" Margin="5" FontSize="16"/>
         <Label Grid.Row="3" Grid.Column="0" Content="Model" Margin="5" FontSize="16"/>
@@ -47,6 +48,7 @@
         <TextBox Name="txtDoors" Grid.Row="8" Grid.Column="1" Text="3" Margin="5" VerticalAlignment="Center" FontSize="16"/>
         <TextBox Name="txtDriver" Grid.Row="1" Grid.Column="3" Text="Lewis Hamilton" Margin="5" VerticalAlignment="Center" FontSize="16" IsEnabled="False"/>
         <Button Name="btnSelectDriver" Grid.Row="1" Grid.Column="4" Content="  Select Driver  " Margin="5" Click="btnSelectDriver_Click"/>
+        <Button x:Name="btnRemoveDriver" Grid.Row="1" Grid.Column="5" Content="  Remove Driver  " Margin="5" IsEnabled="False" Click="btnRemoveDriver_Click"/>
         <ListBox Name="lstFuelTypes" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Margin="5" SelectionMode="Single">
             <ListBox.ItemTemplate>
                 <DataTemplate>

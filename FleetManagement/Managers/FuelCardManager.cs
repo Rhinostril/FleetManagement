@@ -32,12 +32,13 @@ namespace FleetManagement.Business.Managers
 
 
         public FuelCard getFuelCardByID(int fuelcardId) { // NEEDS FIXING
-            try {
-                FuelCard fuelcard = repo.GetFuelCard(fuelcardId);
-                return fuelcard;
-
-            } catch (Exception ex) {
-                throw new Exception(ex.Message, ex.InnerException);
+            try
+            {
+                return repo.GetFuelCard(fuelcardId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
         public IReadOnlyList<FuelCard> GetLatestFuelcards() {
@@ -85,9 +86,7 @@ namespace FleetManagement.Business.Managers
         {
             try
             {
-                // Bestaat fuelCard met zelfde properties al?
-
-
+                repo.UpdateFuelCardTransaction(fuelCard);
             }
             catch (Exception ex)
             {
@@ -103,7 +102,7 @@ namespace FleetManagement.Business.Managers
                 {
                     if (!repo.FuelCardHasDriver(fuelCard))
                     {
-                        repo.DeleteFuelCard(fuelCard);
+                        repo.DeleteFuelCardTransaction(fuelCard);
                     }
                     else
                     {
