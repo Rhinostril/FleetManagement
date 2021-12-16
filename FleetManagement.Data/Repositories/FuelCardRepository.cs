@@ -118,7 +118,7 @@ namespace FleetManagement.Data.Repositories
         public IReadOnlyList<FuelCard> GetTop50FuelCards() {
             SqlConnection connection = getConnection();
             List<FuelCard> fuelCards = new List<FuelCard>();
-            string query = "SELECT TOP 50 * FROM Fuelcard ORDER BY fuelCardId DESC; ";
+            string query = "SELECT TOP (50) Fuelcard.fuelCardId, Fuelcard.cardNumber, Fuelcard.validityDate, Fuelcard.pin, Fuelcard.driverId, Fuelcard.isEnabled, Driver.firstName, Driver.lastName FROM [Fuelcard] LEFT JOIN [Driver] ON Fuelcard.driverId=Driver.driverId ORDER BY Fuelcard.fuelCardId DESC; ";
 
             using (SqlCommand command = connection.CreateCommand()) {
                 command.CommandText = query;
@@ -131,7 +131,14 @@ namespace FleetManagement.Data.Repositories
                         DateTime validityDate = (DateTime)reader["validityDate"];
                         string pin = (string)reader["pin"];
                         bool isEnabled = (bool)reader["isEnabled"];
-                        fuelCards.Add(new FuelCard(fuelCardId, cardNumber, validityDate, pin, isEnabled));
+                        FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, isEnabled);
+                        if(!reader.IsDBNull(4))
+                        {
+                            string firstName = (string)reader["firstName"];
+                            string lastName = (string)reader["lastName"];
+                            fuelCard.SetDriver(new Driver(firstName, lastName));
+                        }
+                        fuelCards.Add(fuelCard);
                     }
                 } catch (Exception ex) {
                     throw new Exception(ex.Message);

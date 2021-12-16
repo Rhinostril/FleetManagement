@@ -17,7 +17,7 @@ namespace FleetManagement.Data.Repositories
             //this sets the driverslicensetype dict so that it can be used by insert commands
             Alldriverlicensetypes = GetDriversLicensePairs();
         }
-        private SqlConnection getConnection()
+        private SqlConnection GetConnection()
         {
             SqlConnection connection = new SqlConnection(connectionString);
             return connection;
@@ -25,7 +25,7 @@ namespace FleetManagement.Data.Repositories
         public Dictionary<int, string> GetDriversLicensePairs() {
             Dictionary<int, string> driverlicensetypes = new Dictionary<int, string>();
             string licenseQuery = "SELECT * FROM [LicenseType]";
-            SqlConnection licenseconnection = getConnection();
+            SqlConnection licenseconnection = GetConnection();
             using (SqlCommand command = new SqlCommand(licenseQuery, licenseconnection)) {
 
                 licenseconnection.Open();
@@ -46,194 +46,12 @@ namespace FleetManagement.Data.Repositories
             return driverlicensetypes;
 
         }
-        public void AddDriver(Driver driver)
-        {
-            int? vehicleid = null; //dont set this as 0 because if the read fails, the id should not be set to 0
-            int? fuelcardid = null;
-            int? addressId = null;
-            if (driver.FuelCard != null) {
-                // get fuelcard Id from fuelcard
-                //cardnr and validityDate are not null and together form robust enough unique identifyer
-                string FuelcardIDQuery = "SELECT * FROM [FuelCard] where cardNumber=@cardnr AND validityDate=@date";
-
-                SqlConnection Fuelcardconnection = getConnection();
-                using (SqlCommand command = new SqlCommand(FuelcardIDQuery, Fuelcardconnection)) {
-                    command.Parameters.AddWithValue("@cardnr", driver.FuelCard.CardNumber);
-                    command.Parameters.AddWithValue("@date", driver.FuelCard.ValidityDate);
-                    Fuelcardconnection.Open();
-                    try {
-                        SqlDataReader reader = command.ExecuteReader();
-                        reader.Read();
-                        fuelcardid = (int)reader.GetValue("fuelCardId");
-                        reader.Close();
-                    } catch (Exception e) {
-
-                    } finally {
-                        Fuelcardconnection.Close();
-                    }
-                }
-            }
-            if (driver.Vehicle != null) {
-                //get vehicleId from vehicle table
-                //chassis brand and model are not null and together form robust enough unique identifyer
-                string vehicleIDQuery = "SELECT * FROM [Vehicle] where chassisNumber=@chassisnr AND model=@model AND brand=@brand ";
-
-                SqlConnection vehicleconnection = getConnection();
-                using (SqlCommand command = new SqlCommand(vehicleIDQuery, vehicleconnection)) {
-                    command.Parameters.AddWithValue("@chassisnr", driver.Vehicle.ChassisNumber);
-                    command.Parameters.AddWithValue("@model", driver.Vehicle.Model);
-                    command.Parameters.AddWithValue("@brand", driver.Vehicle.Brand);
-                    vehicleconnection.Open();
-                    try {
-                        SqlDataReader reader = command.ExecuteReader();
-                        reader.Read();
-                        vehicleid = (int)reader.GetValue("vehicleId");
-                        reader.Close();
-                    } catch (Exception e) {
-
-                    } finally {
-                        vehicleconnection.Close();
-                    }
-                }
-            }
-            if (driver.Address != null) {
-                //get addressid from address table
-                //All param's in Address are not nullable so why not use them all for our query <- todo take extra care because of empty constructor! currently address can be non-null and empty
-                string AddressIDQuery = "SELECT * FROM [Address] where street=@street AND houseNr=@houseNr AND postalCode=@postalCode AND city=@city  AND country=@country";
-
-                SqlConnection Adressconnection = getConnection();
-                using (SqlCommand command = new SqlCommand(AddressIDQuery, Adressconnection)) {
-                    command.Parameters.AddWithValue("@street", driver.Address.Street);
-                    command.Parameters.AddWithValue("@houseNr", driver.Address.HouseNr);
-                    command.Parameters.AddWithValue("@postalCode", driver.Address.PostalCode);
-                    command.Parameters.AddWithValue("@city", driver.Address.City);
-                    command.Parameters.AddWithValue("@country", driver.Address.Country);
-                    Adressconnection.Open();
-                    try {
-                        SqlDataReader reader = command.ExecuteReader();
-                        reader.Read();
-                        addressId = (int)reader.GetValue("addressId");
-                        reader.Close();
-                    } catch (Exception e) {
-
-                    } finally {
-                        Adressconnection.Close();
-                    }
-                }
-            }
-
-            string query = "INSERT INTO [Driver] (firstName,lastName,dateOfBirth,addressId,securityNumber,vehicleid,fuelcardid) Values (@firstName,@lastName,@dateOfBirth,@addressId,@securityNumber,@vehicleid,@fuelcardid);SELECT CAST(scope_identity() AS int)";
-            int? newdriverID = null;
-            SqlConnection connection = getConnection();
-            using (SqlCommand command = new SqlCommand(query, connection)) {
-                SqlTransaction transaction = connection.BeginTransaction();
-                command.Transaction = transaction;
-                try {
-                    SqlParameter parDriverFirstName = new SqlParameter();
-                    parDriverFirstName.ParameterName = "@firstName";
-                    parDriverFirstName.SqlDbType = System.Data.SqlDbType.NVarChar;
-                    command.Parameters.Add(parDriverFirstName);
-
-                    SqlParameter parDriverLastName = new SqlParameter();
-                    parDriverLastName.ParameterName = "@lastName";
-                    parDriverLastName.SqlDbType = System.Data.SqlDbType.NVarChar;
-                    command.Parameters.Add(parDriverLastName);
-
-                    SqlParameter parDriverDateOfBirth = new SqlParameter();
-                    parDriverDateOfBirth.ParameterName = "@dateOfBirth";
-                    parDriverDateOfBirth.SqlDbType = System.Data.SqlDbType.DateTime;
-                    command.Parameters.Add(parDriverDateOfBirth);
-
-                    SqlParameter parAddressId = new SqlParameter();
-                    parAddressId.ParameterName = "@addressId";
-                    parAddressId.SqlDbType = System.Data.SqlDbType.Int;
-                    command.Parameters.Add(parAddressId);
-
-                    SqlParameter parDriverSecurityNr = new SqlParameter();
-                    parDriverSecurityNr.ParameterName = "@securityNumber";
-                    parDriverSecurityNr.SqlDbType = System.Data.SqlDbType.NVarChar;
-                    command.Parameters.Add(parDriverSecurityNr);
-
-                    SqlParameter parvehicleId = new SqlParameter();
-                    parvehicleId.ParameterName = "@vehicleid";
-                    parvehicleId.SqlDbType = System.Data.SqlDbType.Int;
-                    command.Parameters.Add(parvehicleId);
-
-                    SqlParameter parFuelCardID = new SqlParameter();
-                    parFuelCardID.ParameterName = "@fuelcardid";
-                    parFuelCardID.SqlDbType = System.Data.SqlDbType.Int;
-                    command.Parameters.Add(parFuelCardID);
-
-                    command.Parameters["@firstName"].Value = driver.FirstName;
-                    command.Parameters["@lastName"].Value = driver.LastName;
-                    command.Parameters["@dateOfBirth"].Value = driver.DateOfBirth;
-                    command.Parameters["@securityNumber"].Value = driver.SecurityNumber;
-
-                    command.Parameters["@addressId"].Value = addressId;
-                    command.Parameters["@vehicleid"].Value = vehicleid; //TODO test if this works
-                    command.Parameters["@fuelcardid"].Value = fuelcardid;
-
-                    connection.Open();
-                    newdriverID = (int)command.ExecuteScalar();
-                    transaction.Commit();
-
-                } catch (Exception ex) {
-                    transaction.Rollback();
-                    throw new Exception(ex.Message);
-                } finally {
-                    connection.Close();
-                }
-            }
-            if (newdriverID != null) {
-                foreach (string licensetype in driver.DriversLicenceType) {
-                    //if a driver has no license type this will simply not loop once
-                    //inserts a driverid and typeid into the DriversLicenceType table that can be used elsewhere
-                    if (Alldriverlicensetypes.ContainsValue(licensetype)) {
-                        string insertLicenseQuery = "INSERT INTO [DriverLicenseType] (driverId,licenseTypeId) Values (@driverid,@licenseID)";
-                        SqlConnection licenseconnection = getConnection();
-                        using (SqlCommand command = new SqlCommand(insertLicenseQuery, licenseconnection)) {
-                            SqlTransaction transaction = connection.BeginTransaction();
-                            command.Transaction = transaction;
-                            try {
-
-                                SqlParameter pardriverId = new SqlParameter();
-                                pardriverId.ParameterName = "@driverid";
-                                pardriverId.SqlDbType = System.Data.SqlDbType.Int;
-                                command.Parameters.Add(pardriverId);
-                                command.Parameters["@driverid"].Value = newdriverID;
-
-                                SqlParameter parlicenseID = new SqlParameter();
-                                parlicenseID.ParameterName = "@licenseID";
-                                parlicenseID.SqlDbType = System.Data.SqlDbType.Int;
-                                command.Parameters.Add(parlicenseID);
-                                int key = Alldriverlicensetypes.FirstOrDefault(x => x.Value == licensetype).Key;
-                                command.Parameters["@driverid"].Value = key;
-
-                                connection.Open();
-                                command.ExecuteNonQuery();
-                                transaction.Commit();
-                            } catch (Exception ex) {
-                                transaction.Rollback();
-                                throw new Exception(ex.Message);
-                            } finally {
-                                connection.Close();
-                            }
-                        }
-                    } else {
-                        //trying to add a type that is not in the database => ASK what to do here?
-                    }
-                }
-            }//if the previous insert failed, the id will be null so dont add anything
-
-        }
-
-        
 
         public bool DriverExists(int id)
         {
             string query = $"SELECT * FROM [Driver] WHERE driverId=@ID;";
             var list = new List<object>();
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@ID", id);
@@ -273,7 +91,7 @@ namespace FleetManagement.Data.Repositories
         {
             string query = $"SELECT * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId  ;";
             List<Driver> driverlist = new List<Driver>();
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, connection)) {
                 connection.Open();
                 try {
@@ -344,10 +162,11 @@ namespace FleetManagement.Data.Repositories
             }
             return driverlist.AsReadOnly();
         }
+
         public IReadOnlyList<Driver> GetTop50Drivers() {
             string query = $"SELECT TOP 50 * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId ORDER BY Driver.driverid DESC ;";
             List<Driver> driverlist = new List<Driver>();
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, connection)) {
                 connection.Open();
                 try {
@@ -423,7 +242,7 @@ namespace FleetManagement.Data.Repositories
         public IReadOnlyList<Driver> GetDriversByAmount(int amount) {
             string query = $"SELECT TOP @amount * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId ORDER BY Driver.driverid DESC ;";
             List<Driver> driverlist = new List<Driver>();
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, connection)) {
                 command.Parameters.AddWithValue("@amount", amount);
                 connection.Open();
@@ -491,7 +310,7 @@ namespace FleetManagement.Data.Repositories
         public List<FuelType> GetfuelcardFueltypes(int fuelcardid) {
             List<FuelType> fuelTypes = new List<FuelType>();
             string query = "SELECT (fuelCardId,[FuelCardFuelType].fuelTypeId,name) FROM [FuelCardFuelType] LEFT JOIN [FuelType] ON [FuelCardFuelType].fuelTypeId = [FuelType].fuelTypeId where fuelCardId=@ID ";
-            SqlConnection fuelcardtypeconnection = getConnection();
+            SqlConnection fuelcardtypeconnection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, fuelcardtypeconnection)) {
                 fuelcardtypeconnection.Open();
                 try {
@@ -518,7 +337,7 @@ namespace FleetManagement.Data.Repositories
         public List<string> GetLicensesByDriverID(int Driverid) {
             List<string> types = new List<string>();
             string query = "SELECT * FROM [DriverLicenseType] where driverId=@ID";
-            SqlConnection licenseconnection = getConnection();
+            SqlConnection licenseconnection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, licenseconnection)) {
                 licenseconnection.Open();
                 try {
@@ -540,10 +359,11 @@ namespace FleetManagement.Data.Repositories
             }
             return types;
         }
+
         public List<FuelType> GetvehcileFueltypes(int vehicleid) {
             List<FuelType> fuelTypes = new List<FuelType>();
             string query = "SELECT (vehicleId,[VehicleFuelType].fuelTypeId,name) FROM [VehicleFuelType] LEFT JOIN [FuelType] ON [VehicleFuelType].fuelTypeId = [FuelType].fuelTypeId where vehicleId=@ID ";
-            SqlConnection vehiclefueltypeconnection = getConnection();
+            SqlConnection vehiclefueltypeconnection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, vehiclefueltypeconnection)) {
                 vehiclefueltypeconnection.Open();
                 try {
@@ -566,9 +386,11 @@ namespace FleetManagement.Data.Repositories
             }
             return fuelTypes;
         }
+
         public void GetAddressByID(int addressID) {
 
         }
+
         public Driver SearchDriver(int? id, string firstName, string lastName, DateTime dateOfBirth, Address address)
         {
             throw new NotImplementedException();
@@ -661,7 +483,7 @@ namespace FleetManagement.Data.Repositories
                 query = $"SELECT * FROM Driver LEFT JOIN [Address] ON Address.addressId = Driver.addressId  WHERE {String.Join("", subquerylist)}";
             }
 
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
 
             using (SqlCommand cmd = connection.CreateCommand())
             {
@@ -779,11 +601,10 @@ namespace FleetManagement.Data.Repositories
             }
             
         }
-
         public Driver GetDriverById(int id) {
             string query = $"SELECT * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId where [Driver].driverId=@ID;";
             List<Driver> driverlist = new List<Driver>();
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, connection)) {
                 connection.Open();
                 command.Parameters.AddWithValue("@ID", id);
@@ -860,7 +681,7 @@ namespace FleetManagement.Data.Repositories
         public bool DoesSecurityNumberExist(string securityNumber) {
             string query = $"SELECT * FROM [Driver] WHERE securityNumber=@securityNumber;";
             List<int> driverIDlist = new List<int>();
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, connection)) {
 
                 SqlParameter parDriverSecurityNr = new SqlParameter();
@@ -893,11 +714,9 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
-
-
         public IReadOnlyList<Driver> GetDrivers(int? amount)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             string query = "SELECT * FROM Driver";
             if (amount != null)
             {
@@ -937,7 +756,7 @@ namespace FleetManagement.Data.Repositories
 
         public bool DriverHasVehicle(int id)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             string query = "SELECT count(*) FROM [Driver] WHERE driverId=@driverId AND vehicleId IS NOT NULL";
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -963,7 +782,7 @@ namespace FleetManagement.Data.Repositories
 
         public bool DriverHasFuelCard(int id)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             string query = "SELECT count(*) FROM [Driver] WHERE driverId=@driverId AND fuelcardId IS NOT NULL";
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -987,12 +806,102 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
+        // *********************************************************************************
+        // ***************** INSERT INTO DRIVER & ADDRESS TRANSACTION **********************
+        // *********************************************************************************
+        public void AddDriverWithAddress(Driver driver)
+        {
+            SqlConnection connection = GetConnection();
+            connection.Open();
+            SqlTransaction transaction = connection.BeginTransaction();
+            try
+            {
+                int addressId = AddAddress(driver.Address);
+                AddDriver(driver, addressId);
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        private void AddDriver(Driver driver, int addressId)
+        {
+            SqlConnection connection = GetConnection();
+            string query = $"INSERT INTO [Driver] (firstName, lastName, dateOfBirth, addressId, securityNumber) VALUES (@firstName, @lastName, @dateOfBirth, @addressId, @securityNumber)";
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.CommandText = query;
+                    command.Parameters.Add(new SqlParameter("@firstName", SqlDbType.NVarChar));
+                    command.Parameters["@firstName"].Value = driver.FirstName;
+                    command.Parameters.Add(new SqlParameter("@lastName", SqlDbType.NVarChar));
+                    command.Parameters["@lastName"].Value = driver.LastName;
+                    command.Parameters.Add(new SqlParameter("@dateOfBirth", SqlDbType.DateTime));
+                    command.Parameters["@dateOfBirth"].Value = driver.DateOfBirth;
+                    command.Parameters.Add(new SqlParameter("@addressId", SqlDbType.Int));
+                    command.Parameters["@addressId"].Value = addressId;
+                    command.Parameters.Add(new SqlParameter("@securityNumber", SqlDbType.NVarChar));
+                    command.Parameters["@securityNumber"].Value = driver.SecurityNumber;
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+        private int AddAddress(Address address)
+        {
+            SqlConnection connection = GetConnection();
+            string query = $"INSERT INTO [Address] (street, houseNr, postalCode, city, country) OUTPUT INSERTED.addressId VALUES (@street, @houseNr, @postalCode, @city, @country)";
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.CommandText = query;
+                    command.Parameters.Add(new SqlParameter("@street", SqlDbType.NVarChar));
+                    command.Parameters["@street"].Value = address.Street;
+                    command.Parameters.Add(new SqlParameter("@houseNr", SqlDbType.NVarChar));
+                    command.Parameters["@houseNr"].Value = address.HouseNr;
+                    command.Parameters.Add(new SqlParameter("@postalCode", SqlDbType.NVarChar));
+                    command.Parameters["@postalCode"].Value = address.PostalCode;
+                    command.Parameters.Add(new SqlParameter("@city", SqlDbType.NVarChar));
+                    command.Parameters["@city"].Value = address.City;
+                    command.Parameters.Add(new SqlParameter("@country", SqlDbType.NVarChar));
+                    command.Parameters["@country"].Value = address.Country;
+                    int addressId = (int)command.ExecuteScalar();
+                    return addressId;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
         // *******************************************************************************************************
         // ********************************* UPDATE DRIVER WITH TRANSACTION **************************************
         // *******************************************************************************************************
         public void UpdateDriverWithAddress(Driver driver)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             connection.Open();
             SqlTransaction transaction = connection.BeginTransaction();
             try
@@ -1021,7 +930,7 @@ namespace FleetManagement.Data.Repositories
         }
         private void UpdateDriver(Driver driver)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             string query = $"UPDATE [Driver] SET firstName=@firstName, lastName=@lastName, dateOfBirth=@dateOfBirth, securityNumber=@securityNumber, vehicleId=@vehicleId, fuelcardId=@fuelcardId WHERE driverId=@driverId";
             using(SqlCommand command = connection.CreateCommand())
             {
@@ -1071,7 +980,7 @@ namespace FleetManagement.Data.Repositories
         }
         private void UpdateAddress(Address address)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             string query = $"UPDATE [Address] SET street=@street, houseNr=@houseNr, postalCode=@postalCode, city=@city, country=@country WHERE addressId=@addressId";
             using(SqlCommand command = connection.CreateCommand())
             {
@@ -1106,7 +1015,7 @@ namespace FleetManagement.Data.Repositories
         }
         private void ConnectVehicleToDriver(Driver driver)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             string query = $"UPDATE [Vehicle] SET driverId=@driverId WHERE vehicleId=@vehicleId";
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -1134,7 +1043,7 @@ namespace FleetManagement.Data.Repositories
         }
         private void ConnectFuelCardToDriver(Driver driver)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             string query = $"UPDATE [Fuelcard] SET driverId=@driverId WHERE fuelCardId=@fuelCardId";
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -1167,7 +1076,7 @@ namespace FleetManagement.Data.Repositories
 
         public void DeleteDriverWithAddress(Driver driver)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             connection.Open();
             SqlTransaction transaction = connection.BeginTransaction();
             try
@@ -1188,7 +1097,7 @@ namespace FleetManagement.Data.Repositories
         }
         private void DeleteAddress(Address address)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             string query = $"DELETE FROM [Address] WHERE addressId=@addressId";
             using(SqlCommand command = connection.CreateCommand())
             {
@@ -1212,7 +1121,7 @@ namespace FleetManagement.Data.Repositories
         }
         private void DeleteDriver(Driver driver)
         {
-            SqlConnection connection = getConnection();
+            SqlConnection connection = GetConnection();
             string query = $"DELETE FROM [Driver] WHERE driverId=@driverId";
             using (SqlCommand command = connection.CreateCommand())
             {

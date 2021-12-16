@@ -24,7 +24,7 @@ namespace FleetManagement.Business.Managers
             {
                 if (!repo.DriverExists(driver.DriverID))
                 {
-                    repo.AddDriver(driver);
+                    repo.AddDriverWithAddress(driver);
                 }
                 else
                 {
