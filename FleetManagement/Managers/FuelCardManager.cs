@@ -86,9 +86,7 @@ namespace FleetManagement.Business.Managers
         {
             try
             {
-                // Bestaat fuelCard met zelfde properties al?
-
-
+                repo.UpdateFuelCardTransaction(fuelCard);
             }
             catch (Exception ex)
             {
