@@ -326,6 +326,25 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
+        // *************************************************************************************************
+        // ********************** DELETE FUELCARD & REMOVE CONNECTION WITH DRIVER **************************
+        // *************************************************************************************************
+
+        public void DeleteFuelCardAndDriverConnection(FuelCard fuelCard)
+        {
+
+        }
+
+        private void RemoveDriverConnection(FuelCard fuelCard)
+        {
+            SqlConnection connection = getConnection();
+            string query = $"UPDATE DRIVER SET fuelcardId=NULL WHERE driverId=@driverId";
+
+        }
+
+        // *************************************************************************************************
+        // *************************************************************************************************
+        // *************************************************************************************************
 
         // EXISTS
         public bool FuelCardExists(FuelCard fuelCard)

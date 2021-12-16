@@ -32,6 +32,8 @@ namespace FleetManagement.UI.SelectForms
         public SelectDriverWindow()
         {
             InitializeComponent();
+            drivers = new ObservableCollection<Driver>(driverManager.GetLatestDrivers());
+            lstDrivers.ItemsSource = drivers;
         }
 
         private void btnSelectDriver_Click(object sender, RoutedEventArgs e)
