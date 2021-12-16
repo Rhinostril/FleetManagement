@@ -19,7 +19,7 @@ namespace FleetManagement.Business.Interfaces
         bool FuelCardHasDriver(FuelCard fuelCard);
         void AddFuelCard(FuelCard fuelCard);
         void UpdateFuelCard(FuelCard fuelCard);
-        void DeleteFuelCard(FuelCard fuelCard);
+        void DeleteFuelCardTransaction(FuelCard fuelCard);
 
     }
 }

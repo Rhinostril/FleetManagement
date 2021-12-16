@@ -104,7 +104,7 @@ namespace FleetManagement.Business.Managers
                 {
                     if (!repo.FuelCardHasDriver(fuelCard))
                     {
-                        repo.DeleteFuelCard(fuelCard);
+                        repo.DeleteFuelCardTransaction(fuelCard);
                     }
                     else
                     {

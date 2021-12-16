@@ -263,7 +263,7 @@ namespace FleetManagement.Data.Repositories
             SqlConnection connection = getConnection();
 
             string query = "UPDATE Fuelcard" +
-                           "SET cardNumber=@cardNumber, validityDate=@validityDate, pin=@pin, fuelType=@fuelType, driverId=@driverId, isEnabled=@isEnabled" +
+                           "SET cardNumber=@cardNumber, validityDate=@validityDate, pin=@pin, fuelType=@fuelType, driverId=@driverId, isEnabled=@isEnabled " +
                            "WHERE fuelCardId=@fuelCardId";
 
             using (SqlCommand command = connection.CreateCommand())
@@ -299,12 +299,42 @@ namespace FleetManagement.Data.Repositories
                 }
             }
         }
-        public void DeleteFuelCard(FuelCard fuelCard)
+        
+
+        // *************************************************************************************************
+        // ********************** DELETE FUELCARD & REMOVE CONNECTION WITH DRIVER **************************
+        // *************************************************************************************************
+
+        public void DeleteFuelCardTransaction(FuelCard fuelCard)
+        {
+            SqlConnection connection = getConnection();
+            connection.Open();
+            SqlTransaction transaction = connection.BeginTransaction();
+            try
+            {
+                DeleteFuelCard(fuelCard);
+                if (fuelCard.Driver != null)
+                {
+                    RemoveDriverConnection(fuelCard);
+                }
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        private void DeleteFuelCard(FuelCard fuelCard)
         {
             SqlConnection connection = getConnection();
 
             string query = "DELETE FROM Fuelcard WHERE fuelCardId=@fuelCardId";
-            
+
             using (SqlCommand command = connection.CreateCommand())
             {
                 connection.Open();
@@ -325,21 +355,29 @@ namespace FleetManagement.Data.Repositories
                 }
             }
         }
-
-        // *************************************************************************************************
-        // ********************** DELETE FUELCARD & REMOVE CONNECTION WITH DRIVER **************************
-        // *************************************************************************************************
-
-        public void DeleteFuelCardAndDriverConnection(FuelCard fuelCard)
-        {
-
-        }
-
         private void RemoveDriverConnection(FuelCard fuelCard)
         {
             SqlConnection connection = getConnection();
             string query = $"UPDATE DRIVER SET fuelcardId=NULL WHERE driverId=@driverId";
-
+            using(SqlCommand command = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    command.CommandText = query;
+                    command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                    command.Parameters["@driverId"].Value = fuelCard.Driver.DriverID;
+                    command.ExecuteNonQuery();
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
 
         // *************************************************************************************************
