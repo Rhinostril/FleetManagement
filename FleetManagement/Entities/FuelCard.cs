@@ -161,9 +161,8 @@ namespace FleetManagement.Business.Entities
                 {
                     Driver.SetFuelCard(this);
                 }
-                
-                Driver = newDriver;
             }
+            Driver = newDriver;
         }
 
         public bool HasDriver(Driver driver)
