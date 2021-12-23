@@ -66,5 +66,41 @@ namespace FleetManagement.Business.Tests
             Assert.AreEqual("1324", f.Pin);
         }
 
+        [TestMethod()]
+        public void Test_SetDriver_Valid()
+        {
+            FuelCard f = new FuelCard("123", new DateTime(1997, 03, 20), "1324", new List<FuelType> { new FuelType("gasoline") }, true);
+            Driver driver = new Driver("Jimmy", "Neutron");
+            f.SetDriver(driver);
+            Assert.IsNotNull(f.Driver);
+        }
+
+        [TestMethod()]
+        public void Test_SetDriver_Invalid()
+        {
+
+        }
+
+
+        [TestMethod()]
+        public void Test_HasDriver_Valid()
+        {
+
+        }
+
+        [TestMethod()]
+        public void Test_HasDriver_Invalid()
+        {
+
+        }
+
+        [TestMethod()]
+        public void Test_RemoveDriver_Valid()
+        {
+            FuelCard f = new FuelCard("123", new DateTime(1997, 03, 20), "1324", new List<FuelType> { new FuelType("gasoline") }, true);
+
+        }
+
+
     }
 }
