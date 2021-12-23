@@ -126,7 +126,7 @@ namespace FleetManagement.Data.Repositories
 
         public IReadOnlyList<Vehicle> GetTop50Vehicles() {
             SqlConnection connection = GetConnection();
-            string query = "SELECT TOP 50 * FROM Vehicle";
+            string query = "SELECT TOP 50 * FROM Vehicle order by vehicleId DESC ";
             List<Vehicle> vehicles = new List<Vehicle>();
             using (SqlCommand command = connection.CreateCommand()) {
                 try {
