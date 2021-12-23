@@ -209,7 +209,7 @@ namespace FleetManagement.Data.Repositories
                             string vehicleType = (string)reader.GetValue("vehicleType");
                             string color = (string)reader.GetValue("color");
                             int doors = (int)reader.GetValue("doors");
-                            List<FuelType> vehiclefueltypes = GetvehcileFueltypes((int)vehicleid);
+                            List<FuelType> vehiclefueltypes = GetvehcileFueltypes((int)vehicleid); //this results in errors
                             Vehicle v = new Vehicle(brand, model, chassisNr, licensePlate, vehiclefueltypes, vehicleType, color, doors);
                             D.SetVehicle(v);
                         }
@@ -362,7 +362,7 @@ namespace FleetManagement.Data.Repositories
 
         public List<FuelType> GetvehcileFueltypes(int vehicleid) {
             List<FuelType> fuelTypes = new List<FuelType>();
-            string query = "SELECT (vehicleId,[VehicleFuelType].fuelTypeId,name) FROM [VehicleFuelType] LEFT JOIN [FuelType] ON [VehicleFuelType].fuelTypeId = [FuelType].fuelTypeId where vehicleId=@ID ";
+            string query = "SELECT * FROM [VehicleFuelType] LEFT JOIN [FuelType] ON [VehicleFuelType].fuelTypeId = [FuelType].fuelTypeId where vehicleId=@ID ";
             SqlConnection vehiclefueltypeconnection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, vehiclefueltypeconnection)) {
                 vehiclefueltypeconnection.Open();
