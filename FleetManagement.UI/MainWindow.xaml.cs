@@ -158,7 +158,8 @@ namespace FleetManagement.UI
             try
             {
                 FuelCard fuelCard = (FuelCard)FuelCardsDataGrid.SelectedItem;
-                UpdateFuelCardWindow objWindow = new UpdateFuelCardWindow(fuelCard);
+                int fuelCardId = fuelCard.FuelCardId;
+                UpdateFuelCardWindow objWindow = new UpdateFuelCardWindow(fuelCardId);
                 if(objWindow.ShowDialog() == true)
                 {
                     fuelCards = new ObservableCollection<FuelCard>(fuelCardManager.GetLatestFuelcards());

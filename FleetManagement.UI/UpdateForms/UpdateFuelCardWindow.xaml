@@ -33,7 +33,7 @@
         <Label Grid.Row="5" Grid.Column="0" Content="Driver" Margin="5"/>
         <Label Grid.Row="6" Grid.Column="0" Content="Enabled" Margin="5"/>
         <Label Grid.Row="7" Grid.Column="0" Content="Fueltypes" Margin="5"/>
-        
+
         <TextBox x:Name="txtFuelCardId" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="False"/>
         <TextBox x:Name="txtCardNumber" Grid.Row="2" Grid.Column="1" Margin="5"/>
         <DatePicker x:Name="dtpValidityDate" Grid.Row="3" Grid.Column="1" Margin="5" SelectedDateFormat="Short"/>
@@ -59,9 +59,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
+            <Button x:Name="btnAddFuelType" Margin="5,5,5,0" Grid.Column="0" Content=" Add Fueltype " MinHeight="26" Height="26" VerticalAlignment="Top" Click="btnAddFuelType_Click"/>
+            <Button x:Name="btnRemoveFuelType" Margin="5" Grid.Column="1" Content=" Remove Fueltype " MinHeight="26" Click="btnRemoveFuelType_Click"/>
         </Grid>
 
         <Button x:Name="btnUpdateFuelCard" Grid.Row="8" Grid.Column="1" Margin="5" Content="  Update Fuelcard  " MinHeight="26" Click="btnUpdateFuelCard_Click"/>
-        
+
     </Grid>
 </Window>
