@@ -24,7 +24,7 @@ namespace FleetManagement.UI.UpdateForms
     /// </summary>
     public partial class UpdateFuelCardWindow : Window
     {
-
+        private FuelTypeManager fuelTypeManager = new FuelTypeManager(new FuelTypeRepository());
         private FuelCardManager fuelCardManager = new FuelCardManager(new FuelCardRepository());
         private FuelCard fuelCard;
 
@@ -78,16 +78,34 @@ namespace FleetManagement.UI.UpdateForms
 
         private void btnRemoveFuelType_Click(object sender, RoutedEventArgs e)
         {
-            FuelType fuelType = (FuelType)lstFuelTypes.SelectedItem;
-            
+            try
+            {
+                FuelType fuelType = (FuelType)lstFuelTypes.SelectedItem;
+                fuelCard.FuelTypes.Remove(fuelType);
+                lstFuelTypes.Items.Refresh();
+                // fuelTypeManager.RemoveFuelTypeFromFuelCard(fuelType.FuelTypeId, fuelCard.FuelCardId);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
         }
 
         private void btnAddFuelType_Click(object sender, RoutedEventArgs e)
         {
-            AddFuelTypeWindow objWindow = new AddFuelTypeWindow();
-            if(objWindow.ShowDialog() == true)
+            try
             {
-
+                AddFuelTypeWindow objWindow = new AddFuelTypeWindow();
+                if (objWindow.ShowDialog() == true)
+                {
+                    fuelCard.FuelTypes.Add(objWindow.fuelType);
+                    lstFuelTypes.Items.Refresh();
+                    // fuelTypeManager.AddFuelTypeToFuelCard(objWindow.fuelType.FuelTypeId, fuelCard.FuelCardId);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
             }
         }
     }

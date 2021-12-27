@@ -16,6 +16,7 @@ using FleetManagement.Business.Entities;
 using FleetManagement.Business.Managers;
 using FleetManagement.Data.Repositories;
 using FleetManagement.UI.SelectForms;
+using FleetManagement.UI.AddForms;
 
 namespace FleetManagement.UI
 {
@@ -25,16 +26,14 @@ namespace FleetManagement.UI
     public partial class UpdateVehicleWindow : Window
     {
 
-
+        private FuelTypeManager fuelTypeManager = new FuelTypeManager(new FuelTypeRepository());
         private VehicleManager vehicleManager = new VehicleManager(new VehicleRepository());
-        private ObservableCollection<FuelType> fuelTypes = new ObservableCollection<FuelType>();
         private Vehicle vehicle;
 
         public UpdateVehicleWindow(int vehicleId)
         {
             InitializeComponent();
             vehicle = vehicleManager.GetVehicle(vehicleId);
-            fuelTypes = new ObservableCollection<FuelType>(vehicle.FuelTypes);
             txtVehicleId.Text = $"{vehicle.VehicleId}";
             txtBrand.Text = vehicle.Brand;
             txtModel.Text = vehicle.Model;
@@ -50,7 +49,7 @@ namespace FleetManagement.UI
             {
                 txtDriver.Text = "";
             }
-            lstFuelTypes.ItemsSource = fuelTypes;
+            lstFuelTypes.ItemsSource = vehicle.FuelTypes;
         }
 
         private void btnUpdateVehicle_Click(object sender, RoutedEventArgs e)
@@ -87,7 +86,13 @@ namespace FleetManagement.UI
 
         private void btnAddFuelType_Click(object sender, RoutedEventArgs e)
         {
-
+            AddFuelTypeWindow objWindow = new AddFuelTypeWindow();
+            if(objWindow.ShowDialog() == true)
+            {
+                vehicle.FuelTypes.Add(objWindow.fuelType);
+                lstFuelTypes.Items.Refresh();
+                // fuelTypeManager.AddFuelTypeToVehicle(vehicle.VehicleId, objWindow.fuelType.FuelTypeId);
+            }
         }
 
         private void btnRemoveFuelType_Click(object sender, RoutedEventArgs e)
@@ -95,7 +100,9 @@ namespace FleetManagement.UI
             try
             {
                 FuelType fuelType = (FuelType)lstFuelTypes.SelectedItem;
-
+                vehicle.FuelTypes.Remove(fuelType);
+                lstFuelTypes.Items.Refresh();
+                // fuelTypeManager.RemoveFuelTypeFromVehicle(vehicle.VehicleId, fuelType.FuelTypeId);
             }
             catch(Exception ex)
             {

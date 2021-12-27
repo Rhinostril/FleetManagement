@@ -24,14 +24,14 @@ namespace FleetManagement.UI.AddForms
     public partial class AddFuelTypeWindow : Window
     {
 
-        private DataToListRepository repo = new DataToListRepository();
+        private FuelTypeManager fuelTypeManager = new FuelTypeManager(new FuelTypeRepository());
         private ObservableCollection<FuelType> fuelTypes = new ObservableCollection<FuelType>();
         public FuelType fuelType;
 
         public AddFuelTypeWindow()
         {
             InitializeComponent();
-            fuelTypes = new ObservableCollection<FuelType>(repo.GetAllFuelTypes());
+            fuelTypes = new ObservableCollection<FuelType>(fuelTypeManager.GetAllFuelTypes());
             lstFuelTypes.ItemsSource = fuelTypes;
         }
 
