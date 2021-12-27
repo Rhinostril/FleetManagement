@@ -12,6 +12,11 @@ namespace FleetManagement.Business.Managers
     {
         private IFuelTypeRepository repo;
 
+        public FuelTypeManager(IFuelTypeRepository repo)
+        {
+            this.repo = repo;
+        }
+
         public IReadOnlyList<FuelType> GetAllFuelTypes()
         {
             try

@@ -13,6 +13,11 @@ namespace FleetManagement.Business.Managers
 
         private ILicenseTypeRepository repo;
 
+        public LicenseTypeManager(ILicenseTypeRepository repo)
+        {
+            this.repo = repo;
+        }
+
         public IReadOnlyList<(int, string)> GetAllLicenseTypes()
         {
             try
