@@ -16,6 +16,7 @@ using FleetManagement.Business.Managers;
 using FleetManagement.Business.Interfaces;
 using FleetManagement.Data.Repositories;
 using FleetManagement.UI.SelectForms;
+using FleetManagement.UI.AddForms;
 
 namespace FleetManagement.UI.UpdateForms
 {
@@ -103,6 +104,16 @@ namespace FleetManagement.UI.UpdateForms
             driver.RemoveFuelCard();
             txtFuelCard.Text = "None";
             btnRemoveFuelCard.IsEnabled = false;
+        }
+
+        private void btnAddLicenseType_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRemoveLicenseType_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
