@@ -20,7 +20,7 @@ namespace FleetManagement.Data.Repositories
             return connection;
         }
 
-        public IReadOnlyList<(int, string)> GetAllLicenseTypes()
+        public IReadOnlyList<LicenseType> GetAllLicenseTypes()
         {
             SqlConnection connection = GetConnection();
             string query = $"SELECT * FROM LicenseType";
@@ -31,16 +31,16 @@ namespace FleetManagement.Data.Repositories
                     connection.Open();
                     command.CommandText = query;
                     SqlDataReader reader = command.ExecuteReader();
-                    List<(int, string)> licenseTypes = new List<(int, string)>();
+                    List<LicenseType> licenseTypes = new List<LicenseType>();
                     while (reader.Read())
                     {
-                        licenseTypes.Add(new ((int)reader["licenseTypeId"], (string)reader["name"]));
+                        licenseTypes.Add(new LicenseType((int)reader["licenseTypeId"], (string)reader["name"]));
                     }
                     return licenseTypes.AsReadOnly();
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("FuelTypeRepository - GetAllFuelTypes()", ex);
+                    throw new Exception("LicenseTypeRepository - GetAllLicenseTypes()", ex);
                 }
                 finally
                 {

@@ -9,7 +9,7 @@ namespace FleetManagement.Business.Interfaces
 {
     public interface ILicenseTypeRepository
     {
-        IReadOnlyList<(int, string)> GetAllLicenseTypes();
+        IReadOnlyList<LicenseType> GetAllLicenseTypes();
         void AddLicenseTypeToDriver(int licenseTypeId, int driverId);
         void RemoveLicenseTypeFromDriver(int licenseTypeId, int driverId);
 

@@ -14,7 +14,7 @@ namespace FleetManagement.Business.Entities
         public DateTime DateOfBirth { get; private set; }
         public Address Address { get; private set; }
         public string SecurityNumber { get; private set; }
-        public List<string> DriversLicenceType { get; private set; } = new List<string>();
+        public List<string> DriversLicenceType { get; set; } = new List<string>();
         public Vehicle Vehicle { get; private set; }
         public FuelCard FuelCard { get; private set; }
 

@@ -25,20 +25,21 @@ namespace FleetManagement.UI.AddForms
     {
 
         private LicenseTypeManager licenseTypeManager = new LicenseTypeManager(new LicenseTypeRepository());
-        private ObservableCollection<(int, string)> licenseTypes = new ObservableCollection<(int, string)>();
-        private (int, string) LicenseType;
+        private ObservableCollection<LicenseType> licenseTypes = new ObservableCollection<LicenseType>();
+        public LicenseType LicenseType;
 
         public AddLicenseTypeWindow()
         {
             InitializeComponent();
-            licenseTypes = new ObservableCollection<(int, string)>(licenseTypeManager.GetAllLicenseTypes());
+            licenseTypes = new ObservableCollection<LicenseType>(licenseTypeManager.GetAllLicenseTypes());
             lstLicenseTypes.ItemsSource = licenseTypes;
         }
 
         private void btnAddFuelType_Click(object sender, RoutedEventArgs e)
         {
-            
-
+            LicenseType = (LicenseType)lstLicenseTypes.SelectedItem;
+            DialogResult = true;
+            Close();
         }
     }
 }

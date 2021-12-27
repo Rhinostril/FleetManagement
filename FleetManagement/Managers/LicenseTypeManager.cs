@@ -18,7 +18,7 @@ namespace FleetManagement.Business.Managers
             this.repo = repo;
         }
 
-        public IReadOnlyList<(int, string)> GetAllLicenseTypes()
+        public IReadOnlyList<LicenseType> GetAllLicenseTypes()
         {
             try
             {

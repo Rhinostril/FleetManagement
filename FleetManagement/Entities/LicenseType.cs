@@ -42,5 +42,10 @@ namespace FleetManagement.Business.Entities
             }
         }
 
+        public override string ToString()
+        {
+            return $"{LicenseName}";
+        }
+
     }
 }

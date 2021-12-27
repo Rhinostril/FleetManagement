@@ -45,6 +45,7 @@ namespace FleetManagement.UI.UpdateForms
             txtPostalCode.Text = driver.Address.PostalCode;
             txtCity.Text = driver.Address.City;
             txtCountry.Text = driver.Address.Country;
+            lstLicenseTypes.ItemsSource = driver.DriversLicenceType;
         }
 
         private void btnUpdateDriver_Click(object sender, RoutedEventArgs e)
@@ -108,12 +109,19 @@ namespace FleetManagement.UI.UpdateForms
 
         private void btnAddLicenseType_Click(object sender, RoutedEventArgs e)
         {
-
+            AddLicenseTypeWindow objWindow = new AddLicenseTypeWindow();
+            if(objWindow.ShowDialog() == true)
+            {
+                driver.DriversLicenceType.Add(objWindow.LicenseType.LicenseName);
+                lstLicenseTypes.Items.Refresh();
+            }
         }
 
         private void btnRemoveLicenseType_Click(object sender, RoutedEventArgs e)
         {
-            
+            string licenseType = (string)lstLicenseTypes.SelectedItem;
+            driver.DriversLicenceType.Remove(licenseType);
+            lstLicenseTypes.Items.Refresh();
         }
     }
 }
