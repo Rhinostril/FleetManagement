@@ -32,6 +32,7 @@ namespace FleetManagement.UI.UpdateForms
         {
             InitializeComponent();
             fuelCard = fuelCardManager.GetFuelCardById(fuelCardId);
+            fuelCard.SetFuelCardId(fuelCardId);
             txtFuelCardId.Text = fuelCard.FuelCardId.ToString();
             txtCardNumber.Text = fuelCard.CardNumber;
             dtpValidityDate.SelectedDate = fuelCard.ValidityDate;

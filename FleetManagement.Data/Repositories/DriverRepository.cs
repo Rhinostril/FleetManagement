@@ -89,7 +89,7 @@ namespace FleetManagement.Data.Repositories
 
         public IReadOnlyList<Driver> GetAllDrivers()
         {
-            string query = $"SELECT * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId  ;";
+            string query = $"SELECT * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId LEFT JOIN [Fuelcard] ON Fuelcard.fuelCardId = Driver.fuelcardId ORDER BY Driver.driverid DESC  ;";
             List<Driver> driverlist = new List<Driver>();
             SqlConnection connection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, connection)) {
@@ -164,7 +164,7 @@ namespace FleetManagement.Data.Repositories
         }
 
         public IReadOnlyList<Driver> GetTop50Drivers() {
-            string query = $"SELECT TOP 50 * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId ORDER BY Driver.driverid DESC ;";
+            string query = $"SELECT TOP 50 * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId LEFT JOIN [Fuelcard] ON Fuelcard.fuelCardId = Driver.fuelcardId ORDER BY Driver.driverid DESC ;";
             List<Driver> driverlist = new List<Driver>();
             SqlConnection connection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, connection)) {
@@ -231,6 +231,7 @@ namespace FleetManagement.Data.Repositories
                     reader.Close();
                 } catch (Exception e) {
 
+                    Console.WriteLine();
                 } finally {
                     connection.Close();
                 }
@@ -240,7 +241,7 @@ namespace FleetManagement.Data.Repositories
         }
 
         public IReadOnlyList<Driver> GetDriversByAmount(int amount) {
-            string query = $"SELECT TOP @amount * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId ORDER BY Driver.driverid DESC ;";
+            string query = $"SELECT TOP @amount * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId LEFT JOIN [Fuelcard] ON Fuelcard.fuelCardId = Driver.fuelcardId ORDER BY Driver.driverid DESC ;";
             List<Driver> driverlist = new List<Driver>();
             SqlConnection connection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, connection)) {
@@ -287,6 +288,7 @@ namespace FleetManagement.Data.Repositories
                             DateTime validityDate = (DateTime)reader.GetValue("validityDate");
                             string pin = (string)reader.GetValue("pin");
                             List<FuelType> fuelcardFueltypes = GetfuelcardFueltypes((int)fuelcardid);
+
                             bool isEnabled = (bool)reader.GetValue("isEnabled");
                             FuelCard fc = new FuelCard(cardNumber, validityDate, pin, fuelcardFueltypes, isEnabled);
                             D.SetFuelCard(fc);
@@ -309,7 +311,7 @@ namespace FleetManagement.Data.Repositories
 
         public List<FuelType> GetfuelcardFueltypes(int fuelcardid) {
             List<FuelType> fuelTypes = new List<FuelType>();
-            string query = "SELECT (fuelCardId,[FuelCardFuelType].fuelTypeId,name) FROM [FuelCardFuelType] LEFT JOIN [FuelType] ON [FuelCardFuelType].fuelTypeId = [FuelType].fuelTypeId where fuelCardId=@ID ";
+            string query = "SELECT * FROM [FuelCardFuelType] LEFT JOIN [FuelType] ON [FuelCardFuelType].fuelTypeId = [FuelType].fuelTypeId where fuelCardId=@ID ";
             SqlConnection fuelcardtypeconnection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, fuelcardtypeconnection)) {
                 fuelcardtypeconnection.Open();
@@ -602,7 +604,7 @@ namespace FleetManagement.Data.Repositories
             
         }
         public Driver GetDriverById(int id) {
-            string query = $"SELECT * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId where [Driver].driverId=@ID;";
+            string query = $"SELECT * FROM [Driver] LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId LEFT JOIN [Fuelcard] ON Fuelcard.fuelCardId = Driver.fuelcardId where [Driver].driverId=@ID;";
             List<Driver> driverlist = new List<Driver>();
             SqlConnection connection = GetConnection();
             using (SqlCommand command = new SqlCommand(query, connection)) {

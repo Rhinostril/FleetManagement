@@ -73,6 +73,8 @@ namespace FleetManagement.Data.Repositories
                 }
                 catch (Exception ex)
                 {
+
+                    Console.WriteLine();
                     throw new Exception(ex.Message);
                 }
                 finally
@@ -106,8 +108,8 @@ namespace FleetManagement.Data.Repositories
                     }
                     return fuelCards.AsReadOnly();
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex) {
+                    Console.WriteLine();
                     throw new Exception(ex.Message);
                 }
                 finally
@@ -132,6 +134,10 @@ namespace FleetManagement.Data.Repositories
                         string cardNumber = (string)reader["cardNumber"];
                         DateTime validityDate = (DateTime)reader["validityDate"];
                         string pin = (string)reader["pin"];
+                        if(pin.Length != 4) {
+                            int id = fuelCardId;
+                            Console.WriteLine();
+                        }
                         bool isEnabled = (bool)reader["isEnabled"];
                         FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, isEnabled);
                         if(!reader.IsDBNull(4))
@@ -143,6 +149,8 @@ namespace FleetManagement.Data.Repositories
                         fuelCards.Add(fuelCard);
                     }
                 } catch (Exception ex) {
+
+                    Console.WriteLine();
                     throw new Exception(ex.Message);
                 } finally {
                     connection.Close();
@@ -172,6 +180,8 @@ namespace FleetManagement.Data.Repositories
                         fuelCards.Add(new FuelCard(fuelCardId, cardNumber, validityDate, pin, new List<FuelType>(), isEnabled));
                     }
                 } catch (Exception ex) {
+
+                    Console.WriteLine();
                     throw new Exception(ex.Message);
                 } finally {
                     connection.Close();
@@ -389,8 +399,8 @@ namespace FleetManagement.Data.Repositories
         {
             SqlConnection connection = getConnection();
 
-            string query = "UPDATE Fuelcard" +
-                           "SET cardNumber=@cardNumber, validityDate=@validityDate, pin=@pin, fuelType=@fuelType, driverId=@driverId, isEnabled=@isEnabled " +
+            string query = "UPDATE Fuelcard " +
+                           "SET cardNumber=@cardNumber, validityDate=@validityDate, pin=@pin, driverId=@driverId, isEnabled=@isEnabled " +
                            "WHERE fuelCardId=@fuelCardId";
 
             using (SqlCommand command = connection.CreateCommand())
@@ -401,16 +411,16 @@ namespace FleetManagement.Data.Repositories
                     command.Parameters.Add(new SqlParameter("@cardNumber", SqlDbType.NVarChar));
                     command.Parameters.Add(new SqlParameter("@validityDate", SqlDbType.DateTime));
                     command.Parameters.Add(new SqlParameter("@pin", SqlDbType.Int));
-                    command.Parameters.Add(new SqlParameter("@fuelType", SqlDbType.NVarChar));
                     command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
                     command.Parameters.Add(new SqlParameter("@isEnabled", SqlDbType.Bit));
+                    command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
 
                     command.Parameters["@cardNumber"].Value = fuelCard.CardNumber;
                     command.Parameters["@validityDate"].Value = fuelCard.ValidityDate;
                     command.Parameters["@pin"].Value = fuelCard.Pin;
-                    //command.Parameters["@fuelType"].Value = fuelCard.FuelTypes;
                     command.Parameters["@driverId"].Value = fuelCard.Driver.DriverID;
                     command.Parameters["@isEnabled"].Value = fuelCard.IsEnabled;
+                    command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;
 
                     command.CommandText = query;
                     command.ExecuteNonQuery();
