@@ -17,10 +17,9 @@ namespace FleetManagement.Business.Interfaces
         FuelCard SearchFuelCard(int? fuelCardId, string cardNr, FuelType fuelType);
         bool FuelCardExists(FuelCard fuelCard);
         bool FuelCardHasDriver(FuelCard fuelCard);
-        void AddFuelCard(FuelCard fuelCard);
+        int? AddFuelCard(FuelCard fuelCard);
         void UpdateFuelCardTransaction(FuelCard fuelCard);
         void DeleteFuelCardTransaction(FuelCard fuelCard);
-        IReadOnlyList<FuelType> GetAllFuelTypes();
 
     }
 }

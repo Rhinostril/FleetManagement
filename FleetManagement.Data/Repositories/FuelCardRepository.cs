@@ -232,15 +232,17 @@ namespace FleetManagement.Data.Repositories
         }
 
         // INSERT UPDATE DELETE
-        public void AddFuelCard(FuelCard fuelCard)
+        public int? AddFuelCard(FuelCard fuelCard)
         {
             SqlConnection connection = getConnection();
 
             string query = "INSERT INTO Fuelcard (cardNumber, validityDate, pin, isEnabled)" +
-                           "VALUES (@cardNumber, @validityDate, @pin, @isEnabled)";
+                           "VALUES (@cardNumber, @validityDate, @pin, @isEnabled)" +
+                           " SELECT SCOPE_IDENTITY();";
 
             using(SqlCommand command = connection.CreateCommand())
             {
+                int? id = null;
                 connection.Open();
                 try
                 {
@@ -255,7 +257,8 @@ namespace FleetManagement.Data.Repositories
                     command.Parameters["@isEnabled"].Value = fuelCard.IsEnabled;
 
                     command.CommandText = query;
-                    command.ExecuteNonQuery();
+                    int n = Convert.ToInt32(command.ExecuteScalar());
+                    id = n;
                 }
                 catch(Exception ex)
                 {
@@ -265,6 +268,7 @@ namespace FleetManagement.Data.Repositories
                 {
                     connection.Close();
                 }
+                return id;
             }
         }
         
@@ -515,30 +519,7 @@ namespace FleetManagement.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public IReadOnlyList<FuelType> GetAllFuelTypes() {
-            List<FuelType> fueltypelist = new List<FuelType>();
-            SqlConnection connection = getConnection();
-            string query = "SELECT * FROM [FuelType];";
-            using (SqlCommand command = connection.CreateCommand()) {
-                command.CommandText = query;
-                connection.Open();
-                try {
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read()) {
-                        int fuelTypeId = (int)reader["fuelTypeId"];
-                        string name = (string)reader["name"];
-
-                        fueltypelist.Add(new FuelType(fuelTypeId,name));
-                    }
-                } catch (Exception ex) {
-                    throw new Exception(ex.Message);
-                } finally {
-                    connection.Close();
-                }
-            }
-            return fueltypelist.AsReadOnly();
-        }
-
+       
 
 
 

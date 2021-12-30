@@ -24,12 +24,14 @@ namespace FleetManagement.UI
     public partial class AddNewFuelCard : Window {
 
         public ObservableCollection<FuelType> fueltypecollection = new ObservableCollection<FuelType>();
-        public FuelCardRepository fuelCardRepository { get; set; } = new FuelCardRepository();
+        public FuelCardManager fuelCardManager { get; set; } = new FuelCardManager(new FuelCardRepository());
+        public FuelTypeManager fuelTypeManager { get; set; } = new FuelTypeManager(new FuelTypeRepository());
+        
         public AddNewFuelCard()
         {
          
             InitializeComponent();
-            var allfueltypes = fuelCardRepository.GetAllFuelTypes();
+            var allfueltypes = fuelTypeManager.GetAllFuelTypes();
             foreach (FuelType type in allfueltypes) {
                 fueltypecollection.Add(type);
             }
@@ -56,10 +58,26 @@ namespace FleetManagement.UI
                 {
                     isEnabled = true;
                 }
-                //TODO ADD FUELTYPE SELECTION
-                fuelCardRepository.AddFuelCard(new FuelCard(cardnumber, validatyDate, pin, isEnabled));
-                MessageBox.Show("FuelCard succesfully added !", "Add new fuelcard", MessageBoxButton.OK, MessageBoxImage.Information);
-                Close();
+                var selecteditems = fueltypeListbox.SelectedItems;
+                if(selecteditems.Count != 0) {
+                    List<FuelType> fueltypelist = new List<FuelType>();
+                    foreach (FuelType fueltype in selecteditems) {
+                        fueltypelist.Add(fueltype);
+                    }
+                    FuelCard fuelcard = new FuelCard(cardnumber, validatyDate, pin, isEnabled);
+                    fuelcard.SetFuelTypes(fueltypelist);
+                    int id = (int)fuelCardManager.AddFuelCard(fuelcard); //EXECUTESCALAR
+                    foreach (FuelType fueltype in selecteditems) {
+                        fuelTypeManager.AddFuelTypeToFuelCard(fueltype.FuelTypeId, id);
+                    }
+                    
+
+                    MessageBox.Show("FuelCard succesfully added !", "Add new fuelcard", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Close();
+                } else {
+                    MessageBox.Show("Choose at least 1 fueltype", "Add new fuelcard", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+               
             }
             catch (Exception ex)
             {

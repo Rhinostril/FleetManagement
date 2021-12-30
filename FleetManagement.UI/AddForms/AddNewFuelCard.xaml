@@ -35,7 +35,7 @@
         
         <CheckBox Name="chkbxIsEnabled" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="10,62,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label Name="exceptionPinlbl" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="10,36,0,0" Grid.Row="3" VerticalAlignment="Top"/>
-        <ListBox x:Name="fueltypeListbox" Grid.Row="5" Grid.Column="1" Margin="0,4,0,5" Width="209.323333333333" Height="23.28" MinHeight="200" >
+        <ListBox x:Name="fueltypeListbox" Grid.Row="5" Grid.Column="1" Margin="0,4,0,5" Width="209.323333333333" Height="23.28" MinHeight="200" SelectionMode="Multiple" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=FuelName}"/>
