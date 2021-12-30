@@ -4,6 +4,7 @@ using FleetManagement.Business.Entities;
 using FleetManagement.Business.Interfaces;
 using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlTypes;
 
 namespace FleetManagement.Data.Repositories
 {
@@ -54,9 +55,13 @@ namespace FleetManagement.Data.Repositories
 
                     if (!reader.IsDBNull(8))
                     {
+                        int driverid = (int)reader["driverId"];
                         string firstName = (string)reader["firstName"];
                         string lastName = (string)reader["lastName"];
-                        Driver driver = new Driver(firstName, lastName);
+                        DateTime date = (DateTime)reader["dateOfBirth"];
+                        string secnr = (string)reader["securityNumber"];
+                        Driver driver = new Driver(firstName, lastName, date, secnr);
+                        driver.SetDriverID(driverid);
                         fuelCard.SetDriver(driver);
                     }
 
@@ -142,9 +147,12 @@ namespace FleetManagement.Data.Repositories
                         FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, isEnabled);
                         if(!reader.IsDBNull(4))
                         {
+                            int driverid = (int)reader["driverId"];
                             string firstName = (string)reader["firstName"];
                             string lastName = (string)reader["lastName"];
-                            fuelCard.SetDriver(new Driver(firstName, lastName));
+                             Driver d = new Driver(firstName, lastName);
+                            d.SetDriverID(driverid);
+                            fuelCard.SetDriver(d);
                         }
                         fuelCards.Add(fuelCard);
                     }
@@ -293,8 +301,9 @@ namespace FleetManagement.Data.Repositories
             SqlConnection connection = getConnection();
             connection.Open();
             SqlTransaction transaction = connection.BeginTransaction();
-            try
-            {
+            try {
+
+                DeleteFuelCardFromForeignTables(fuelCard);
                 DeleteFuelCard(fuelCard);
                 if (fuelCard.Driver != null)
                 {
@@ -310,6 +319,25 @@ namespace FleetManagement.Data.Repositories
             finally
             {
                 connection.Close();
+            }
+        }
+        private void DeleteFuelCardFromForeignTables(FuelCard fuelCard) {
+            SqlConnection connection = getConnection();
+
+            string query = "DELETE FROM FuelCardFuelType WHERE fuelCardId=@fuelCardId";
+
+            using (SqlCommand command = connection.CreateCommand()) {
+                connection.Open();
+                try {
+                    command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
+                    command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;
+                    command.CommandText = query;
+                    command.ExecuteNonQuery();
+                } catch (Exception ex) {
+                    throw new Exception(ex.Message);
+                } finally {
+                    connection.Close();
+                }
             }
         }
         private void DeleteFuelCard(FuelCard fuelCard)
@@ -341,7 +369,7 @@ namespace FleetManagement.Data.Repositories
         private void RemoveDriverConnection(FuelCard fuelCard)
         {
             SqlConnection connection = getConnection();
-            string query = $"UPDATE DRIVER SET fuelcardId=NULL WHERE driverId=@driverId";
+            string query = $"UPDATE Driver SET fuelcardId=NULL WHERE driverId=@driverId";
             using(SqlCommand command = connection.CreateCommand())
             {
                 try
@@ -364,12 +392,14 @@ namespace FleetManagement.Data.Repositories
         }
         public void RemoveDriverConnectionByDriverId(int driverid) {
             SqlConnection connection = getConnection();
-            string query = $"UPDATE DRIVER SET fuelcardId=@nullvalue WHERE driverId=@driverId";
+            string query = $"UPDATE Driver SET fuelcardId=@nullvalue WHERE driverId=@driverId";
             using (SqlCommand command = connection.CreateCommand()) {
                 try {
                     connection.Open();
                     command.CommandText = query;
                     command.Parameters.AddWithValue("@nullvalue", DBNull.Value);
+                    //command.Parameters.Add(new SqlParameter("@nullvalue", SqlDbType.Int));
+                    //command.Parameters["@nullvalue"].Value =0;
                     command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
                     command.Parameters["@driverId"].Value = driverid;
                     command.ExecuteNonQuery();

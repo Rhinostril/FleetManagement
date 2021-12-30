@@ -263,7 +263,12 @@ namespace FleetManagement.Business.Entities
 
         public override string ToString()
         {
-            return $"{FirstName} {LastName}, {DateOfBirth.ToShortDateString()}, {SecurityNumber}, {Address}";
+            if(this.SecurityNumber != null) {
+                return $"{FirstName} {LastName}, {DateOfBirth.ToShortDateString()}, {SecurityNumber}, {Address}";
+            } else {
+                return $"{FirstName} {LastName}";
+            }
+            
         }
 
     }
