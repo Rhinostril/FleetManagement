@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FleetManagement.Business.Entities;
+using FleetManagement.Business.Managers;
 using FleetManagement.Data.Repositories;
 
 namespace FleetManagement.UI
@@ -21,9 +23,18 @@ namespace FleetManagement.UI
     /// </summary>
     public partial class AddNewVehicle : Window
     {
+        public FuelTypeManager fuelTypeManager { get; set; } = new FuelTypeManager(new FuelTypeRepository());
+        public ObservableCollection<FuelType> fueltypecollection = new ObservableCollection<FuelType>();
         public AddNewVehicle()
         {
             InitializeComponent();
+            var allfueltypes = fuelTypeManager.GetAllFuelTypes();
+            foreach (FuelType type in allfueltypes) {
+                fueltypecollection.Add(type);
+            }
+
+            lstBoxFuelTypes.ItemsSource = fueltypecollection;
+            lstBoxFuelTypes.Items.Refresh();
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -40,19 +51,24 @@ namespace FleetManagement.UI
                 string color = txtColor.Text;
                 string doors =txtDoors.Text;
                 List<FuelType> fuelTypes = new List<FuelType>();
-                string fuel = lstBoxFuelTypes.SelectedItem.ToString();
+                var selectedfuels = lstBoxFuelTypes.SelectedItems;
+                if (selectedfuels.Count != 0) {
+                    foreach (FuelType fueltype in selectedfuels) {
+                        fuelTypes.Add(fueltype);
+                    }
+                    if (chasis.Length < 17) {
+                        lblException.Content = "ChasisNr requires 17 characters!";
+                    }
 
-                fuelTypes.Add(new FuelType(fuel));
-
-
-                if (chasis.Length < 17)
-                {
-                    lblException.Content = "ChasisNr requires 17 characters!";
+                    int id = (int)vehicleRepository.AddVehicle(new Vehicle(brand, model, chasis, plate, fuelTypes, type, color, int.Parse(doors)));
+                    foreach(FuelType fueltype in fuelTypes) {
+                        fuelTypeManager.AddFuelTypeToVehicle(fueltype.FuelTypeId, id);
+                    }
+                    MessageBox.Show("FuelCard succesfully added !", "Add new fuelcard", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Close();
+                } else {
+                    MessageBox.Show("Choose at least 1 fueltype", "Add new fuelcard", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-
-                vehicleRepository.AddVehicle(new Vehicle(brand,model,chasis,plate,new List<FuelType>(),type,color,int.Parse(doors)));
-                MessageBox.Show("FuelCard succesfully added !", "Add new fuelcard", MessageBoxButton.OK, MessageBoxImage.Information);
-                Close();
 
             }
             catch (Exception ex)

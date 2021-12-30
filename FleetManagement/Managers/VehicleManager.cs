@@ -16,10 +16,10 @@ namespace FleetManagement.Business.Managers
             this.repo = repo;
         }
 
-        public void AddVehicle(Vehicle vehicle) {
+        public int? AddVehicle(Vehicle vehicle) {
             try {
                 if (!repo.VehicleExists(vehicle)) {
-                    repo.AddVehicle(vehicle);
+                    return repo.AddVehicle(vehicle);
                 } else {
                     throw new VehicleManagerException("VehicleManager - AddVehicle - Vehicle already added");
                 }

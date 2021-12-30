@@ -24,13 +24,13 @@
         <Label Content="Doors" HorizontalAlignment="Left" Margin="24,281,0,0" VerticalAlignment="Top"/>
         <Label Content="Add new vehicle" HorizontalAlignment="Left" Margin="24,23,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
         <Label Name="lblException" Content="" HorizontalAlignment="Left" Margin="112,155,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.78,-0.609" Height="31" Width="178"/>
-        <ListBox Name="lstBoxFuelTypes" Margin="280,106,123,160">
-
-            <ListBoxItem>Diesel</ListBoxItem>
-            <ListBoxItem>Gasoline</ListBoxItem>
-            <ListBoxItem>Electric</ListBoxItem>
-            <ListBoxItem>H</ListBoxItem>
-            <ListBoxItem>Hybrid</ListBoxItem>
+        <ListBox Name="lstBoxFuelTypes" Margin="280,86,55,77" MinWidth="120" MinHeight="200" SelectionMode="Multiple">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=FuelName}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            
 
         </ListBox>
 

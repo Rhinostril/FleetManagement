@@ -17,12 +17,13 @@ namespace FleetManagement.Data.Repositories
             return connection;
         }
 
-        public void AddVehicle(Vehicle vehicle)
+        public int? AddVehicle(Vehicle vehicle)
         {
             SqlConnection cn = GetConnection();
-            string query = "INSERT INTO vehicle (brand,model,chasisNumber,licensePlate,vehicleType,color,doors)VALUES(@brand,@model,@chasisNumber,@licensePlate,@vehicleType,@color,@doors)";
+            string query = "INSERT INTO vehicle (brand,model,chasisNumber,licensePlate,vehicleType,color,doors)VALUES(@brand,@model,@chasisNumber,@licensePlate,@vehicleType,@color,@doors) SELECT SCOPE_IDENTITY();";
             using (SqlCommand cmd = cn.CreateCommand())
             {
+                int? id = null;
                 cn.Open();
                 try
                 {
@@ -43,7 +44,8 @@ namespace FleetManagement.Data.Repositories
                     cmd.Parameters["@doors"].Value = vehicle.Doors;
 
                     cmd.CommandText = query;
-                    cmd.ExecuteNonQuery();
+                    int n = Convert.ToInt32(cmd.ExecuteScalar());
+                    id = n;
 
                 }
                 catch (Exception ex)
@@ -55,6 +57,7 @@ namespace FleetManagement.Data.Repositories
                 {
                     cn.Close(); 
                 }
+                return id;
             }
         }
 
