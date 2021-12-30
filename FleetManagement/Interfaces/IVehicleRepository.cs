@@ -20,7 +20,6 @@ namespace FleetManagement.Business.Interfaces
         int? AddVehicle(Vehicle vehicle);
         void UpdateVehicle(Vehicle vehicle);
         void DeleteVehicle(Vehicle vehicle);
-
-
+        void DeleteVehicleFuelRecord(Vehicle vehicle);
     }
 }

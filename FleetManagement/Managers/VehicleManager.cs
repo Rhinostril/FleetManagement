@@ -45,6 +45,7 @@ namespace FleetManagement.Business.Managers
                 {
                     if (!repo.VehicleHasDriver(vehicle))
                     {
+                        repo.DeleteVehicleFuelRecord(vehicle);
                         repo.DeleteVehicle(vehicle);
                     }
                     else

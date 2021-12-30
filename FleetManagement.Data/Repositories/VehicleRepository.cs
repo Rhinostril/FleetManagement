@@ -553,7 +553,7 @@ namespace FleetManagement.Data.Repositories
         public bool VehicleExists(Vehicle vehicle)
         {
             SqlConnection cn = GetConnection();
-            string query = "SELECT count(*) FROM vehicle WHERE vehicle=@vehicleId OR chassisNumber=@chassisNumber OR licensePlate=@licensePlate";
+            string query = "SELECT count(*) FROM vehicle WHERE vehicleId=@vehicleId OR chassisNumber=@chassisNumber OR licensePlate=@licensePlate";
             using(SqlCommand cmd = cn.CreateCommand())
             {
                 cn.Open();
@@ -582,7 +582,7 @@ namespace FleetManagement.Data.Repositories
 
         public bool VehicleHasDriver(Vehicle vehicle) {
             SqlConnection cn = GetConnection();
-            string query = "SELECT count(*) FROM vehicle WHERE vehicle=@vehicleId AND driverId IS NOT NULL";
+            string query = "SELECT count(*) FROM vehicle WHERE vehicleId=@vehicleId AND driverId IS NOT NULL";
             using (SqlCommand cmd = cn.CreateCommand()) {
                 cn.Open();
                 try {
@@ -695,6 +695,26 @@ namespace FleetManagement.Data.Repositories
                 finally
                 {
                     connection.Close();
+                }
+            }
+        }
+
+        public void DeleteVehicleFuelRecord(Vehicle vehicle) {
+            SqlConnection cn = GetConnection();
+            string query = "DELETE FROM VehicleFuelType WHERE vehicleId=@vehicleId";
+            using (SqlCommand cmd = cn.CreateCommand()) {
+                cn.Open();
+                try {
+                    cmd.Parameters.Add(new SqlParameter("@vehicleId", SqlDbType.Int));
+                    cmd.Parameters["@vehicleId"].Value = vehicle.VehicleId;
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+
+                } catch (Exception ex) {
+
+                    throw new Exception(ex.Message);
+                } finally {
+                    cn.Close();
                 }
             }
         }

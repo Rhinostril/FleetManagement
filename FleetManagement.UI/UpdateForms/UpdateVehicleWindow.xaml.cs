@@ -44,10 +44,12 @@ namespace FleetManagement.UI
             if(vehicle.Driver != null)
             {
                 txtDriver.Text = $"{vehicle.Driver.FirstName} {vehicle.Driver.LastName}";
+                btnRemoveDriver.IsEnabled = true;
             }
             else
             {
                 txtDriver.Text = "";
+                btnRemoveDriver.IsEnabled = false;
             }
             lstFuelTypes.ItemsSource = vehicle.FuelTypes;
         }
