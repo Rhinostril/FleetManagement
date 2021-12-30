@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FleetManagement.UI.UpdateForms"
         mc:Ignorable="d"
-        Title="UpdateDriverWindow" Height="450" Width="800">
+        Title="UpdateDriverWindow" Height="512" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -16,7 +16,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -33,6 +33,9 @@
         <Label Grid.Row="5" Grid.Column="0" Content="Security Number" Margin="5" FontSize="16"/>
         <Label Grid.Row="6" Grid.Column="0" Content="Vehicle" Margin="5" FontSize="16"/>
         <Label Grid.Row="7" Grid.Column="0" Content="FuelCard" Margin="5" FontSize="16"/>
+        <Label Grid.Row="8" Grid.Column="0" Content="Licenses" Margin="5" FontSize="16"/>
+        
+        <ListBox Grid.Row="8" Grid.Column="1" Name="lstLicenseTypes" Margin="5"/>
 
         <Label Grid.Row="1" Grid.Column="2" Content="Street" Margin="5" FontSize="16"/>
         <Label Grid.Row="2" Grid.Column="2" Content="House Number" Margin="5" FontSize="16"/>
@@ -57,8 +60,22 @@
         <Button x:Name="btnSelectFuelCard" Grid.Row="7" Grid.Column="2" Margin="5" Content="Select Fuelcard" Click="btnSelectFuelCard_Click"/>
         <Button x:Name="btnRemoveVehicle" Grid.Row="6" Grid.Column="3" Margin="5" Content="Remove Vehicle" IsEnabled="False" Click="btnRemoveVehicle_Click"/>
         <Button x:Name="btnRemoveFuelCard" Grid.Row="7" Grid.Column="3" Margin="5" Content="Remove Fuelcard" IsEnabled="False" Click="btnRemoveFuelCard_Click"/>
-        
-        <Button x:Name="btnUpdateDriver" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Content="  Update Driver  " MinHeight="28" Click="btnUpdateDriver_Click"/>
+
+        <Grid Grid.Row="8" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="btnAddLicenseType" Grid.Column="0" Margin="5" Content="Add" IsEnabled="True" Click="btnAddLicenseType_Click"/>
+            <Button x:Name="btnRemoveLicenseType" Grid.Column="1" Margin="5" Content="Remove" IsEnabled="True" Click="btnRemoveLicenseType_Click"/>
+        </Grid>
+
+
+        <Button x:Name="btnUpdateDriver" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2" Margin="5" Content="  Update Driver  " MinHeight="40" FontSize="16" Click="btnUpdateDriver_Click"/>
 
     </Grid>
 </Window>

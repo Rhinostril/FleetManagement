@@ -47,7 +47,8 @@ namespace FleetManagement.Data.Repositories
 
                     List<FuelType> fuelTypes = new List<FuelType>();
                     string fuelName = (string)reader["name"];
-                    fuelTypes.Add(new FuelType(fuelName));
+                    int fuelTypeId = (int)reader["fuelTypeId"];
+                    fuelTypes.Add(new FuelType(fuelTypeId, fuelName));
 
                     FuelCard fuelCard = new FuelCard(fuelCardId, cardNumber, validityDate, pin, fuelTypes, isEnabled);
 
@@ -61,8 +62,9 @@ namespace FleetManagement.Data.Repositories
 
                     while (reader.Read())
                     {
-                        string fuel = (string)reader["name"];
-                        fuelTypes.Add(new FuelType(fuel));
+                        fuelName = (string)reader["name"];
+                        fuelTypeId = (int)reader["fuelTypeId"];
+                        fuelTypes.Add(new FuelType(fuelTypeId, fuelName));
                         fuelCard.SetFuelTypes(fuelTypes);
                     }
 

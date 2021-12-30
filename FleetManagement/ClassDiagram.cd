@@ -3,49 +3,51 @@
   <Class Name="FleetManagement.Business.Entities.Address">
     <Position X="13.5" Y="0.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>RAAAAAAIAAIAAAAIoAAAAACAgAIAAAAAAAKAAAAAAAA=</HashCode>
+      <HashCode>RAAAAAAIAAIAAAAMoAAAAACAgAIAAAAAAAKAAAAAAAA=</HashCode>
       <FileName>Entities\Address.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FleetManagement.Business.Entities.Driver">
     <Position X="9.75" Y="0.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>ABCAAGACQDAAACABACgEAAEApAAQEAACAAAQAAAAAQg=</HashCode>
+      <HashCode>ABAEAGACUDAAACAFAggEAAAApAAYEAACAAAQAAAAAQg=</HashCode>
       <FileName>Entities\Driver.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="FuelCard" />
       <Property Name="Address" />
       <Property Name="Vehicle" />
+      <Property Name="FuelCard" />
     </ShowAsAssociation>
   </Class>
   <Class Name="FleetManagement.Business.Entities.FuelCard">
-    <Position X="6" Y="4.25" Width="2" />
+    <Position X="5.5" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAQABAAIAACACEAAAAAAAAAAAEAAAAAAAEAA=</HashCode>
+      <HashCode>IAAAAAAAAQABAAIEACECEAAAAEAAgAAAEICAAAAAEAA=</HashCode>
       <FileName>Entities\FuelCard.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="FuelType" />
-    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="FuelTypes" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="FleetManagement.Business.Entities.FuelType">
-    <Position X="2.5" Y="6" Width="2" />
+    <Position X="2.5" Y="6.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAACAAIAAAAAAABEAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\FuelType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FleetManagement.Business.Entities.Vehicle">
     <Position X="2.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>ACBAAEACCAABQAAAAAAAAAAAAAAIgAABEIiBgAADCAA=</HashCode>
+      <HashCode>ACBAAEACCAABQAAEAAAAAAAAAEAIgAABEIiBgAADCAA=</HashCode>
       <FileName>Entities\Vehicle.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="FuelType" />
       <Property Name="Driver" />
     </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="FuelTypes" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

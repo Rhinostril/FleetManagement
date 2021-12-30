@@ -31,7 +31,7 @@ namespace FleetManagement.Business.Managers
         }
 
 
-        public FuelCard getFuelCardByID(int fuelcardId) { // NEEDS FIXING
+        public FuelCard GetFuelCardById(int fuelcardId) { // NEEDS FIXING
             try
             {
                 return repo.GetFuelCard(fuelcardId);

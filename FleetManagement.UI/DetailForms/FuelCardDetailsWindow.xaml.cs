@@ -29,7 +29,7 @@ namespace FleetManagement.UI.DetailForms {
             InitializeComponent();
             if (fuelCard != null)
             {
-                FuelCard fuelcard = fuelCardManager.getFuelCardByID(fuelCard.FuelCardId);
+                FuelCard fuelcard = fuelCardManager.GetFuelCardById(fuelCard.FuelCardId);
 
                 fuelTypes = new ObservableCollection<FuelType>(fuelcard.FuelTypes);
                 lstFuelTypes.ItemsSource = fuelTypes;

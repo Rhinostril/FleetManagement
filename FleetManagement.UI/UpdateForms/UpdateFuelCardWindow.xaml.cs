@@ -15,6 +15,7 @@ using FleetManagement.Business.Entities;
 using FleetManagement.Business.Managers;
 using FleetManagement.Data.Repositories;
 using FleetManagement.UI.SelectForms;
+using FleetManagement.UI.AddForms;
 
 namespace FleetManagement.UI.UpdateForms
 {
@@ -23,19 +24,20 @@ namespace FleetManagement.UI.UpdateForms
     /// </summary>
     public partial class UpdateFuelCardWindow : Window
     {
-
+        private FuelTypeManager fuelTypeManager = new FuelTypeManager(new FuelTypeRepository());
         private FuelCardManager fuelCardManager = new FuelCardManager(new FuelCardRepository());
         private FuelCard fuelCard;
 
-        public UpdateFuelCardWindow(FuelCard fuelCard)
+        public UpdateFuelCardWindow(int fuelCardId)
         {
             InitializeComponent();
-            this.fuelCard = fuelCard;
+            fuelCard = fuelCardManager.GetFuelCardById(fuelCardId);
             txtFuelCardId.Text = fuelCard.FuelCardId.ToString();
             txtCardNumber.Text = fuelCard.CardNumber;
             dtpValidityDate.SelectedDate = fuelCard.ValidityDate;
             txtPin.Text = fuelCard.Pin;
             cbxEnabled.IsChecked = fuelCard.IsEnabled;
+            lstFuelTypes.ItemsSource = fuelCard.FuelTypes;
         }
 
         private void btnUpdateFuelCard_Click(object sender, RoutedEventArgs e)
@@ -74,7 +76,37 @@ namespace FleetManagement.UI.UpdateForms
             btnRemoveDriver.IsEnabled = false;
         }
 
+        private void btnRemoveFuelType_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FuelType fuelType = (FuelType)lstFuelTypes.SelectedItem;
+                fuelCard.FuelTypes.Remove(fuelType);
+                lstFuelTypes.Items.Refresh();
+                // fuelTypeManager.RemoveFuelTypeFromFuelCard(fuelType.FuelTypeId, fuelCard.FuelCardId);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
+        }
 
-
+        private void btnAddFuelType_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AddFuelTypeWindow objWindow = new AddFuelTypeWindow();
+                if (objWindow.ShowDialog() == true)
+                {
+                    fuelCard.FuelTypes.Add(objWindow.fuelType);
+                    lstFuelTypes.Items.Refresh();
+                    // fuelTypeManager.AddFuelTypeToFuelCard(objWindow.fuelType.FuelTypeId, fuelCard.FuelCardId);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Foutmelding!");
+            }
+        }
     }
 }

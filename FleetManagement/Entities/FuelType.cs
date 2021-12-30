@@ -49,6 +49,11 @@ namespace FleetManagement.Business.Entities
                 throw new FuelTypeException("FuelType - SetFuelName: name cannot be empty!");
             }
         }
- 
+
+        public override string ToString()
+        {
+            return $"{FuelName}";
+        }
+
     }
 }
