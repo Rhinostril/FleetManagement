@@ -112,8 +112,15 @@ namespace FleetManagement.UI.UpdateForms
             AddLicenseTypeWindow objWindow = new AddLicenseTypeWindow();
             if(objWindow.ShowDialog() == true)
             {
-                driver.DriversLicenceType.Add(objWindow.LicenseType.LicenseName);
-                lstLicenseTypes.Items.Refresh();
+                if (!lstLicenseTypes.Items.Contains(objWindow.LicenseType.LicenseName))
+                {
+                    driver.DriversLicenceType.Add(objWindow.LicenseType.LicenseName);
+                    lstLicenseTypes.Items.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Drivers license already added.", "Foutmelding!");
+                }
             }
         }
 
