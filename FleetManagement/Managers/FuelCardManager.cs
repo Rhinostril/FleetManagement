@@ -120,5 +120,13 @@ namespace FleetManagement.Business.Managers
             }
         }
 
+        public void RemoveDriverConnectionByDriverId(int driverid) {
+            try {
+                repo.RemoveDriverConnectionByDriverId(driverid);
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+        
     }
 }

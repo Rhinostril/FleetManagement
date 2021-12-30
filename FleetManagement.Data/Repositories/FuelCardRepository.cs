@@ -362,6 +362,24 @@ namespace FleetManagement.Data.Repositories
                 }
             }
         }
+        public void RemoveDriverConnectionByDriverId(int driverid) {
+            SqlConnection connection = getConnection();
+            string query = $"UPDATE DRIVER SET fuelcardId=@nullvalue WHERE driverId=@driverId";
+            using (SqlCommand command = connection.CreateCommand()) {
+                try {
+                    connection.Open();
+                    command.CommandText = query;
+                    command.Parameters.AddWithValue("@nullvalue", DBNull.Value);
+                    command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                    command.Parameters["@driverId"].Value = driverid;
+                    command.ExecuteNonQuery();
+                } catch (Exception ex) {
+                    throw new Exception(ex.Message);
+                } finally {
+                    connection.Close();
+                }
+            }
+        }
 
         // *************************************************************************************************
         // ********************** UPDATE FUELCARD & UPDATE CONNECTION WITH DRIVER **************************
@@ -381,7 +399,9 @@ namespace FleetManagement.Data.Repositories
                 }
                 else
                 {
-                    RemoveDriverConnection(fuelCard);
+                    //RemoveDriverConnection(fuelCard);
+                    //since the fuelcard object allready removed the driver it is impossible to retrieve the driver id after the fact.
+                    // this has been resolved with the use of a removedriverById (driverid) method that acts befor a driver was removed.
                 }
                 transaction.Commit();
             }
@@ -397,43 +417,74 @@ namespace FleetManagement.Data.Repositories
         }
         private void UpdateFuelCard(FuelCard fuelCard)
         {
-            SqlConnection connection = getConnection();
+            if(fuelCard.Driver != null) {
+                SqlConnection connection = getConnection();
 
-            string query = "UPDATE Fuelcard " +
-                           "SET cardNumber=@cardNumber, validityDate=@validityDate, pin=@pin, driverId=@driverId, isEnabled=@isEnabled " +
-                           "WHERE fuelCardId=@fuelCardId";
+                string query = "UPDATE Fuelcard " +
+                               "SET cardNumber=@cardNumber, validityDate=@validityDate, pin=@pin, driverId=@driverId, isEnabled=@isEnabled " +
+                               "WHERE fuelCardId=@fuelCardId";
 
-            using (SqlCommand command = connection.CreateCommand())
-            {
-                connection.Open();
-                try
-                {
-                    command.Parameters.Add(new SqlParameter("@cardNumber", SqlDbType.NVarChar));
-                    command.Parameters.Add(new SqlParameter("@validityDate", SqlDbType.DateTime));
-                    command.Parameters.Add(new SqlParameter("@pin", SqlDbType.Int));
-                    command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
-                    command.Parameters.Add(new SqlParameter("@isEnabled", SqlDbType.Bit));
-                    command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
+                using (SqlCommand command = connection.CreateCommand()) {
+                    connection.Open();
+                    try {
+                        command.Parameters.Add(new SqlParameter("@cardNumber", SqlDbType.NVarChar));
+                        command.Parameters.Add(new SqlParameter("@validityDate", SqlDbType.DateTime));
+                        command.Parameters.Add(new SqlParameter("@pin", SqlDbType.Int));
+                        command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                        command.Parameters.Add(new SqlParameter("@isEnabled", SqlDbType.Bit));
+                        command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
 
-                    command.Parameters["@cardNumber"].Value = fuelCard.CardNumber;
-                    command.Parameters["@validityDate"].Value = fuelCard.ValidityDate;
-                    command.Parameters["@pin"].Value = fuelCard.Pin;
-                    command.Parameters["@driverId"].Value = fuelCard.Driver.DriverID;
-                    command.Parameters["@isEnabled"].Value = fuelCard.IsEnabled;
-                    command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;
+                        command.Parameters["@cardNumber"].Value = fuelCard.CardNumber;
+                        command.Parameters["@validityDate"].Value = fuelCard.ValidityDate;
+                        command.Parameters["@pin"].Value = fuelCard.Pin;
+                        command.Parameters["@isEnabled"].Value = fuelCard.IsEnabled;
+                        command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;
+                        command.Parameters["@driverId"].Value = fuelCard.Driver.DriverID;
+                     
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
 
-                    command.CommandText = query;
-                    command.ExecuteNonQuery();
-
+                    } catch (Exception ex) {
+                        throw new Exception(ex.Message);
+                    } finally {
+                        connection.Close();
+                    }
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
+
+            } else {
+                SqlConnection connection = getConnection();
+
+                string query = "UPDATE Fuelcard " +
+                               "SET cardNumber=@cardNumber, validityDate=@validityDate, pin=@pin, driverId=@driverId, isEnabled=@isEnabled " +
+                               "WHERE fuelCardId=@fuelCardId";
+
+                using (SqlCommand command = connection.CreateCommand()) {
+                    connection.Open();
+                    try {
+                        command.Parameters.Add(new SqlParameter("@cardNumber", SqlDbType.NVarChar));
+                        command.Parameters.Add(new SqlParameter("@validityDate", SqlDbType.DateTime));
+                        command.Parameters.Add(new SqlParameter("@pin", SqlDbType.Int));
+                        
+                        command.Parameters.Add(new SqlParameter("@isEnabled", SqlDbType.Bit));
+                        command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
+
+                        command.Parameters["@cardNumber"].Value = fuelCard.CardNumber;
+                        command.Parameters["@validityDate"].Value = fuelCard.ValidityDate;
+                        command.Parameters["@pin"].Value = fuelCard.Pin;
+                        command.Parameters["@isEnabled"].Value = fuelCard.IsEnabled;
+                        command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;
+                        command.Parameters.AddWithValue("@driverId", DBNull.Value);
+
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+
+                    } catch (Exception ex) {
+                        throw new Exception(ex.Message);
+                    } finally {
+                        connection.Close();
+                    }
                 }
-                finally
-                {
-                    connection.Close();
-                }
+
             }
         }
         private void UpdateDriverConnection(FuelCard fuelCard)

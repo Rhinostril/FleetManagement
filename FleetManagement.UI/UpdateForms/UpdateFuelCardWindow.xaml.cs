@@ -37,14 +37,20 @@ namespace FleetManagement.UI.UpdateForms
             txtCardNumber.Text = fuelCard.CardNumber;
             dtpValidityDate.SelectedDate = fuelCard.ValidityDate;
             txtPin.Text = fuelCard.Pin;
+           
+            if (fuelCard.Driver != null) {
+                txtDriver.Text = fuelCard.Driver.ToString();
+                btnRemoveDriver.IsEnabled = true;
+            }
             cbxEnabled.IsChecked = fuelCard.IsEnabled;
             lstFuelTypes.ItemsSource = fuelCard.FuelTypes;
+
         }
 
         private void btnUpdateFuelCard_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {   
+            try{
+               
                 fuelCard.SetCardNumber(txtCardNumber.Text);
                 fuelCard.ValidityDate = (DateTime)dtpValidityDate.SelectedDate;
                 fuelCard.IsEnabled = (bool)cbxEnabled.IsChecked;
@@ -77,9 +83,18 @@ namespace FleetManagement.UI.UpdateForms
 
         private void btnRemoveDriver_Click(object sender, RoutedEventArgs e)
         {
-            fuelCard.RemoveDriver();
-            txtDriver.Text = "None";
-            btnRemoveDriver.IsEnabled = false;
+            if (fuelCard.Driver != null) {
+                int driverid = fuelCard.Driver.DriverID;
+                fuelCardManager.RemoveDriverConnectionByDriverId(driverid);
+                fuelCard.RemoveDriver();
+                txtDriver.Text = "None";
+                btnRemoveDriver.IsEnabled = false;
+            } else {
+                btnRemoveDriver.IsEnabled = false;
+
+            }
+
+
         }
 
         private void btnRemoveFuelType_Click(object sender, RoutedEventArgs e)

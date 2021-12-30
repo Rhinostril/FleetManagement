@@ -20,6 +20,6 @@ namespace FleetManagement.Business.Interfaces
         int? AddFuelCard(FuelCard fuelCard);
         void UpdateFuelCardTransaction(FuelCard fuelCard);
         void DeleteFuelCardTransaction(FuelCard fuelCard);
-
+        void RemoveDriverConnectionByDriverId(int driverid);
     }
 }
