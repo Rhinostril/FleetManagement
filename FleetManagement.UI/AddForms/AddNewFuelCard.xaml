@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FleetManagement.UI"
         mc:Ignorable="d"
-        Title="AddNewFuelCard" Height="350" Width="350">
+        Title="AddNewFuelCard" Height="550" Width="350">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -26,15 +27,22 @@
         <Label Grid.Row="2" Grid.Column="0" Content="Validation date" Margin="5" FontSize="16"/>
         <Label Grid.Row="3" Grid.Column="0" Content="Pin" Margin="5" FontSize="16"/>
         <Label Grid.Row="3" Grid.Column="0" Content="IsEnabled" Margin="5,50,5,10" FontSize="16" Grid.RowSpan="2"/>
-
+        <Label Grid.Row="5" Grid.Column="0" Content="FuelTypes" Margin="5,3,5,10" FontSize="16" />
 
         <TextBox Name="txtCardnr" Grid.Row="1" Grid.Column="1" MaxLength="6"  Margin="5,0,10,0" VerticalAlignment="Center" FontSize="16" IsEnabled="True"/>
         <TextBox Name="txtPin" Grid.Row="3" Grid.Column="1"  MaxLength="4" Margin="5,10,10,0" VerticalAlignment="Top" FontSize="16" IsEnabled="True"/>
         <DatePicker Name="datePicker" Grid.Row="2" Grid.Column="1"  SelectedDateFormat="Short" IsTodayHighlighted="true" Margin="5"/>
-        <Button  Name="buttonAddFuelCard" Content="Add FuelCard" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
+        
         <CheckBox Name="chkbxIsEnabled" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="10,62,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label Name="exceptionPinlbl" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="10,36,0,0" Grid.Row="3" VerticalAlignment="Top"/>
-
+        <ListBox x:Name="fueltypeListbox" Grid.Row="5" Grid.Column="1" Margin="0,4,0,5" Width="209.323333333333" Height="23.28" MinHeight="200" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=FuelName}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button  Name="buttonAddFuelCard" Content="Add FuelCard" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
 
     </Grid>
 </Window>

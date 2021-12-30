@@ -20,6 +20,7 @@ namespace FleetManagement.Business.Interfaces
         void AddFuelCard(FuelCard fuelCard);
         void UpdateFuelCardTransaction(FuelCard fuelCard);
         void DeleteFuelCardTransaction(FuelCard fuelCard);
+        IReadOnlyList<FuelType> GetAllFuelTypes();
 
     }
 }

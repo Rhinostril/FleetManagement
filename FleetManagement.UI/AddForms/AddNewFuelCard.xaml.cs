@@ -14,25 +14,36 @@ using System.Windows.Shapes;
 using FleetManagement.Business.Managers;
 using FleetManagement.Business.Entities;
 using FleetManagement.Data.Repositories;
+using System.Collections.ObjectModel;
 
 namespace FleetManagement.UI
 {
     /// <summary>
     /// Interaction logic for AddNewFuelCard.xaml
     /// </summary>
-    public partial class AddNewFuelCard : Window
-    {
+    public partial class AddNewFuelCard : Window {
+
+        public ObservableCollection<FuelType> fueltypecollection = new ObservableCollection<FuelType>();
+        public FuelCardRepository fuelCardRepository { get; set; } = new FuelCardRepository();
         public AddNewFuelCard()
         {
+         
             InitializeComponent();
+            var allfueltypes = fuelCardRepository.GetAllFuelTypes();
+            foreach (FuelType type in allfueltypes) {
+                fueltypecollection.Add(type);
+            }
+
+            fueltypeListbox.ItemsSource = fueltypecollection;
+            fueltypeListbox.Items.Refresh();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                FuelCardRepository fuelCardRepository = new FuelCardRepository();
-
+                
                 string cardnumber = txtCardnr.Text;
                 DateTime validatyDate =datePicker.DisplayDate;
                 string pin = txtPin.Text;
@@ -45,7 +56,7 @@ namespace FleetManagement.UI
                 {
                     isEnabled = true;
                 }
-
+                //TODO ADD FUELTYPE SELECTION
                 fuelCardRepository.AddFuelCard(new FuelCard(cardnumber, validatyDate, pin, isEnabled));
                 MessageBox.Show("FuelCard succesfully added !", "Add new fuelcard", MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();

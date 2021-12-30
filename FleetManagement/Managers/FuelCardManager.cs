@@ -62,6 +62,17 @@ namespace FleetManagement.Business.Managers
             }
         }
 
+        public IReadOnlyList<FuelType> GetAllFuelTypes() {
+            try {
+                var collection = repo.GetAllFuelTypes();
+                
+                return collection;
+
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public void AddFuelCard(FuelCard fuelCard)
         {

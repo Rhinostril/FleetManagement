@@ -513,6 +513,30 @@ namespace FleetManagement.Data.Repositories
             throw new NotImplementedException();
         }
 
+        public IReadOnlyList<FuelType> GetAllFuelTypes() {
+            List<FuelType> fueltypelist = new List<FuelType>();
+            SqlConnection connection = getConnection();
+            string query = "SELECT * FROM [FuelType];";
+            using (SqlCommand command = connection.CreateCommand()) {
+                command.CommandText = query;
+                connection.Open();
+                try {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read()) {
+                        int fuelTypeId = (int)reader["fuelTypeId"];
+                        string name = (string)reader["name"];
+
+                        fueltypelist.Add(new FuelType(fuelTypeId,name));
+                    }
+                } catch (Exception ex) {
+                    throw new Exception(ex.Message);
+                } finally {
+                    connection.Close();
+                }
+            }
+            return fueltypelist.AsReadOnly();
+        }
+
 
 
 
