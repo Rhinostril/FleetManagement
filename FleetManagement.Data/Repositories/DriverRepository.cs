@@ -482,7 +482,7 @@ namespace FleetManagement.Data.Repositories
                 //dont even query anything
                 //maybe break here
             } else {
-                query = $"SELECT * FROM Driver LEFT JOIN [Address] ON Address.addressId = Driver.addressId  WHERE {String.Join("", subquerylist)}";
+                query = $"SELECT * FROM Driver LEFT JOIN [Vehicle] ON Vehicle.vehicleId = Driver.vehicleId LEFT JOIN [Address] ON Address.addressId = Driver.addressId LEFT JOIN [Fuelcard] ON Fuelcard.fuelCardId = Driver.fuelcardId WHERE {String.Join("", subquerylist)}";
             }
 
             SqlConnection connection = GetConnection();

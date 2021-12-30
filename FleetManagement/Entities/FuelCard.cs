@@ -191,7 +191,7 @@ namespace FleetManagement.Business.Entities
 
         public override string ToString()
         {
-            return $"ID:{FuelCardId}, #{CardNumber}, {ValidityDate}, [{Pin}], {IsEnabled}, {Driver}";
+            return $"#{CardNumber}, {ValidityDate}, [{Pin}], {IsEnabled}, {Driver}";
         }
 
     }

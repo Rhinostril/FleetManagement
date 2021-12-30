@@ -44,14 +44,19 @@ namespace FleetManagement.UI.UpdateForms
         private void btnUpdateFuelCard_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
+            {   
                 fuelCard.SetCardNumber(txtCardNumber.Text);
                 fuelCard.ValidityDate = (DateTime)dtpValidityDate.SelectedDate;
-                fuelCard.SetPin(txtPin.Text);
                 fuelCard.IsEnabled = (bool)cbxEnabled.IsChecked;
-                fuelCardManager.UpdateFuelCard(fuelCard);
-                DialogResult = true;
-                Close();
+                if(txtPin.Text.Length != 4) {
+                    MessageBox.Show("Pin must contain 4 characters");
+                } else {
+                    fuelCard.SetPin(txtPin.Text);
+                    fuelCardManager.UpdateFuelCard(fuelCard);
+                    DialogResult = true;
+                    Close();
+                }
+                
             }
             catch(Exception ex)
             {

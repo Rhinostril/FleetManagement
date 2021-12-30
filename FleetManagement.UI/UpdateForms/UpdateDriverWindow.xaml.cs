@@ -38,9 +38,16 @@ namespace FleetManagement.UI.UpdateForms
             txtLastName.Text = driver.LastName;
             dtpDateOfBirth.SelectedDate = driver.DateOfBirth;
             txtSecurityNumber.Text = driver.SecurityNumber;
-            if (driver.Vehicle != null) txtVehicle.Text = driver.Vehicle.ToString();
-            if (driver.FuelCard != null) txtFuelCard.Text = driver.FuelCard.ToString();
-            txtStreet.Text = driver.Address.Street;
+            if (driver.Vehicle != null) {
+                btnRemoveVehicle.IsEnabled = true;
+                txtVehicle.Text = driver.Vehicle.ToString();
+            }
+            if (driver.FuelCard != null) {
+                btnRemoveFuelCard.IsEnabled = true;
+                txtFuelCard.Text = driver.FuelCard.ToString();
+            
+            }
+                txtStreet.Text = driver.Address.Street;
             txtHouseNumber.Text = driver.Address.HouseNr;
             txtPostalCode.Text = driver.Address.PostalCode;
             txtCity.Text = driver.Address.City;
