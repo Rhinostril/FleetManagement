@@ -129,7 +129,7 @@ namespace FleetManagement.Data.Repositories
 
         public IReadOnlyList<Vehicle> GetTop50Vehicles() {
             SqlConnection connection = GetConnection();
-            string query = "SELECT TOP 50 * FROM Vehicle order by vehicleId DESC ";
+            string query = "SELECT TOP 50 * FROM Vehicle LEFT JOIN Driver ON [Driver].driverId=[Vehicle].driverId order by [Vehicle].vehicleId DESC ";
             List<Vehicle> vehicles = new List<Vehicle>();
             using (SqlCommand command = connection.CreateCommand()) {
                 try {
@@ -145,9 +145,23 @@ namespace FleetManagement.Data.Repositories
                         string vehicleType = (string)reader["vehicleType"];
                         string color = (string)reader["color"];
                         int doors = (int)reader["doors"];
-                        Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNumber, licensePlate, new List<FuelType> { new FuelType("#") }, vehicleType, color, doors);
-                        vehicles.Add(vehicle);
+                        int? driverid = null;
+                        
+                        if (!reader.IsDBNull("driverId")) {
+                            int tempId = (int)reader.GetValue("driverId");
+                            driverid = (int?)tempId;
+                        }
+                        if (driverid == null) {
+                            Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNumber, licensePlate, new List<FuelType> { new FuelType("#") }, vehicleType, color, doors);
+                            vehicles.Add(vehicle);
+                        } else {
+                            DriverRepository driverRepo = new DriverRepository();
+                            Driver driver = driverRepo.GetDriverById((int)driverid);
+                            Vehicle vehicle = new Vehicle(vehicleId, brand, model, chassisNumber, licensePlate, new List<FuelType> { new FuelType("#") }, vehicleType, color, doors, driver);
+                            vehicles.Add(vehicle);
+                        }
                     }
+                        
                     return vehicles.AsReadOnly();
                 } catch (Exception ex) {
                     throw new Exception(ex.Message);
@@ -335,7 +349,7 @@ namespace FleetManagement.Data.Repositories
                 //dont even query anything
                 //maybe break here
             }else{
-                query= $"SELECT * FROM vehicle WHERE {String.Join("",subquerylist)}";
+                query= $"SELECT * FROM vehicle LEFT JOIN Driver ON [Driver].driverId=[Vehicle].driverId  WHERE {String.Join("",subquerylist)}";
             }
             SqlConnection cn = GetConnection();
             using (SqlCommand cmd = cn.CreateCommand()) {
@@ -386,8 +400,21 @@ namespace FleetManagement.Data.Repositories
                     string vehicleTypedread = (string)reader["vehicleType"];
                     string colordread = (string)reader["color"];
                     int doorsdread = (int)reader["doors"];
-                    Vehicle vehicle = new Vehicle(vehicleIdread, branddread, modeldread, chassisNumberdread, licensePlatedread, new List<FuelType> { new FuelType("#") }, vehicleTypedread, colordread, doorsdread);
-                    vehicles.Add(vehicle);
+                    int? driverid = null;
+                    if (!reader.IsDBNull("driverId")) {
+                        int tempId = (int)reader.GetValue("driverId");
+                        driverid = (int?)tempId;
+                    }
+                    if (driverid == null) {
+                        Vehicle vehicle = new Vehicle(vehicleIdread, branddread, modeldread, chassisNumberdread, licensePlatedread, new List<FuelType> { new FuelType("#") }, vehicleTypedread, colordread, doorsdread);
+                        vehicles.Add(vehicle);
+                    } else {
+                        DriverRepository driverRepo = new DriverRepository();
+                        Driver driver = driverRepo.GetDriverById((int)driverid);
+                        Vehicle vehicle = new Vehicle(vehicleIdread, branddread, modeldread, chassisNumberdread, licensePlatedread, new List<FuelType> { new FuelType("#") }, vehicleTypedread, colordread, doorsdread, driver);
+                        vehicles.Add(vehicle);
+                    }
+                    
                 } catch (Exception ex) {
 
                     throw new Exception(ex.Message);
@@ -483,7 +510,7 @@ namespace FleetManagement.Data.Repositories
             //dont even query anything
             //maybe break here
         } else {
-            query = $"SELECT * FROM vehicle WHERE {String.Join("", subquerylist)}";
+            query = $"SELECT * FROM vehicle LEFT JOIN Driver ON [Driver].driverId=[Vehicle].driverId  WHERE {String.Join("", subquerylist)}";
         }
         SqlConnection cn = GetConnection();
         using (SqlCommand cmd = cn.CreateCommand()) {
@@ -533,8 +560,20 @@ namespace FleetManagement.Data.Repositories
                         string vehicleTypedread = (string)reader["vehicleType"];
                         string colordread = (string)reader["color"];
                         int doorsdread = (int)reader["doors"];
-                        Vehicle vehicle = new Vehicle(vehicleIdread, branddread, modeldread, chassisNumberdread, licensePlatedread, new List<FuelType> { new FuelType("#") }, vehicleTypedread, colordread, doorsdread);
-                        vehicles.Add(vehicle);
+                        int? driverid = null;
+                        if (!reader.IsDBNull("driverId")) {
+                            int tempId = (int)reader.GetValue("driverId");
+                            driverid = (int?)tempId;
+                        }
+                        if (driverid == null) {
+                            Vehicle vehicle = new Vehicle(vehicleIdread, branddread, modeldread, chassisNumberdread, licensePlatedread, new List<FuelType> { new FuelType("#") }, vehicleTypedread, colordread, doorsdread);
+                            vehicles.Add(vehicle);
+                        } else {
+                            DriverRepository driverRepo = new DriverRepository();
+                            Driver driver = driverRepo.GetDriverById((int)driverid);
+                            Vehicle vehicle = new Vehicle(vehicleIdread, branddread, modeldread, chassisNumberdread, licensePlatedread, new List<FuelType> { new FuelType("#") }, vehicleTypedread, colordread, doorsdread, driver);
+                            vehicles.Add(vehicle);
+                        }
                     }
 
               
@@ -602,6 +641,30 @@ namespace FleetManagement.Data.Repositories
         // ********************************************************************
         // **************** UPDATE VEHICLE WITH TRANSACTION *******************
         // ********************************************************************
+        public void RemoveDriverIdFromVehicle(Vehicle vehicle) {
+            if(vehicle.Driver != null) {
+                SqlConnection connection = GetConnection();
+                string query = $"UPDATE [Vehicle] SET [Vehicle].driverId=@driverId WHERE vehicleId=@vehicleId";
+                using (SqlCommand command = connection.CreateCommand()) {
+                    try {
+                        connection.Open();
+                        command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                        command.Parameters.Add(new SqlParameter("@vehicleId", SqlDbType.Int));
+
+                        command.Parameters["@driverId"].Value = DBNull.Value ;
+                        command.Parameters["@vehicleId"].Value = vehicle.VehicleId;
+
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    } catch (Exception ex) {
+                        throw new Exception(ex.Message);
+                    } finally {
+                        connection.Close();
+                    }
+                }
+            } 
+        }
+
 
         public void UpdateVehicleWithDriver(Vehicle vehicle)
         {

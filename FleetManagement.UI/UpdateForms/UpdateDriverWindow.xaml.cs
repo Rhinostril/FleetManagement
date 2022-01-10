@@ -83,6 +83,13 @@ namespace FleetManagement.UI.UpdateForms
             SelectVehicleWindow objWindow = new SelectVehicleWindow();
             if(objWindow.ShowDialog() == true)
             {
+                if(objWindow.vehicle.Driver != null){
+                    Driver D = objWindow.vehicle.Driver;
+                    objWindow.vehicle.Driver.RemoveVehicle();//Some bs
+                    driverManager.UpdateDriver(D);
+                }
+               
+               
                 driver.SetVehicle(objWindow.vehicle);
                 txtVehicle.Text = objWindow.vehicle.ToString();
                 btnRemoveVehicle.IsEnabled = true;

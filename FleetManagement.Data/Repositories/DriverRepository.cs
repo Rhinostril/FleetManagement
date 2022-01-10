@@ -958,6 +958,7 @@ namespace FleetManagement.Data.Repositories
                     else
                     {
                         command.Parameters["@vehicleId"].Value = DBNull.Value;
+
                     }
                     if(driver.FuelCard != null)
                     {
