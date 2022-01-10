@@ -113,10 +113,13 @@ namespace FleetManagement.UI
         }
 
         private void btnRemoveDriver_Click(object sender, RoutedEventArgs e)   {
+            
             if(vehicle.Driver != null) {
                 Driver D = vehicle.Driver;
+
             }
             vehicle.RemoveDriver();
+            
             txtDriver.Text = "None";
             btnRemoveDriver.IsEnabled = false;
         }

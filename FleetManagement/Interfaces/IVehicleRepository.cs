@@ -21,5 +21,6 @@ namespace FleetManagement.Business.Interfaces
         void UpdateVehicle(Vehicle vehicle);
         void DeleteVehicle(Vehicle vehicle);
         void DeleteVehicleFuelRecord(Vehicle vehicle);
+        void RemoveDriverIdFromVehicle(Vehicle vehicle);
     }
 }

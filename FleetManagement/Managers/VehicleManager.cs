@@ -98,6 +98,19 @@ namespace FleetManagement.Business.Managers
                 throw new Exception(ex.Message);
             }
         }
+        
+        public void RemoveDriverIdFromVehicle(Vehicle vehicle)
+        {
+            try
+            {
+                repo.RemoveDriverIdFromVehicle(vehicle);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
 
     }
