@@ -1147,6 +1147,38 @@ namespace FleetManagement.Data.Repositories
             }
         }
 
+        public void RemoveVehicleIdFromDriver(Driver driver)
+        {
+            if (driver.Vehicle != null)
+            {
+                SqlConnection connection = GetConnection();
+                string query = $"UPDATE [Driver] SET [Driver].vehicleId=@vehicleId WHERE driverId=@driverId";
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    try
+                    {
+                        connection.Open();
+                        command.Parameters.Add(new SqlParameter("@vehicleId", SqlDbType.Int));
+                        command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+
+                        command.Parameters["@vehicleId"].Value = DBNull.Value;
+                        command.Parameters["@driverId"].Value = driver.Vehicle;
+
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+        }
+
         // *******************************************************************************************************
         // *******************************************************************************************************
         // *******************************************************************************************************

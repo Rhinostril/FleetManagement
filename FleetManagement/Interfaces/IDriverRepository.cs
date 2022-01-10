@@ -20,6 +20,7 @@ namespace FleetManagement.Business.Interfaces
         void UpdateDriverWithAddress(Driver driver);
         void DeleteDriverWithAddress(Driver driver);
         bool DoesSecurityNumberExist(string securityNumber);
+        void RemoveVehicleIdFromDriver(Driver driver);
 
 
 

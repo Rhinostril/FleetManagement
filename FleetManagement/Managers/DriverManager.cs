@@ -122,6 +122,18 @@ namespace FleetManagement.Business.Managers
             }
         }
 
+        public void RemoveVehicleIdFromDriver(Driver driver)
+        {
+            try
+            {
+                repo.RemoveVehicleIdFromDriver(driver);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
     }
 }
