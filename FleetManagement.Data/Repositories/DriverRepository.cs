@@ -1158,11 +1158,10 @@ namespace FleetManagement.Data.Repositories
                     try
                     {
                         connection.Open();
-                        command.Parameters.Add(new SqlParameter("@vehicleId", SqlDbType.Int));
+                        command.Parameters.AddWithValue("vehicleId", DBNull.Value);
                         command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
 
-                        command.Parameters["@vehicleId"].Value = DBNull.Value;
-                        command.Parameters["@driverId"].Value = driver.Vehicle;
+                        command.Parameters["@driverId"].Value = driver.DriverID;
 
                         command.CommandText = query;
                         command.ExecuteNonQuery();

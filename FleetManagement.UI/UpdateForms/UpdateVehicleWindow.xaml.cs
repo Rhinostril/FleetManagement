@@ -28,6 +28,7 @@ namespace FleetManagement.UI
 
         private FuelTypeManager fuelTypeManager = new FuelTypeManager(new FuelTypeRepository());
         private VehicleManager vehicleManager = new VehicleManager(new VehicleRepository());
+        private DriverManager driverManager = new DriverManager(new DriverRepository());
         private Vehicle vehicle;
 
         public UpdateVehicleWindow(int vehicleId)
@@ -116,8 +117,9 @@ namespace FleetManagement.UI
             
             if(vehicle.Driver != null) {
                 Driver D = vehicle.Driver;
-
+                driverManager.RemoveVehicleIdFromDriver(D);
             }
+            vehicleManager.RemoveDriverIdFromVehicle(vehicle);
             vehicle.RemoveDriver();
             
             txtDriver.Text = "None";

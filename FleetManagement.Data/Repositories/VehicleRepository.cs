@@ -648,10 +648,9 @@ namespace FleetManagement.Data.Repositories
                 using (SqlCommand command = connection.CreateCommand()) {
                     try {
                         connection.Open();
-                        command.Parameters.Add(new SqlParameter("@driverId", SqlDbType.Int));
+                        command.Parameters.AddWithValue("driverId", DBNull.Value);
+                        
                         command.Parameters.Add(new SqlParameter("@vehicleId", SqlDbType.Int));
-
-                        command.Parameters["@driverId"].Value = DBNull.Value ;
                         command.Parameters["@vehicleId"].Value = vehicle.VehicleId;
 
                         command.CommandText = query;

@@ -25,8 +25,8 @@ namespace FleetManagement.UI.UpdateForms
     /// </summary>
     public partial class UpdateDriverWindow : Window
     {
-
-        private DriverManager driverManager = new DriverManager(new DriverRepository());
+        private VehicleManager vehicleManager = new VehicleManager(new VehicleRepository());
+         private DriverManager driverManager = new DriverManager(new DriverRepository());
         private Driver driver;
 
         public UpdateDriverWindow(Driver driver)
@@ -109,6 +109,11 @@ namespace FleetManagement.UI.UpdateForms
 
         private void btnRemoveVehicle_Click(object sender, RoutedEventArgs e)
         {
+            if (driver.Vehicle != null) {
+                Vehicle vehicle = driver.Vehicle;
+                vehicleManager.RemoveDriverIdFromVehicle(vehicle);
+            }
+            driverManager.RemoveVehicleIdFromDriver(driver);
             driver.RemoveVehicle();
             txtVehicle.Text = "None";
             btnRemoveVehicle.IsEnabled = false;
