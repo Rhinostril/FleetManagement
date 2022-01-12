@@ -30,7 +30,7 @@ namespace FleetManagement.Business.Managers
 
         public void UpdateVehicle(Vehicle vehicle) {
             try {
-                // Bestaat vehicle met properties al ?
+                repo.UpdateVehicle(vehicle);
 
 
             } catch (Exception ex) {

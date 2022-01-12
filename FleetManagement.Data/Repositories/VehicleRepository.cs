@@ -691,45 +691,90 @@ namespace FleetManagement.Data.Repositories
         }
         public void UpdateVehicle(Vehicle vehicle)
         {
+            bool vehicleHasDriver = false;
+            int? driverID = null;
+            if(vehicle.Driver != null) {
+                vehicleHasDriver = true;
+                driverID = vehicle.Driver.DriverID;
+            }
             SqlConnection cn = GetConnection();
-            string query = "UPDATE vehicle" +
-                "SET brand=@brand,model=@model,chasisNumber=@chasisNumber,licensePlate=@licensePlate,vehicleType=@vehicleType,color=@color,doors=@doors"
-                + "WHERE vehicleId=@vehicleId";
 
-            using (SqlCommand cmd = cn.CreateCommand())
-            {
-                cn.Open();
-                try
-                {
-                    cmd.Parameters.Add(new SqlParameter("@brand", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@chasisNumber", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@vehicleType", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@color", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@doors", SqlDbType.NVarChar));
+            string query = "";
+            if (!vehicleHasDriver) {
+                query = "UPDATE vehicle" +
+                " SET brand=@brand,model=@model,chassisNumber=@chasisNumber,licensePlate=@licensePlate,vehicleType=@vehicleType,color=@color,doors=@doors"
+                + " WHERE vehicleId=@vehicleId";
 
-                    cmd.Parameters["@brand"].Value = vehicle.Brand;
-                    cmd.Parameters["@model"].Value = vehicle.Model;
-                    cmd.Parameters["@chasisNumber"].Value = vehicle.ChassisNumber;
-                    cmd.Parameters["@licensePlate"].Value = vehicle.LicensePlate;
-                    cmd.Parameters["@vehicleType"].Value = vehicle.VehicleType;
-                    cmd.Parameters["@color"].Value = vehicle.Color;
-                    cmd.Parameters["@doors"].Value = vehicle.Doors;
+                using (SqlCommand cmd = cn.CreateCommand()) {
+                    cn.Open();
+                    try {
+                        cmd.Parameters.Add(new SqlParameter("@brand", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@chasisNumber", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@vehicleType", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@color", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@doors", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@vehicleId", SqlDbType.Int));
 
-                    cmd.CommandText = query;
-                    cmd.ExecuteNonQuery();
+                        cmd.Parameters["@brand"].Value = vehicle.Brand;
+                        cmd.Parameters["@model"].Value = vehicle.Model;
+                        cmd.Parameters["@chasisNumber"].Value = vehicle.ChassisNumber;
+                        cmd.Parameters["@licensePlate"].Value = vehicle.LicensePlate;
+                        cmd.Parameters["@vehicleType"].Value = vehicle.VehicleType;
+                        cmd.Parameters["@color"].Value = vehicle.Color;
+                        cmd.Parameters["@doors"].Value = vehicle.Doors;
+                        cmd.Parameters["@vehicleId"].Value = vehicle.VehicleId;
+
+
+                        cmd.CommandText = query;
+                        cmd.ExecuteNonQuery();
+                    } catch (Exception ex) {
+
+                        throw new Exception(ex.Message);
+                    } finally {
+                        cn.Close();
+                    }
                 }
-                catch (Exception ex)
-                {
+            } else {
+                query = "UPDATE vehicle" +
+                " SET brand=@brand,model=@model,chassisNumber=@chasisNumber,licensePlate=@licensePlate,vehicleType=@vehicleType,color=@color,doors=@doors ,driverId=@driverid"
+                + " WHERE vehicleId=@vehicleId";
 
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    cn.Close();
+                using (SqlCommand cmd = cn.CreateCommand()) {
+                    cn.Open();
+                    try {
+                        cmd.Parameters.Add(new SqlParameter("@brand", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@chasisNumber", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@licensePlate", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@vehicleType", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@color", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@doors", SqlDbType.NVarChar));
+                        cmd.Parameters.Add(new SqlParameter("@vehicleId", SqlDbType.Int));
+                        cmd.Parameters.Add(new SqlParameter("@driverid", SqlDbType.Int));
+
+                        cmd.Parameters["@brand"].Value = vehicle.Brand;
+                        cmd.Parameters["@model"].Value = vehicle.Model;
+                        cmd.Parameters["@chasisNumber"].Value = vehicle.ChassisNumber;
+                        cmd.Parameters["@licensePlate"].Value = vehicle.LicensePlate;
+                        cmd.Parameters["@vehicleType"].Value = vehicle.VehicleType;
+                        cmd.Parameters["@color"].Value = vehicle.Color;
+                        cmd.Parameters["@doors"].Value = vehicle.Doors;
+                        cmd.Parameters["@vehicleId"].Value = vehicle.VehicleId;
+                        cmd.Parameters["@driverid"].Value = (int)driverID;
+
+                        cmd.CommandText = query;
+                        cmd.ExecuteNonQuery();
+                    } catch (Exception ex) {
+
+                        throw new Exception(ex.Message);
+                    } finally {
+                        cn.Close();
+                    }
                 }
             }
+            
 
         }
         private void ConnectVehicleToDriver(Vehicle vehicle)
