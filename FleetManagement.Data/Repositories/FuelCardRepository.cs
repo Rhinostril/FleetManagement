@@ -303,8 +303,8 @@ namespace FleetManagement.Data.Repositories
             SqlTransaction transaction = connection.BeginTransaction();
             try {
 
-                DeleteFuelCardFromForeignTables(fuelCard);
-                DeleteFuelCard(fuelCard);
+                DeleteFuelCardFromForeignTables(fuelCard, transaction);
+                DeleteFuelCard(fuelCard, transaction);
                 if (fuelCard.Driver != null)
                 {
                     RemoveDriverConnection(fuelCard);
@@ -321,7 +321,7 @@ namespace FleetManagement.Data.Repositories
                 connection.Close();
             }
         }
-        private void DeleteFuelCardFromForeignTables(FuelCard fuelCard) {
+        private void DeleteFuelCardFromForeignTables(FuelCard fuelCard, SqlTransaction transaction) {
             SqlConnection connection = getConnection();
 
             string query = "DELETE FROM FuelCardFuelType WHERE fuelCardId=@fuelCardId";
@@ -329,6 +329,7 @@ namespace FleetManagement.Data.Repositories
             using (SqlCommand command = connection.CreateCommand()) {
                 connection.Open();
                 try {
+                    command.Transaction = transaction;
                     command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
                     command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;
                     command.CommandText = query;
@@ -340,7 +341,7 @@ namespace FleetManagement.Data.Repositories
                 }
             }
         }
-        private void DeleteFuelCard(FuelCard fuelCard)
+        private void DeleteFuelCard(FuelCard fuelCard, SqlTransaction transaction)
         {
             SqlConnection connection = getConnection();
 
@@ -351,6 +352,7 @@ namespace FleetManagement.Data.Repositories
                 connection.Open();
                 try
                 {
+                    command.Transaction = transaction;
                     command.Parameters.Add(new SqlParameter("@fuelCardId", SqlDbType.Int));
                     command.Parameters["@fuelCardId"].Value = fuelCard.FuelCardId;
                     command.CommandText = query;
@@ -422,10 +424,10 @@ namespace FleetManagement.Data.Repositories
             SqlTransaction transaction = connection.BeginTransaction();
             try
             {
-                UpdateFuelCard(fuelCard);
+                UpdateFuelCard(fuelCard, transaction);
                 if(fuelCard.Driver != null)
                 {
-                    UpdateDriverConnection(fuelCard);
+                    UpdateDriverConnection(fuelCard, transaction);
                 }
                 else
                 {
@@ -445,7 +447,7 @@ namespace FleetManagement.Data.Repositories
                 connection.Close();
             }
         }
-        private void UpdateFuelCard(FuelCard fuelCard)
+        private void UpdateFuelCard(FuelCard fuelCard, SqlTransaction transaction)
         {
             if(fuelCard.Driver != null) {
                 SqlConnection connection = getConnection();
@@ -457,6 +459,7 @@ namespace FleetManagement.Data.Repositories
                 using (SqlCommand command = connection.CreateCommand()) {
                     connection.Open();
                     try {
+                        command.Transaction = transaction;
                         command.Parameters.Add(new SqlParameter("@cardNumber", SqlDbType.NVarChar));
                         command.Parameters.Add(new SqlParameter("@validityDate", SqlDbType.DateTime));
                         command.Parameters.Add(new SqlParameter("@pin", SqlDbType.Int));
@@ -517,7 +520,7 @@ namespace FleetManagement.Data.Repositories
 
             }
         }
-        private void UpdateDriverConnection(FuelCard fuelCard)
+        private void UpdateDriverConnection(FuelCard fuelCard, SqlTransaction transaction)
         {
             SqlConnection connection = getConnection();
             string query = $"UPDATE DRIVER SET fuelcardId=@fuelcardId WHERE driverId=@driverId";
@@ -526,6 +529,7 @@ namespace FleetManagement.Data.Repositories
                 try
                 {
                     connection.Open();
+                    command.Transaction = transaction;
                     command.CommandText = query;
                     command.Parameters.Add(new SqlParameter("@fuelcardId", SqlDbType.Int));
                     command.Parameters["@fuelcardId"].Value = fuelCard.FuelCardId;
